@@ -1,0 +1,8 @@
+name: WorldProtector
+version: 1.5.0
+main: legacy\world\Main
+authors:
+  - Legacy
+  - Refaltor
+  - Nyrok
+api: [4.0.0]
