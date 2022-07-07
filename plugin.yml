@@ -1,0 +1,8 @@
+name: ThePit
+version: 1.0.0
+main: Legacy\ThePit\Core
+authors:
+  - Legacy
+  - Nyrok
+api: [4.0.0]
+src-namespace-prefix: Legacy\ThePit

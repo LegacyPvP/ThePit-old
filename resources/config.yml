@@ -1,0 +1,42 @@
+languages:
+  - "fr_FR"
+
+scoreboards:
+  refresh-time: 15 # (ticks)
+  # basic - Le scoreboard par défaut
+  # prestige - Le scoreboard premium
+  # deathmatch - Le scoreboard lorsqu'il y a l'event deathmatch en cours
+  # raffle - Le scoreboard lorsqu'il y a l'event raffle en cours
+  # spire - Le scoreboard lorsqu'il y a l'event spire en cours
+  basic: # {level}, {xp}, {or}, {credits}, {etoiles}, {votecoins}, {online}
+    title: ""
+    lines:
+      - ""
+      - ""
+  prestige: # {prestige}, {level}, {xp}, {or}, {credits}, {etoiles}, {votecoins}, {online}
+    title: ""
+    lines:
+      - ""
+      - ""
+  deathmatch: # {timeleft}, {kills}, {position}, {kills_blue}, {kills_red}, {prestige}, {level}, {xp}, {online}
+    title: ""
+    lines:
+      - ""
+      - ""
+  raffle: # {timeleft}, {tickets}, {position}, {cagnotte}, {prestige}, {level}, {xp}, {online}
+    title: ""
+    lines:
+      - ""
+      - ""
+  spire: # {timeleft}, {stage}, {kills}, {prestige}, {level}, {xp}, {online}
+    title: ""
+    lines:
+      - ""
+      - ""
+
+grades:
+  Admin:
+    chat: "§a{player} §f-> §2{chat}"
+    nametag: ""
+    scoretag: ""
+    permissions: []
