@@ -6,6 +6,7 @@ use Legacy\ThePit\Core;
 use Legacy\ThePit\Librairies\Voltage\Api\module\types\ScoreBoardLine;
 use Legacy\ThePit\Player\LegacyPlayer;
 use Legacy\ThePit\Tasks\ScoreBoardTask;
+use pocketmine\player\Player;
 use pocketmine\scheduler\ClosureTask;
 use pocketmine\Server;
 use Legacy\ThePit\Librairies\Voltage\Api\ScoreBoardApi;
@@ -44,7 +45,8 @@ abstract class ScoreBoardManager
     }
 
     public static function getTitle(string $type): string {
-        return Core::getInstance()->getConfig()->getNested("scoreboards.$type.title", "QuazarMC");
+        $type = $type === EventsManager::TYPE_NONE ? "basic" : $type;
+        return Core::getInstance()->getConfig()->getNested("scoreboards.$type.title", "Legacy");
     }
 
     public static function getLines(string $type): array {
@@ -52,40 +54,32 @@ abstract class ScoreBoardManager
     }
 
     public static function updateScoreboard(?ScoreBoard $scoreboard, string $type): void {
+
         $scoreboard?->removeAllPlayers();
         foreach (Server::getInstance()->getOnlinePlayers() as $player){
-            var_dump($player->getName());
             if(!$scoreboard){
                 $scoreboard = ($player->getPlayerProperties()->getNestedProperties("stats.prestige") ?? 0) >= 1
                     ? self::$scoreboards["prestige"]["scoreboard"]
                     : self::$scoreboards["basic"]["scoreboard"];
             }
+            $scoreboard = self::updateLines($scoreboard, $type, $player);
             if($scoreboard and $player->getPlayerProperties()->getNestedProperties("parameters.scoreboard") ?? true) {
-                if($type === EventsManager::TYPE_NONE){
-                    if (($player->getPlayerProperties()->getNestedProperties("stats.prestige") ?? 0) >= 1){
-                        $scoreboard->addPlayer($player);
-                    }
-                }
-                else {
-                    $scoreboard->addPlayer($player);
-                }
+                $scoreboard->addPlayer($player);
             }
         }
-        if($type === EventsManager::TYPE_NONE){
-            self::updateTitle($scoreboard, "basic");
-            self::updateTitle($scoreboard, "prestige");
-        }
-        else self::updateTitle($scoreboard, $type);
-        $scoreboard->sendToAll();
+        self::updateTitle($scoreboard, $type);
+        $scoreboard?->sendToAll();
     }
 
-    public static function updateLines(ScoreBoard $scoreboard, string $type, ?LegacyPlayer $player = null): void {
+    public static function updateLines(ScoreBoard $scoreboard, string $type, Player|LegacyPlayer|null $player = null): ScoreBoard {
+        if($type === EventsManager::TYPE_NONE) $type = ($player?->getPlayerProperties()?->getNestedProperties("stats.prestige") ?? 0) >= 1 ? "prestige" : "basic";
         foreach (array_slice(self::getLines($type), 0, 15) as $i => $line){
             foreach (self::getParameters($type, $player) as $parameter => $value){
                 $line = str_replace($parameter, $value, $line);
             }
             $scoreboard->setLineToAll(new ScoreBoardLine($i + 1, $line));
         }
+        return $scoreboard;
     }
 
     public static function getParameters(string $type, ?LegacyPlayer $player): array {
@@ -144,8 +138,7 @@ abstract class ScoreBoardManager
         };
     }
 
-    public static function updateTitle(ScoreBoard $scoreboard, string $type): void {
-        $scoreboard->setDisplayName(self::getTitle($type));
+    public static function updateTitle(?ScoreBoard $scoreboard, string $type): void {
+        $scoreboard?->setDisplayName(self::getTitle($type));
     }
-
 }

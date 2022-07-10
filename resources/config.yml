@@ -9,15 +9,36 @@ scoreboards:
   # raffle - Le scoreboard lorsqu'il y a l'event raffle en cours
   # spire - Le scoreboard lorsqu'il y a l'event spire en cours
   basic: # {level}, {xp}, {or}, {credits}, {etoiles}, {votecoins}, {online}
-    title: ""
+    title: "§l§dLEGACY"
     lines:
-      - ""
-      - ""
+      - " "
+      - "§fNiveau§7: {level}"
+      - "§fEXP restant§7: §b{xp}"
+      - "  "
+      - "§fOr§7: §6{or}"
+      - "§fCrédits§7: §a{credits}"
+      - "§fÉtoiles§7: §e{etoiles}"
+      - "§fVoteCoins§7: §9{votecoins}"
+      - "   "
+      - "§fServeur§7: §c{online}"
+      - "    "
+      - "legacymc.eu"
   prestige: # {prestige}, {level}, {xp}, {or}, {credits}, {etoiles}, {votecoins}, {online}
-    title: ""
+    title: "§l§dLEGACY"
     lines:
-      - ""
-      - ""
+      - " "
+      - "§fPrestige§7: §e{prestige}"
+      - "§fNiveau§7: {level}"
+      - "§fEXP restant§7: §b{xp}"
+      - "  "
+      - "§fOr§7: §6{or}"
+      - "§fCrédits§7: §a{credits}"
+      - "§fÉtoiles§7: §e{etoiles}"
+      - "§fVoteCoins§7: §9{votecoins}"
+      - "   "
+      - "§fServeur§7: §c{online}"
+      - "     "
+      - "legacymc.eu"
   deathmatch: # {timeleft}, {kills}, {position}, {kills_blue}, {kills_red}, {prestige}, {level}, {xp}, {online}
     title: ""
     lines:
@@ -40,3 +61,20 @@ grades:
     nametag: ""
     scoretag: ""
     permissions: []
+
+commands:
+  ban:
+    permission: "legacy.commands.ban"
+    usage: "/ban <player> <time> <ip> <reason>"
+    description: "Bannir un joueur"
+    aliases: []
+  unban:
+    permission: "legacy.commands.unban"
+    usage: "/unban <player>"
+    description: "Débannir un joueur"
+    aliases: []
+  kick:
+    permission: "legacy.commands.kick"
+    usage: "/kick <player>"
+    description: "Expulser un joueur"
+    aliases: []

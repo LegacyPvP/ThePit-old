@@ -1,6 +1,7 @@
 <?php
 namespace Legacy\ThePit\Managers;
 
+use Legacy\ThePit\Commands\BanCommand;
 use Legacy\ThePit\Core;
 
 abstract class CommandsManager
@@ -8,7 +9,7 @@ abstract class CommandsManager
     public static function getCommands(): array
     {
         return [
-
+            new BanCommand('ban'),
         ];
     }
 

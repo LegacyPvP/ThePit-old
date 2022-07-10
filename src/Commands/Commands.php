@@ -15,10 +15,9 @@ use pocketmine\plugin\PluginOwned;
 
 abstract class Commands extends Command implements PluginOwned
 {
-    private const NAME = "";
     use CommandTrait;
 
-    public function __construct(string $name = self::NAME, Translatable|string $description = "", Translatable|string|null $usageMessage = null, array $aliases = [])
+    public function __construct(string $name, Translatable|string $description = "", Translatable|string|null $usageMessage = null, array $aliases = [])
     {
         parent::__construct($name, $description, $usageMessage, $aliases);
         self::setCommand($this);
@@ -47,6 +46,15 @@ abstract class Commands extends Command implements PluginOwned
     {
         if(!$this->testPermission($sender)){
             self::getSenderLanguage($sender)->getMessage("messages.commands.not-permission")->send($sender);
+            return false;
+        }
+        return true;
+    }
+
+    public function testPermissionSilent(CommandSender $target, ?string $permission = null): bool
+    {
+        if(!parent::testPermission($target)){
+            self::getSenderLanguage($target)->getMessage("messages.commands.not-permission")->send($target);
             return false;
         }
         return true;

@@ -246,9 +246,11 @@ final class ScoreBoard
             if (in_array($player->getId(),$this->removes)) {
                 $pk = new RemoveObjectivePacket();
                 $pk->objectiveName = $this->getObjectiveName();
-                $player->getNetworkSession()->sendDataPacket($pk);
-                unset($this->removes[array_search($player->getId(),$this->removes)]);
-                unset($this->entries[$player->getId()]);
+                if($player->isOnline()) {
+                    $player->getNetworkSession()->sendDataPacket($pk);
+                    unset($this->removes[array_search($player->getId(),$this->removes)]);
+                    unset($this->entries[$player->getId()]);
+                }
             } else {
                 if (in_array($player->getId(),$this->objectives)) {
                     $player->getNetworkSession()->sendDataPacket($this->display);
