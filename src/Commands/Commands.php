@@ -30,6 +30,7 @@ abstract class Commands extends Command implements PluginOwned
     }
 
     public function getSenderLanguage(CommandSender $sender): ?Language {
+        var_dump(3);
         return (match($sender::class){
             LegacyPlayer::class => $sender->getLanguage(),
             ConsoleCommandSender::class => LanguageManager::getDefaultLanguage(),
@@ -42,18 +43,9 @@ abstract class Commands extends Command implements PluginOwned
         return Core::getInstance();
     }
 
-    public function execute(CommandSender $sender, string $commandLabel, array $args): bool
-    {
-        if(!$this->testPermission($sender)){
-            self::getSenderLanguage($sender)->getMessage("messages.commands.not-permission")->send($sender);
-            return false;
-        }
-        return true;
-    }
-
     public function testPermissionSilent(CommandSender $target, ?string $permission = null): bool
     {
-        if(!parent::testPermission($target)){
+        if(!parent::testPermissionSilent($target)){
             self::getSenderLanguage($target)->getMessage("messages.commands.not-permission")->send($target);
             return false;
         }

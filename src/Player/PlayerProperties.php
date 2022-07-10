@@ -28,6 +28,8 @@ final class PlayerProperties {
                 "prestige" => 0,
             ],
             "infos" => [
+                "ip" => "",
+                "platform" => "",
                 "grade" => GradesManager::getDefaultGrade()->getName(),
             ],
             "status" => [

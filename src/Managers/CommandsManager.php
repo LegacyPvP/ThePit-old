@@ -2,6 +2,8 @@
 namespace Legacy\ThePit\Managers;
 
 use Legacy\ThePit\Commands\BanCommand;
+use Legacy\ThePit\Commands\KickCommand;
+use Legacy\ThePit\Commands\UnbanCommand;
 use Legacy\ThePit\Core;
 
 abstract class CommandsManager
@@ -10,6 +12,8 @@ abstract class CommandsManager
     {
         return [
             new BanCommand('ban'),
+            new UnbanCommand('unban'),
+            new KickCommand('kick'),
         ];
     }
 

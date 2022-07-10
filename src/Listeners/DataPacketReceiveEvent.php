@@ -4,9 +4,7 @@ namespace Legacy\ThePit\Listeners;
 
 use pocketmine\event\Listener;
 use pocketmine\event\server\DataPacketReceiveEvent as ClassEvent;
-use pocketmine\network\mcpe\protocol\ActorEventPacket;
 use pocketmine\network\mcpe\protocol\AnimatePacket;
-use pocketmine\network\mcpe\protocol\PlayerActionPacket;
 
 final class DataPacketReceiveEvent implements Listener
 {

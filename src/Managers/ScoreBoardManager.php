@@ -22,7 +22,12 @@ abstract class ScoreBoardManager
         $scoreboards = Core::getInstance()->getConfig()->get("scoreboards");
         foreach ($scoreboards as $type => $scoreboard){
             if(!is_array($scoreboard)) continue;
-            self::$scoreboards[$type] = ["id" => array_search($type, array_keys($scoreboards)) + 1, "scoreboard" => ($manager = ScoreBoardApi::getManager())?->getScoreBoard($manager?->createScoreBoard(array_search($type, array_keys($scoreboards)) + 1))];
+            self::$scoreboards[$type] = [
+                "id" => array_search($type, array_keys($scoreboards)) + 1,
+                "scoreboard" => ($manager = ScoreBoardApi::getManager())?->getScoreBoard(
+                    $manager?->createScoreBoard(array_search($type, array_keys($scoreboards)) + 1)
+                )
+            ];
             if(!isset(self::$scoreboards[$type])){
                 Core::getInstance()->getLogger()->emergency("[SCOREBOARDS] Failed to load ScoreBoard: $type ... Retrying in 5 seconds");
                 Core::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(function () use ($type): void {
@@ -54,20 +59,25 @@ abstract class ScoreBoardManager
     }
 
     public static function updateScoreboard(?ScoreBoard $scoreboard, string $type): void {
-
-        $scoreboard?->removeAllPlayers();
         foreach (Server::getInstance()->getOnlinePlayers() as $player){
-            if(!$scoreboard){
-                $scoreboard = ($player->getPlayerProperties()->getNestedProperties("stats.prestige") ?? 0) >= 1
-                    ? self::$scoreboards["prestige"]["scoreboard"]
-                    : self::$scoreboards["basic"]["scoreboard"];
+            foreach (self::getScoreboards() as $scoreboard){
+                $scoreboard["scoreboard"]->removePlayer($player);
+            }
+            $scoreboard = match ($type){
+                EventsManager::TYPE_NONE => match ($player->getPlayerProperties()->getNestedProperties("stats.prestige") ?? 0) {
+                    0 => self::$scoreboards["basic"]["scoreboard"],
+                    default => self::$scoreboards["prestige"]["scoreboard"],
+                },
+                EventsManager::TYPE_DEATHMATCH => self::$scoreboards[EventsManager::TYPE_DEATHMATCH]["scoreboard"],
+                EventsManager::TYPE_RAFFLE => self::$scoreboards[EventsManager::TYPE_RAFFLE]["scoreboard"],
+                EventsManager::TYPE_SPIRE => self::$scoreboards[EventsManager::TYPE_SPIRE]["scoreboard"],
+            };
+            if($player->getPlayerProperties()->getNestedProperties("parameters.scoreboard") ?? true) {
+                $scoreboard?->addPlayer($player);
             }
             $scoreboard = self::updateLines($scoreboard, $type, $player);
-            if($scoreboard and $player->getPlayerProperties()->getNestedProperties("parameters.scoreboard") ?? true) {
-                $scoreboard->addPlayer($player);
-            }
         }
-        self::updateTitle($scoreboard, $type);
+        $scoreboard = self::updateTitle($scoreboard, $type);
         $scoreboard?->sendToAll();
     }
 
@@ -138,7 +148,8 @@ abstract class ScoreBoardManager
         };
     }
 
-    public static function updateTitle(?ScoreBoard $scoreboard, string $type): void {
+    public static function updateTitle(?ScoreBoard $scoreboard, string $type): ?ScoreBoard {
         $scoreboard?->setDisplayName(self::getTitle($type));
+        return $scoreboard;
     }
 }

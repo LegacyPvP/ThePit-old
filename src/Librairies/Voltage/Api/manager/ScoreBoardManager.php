@@ -27,6 +27,10 @@ final class ScoreBoardManager
         }
     }
 
+    public function removeAllScoreBoard() : void {
+        $this->scoreboards = [];
+    }
+
     public function getScoreBoard(int $id) : ?ScoreBoard {
         if ($this->issetScoreBoard($id)) {
             return $this->scoreboards[$id];

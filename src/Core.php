@@ -33,8 +33,5 @@ class Core extends PluginBase
 
         ItemFactory::getInstance()->register(new Snowball(new ItemIdentifier(ItemIds::SNOWBALL, 0), "Snowball"), true);
         ItemFactory::getInstance()->register(new Bow(new ItemIdentifier(ItemIds::BOW, 0), "Bow"), true);
-
-
-
     }
 }
