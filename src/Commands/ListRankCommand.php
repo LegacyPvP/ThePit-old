@@ -7,7 +7,7 @@ use pocketmine\command\CommandSender;
 
 final class ListRankCommand extends Commands
 {
-    public function execute(CommandSender $sender, string $commandLabel, array $args)
+    public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
         if($this->testPermissionSilent($sender)){
             $list = $this->getSenderLanguage($sender)->getMessage("messages.commands.listrank.header")->__toString();

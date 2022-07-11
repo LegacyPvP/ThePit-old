@@ -7,7 +7,7 @@ use pocketmine\Server;
 
 final class BanListCommand extends Commands
 {
-    public function execute(CommandSender $sender, string $commandLabel, array $args)
+    public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
         if($this->testPermissionSilent($sender)){
             $list = $this->getSenderLanguage($sender)->getMessage("messages.commands.banlist.header")->__toString();

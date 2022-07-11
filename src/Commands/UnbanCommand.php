@@ -7,7 +7,7 @@ use pocketmine\Server;
 
 final class UnbanCommand extends Commands
 {
-    public function execute(CommandSender $sender, string $commandLabel, array $args): bool
+    public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
         if($this->testPermissionSilent($sender)){
             $sender_language = $this->getSenderLanguage($sender);
@@ -19,17 +19,15 @@ final class UnbanCommand extends Commands
                 if($target){
                     Server::getInstance()->getIPBans()->remove($target);
                     Server::getInstance()->getNameBans()->remove($target);
-                    $sender_language->getMessage("messages.commands.unban.success", ["{player}" => $target->getName()])->send($sender);
+                    $sender_language->getMessage("messages.commands.unban.success", ["{player}" => $target])->send($sender);
                 }
                 else {
-                    $sender_language->getMessage("messages.commands.not-player")->send($sender);
+                    $sender_language->getMessage("messages.commands.target-not-player")->send($sender);
                 }
             }
             else {
                 $sender->sendMessage($this->getUsage());
             }
         }
-        return true;
     }
-
 }

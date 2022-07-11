@@ -11,7 +11,7 @@ use pocketmine\Server;
 
 final class SetRankCommand extends Commands
 {
-    public function execute(CommandSender $sender, string $commandLabel, array $args)
+    public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
         if($this->testPermissionSilent($sender)){
             if(isset($args[0], $args[1])){
@@ -29,7 +29,7 @@ final class SetRankCommand extends Commands
                         $this->getSenderLanguage($sender)->getMessage("messages.commands.setrank.success", ["{player}" => $target->getName(), "{rank}" => $rank->getName()])->send($sender);
                     }
                     else {
-                        $this->getSenderLanguage($sender)->getMessage("messages.commands.not-player")->send($sender);
+                        $this->getSenderLanguage($sender)->getMessage("messages.commands.target-not-player")->send($sender);
                     }
                 }
                 else {

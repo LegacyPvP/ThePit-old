@@ -1,7 +1,9 @@
 messages:
   commands:
     not-permission: "§cYou do not have permission to use this command"
-    not-player: "Le joueur mentionné n'existe pas "
+    target-not-player: "Le joueur mentionné n'existe pas"
+    target-not-found: "Le joueur mentionné n'est pas connecté"
+    sender-not-player: "Vous devez être un joueur pour effectuer cette commande"
     ban:
       success: "Vous avez banni {player} jusqu'au {date} pour {reason}" # {player}, {date}, {reason}
       banned: "Vous avez été banni par {player} jusqu'au {date} pour {reason}" # {player} is the player who banned you, {date} is the date of the ban, {reason} is the reason of the ban

@@ -150,3 +150,9 @@ commands:
     usage: "/banlist"
     description: "Voir la liste des bans"
     aliases: []
+  gamemode:
+    permission: "legacy.commands.gamemode"
+    usage: "/gamemode <mode> [player]"
+    description: "Définir le gamemode d'un joueur"
+    aliases:
+      - gm

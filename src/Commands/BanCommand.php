@@ -15,7 +15,7 @@ final class BanCommand extends Commands
      * @throws Exception
      * @noinspection PhpMissingBreakStatementInspection
      */
-    public function execute(CommandSender $sender, string $commandLabel, array $args): bool
+    public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
         if($this->testPermissionSilent($sender)){
             $sender_language = $this->getSenderLanguage($sender);
@@ -47,14 +47,13 @@ final class BanCommand extends Commands
                     }
                 }
                 else {
-                    $sender_language->getMessage("messages.commands.not-player")->send($sender);
+                    $sender_language->getMessage("messages.commands.target-not-player")->send($sender);
                 }
             }
             else {
                 $sender->sendMessage($this->getUsage());
             }
         }
-        return true;
     }
 
 }
