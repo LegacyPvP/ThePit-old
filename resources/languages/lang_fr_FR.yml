@@ -31,3 +31,4 @@ messages:
       failed: "Vous êtes le seul joueur du serveur."
     tp:
       success: "Vous vous êtes téléporté sur {player}" # {player}
+      success-others: "Vous avez téléporté {player1} à {player2}" # {player1} is the player who teleported, {player2} is the player who was teleported

@@ -29,10 +29,10 @@ final class TpCommand extends Commands
                         $player2 = Server::getInstance()->getPlayerByPrefix($args[1]) ?? Server::getInstance()->getOfflinePlayer($args[1]);
                         if($player1 instanceof Player and $player2 instanceof Player){
                             $player1->teleport($player2->getPosition());
-                            throw new LanguageException("messages.commands.tp.success", ["{player1}" => $player1->getName(), "{player2}" => $player2->getName()]);
+                            throw new LanguageException("messages.commands.tp.success-others", ["{player1}" => $player1->getName(), "{player2}" => $player2->getName()]);
                         }
-                        else if($player1 instanceof Player and !$player2 instanceof Player) throw new LanguageException("messages.commands.target-not-found", ["{player}" => $player1->getName()]);
-                        else if(!$player1 instanceof Player and $player2 instanceof Player) throw new LanguageException("messages.commands.target-not-found", ["{player}" => $player2->getName()]);
+                        else if($player1 instanceof Player and !$player2 instanceof Player) throw new LanguageException("messages.commands.target-not-found", ["{player}" => $player2->getName()]);
+                        else if(!$player1 instanceof Player and $player2 instanceof Player) throw new LanguageException("messages.commands.target-not-found", ["{player}" => $player1->getName()]);
                         else if(!Server::getInstance()->getOfflinePlayerData($player1->getName())) throw new LanguageException("messages.commands.target-not-player", ["{player}" => $player1->getName()]);
                         else throw new LanguageException("messages.commands.target-not-player", ["{player}" => $player2->getName()]);
                     }

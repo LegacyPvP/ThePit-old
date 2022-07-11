@@ -5,6 +5,7 @@ use JetBrains\PhpStorm\Pure;
 use Legacy\ThePit\Core;
 use Legacy\ThePit\Listeners\DataPacketReceiveEvent;
 use Legacy\ThePit\Listeners\DataPacketSendEvent;
+use Legacy\ThePit\Listeners\EntityDamageByEntityEvent;
 use Legacy\ThePit\Listeners\PlayerChatEvent;
 use Legacy\ThePit\Listeners\PlayerCreationEvent;
 use Legacy\ThePit\Listeners\PlayerJoinEvent;
@@ -18,7 +19,8 @@ abstract class ListenersManager
             new DataPacketReceiveEvent(),
             new PlayerChatEvent(),
             new PlayerJoinEvent(),
-            new DataPacketSendEvent()
+            new DataPacketSendEvent(),
+            new EntityDamageByEntityEvent(),
         ];
     }
 

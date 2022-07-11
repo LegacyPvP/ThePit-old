@@ -168,3 +168,8 @@ commands:
     description: "Commande de téléportation"
     aliases:
       - teleport
+
+items:
+  nemo:
+    horizontal: 2
+    vertical: 0.50

@@ -4,10 +4,15 @@ namespace Legacy\ThePit\Managers;
 
 use Exception;
 use Legacy\ThePit\Core;
+use Legacy\ThePit\Items\CustomFood;
+use Legacy\ThePit\Items\CustomSword;
+use Legacy\ThePit\Items\List\Nemo;
 use pocketmine\inventory\CreativeInventory;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
+use pocketmine\item\ItemIdentifier;
 use pocketmine\item\StringToItemParser;
+use pocketmine\item\ToolTier;
 use pocketmine\item\VanillaItems;
 use pocketmine\network\mcpe\convert\GlobalItemTypeDictionary;
 use pocketmine\network\mcpe\convert\ItemTranslator;
@@ -43,6 +48,7 @@ abstract class CustomItemManager
 
     public static function initCustomItems(): void {
         self::register(
+            new Nemo(new ItemIdentifier(1005, 0), "nemo", ToolTier::STONE(), "stick", 1000, 1),
         );
     }
 
@@ -66,7 +72,7 @@ abstract class CustomItemManager
             $coreToNetValues[$item->getId()] = $runtimeId;
             $netToCoreValues[$runtimeId] = $item->getId();
             $itemTypeEntries[] = new ItemTypeEntry("custom:" . $item->getName(), $runtimeId, true);
-            self::$packetEntries[] = new ItemComponentPacketEntry("custom:" . $item->getName(), new CacheableNbt($item->getNamedTag()));
+            self::$packetEntries[] = new ItemComponentPacketEntry("custom:" . $item->getName(), new CacheableNbt($item->getComponents()));
             self::$registered[] = $item;
             $new = clone $item;
             StringToItemParser::getInstance()->register($item->getName() . ':custom', fn() => $new);

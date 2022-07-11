@@ -115,13 +115,9 @@ final class DataPacketReceiveEvent implements Listener
                             CustomItemManager::stopTask($player, Position::fromObject($pos, $player->getWorld()));
                         }
                     }
-
                 } catch (Exception) {
 
                 }
-        }
-        if($packet instanceof AnimatePacket){
-            $event->getOrigin()->getPlayer()->getServer()->broadcastPackets($event->getOrigin()->getPlayer()->getViewers(), [$event->getPacket()]);
         }
     }
 }

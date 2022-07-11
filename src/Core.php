@@ -32,15 +32,12 @@ class Core extends PluginBase
         $this::setInstance($this);
         $this->saveResource("config.yml", true);
 
-        CustomItemManager::registerItems();
         ListenersManager::initListeners($this);
         CommandsManager::initCommands();
         EventsManager::initEvents();
         RanksManager::initRanks();
         LanguageManager::initLanguages();
         ScoreBoardManager::initScoreBoards();
-
-        ItemFactory::getInstance()->register(new Snowball(new ItemIdentifier(ItemIds::SNOWBALL, 0), "Snowball"), true);
-        ItemFactory::getInstance()->register(new Bow(new ItemIdentifier(ItemIds::BOW, 0), "Bow"), true);
+        CustomItemManager::registerItems();
     }
 }
