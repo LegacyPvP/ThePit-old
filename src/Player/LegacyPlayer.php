@@ -9,7 +9,12 @@ use Legacy\ThePit\Utils\PlayerUtils;
 use pocketmine\entity\effect\EffectManager;
 use pocketmine\entity\ExperienceManager;
 use pocketmine\entity\HungerManager;
+use pocketmine\lang\KnownTranslationFactory;
+use pocketmine\lang\KnownTranslationKeys;
+use pocketmine\lang\Translatable;
 use pocketmine\nbt\tag\CompoundTag;
+use pocketmine\network\mcpe\protocol\TextPacket;
+use pocketmine\player\GameMode;
 use pocketmine\player\Player;
 
 final class LegacyPlayer extends Player
@@ -63,5 +68,35 @@ final class LegacyPlayer extends Player
         $this->setScoreTag($this->getGrade()->getScoretag($this));
         $this->saveNBT();
         return parent::onUpdate($currentTick);
+    }
+
+    public function setGamemode(GameMode $gm): bool
+    {
+        $this->getLanguage()->getMessage("messages.commands.gamemode.change", ["{gamemode}" => $gm->getEnglishName()])->send($this);
+        return parent::setGamemode($gm);
+    }
+
+    public function getTranslation(string $message, array $parameters = []): string {
+        $parameters = array_map(fn(string|Translatable $p) => $p instanceof Translatable ? $this->getLanguage()->translate($p) : $p, $parameters);
+        if(!$this->server->isLanguageForced()){
+            foreach($parameters as $i => $p){
+                $parameters[$i] = $this->getLanguage()->translateString($p, [], "pocketmine.");
+            }
+            return TextPacket::translation($this->getLanguage()->translateString($message, $parameters, "pocketmine."), $parameters)->message;
+        }
+        return $this->getLanguage()->translateString($message, $parameters);
+    }
+
+    public function sendTranslation(string $message, array $parameters = []): void
+    {
+        $parameters = array_map(fn(string|Translatable $p) => $p instanceof Translatable ? $this->getLanguage()->translate($p) : $p, $parameters);
+        if(!$this->server->isLanguageForced()){
+            foreach($parameters as $i => $p){
+                $parameters[$i] = $this->getLanguage()->translateString($p, [], "pocketmine.");
+            }
+            $this->getNetworkSession()->onTranslatedChatMessage($this->getLanguage()->translateString($message, $parameters, "pocketmine."), $parameters);
+        }else{
+            $this->sendMessage($this->getLanguage()->translateString($message, $parameters));
+        }
     }
 }

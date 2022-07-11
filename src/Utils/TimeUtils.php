@@ -13,10 +13,10 @@ abstract class TimeUtils
             $datetime = new DateTime(
                 str_replace(
                     [
-                        "s", "m", "h", "d", "w"
+                        "m", "h", "d", "w"
                     ],
                     [
-                        "seconds", "minutes", "hours", "days", "weeks"
+                        "minutes", "hours", "days", "weeks"
                     ],
                     strtolower($date)
                 )

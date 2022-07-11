@@ -3,7 +3,7 @@
 namespace Legacy\ThePit\Commands;
 
 use pocketmine\command\CommandSender;
-use pocketmine\command\utils\CommandException;
+use Legacy\ThePit\Exceptions\LanguageException;
 use pocketmine\player\GameMode;
 use pocketmine\player\Player;
 use pocketmine\Server;
@@ -18,23 +18,27 @@ final class GameModeCommand extends Commands
                     try {
                         $target = $sender;
                         another:
-                        if(isset($args[1]) and $sender instanceof Player){
+                        if(isset($args[1])){
                             $target = Server::getInstance()->getPlayerByPrefix($args[1]);
                             if(!$target){
-                                throw new CommandException("messages.commands.target-not-player");
+                                throw new LanguageException("messages.commands.target-not-player", ["{player}" => $args[1]]);
                             }
                         }
-                        else throw new CommandException("messages.commands.sender-not-player");
-                        $target->setGamemode(match ($args[0]){
+                        else if(!$sender instanceof Player) throw new LanguageException("messages.commands.sender-not-player");
+                        $gamemode = match ($args[0]){
                             "0", "survival" => GameMode::SURVIVAL(),
                             "1", "creative" => GameMode::CREATIVE(),
                             "2", "adventure" => GameMode::ADVENTURE(),
                             "3", "spectator" => GameMode::SPECTATOR(),
-                            default => throw new CommandException("messages.commands.gamemode.invalid-gamemode", ["{gamemode}" => $args[0]])
-                        });
+                            default => throw new LanguageException("messages.commands.gamemode.invalid-gamemode", ["{gamemode}" => $args[0]])
+                        };
+                        $target->setGamemode($gamemode);
+                        $target->getName() === $sender->getName()
+                            ? throw new LanguageException("messages.commands.gamemode.success-self", ["{gamemode}" => $gamemode->getEnglishName()])
+                            : throw new LanguageException("messages.commands.gamemode.success-other", ["{player}" => $target->getName(), "{gamemode}" => $gamemode->getEnglishName()]);
                     }
-                    catch (CommandException $e){
-                        $this->getSenderLanguage($sender)->getMessage($e->getMessage())->send($sender);
+                    catch (LanguageException $e){
+                        $this->getSenderLanguage($sender)->getMessage($e->getMessage(), $e->getArgs(), $e->getPrefix())->send($sender);
                     }
                 }
                 else {
