@@ -5,8 +5,10 @@ namespace Legacy\ThePit\Listeners;
 use Legacy\ThePit\Managers\CustomItemManager;
 use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Player\LegacyPlayer;
+use pocketmine\color\Color;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent as ClassEvent;
+use pocketmine\item\VanillaItems;
 
 final class PlayerJoinEvent implements Listener
 {

@@ -1,4 +1,6 @@
 messages:
+  interactions:
+    cooldown: "Le cooldown est de {timeleft} secondes." # {timeleft}
   commands:
     not-permission: "§cYou do not have permission to use this command"
     target-not-player: "Le joueur {player} n'existe pas" # {player}

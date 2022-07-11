@@ -6,8 +6,11 @@ use Legacy\ThePit\Core;
 use Legacy\ThePit\Listeners\DataPacketReceiveEvent;
 use Legacy\ThePit\Listeners\DataPacketSendEvent;
 use Legacy\ThePit\Listeners\EntityDamageByEntityEvent;
+use Legacy\ThePit\Listeners\EntityDamageEvent;
 use Legacy\ThePit\Listeners\PlayerChatEvent;
 use Legacy\ThePit\Listeners\PlayerCreationEvent;
+use Legacy\ThePit\Listeners\PlayerDropItemEvent;
+use Legacy\ThePit\Listeners\PlayerItemUseEvent;
 use Legacy\ThePit\Listeners\PlayerJoinEvent;
 use pocketmine\plugin\Plugin;
 
@@ -21,6 +24,9 @@ abstract class ListenersManager
             new PlayerJoinEvent(),
             new DataPacketSendEvent(),
             new EntityDamageByEntityEvent(),
+            new PlayerItemUseEvent(),
+            new EntityDamageEvent(),
+            new PlayerDropItemEvent()
         ];
     }
 

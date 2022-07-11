@@ -173,3 +173,6 @@ items:
   nemo:
     horizontal: 2
     vertical: 0.50
+
+cooldowns:
+  1002: 15
