@@ -1,7 +1,7 @@
 messages:
   commands:
     not-permission: "§cYou do not have permission to use this command"
-    target-not-player: "Le joueur mentionné n'existe pas"
+    target-not-player: "Le joueur {player} n'existe pas" # {player}
     target-not-found: "Le joueur mentionné n'est pas connecté"
     sender-not-player: "Vous devez être un joueur pour effectuer cette commande"
     ban:
@@ -21,4 +21,8 @@ messages:
     banlist:
       header: "Voici la liste des Bans:\n"
       format: "- {name} [{date}] -> {reason}\n"
-
+    gamemode:
+      invalid-gamemode: "Gamemode {gamemode} invalide"
+      change: "Votre gamemode a été changé à {gamemode}"
+      success-other: "Vous avez changé le gamemode de {player} à {gamemode}" # {player} is the player who set his gamemode, {gamemode} is the gamemode he set
+      success-self: "Vous avez changé votre gamemode à {gamemode}" # {player} is the player who set his gamemode, {gamemode} is the gamemode he set
