@@ -47,9 +47,7 @@ abstract class CustomItemManager
     public static ?ItemComponentPacket $packet = null;
 
     public static function initCustomItems(): void {
-        self::register(
-            new Nemo(new ItemIdentifier(1005, 0), "nemo", ToolTier::STONE(), "stick", 1000, 1),
-        );
+
     }
 
     public static function registerItems()

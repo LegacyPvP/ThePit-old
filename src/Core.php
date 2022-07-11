@@ -9,8 +9,6 @@ use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Managers\LanguageManager;
 use Legacy\ThePit\Managers\ListenersManager;
 use Legacy\ThePit\Managers\ScoreBoardManager;
-use Legacy\ThePit\Test\Bow;
-use Legacy\ThePit\Test\Snowball;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
 
