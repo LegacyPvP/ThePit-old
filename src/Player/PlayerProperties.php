@@ -2,17 +2,15 @@
 
 namespace Legacy\ThePit\Player;
 
-use Legacy\ThePit\Managers\GradesManager;
+use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Traits\PropertiesTrait;
+use Legacy\ThePit\Utils\PlayerUtils;
 
 final class PlayerProperties {
     use PropertiesTrait;
 
     public function __construct(LegacyPlayer $player)
     {
-        $nbt = $player->getNBT();
-        if($nbt->getTag("parameters")){
-        }
         $this->setBaseProperties([
             "stats" => [
                 "kills" => 0,
@@ -30,7 +28,7 @@ final class PlayerProperties {
             "infos" => [
                 "ip" => "",
                 "platform" => "",
-                "grade" => GradesManager::getDefaultGrade()->getName(),
+                "rank" => RanksManager::getDefaultRank()->getName(),
             ],
             "status" => [
                 "muted" => false,
@@ -41,5 +39,10 @@ final class PlayerProperties {
                 "autosprint" => false,
             ]
         ]);
+        $nbt = $player->getNBT();
+        foreach ($this->getPropertiesList() as $name => $value){
+            $nbt = PlayerUtils::valueToTag($name, $value, $nbt);
+        }
+        $player->saveNBT();
     }
 }

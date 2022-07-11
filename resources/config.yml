@@ -1,3 +1,5 @@
+prefix: "§o§eLegacy §2>> §a"
+
 languages:
   - "fr_FR"
 
@@ -55,10 +57,65 @@ scoreboards:
       - ""
       - ""
 
-grades:
+ranks:
+  Joueur:
+    chat: "§7{player} §l§8» §r§7{chat}"
+    nametag: "§7{player}"
+    scoretag: ""
+    permissions: []
+  Plus:
+    chat: "§8[§a+§8] §a{player} §l§8» §r§f{chat}"
+    nametag: "§a{player}"
+    scoretag: ""
+    permissions: []
+  Star:
+    chat: "§8[§9Star§8] §9{player} §l§8» §r§f{chat}"
+    nametag: "§9{player}"
+    scoretag: ""
+    permissions: []
+  Booster:
+    chat: "§8[§dBooster§8] §d{player} §l§8» §r§f{chat}"
+    nametag: "§d{player}"
+    scoretag: ""
+    permissions: []
+  YouTube:
+    chat: "§8[§bYouTube§8] §b{player} §l§8» §r§f{chat}"
+    nametag: "§b{player}"
+    scoretag: ""
+    permissions: []
+  Famous:
+    chat: "§8[§5Famous§8] §5{player} §l§8» §r§f{chat}"
+    nametag: "§5{player}"
+    scoretag: ""
+    permissions: []
+  Guide:
+    chat: "§8[§2§lGuide§r§8] §2{player} §l§8» §r§2{chat}"
+    nametag: "§2§l{player}"
+    scoretag: ""
+    permissions: []
+  Modo:
+    chat: "§8[§e§lModo§r§8] §e{player} §l§8» §r§e{chat}"
+    nametag: "§e§l{player}"
+    scoretag: ""
+    permissions: []
+  SuperModo:
+    chat: "§8[§6§lSuperModo§r§8] §6{player} §l§8» §r§6{chat}"
+    nametag: "§6§l{player}"
+    scoretag: ""
+    permissions: []
+  Développeur:
+    chat: "§8[§c§lDéveloppeur§r§8] §c{player} §l§8» §r§c{chat}"
+    nametag: "§c§l{player}"
+    scoretag: ""
+    permissions: []
+  Responsable:
+    chat: "§8[§c§lResponsable§r§8] §c{player} §l§8» §r§c{chat}"
+    nametag: "§c§l{player}"
+    scoretag: ""
+    permissions: []
   Admin:
-    chat: "§a{player} §f-> §2{chat}"
-    nametag: ""
+    chat: "§8[§4§lAdmin§r§8] §4{player} §l§8» §r§4{chat}"
+    nametag: "§l§4{player}"
     scoretag: ""
     permissions: []
 
@@ -77,4 +134,14 @@ commands:
     permission: "legacy.commands.kick"
     usage: "/kick <player>"
     description: "Expulser un joueur"
+    aliases: []
+  setrank:
+    permission: "legacy.commands.setrank"
+    usage: "/setrank <player> <rank>"
+    description: "Mettre un rank à un joueur"
+    aliases: []
+  listrank:
+    permission: "legacy.commands.listrank"
+    usage: "/listrank"
+    description: "Voir la liste des ranks"
     aliases: []

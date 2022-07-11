@@ -1,7 +1,7 @@
 messages:
   commands:
     not-permission: "§cYou do not have permission to use this command"
-    not-player: ""
+    not-player: "Le joueur mentionné n'existe pas "
     ban:
       success: "Vous avez banni {player} jusqu'au {date} pour {reason}" # {player}, {date}, {reason}
       banned: "Vous avez été banni par {player} jusqu'au {date} pour {reason}" # {player} is the player who banned you, {date} is the date of the ban, {reason} is the reason of the ban
@@ -10,3 +10,10 @@ messages:
     kick:
       success: "Vous avez kick {player} pour {reason}" # {player} is the player who kicked you
       kicked: "Vous avez été kick par {player} pour {reason}" # {player} is the player who kicked you, {reason} is the reason of the kick
+    setrank:
+      invalid-rank: "Rank {rank} invalide"
+      success: "Vous avez changé le rank de {player} à {rank}" # {player} is the player who set his rank, {rank} is the rank he set
+    listrank:
+      header: "Voici la liste des Ranks:\n"
+      format: "{name}, "
+

@@ -1,9 +1,14 @@
 <?php
 namespace Legacy\ThePit\Player;
 
+use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Managers\LanguageManager;
+use Legacy\ThePit\Objects\Rank;
 use Legacy\ThePit\Objects\Language;
 use Legacy\ThePit\Utils\PlayerUtils;
+use pocketmine\entity\effect\EffectManager;
+use pocketmine\entity\ExperienceManager;
+use pocketmine\entity\HungerManager;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\player\Player;
 
@@ -29,11 +34,17 @@ final class LegacyPlayer extends Player
 
     public function saveNBT(): CompoundTag
     {
-        $nbt = parent::saveNBT();
-        foreach ($this->properties->getPropertiesList() as $property => $value){
-            $nbt = PlayerUtils::valueToTag($property, $value, $nbt);
+        $this->effectManager ??= new EffectManager($this);
+        $this->hungerManager ??= new HungerManager($this);
+        $this->xpManager ??= new ExperienceManager($this);
+        if($this->spawned){
+            $nbt = parent::saveNBT();
+            foreach ($this->properties->getPropertiesList() as $property => $value){
+                $nbt = PlayerUtils::valueToTag($property, $value, $nbt);
+            }
+            return $nbt;
         }
-        return $nbt;
+        return new CompoundTag();
     }
 
     public function getLanguage(): Language
@@ -41,4 +52,16 @@ final class LegacyPlayer extends Player
         return LanguageManager::parseLanguage(parent::getLocale());
     }
 
+    public function getGrade(): Rank
+    {
+        return RanksManager::parseRank($this->getPlayerProperties()->getNestedProperties("infos.rank")) ?? RanksManager::getDefaultRank();
+    }
+
+    public function onUpdate(int $currentTick): bool
+    {
+        $this->setNameTag($this->getGrade()->getNametag($this));
+        $this->setScoreTag($this->getGrade()->getScoretag($this));
+        $this->saveNBT();
+        return parent::onUpdate($currentTick);
+    }
 }

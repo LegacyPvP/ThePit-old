@@ -3,6 +3,8 @@ namespace Legacy\ThePit\Managers;
 
 use Legacy\ThePit\Commands\BanCommand;
 use Legacy\ThePit\Commands\KickCommand;
+use Legacy\ThePit\Commands\ListRankCommand;
+use Legacy\ThePit\Commands\SetRankCommand;
 use Legacy\ThePit\Commands\UnbanCommand;
 use Legacy\ThePit\Core;
 
@@ -14,6 +16,8 @@ abstract class CommandsManager
             new BanCommand('ban'),
             new UnbanCommand('unban'),
             new KickCommand('kick'),
+            new SetRankCommand('setrank'),
+            new ListRankCommand('listrank'),
         ];
     }
 

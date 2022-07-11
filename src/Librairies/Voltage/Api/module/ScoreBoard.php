@@ -243,6 +243,7 @@ final class ScoreBoard
      */
     public function sendToPlayers(array $players) : void {
         foreach ($players as $player) {
+            if(!$player->isOnline()) continue;
             if (in_array($player->getId(),$this->removes)) {
                 $pk = new RemoveObjectivePacket();
                 $pk->objectiveName = $this->getObjectiveName();

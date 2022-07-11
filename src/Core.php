@@ -3,7 +3,7 @@ namespace Legacy\ThePit;
 
 use Legacy\ThePit\Managers\CommandsManager;
 use Legacy\ThePit\Managers\EventsManager;
-use Legacy\ThePit\Managers\GradesManager;
+use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Managers\LanguageManager;
 use Legacy\ThePit\Managers\ListenersManager;
 use Legacy\ThePit\Managers\ScoreBoardManager;
@@ -27,7 +27,7 @@ class Core extends PluginBase
         ListenersManager::initListeners($this);
         CommandsManager::initCommands();
         EventsManager::initEvents();
-        GradesManager::initGrades();
+        RanksManager::initRanks();
         LanguageManager::initLanguages();
         ScoreBoardManager::initScoreBoards();
 

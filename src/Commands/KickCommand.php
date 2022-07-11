@@ -21,7 +21,7 @@ final class KickCommand extends Commands
                 if($target instanceof Player){
                     $reason = implode(" ", array_slice($args, 1));
                     $target->kick(
-                        $target->getLanguage()->getMessage("messages.commands.ban.banned",
+                        $target->getLanguage()->getMessage("messages.commands.kick.kicked",
                             [
                                 "{player}" => $sender->getName(),
                                 "{reason}" => $reason

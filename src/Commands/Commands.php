@@ -30,7 +30,6 @@ abstract class Commands extends Command implements PluginOwned
     }
 
     public function getSenderLanguage(CommandSender $sender): ?Language {
-        var_dump(3);
         return (match($sender::class){
             LegacyPlayer::class => $sender->getLanguage(),
             ConsoleCommandSender::class => LanguageManager::getDefaultLanguage(),
