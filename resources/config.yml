@@ -3,6 +3,13 @@ global-mute: false
 languages:
   - "fr_FR"
 
+knockback:
+  x: 1
+  z: 1
+  force: 1
+  vertical-limit: 1
+  attack-cooldown: 5
+
 scoreboards:
   refresh-time: 15 # (ticks)
   # basic - Le scoreboard par défaut
@@ -181,6 +188,12 @@ commands:
     description: "Se téléporter à un joueur spécifique"
     aliases:
       - teleport
+  knockback:
+    permission: "legacy.commands.knockback"
+    usage: "§fVous devez faire §d/knockback (x) (y) (force) (vertical-limit) (attack-cooldown)"
+    description: "Changer le knockback du serveur"
+    aliases:
+      - kb
 
 items:
   nemo:

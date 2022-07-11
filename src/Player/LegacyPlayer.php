@@ -1,6 +1,7 @@
 <?php
 namespace Legacy\ThePit\Player;
 
+use Legacy\ThePit\Core;
 use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Managers\LanguageManager;
 use Legacy\ThePit\Objects\Rank;
@@ -9,6 +10,7 @@ use Legacy\ThePit\Utils\PlayerUtils;
 use pocketmine\entity\effect\EffectManager;
 use pocketmine\entity\ExperienceManager;
 use pocketmine\entity\HungerManager;
+use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\lang\KnownTranslationFactory;
 use pocketmine\lang\KnownTranslationKeys;
 use pocketmine\lang\Translatable;
@@ -98,5 +100,15 @@ final class LegacyPlayer extends Player
         }else{
             $this->sendMessage($this->getLanguage()->translateString($message, $parameters));
         }
+    }
+
+    public function knockBack(float $x, float $z, float $force = 0.4, ?float $verticalLimit = 0.4): void
+    {
+        parent::knockBack(Core::getInstance()->getConfig()->getNested("knockback.x"), Core::getInstance()->getConfig()->getNested("knockback.z"), Core::getInstance()->getConfig()->getNested("knockback.force"), Core::getInstance()->getConfig()->getNested("knockback.vertical-limit"));
+    }
+
+    public function attack(EntityDamageEvent $source): void
+    {
+        $source->setAttackCooldown(Core::getInstance()->getConfig()->getNested("knockback.attack-cooldown"));
     }
 }
