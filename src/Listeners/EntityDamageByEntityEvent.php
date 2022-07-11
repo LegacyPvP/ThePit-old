@@ -32,5 +32,11 @@ final class EntityDamageByEntityEvent implements Listener
                     break;
             }
         }
+
+        if(($damager = $event->getDamager()) instanceof LegacyPlayer){
+            if($damager->isImmobile()){
+                $event->cancel();
+            }
+        }
     }
 }

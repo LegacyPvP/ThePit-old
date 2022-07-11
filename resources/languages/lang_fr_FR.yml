@@ -28,3 +28,9 @@ messages:
       success-false: "Le général est désactivé"
       success-true: "Le général est activé"
       error: "Vous devez entrer soit <true> ou <false>"
+    freeze:
+      freeze-success: "§aVous avez gelé {player}"
+      target-freeze: "Vous êtes gelé"
+      unfreeze-success: "§aVous avez dégelé {player}"
+      target-unfreeze: "Vous êtes dégelé"
+

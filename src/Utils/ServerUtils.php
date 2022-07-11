@@ -6,7 +6,7 @@ class ServerUtils {
 
     const VERSION = "1.0.0";
 
-    const PREFIX_1_TEXT = "§5[§d§lLegacy§r§5] §r";
+    const PREFIX_1_TEXT = "§5[§dLegacy§r§5] §r";
     const PREFIX_2_TEXT = "§5[§d§l!!!§r§5] §r";
     const PREFIX_3_TEXT = "§5[§d§l!§r§5] §r";
 
