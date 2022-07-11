@@ -171,3 +171,22 @@ commands:
     description: "Mute tous les joueurs"
     aliases:
       - muteall
+  tpr:
+    permission: "legacy.commands.tpr"
+    usage: "/tpr"
+    description: "Se téléporter aléatoirement sur un joueur du serveur"
+    aliases:
+      - randomtp
+  tp:
+    permission: "legacy.commands.tp"
+    usage: "/tp <player1> [player2]"
+    description: "Commande de téléportation"
+    aliases:
+      - teleport
+items:
+  nemo:
+    horizontal: 2
+    vertical: 0.50
+
+cooldowns:
+  1002: 15
