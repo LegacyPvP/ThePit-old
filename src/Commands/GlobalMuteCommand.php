@@ -18,13 +18,13 @@ class GlobalMuteCommand extends Commands {
                     if($global_mute === false) {
                         Core::getInstance()->getConfig()->setNested("global-mute", true);
                         Core::getInstance()->getConfig()->save();
-                        $sender->sendMessage($sender_language->getMessage("messages.commands.global-mute.muted"));
+                        $sender->sendMessage($sender_language->getMessage("messages.commands.globalmute.succes-true"));
                     }elseif($global_mute === true){
                         Core::getInstance()->getConfig()->setNested("global-mute", false);
                         Core::getInstance()->getConfig()->save();
-                        $sender->sendMessage($sender_language->getMessage("messages.commands.global-mute.unmuted"));
+                        $sender->sendMessage($sender_language->getMessage("messages.commands.globalmute.succes-false"));
                     }else{
-                        $sender->sendMessage($sender_language->getMessage("messages.commands.global-mute.error"));
+                        $sender->sendMessage($sender_language->getMessage("messages.commands.globalmute.error"));
                     }
                 }else {
                     $sender->sendMessage($this->getUsage());

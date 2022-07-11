@@ -24,3 +24,7 @@ messages:
     say:
       success: "Le message a été envoyé"
       no-message-valid: "Vous devez entrer un message valide , plus de 1 caractère"
+    globalmute:
+      success-false: "Le général est désactivé"
+      success-true: "Le général est activé"
+      error: "Vous devez entrer soit <true> ou <false>"

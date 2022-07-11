@@ -44,9 +44,9 @@ final class Language extends \pocketmine\lang\Language
         return $this->database;
     }
 
-    public function getMessage(string $key, array $params = [], bool $prefix = true): Message
+    public function getMessage(string $key, array $params = [], int $prefix = 1): Message
     {
-        $message = ($prefix ? LanguageManager::getPrefix() : "").$this->getDatabase()->getNested($key, $key);
+        $message = ($prefix ? LanguageManager::getPrefix($prefix) : "").$this->getDatabase()->getNested($key, $key);
         foreach ($params as $key => $value){
             $message = str_replace($key, $value, $message);
         }

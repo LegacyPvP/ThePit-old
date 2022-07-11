@@ -3,6 +3,7 @@
 namespace Legacy\ThePit\Commands;
 
 use Legacy\ThePit\Managers\LanguageManager;
+use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\command\CommandSender;
 
 class SayCommand extends Commands {
@@ -14,7 +15,8 @@ class SayCommand extends Commands {
             if(isset($args[0])){
                 if(str_word_count($args[0]) >= 1){
                     $message = implode(" ", array_slice($args, 0));
-                    $sender->getServer()->broadcastMessage(LanguageManager::getPrefix() . $message);
+                    $sender_language->getMessage("messages.commands.say.success")->send($sender);
+                    $sender->getServer()->broadcastMessage(LanguageManager::getPrefix(ServerUtils::PREFIX_2) . $message);
                 }else{
                     $sender_language->getMessage("messages.commands.say.no-message-valid")->send($sender);
                 }
