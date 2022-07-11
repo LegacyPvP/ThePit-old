@@ -7,6 +7,8 @@ use Legacy\ThePit\Commands\GameModeCommand;
 use Legacy\ThePit\Commands\KickCommand;
 use Legacy\ThePit\Commands\ListRankCommand;
 use Legacy\ThePit\Commands\SetRankCommand;
+use Legacy\ThePit\Commands\TpCommand;
+use Legacy\ThePit\Commands\TprCommand;
 use Legacy\ThePit\Commands\UnbanCommand;
 use Legacy\ThePit\Core;
 
@@ -22,6 +24,8 @@ abstract class CommandsManager
             new ListRankCommand('listrank'),
             new BanListCommand('banlist'),
             new GameModeCommand('gamemode'),
+            new TprCommand('tpr'),
+            new TpCommand('tp'),
         ];
     }
 

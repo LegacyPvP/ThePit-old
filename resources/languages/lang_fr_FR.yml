@@ -2,7 +2,7 @@ messages:
   commands:
     not-permission: "§cYou do not have permission to use this command"
     target-not-player: "Le joueur {player} n'existe pas" # {player}
-    target-not-found: "Le joueur mentionné n'est pas connecté"
+    target-not-found: "Le joueur {player} n'est pas connecté"
     sender-not-player: "Vous devez être un joueur pour effectuer cette commande"
     ban:
       success: "Vous avez banni {player} jusqu'au {date} pour {reason}" # {player}, {date}, {reason}
@@ -26,3 +26,8 @@ messages:
       change: "Votre gamemode a été changé à {gamemode}"
       success-other: "Vous avez changé le gamemode de {player} à {gamemode}" # {player} is the player who set his gamemode, {gamemode} is the gamemode he set
       success-self: "Vous avez changé votre gamemode à {gamemode}" # {player} is the player who set his gamemode, {gamemode} is the gamemode he set
+    tpr:
+      success: "Vous vous êtes téléporté sur {player}" # {player}
+      failed: "Vous êtes le seul joueur du serveur."
+    tp:
+      success: "Vous vous êtes téléporté sur {player}" # {player}

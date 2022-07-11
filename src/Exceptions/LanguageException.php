@@ -3,9 +3,10 @@
 namespace Legacy\ThePit\Exceptions;
 
 use JetBrains\PhpStorm\Pure;
+use pocketmine\command\utils\CommandException;
 use Throwable;
 
-final class CommandException extends \pocketmine\command\utils\CommandException
+final class LanguageException extends CommandException
 {
     #[Pure] public function __construct($message = "", public $args = [], public bool $prefix = true, $code = 0, Throwable $previous = null)
     {
