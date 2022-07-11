@@ -6,7 +6,7 @@ use Legacy\ThePit\Player\LegacyPlayer;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerChatEvent as ClassEvent;
 
-class PlayerChatEvent implements Listener
+final class PlayerChatEvent implements Listener
 {
     /**
      * @param ClassEvent $event

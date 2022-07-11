@@ -2,6 +2,7 @@
 namespace Legacy\ThePit;
 
 use Legacy\ThePit\Managers\CommandsManager;
+use Legacy\ThePit\Managers\CustomItemManager;
 use Legacy\ThePit\Managers\EventsManager;
 use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Managers\LanguageManager;
@@ -19,6 +20,11 @@ class Core extends PluginBase
 {
     use SingletonTrait;
 
+    protected function onLoad(): void
+    {
+        CustomItemManager::initCustomItems();
+    }
+
     public function onEnable(): void
     {
         date_default_timezone_set('Europe/Paris');
@@ -26,6 +32,7 @@ class Core extends PluginBase
         $this::setInstance($this);
         $this->saveResource("config.yml", true);
 
+        CustomItemManager::registerItems();
         ListenersManager::initListeners($this);
         CommandsManager::initCommands();
         EventsManager::initEvents();
