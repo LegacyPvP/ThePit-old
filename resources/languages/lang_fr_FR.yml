@@ -21,4 +21,6 @@ messages:
     banlist:
       header: "Voici la liste des Bans:\n"
       format: "- {name} [{date}] -> {reason}\n"
-
+    say:
+      success: "Le message a été envoyé"
+      no-message-valid: "Vous devez entrer un message valide , plus de 1 caractère"

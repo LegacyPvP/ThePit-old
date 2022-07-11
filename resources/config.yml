@@ -1,4 +1,6 @@
-prefix: "§o§eLegacy §2>> §a"
+prefix: "§9Legacy §1§l» §r§9"
+
+global-mute: false
 
 languages:
   - "fr_FR"
@@ -156,3 +158,16 @@ commands:
     description: "Définir le gamemode d'un joueur"
     aliases:
       - gm
+  say:
+    permission: "legacy.commands.say"
+    usage: "/say <message>"
+    description: "Publier un message aux joueurs du serveur"
+    aliases:
+      - s
+      - sayall
+  globalmute:
+    permission: "legacy.commands.globalmute"
+    usage: "/globalmute <true/false>"
+    description: "Mute tous les joueurs"
+    aliases:
+      - muteall

@@ -4,8 +4,10 @@ namespace Legacy\ThePit\Managers;
 use Legacy\ThePit\Commands\BanCommand;
 use Legacy\ThePit\Commands\BanListCommand;
 use Legacy\ThePit\Commands\GameModeCommand;
+use Legacy\ThePit\Commands\GlobalMuteCommand;
 use Legacy\ThePit\Commands\KickCommand;
 use Legacy\ThePit\Commands\ListRankCommand;
+use Legacy\ThePit\Commands\SayCommand;
 use Legacy\ThePit\Commands\SetRankCommand;
 use Legacy\ThePit\Commands\UnbanCommand;
 use Legacy\ThePit\Core;
@@ -22,6 +24,8 @@ abstract class CommandsManager
             new ListRankCommand('listrank'),
             new BanListCommand('banlist'),
             new GameModeCommand('gamemode'),
+            new SayCommand("say"),
+            new GlobalMuteCommand("globalmute"),
         ];
     }
 
