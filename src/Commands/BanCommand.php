@@ -19,12 +19,12 @@ final class BanCommand extends Commands
     {
         if($this->testPermissionSilent($sender)){
             $sender_language = $this->getSenderLanguage($sender);
-            if(isset($args[0], $args[1], $args[2], $args[3])){
+            if(isset($args[0], $args[1])){
                 $target = Server::getInstance()->getPlayerByPrefix($args[0]) ?? Server::getInstance()->getOfflinePlayer($args[0]);
                 if($target instanceof IPlayer){
                     $time = strtolower($args[1]) === "perm" ? null : TimeUtils::strToDate($args[1]);
-                    $ip = $args[2];
-                    $reason = implode(" ", array_slice($args, 3));
+                    $ip = $args[2] ?? "non";
+                    $reason = isset($args[3]) ? implode(" ", array_slice($args, 3)) : "Aucune raison donnée.";
                     switch (strtolower($ip)){
                         case "o":
                         case "oui":
@@ -32,7 +32,7 @@ final class BanCommand extends Commands
                         case "n":
                         case "non":
                         default:
-                            Server::getInstance()->getNameBans()->addBan($target, $reason, $time);
+                            Server::getInstance()->getNameBans()->addBan($target->getName(), $reason, $time);
                             $sender_language->getMessage("messages.commands.ban.success", ["{player}" => $target->getName(), "{date}" => $time?->format("d/m/Y H:i:s") ?? "Permanent", "{reason}" => $reason])->send($sender);
                             if($target instanceof Player) $target->kick(
                                 $target->getLanguage()->getMessage("messages.commands.ban.banned",

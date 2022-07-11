@@ -11,19 +11,19 @@ abstract class TimeUtils
     {
         try {
             $datetime = new DateTime(
-                strtotime(
-                    str_replace(
-                        [
-                            "s", "m", "h", "d", "w", "y"
-                        ],
-                        [
-                            "seconds", "minutes", "hours", "days", "weeks", "years"
-                        ],
-                        strtolower($date)
-                    )
+                str_replace(
+                    [
+                        "s", "m", "h", "d", "w"
+                    ],
+                    [
+                        "seconds", "minutes", "hours", "days", "weeks"
+                    ],
+                    strtolower($date)
                 )
             );
-            if($datetime->getTimestamp() <= time()) throw new Exception("La Date est invalide");
+            if($datetime->getTimestamp() <= time()){
+                throw new Exception("La Date est invalide");
+            }
             return $datetime;
         } catch (Exception) {
             return null;

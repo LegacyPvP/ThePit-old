@@ -122,7 +122,7 @@ ranks:
 commands:
   ban:
     permission: "legacy.commands.ban"
-    usage: "/ban <player> <time> <ip> <reason>"
+    usage: "/ban <player> <time> [ip] [reason]"
     description: "Bannir un joueur"
     aliases: []
   unban:
@@ -144,4 +144,9 @@ commands:
     permission: "legacy.commands.listrank"
     usage: "/listrank"
     description: "Voir la liste des ranks"
+    aliases: []
+  banlist:
+    permission: "legacy.commands.banlist"
+    usage: "/banlist"
+    description: "Voir la liste des bans"
     aliases: []

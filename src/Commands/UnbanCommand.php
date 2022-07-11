@@ -19,7 +19,7 @@ final class UnbanCommand extends Commands
                 if($target){
                     Server::getInstance()->getIPBans()->remove($target);
                     Server::getInstance()->getNameBans()->remove($target);
-                    $sender_language->getMessage("messages.commands.unban.success")->send($sender);
+                    $sender_language->getMessage("messages.commands.unban.success", ["{player}" => $target->getName()])->send($sender);
                 }
                 else {
                     $sender_language->getMessage("messages.commands.not-player")->send($sender);

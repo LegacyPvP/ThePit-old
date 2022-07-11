@@ -21,6 +21,8 @@ class Core extends PluginBase
 
     public function onEnable(): void
     {
+        date_default_timezone_set('Europe/Paris');
+
         $this::setInstance($this);
         $this->saveResource("config.yml", true);
 

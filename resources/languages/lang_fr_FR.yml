@@ -16,4 +16,7 @@ messages:
     listrank:
       header: "Voici la liste des Ranks:\n"
       format: "{name}, "
+    banlist:
+      header: "Voici la liste des Bans:\n"
+      format: "- {name} [{date}] -> {reason}\n"
 

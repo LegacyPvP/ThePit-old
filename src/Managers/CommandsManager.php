@@ -2,6 +2,7 @@
 namespace Legacy\ThePit\Managers;
 
 use Legacy\ThePit\Commands\BanCommand;
+use Legacy\ThePit\Commands\BanListCommand;
 use Legacy\ThePit\Commands\KickCommand;
 use Legacy\ThePit\Commands\ListRankCommand;
 use Legacy\ThePit\Commands\SetRankCommand;
@@ -18,6 +19,7 @@ abstract class CommandsManager
             new KickCommand('kick'),
             new SetRankCommand('setrank'),
             new ListRankCommand('listrank'),
+            new BanListCommand('banlist'),
         ];
     }
 

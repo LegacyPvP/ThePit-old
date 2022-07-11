@@ -38,7 +38,8 @@ abstract class RanksManager
         return reset(self::$ranks) ?? null;
     }
 
-    #[ArrayShape(["{player}" => "string", "{prestige}" => "int", "{niveau}" => "int"])] public static function getParameters(LegacyPlayer $player): array {
+    #[ArrayShape(["{player}" => "string", "{prestige}" => "int", "{niveau}" => "int"])]
+    public static function getParameters(LegacyPlayer $player): array {
         return [
             "{player}" => $player->getName(),
             "{prestige}" => $player->getPlayerProperties()->getNestedProperties("stats.prestige") ?? 0,
