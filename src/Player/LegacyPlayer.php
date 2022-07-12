@@ -23,6 +23,7 @@ final class LegacyPlayer extends Player
 {
     private PlayerProperties $properties;
     private CompoundTag $tag;
+    private bool $nightvision;
 
     public function initEntity(CompoundTag $nbt): void
     {
@@ -109,5 +110,15 @@ final class LegacyPlayer extends Player
     public function attack(EntityDamageEvent $source): void
     {
         $source->setAttackCooldown(Core::getInstance()->getConfigByName("knockback")->get("attack-cooldown"));
+    }
+
+    public function isInNightvision(): bool
+    {
+        return $this->nightvision;
+    }
+
+    public function setNightvision(bool $nightvision): void
+    {
+        $this->nightvision = $nightvision;
     }
 }
