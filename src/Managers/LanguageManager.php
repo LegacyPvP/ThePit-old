@@ -4,6 +4,7 @@ namespace Legacy\ThePit\Managers;
 use Legacy\ThePit\Core;
 use Legacy\ThePit\Databases\LanguageDatabase;
 use Legacy\ThePit\Objects\Language;
+use Legacy\ThePit\Utils\ServerUtils;
 
 abstract class LanguageManager
 {
@@ -44,8 +45,14 @@ abstract class LanguageManager
         return self::$languages[$language] ?? reset(self::$languages);
     }
 
-    public static function getPrefix(): string {
-        return Core::getInstance()->getConfig()->get('prefix', "");
+    public static function getPrefix(int $prefix): string {
+        $result = match($prefix) {
+            1 => ServerUtils::PREFIX_1_TEXT,
+            2 => ServerUtils::PREFIX_2_TEXT,
+            3 => ServerUtils::PREFIX_3_TEXT,
+        };
+
+        return $result ?? ServerUtils::PREFIX_1;
     }
 
     public static function getDefaultLanguage(): Language

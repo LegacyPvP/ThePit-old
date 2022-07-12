@@ -6,12 +6,14 @@ use Legacy\ThePit\Managers\LanguageManager;
 use Legacy\ThePit\Objects\Language;
 use Legacy\ThePit\Player\LegacyPlayer;
 use Legacy\ThePit\Traits\CommandTrait;
+use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\console\ConsoleCommandSender;
 use pocketmine\lang\Translatable;
 use pocketmine\plugin\Plugin;
 use pocketmine\plugin\PluginOwned;
+use pocketmine\Server;
 
 abstract class Commands extends Command implements PluginOwned
 {
@@ -28,7 +30,7 @@ abstract class Commands extends Command implements PluginOwned
 
     public function getUsage(): Translatable|string
     {
-        return LanguageManager::getPrefix().parent::getUsage();
+        return LanguageManager::getPrefix(ServerUtils::PREFIX_3).parent::getUsage();
     }
 
     public function getSenderLanguage(CommandSender $sender): ?Language {

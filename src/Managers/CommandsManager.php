@@ -6,6 +6,7 @@ use Legacy\ThePit\Commands\BanListCommand;
 use Legacy\ThePit\Commands\GameModeCommand;
 use Legacy\ThePit\Commands\GlobalMuteCommand;
 use Legacy\ThePit\Commands\KickCommand;
+use Legacy\ThePit\Commands\KnockbackCommand;
 use Legacy\ThePit\Commands\ListRankCommand;
 use Legacy\ThePit\Commands\SayCommand;
 use Legacy\ThePit\Commands\SetRankCommand;
@@ -30,6 +31,7 @@ abstract class CommandsManager
             new GlobalMuteCommand("globalmute"),
             new TprCommand("tpr"),
             new TpCommand("tp"),
+            new KnockbackCommand("knockback"),
         ];
     }
 

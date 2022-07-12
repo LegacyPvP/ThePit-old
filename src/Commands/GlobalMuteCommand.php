@@ -2,11 +2,15 @@
 
 namespace Legacy\ThePit\Commands;
 
+use Legacy\ThePit\Core;
 use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\command\CommandSender;
 
 final class GlobalMuteCommand extends Commands {
 
+    /**
+     * @throws \JsonException
+     */
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
         if($this->testPermissionSilent($sender)){
@@ -20,7 +24,7 @@ final class GlobalMuteCommand extends Commands {
                     } else {
                         $sender_language->getMessage("messages.commands.globalmute.muted")->send($sender);
                     }
-                }else {
+                } else {
                     $sender->sendMessage($this->getUsage());
                 }
             }else{
