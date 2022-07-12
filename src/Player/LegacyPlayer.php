@@ -1,7 +1,6 @@
 <?php
 namespace Legacy\ThePit\Player;
 
-use Legacy\ThePit\Core;
 use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Managers\LanguageManager;
 use Legacy\ThePit\Objects\Rank;
@@ -10,9 +9,6 @@ use Legacy\ThePit\Utils\PlayerUtils;
 use pocketmine\entity\effect\EffectManager;
 use pocketmine\entity\ExperienceManager;
 use pocketmine\entity\HungerManager;
-use pocketmine\event\entity\EntityDamageEvent;
-use pocketmine\lang\KnownTranslationFactory;
-use pocketmine\lang\KnownTranslationKeys;
 use pocketmine\lang\Translatable;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\network\mcpe\protocol\TextPacket;
@@ -100,16 +96,6 @@ final class LegacyPlayer extends Player
         }else{
             $this->sendMessage($this->getLanguage()->translateString($message, $parameters));
         }
-    }
-
-    public function knockBack(float $x, float $z, float $force = 0.4, ?float $verticalLimit = 0.4): void
-    {
-        parent::knockBack(Core::getInstance()->getConfigByName("knockback")->get("x"), Core::getInstance()->getConfigByName("knockback")->get("y"), Core::getInstance()->getConfigByName("knockback")->get("force"), Core::getInstance()->getConfigByName("knockback")->get("vertical-limit"));
-    }
-
-    public function attack(EntityDamageEvent $source): void
-    {
-        $source->setAttackCooldown(Core::getInstance()->getConfigByName("knockback")->get("attack-cooldown"));
     }
 
     public function isInNightvision(): bool

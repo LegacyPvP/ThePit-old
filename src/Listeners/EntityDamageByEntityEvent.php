@@ -15,7 +15,12 @@ final class EntityDamageByEntityEvent implements Listener
     {
 
         if(($damager = $event->getDamager()) instanceof LegacyPlayer){
+            $vector = $damager->getDirectionVector();
             $item = $event->getDamager()->getInventory()->getItemInHand();
+            if($damager->isImmobile()){
+                $event->cancel();
+                return;
+            }
             switch(true){
                 case $item instanceof Nemo:
                     if(CooldownManager::hasCooldown($item)){
@@ -23,20 +28,17 @@ final class EntityDamageByEntityEvent implements Listener
                         $event->cancel();
                     }
                     else {
-                        $vector = $damager->getDirectionVector();
                         $event->getEntity()->knockBack($vector->getX(), $vector->getZ(), Core::getInstance()->getConfig()->getNested("items.nemo.horizontal", 2), Core::getInstance()->getConfig()->getNested("items.nemo.vertical", 0.50));
-                        $event->setKnockBack(0);
                         $item = CooldownManager::setCooldown($item, null);
                         $damager->getInventory()->setItemInHand($item);
                     }
                     break;
+                default:
+                    $event->getEntity()->knockBack($vector->getX(), $vector->getZ(), Core::getInstance()->getConfig()->getNested("knockback.horizontal", 0.40), Core::getInstance()->getConfig()->getNested("knockback.vertical", 0.40));
+                    break;
             }
-        }
-
-        if(($damager = $event->getDamager()) instanceof LegacyPlayer){
-            if($damager->isImmobile()){
-                $event->cancel();
-            }
+            $event->setAttackCooldown(Core::getInstance()->getConfig()->getNested("knockback.attack_cooldown", 10));
+            $event->setKnockBack(0);
         }
     }
 }
