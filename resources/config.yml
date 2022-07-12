@@ -1,4 +1,7 @@
-prefix: "§9Legacy §1§l» §r§9"
+prefixes:
+  1: "§5[§dLegacy§r§5] §r"
+  2: "§5[§d§l!!!§r§5] §r"
+  3: "§5[§d§l!§r§5] §r"
 
 languages:
   - "fr_FR"
@@ -120,24 +123,26 @@ ranks:
     permissions: []
 
 commands:
+  # <> = obligatoire
+  # [] = optionnel
   ban:
     permission: "legacy.commands.ban"
-    usage: "§fVous devez faire §d/ban (nom du joueur) (temps) (ip [oui/non]) (raison) §fpour bannir un joueur."
+    usage: "§fVous devez faire §d/ban <nom du joueur> <temps> [ip: [oui/non]] [raison] §fpour bannir un joueur."
     description: "Bannir un joueur"
     aliases: []
   unban:
     permission: "legacy.commands.unban"
-    usage: "§fVous devez faire §d/unban (nom du joueur) §fpour débannir un joueur."
+    usage: "§fVous devez faire §d/unban <nom du joueur> §fpour débannir un joueur."
     description: "Débannir un joueur"
     aliases: []
   kick:
     permission: "legacy.commands.kick"
-    usage: "§fVous devez faire §d/kick (nom du joueur) §fpour expulser un joueur."
+    usage: "§fVous devez faire §d/kick <nom du joueur> §fpour expulser un joueur."
     description: "Expulser un joueur"
     aliases: []
   setrank:
     permission: "legacy.commands.setrank"
-    usage: "§fVous devez faire §d/setrank (nom du joueur) (grade) §fpour mettre un grade à un joueur."
+    usage: "§fVous devez faire §d/setrank <nom du joueur> <grade> §fpour mettre un grade à un joueur."
     description: "Mettre un grade à un joueur"
     aliases: []
   listrank:
@@ -152,20 +157,20 @@ commands:
     aliases: []
   gamemode:
     permission: "legacy.commands.gamemode"
-    usage: "§fVous devez faire §d/gamemode (mode) (nom du joueur) §fpour changer le mode de jeu d'un joueur."
+    usage: "§fVous devez faire §d/gamemode <mode> [nom du joueur] §fpour changer le mode de jeu d'un joueur."
     description: "Définir le gamemode d'un joueur"
     aliases:
       - gm
   say:
     permission: "legacy.commands.say"
-    usage: "§fVous devez faire §d/say (message) §fpour faire une annonce."
+    usage: "§fVous devez faire §d/say <message> §fpour faire une annonce."
     description: "Écrire une annonce"
     aliases:
       - s
       - sayall
   globalmute:
     permission: "legacy.commands.globalmute"
-    usage: "§fVous devez faire §d/globalmute (mode [true/false]) §fpour mute tous les joueurs."
+    usage: "§fVous devez faire §d/globalmute [mode: [true/false]] §fpour mute tous les joueurs."
     description: "Mute tous les joueurs"
     aliases:
       - muteall
@@ -177,13 +182,13 @@ commands:
       - randomtp
   tp:
     permission: "legacy.commands.tp"
-    usage: "§fVous devez faire §d/tp (player1) (player2)"
+    usage: "§fVous devez faire §d/tp <player1> [player2]"
     description: "Se téléporter à un joueur spécifique"
     aliases:
       - teleport
   knockback:
     permission: "legacy.commands.knockback"
-    usage: "§fVous devez faire §d/knockback (x) (y) (force) (vertical-limit) (attack-cooldown)"
+    usage: "§fVous devez faire §d/knockback <x> <y> <force> [vertical-limit] (attack-cooldown)"
     description: "Changer le knockback du serveur"
     aliases:
       - kb

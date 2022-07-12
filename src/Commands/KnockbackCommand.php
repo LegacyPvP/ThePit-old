@@ -2,58 +2,46 @@
 
 namespace Legacy\ThePit\Commands;
 
+use JsonException;
 use Legacy\ThePit\Core;
+use Legacy\ThePit\Exceptions\LanguageException;
+use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\command\CommandSender;
-use pocketmine\player\Player;
-use pocketmine\Server;
 
 final class KnockbackCommand extends Commands
 {
+    /**
+     * @throws JsonException
+     */
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
         if($this->testPermissionSilent($sender)){
-            $sender_language = $this->getSenderLanguage($sender);
-            if(isset($args[0])){
-                $x = $args[0];
-                if(isset($args[1])){
-                    $y = $args[1];
-                    if(isset ($args[2])){
-                        $force = $args[2];
-                        if(isset($args[3])){
-                            $vertical_limit = $args[3];
-                            if(isset($args[4])){
-                                $attack_cooldown = $args[4];
-                                if(is_numeric($x) and is_numeric($y) and is_numeric($force) and is_numeric($vertical_limit) and is_numeric($attack_cooldown)){
-                                    $config = Core::getInstance()->getConfigByName("knockback");
-                                    $config->set("x", (int)$x);
-                                    $config->set("y", (int)$y);
-                                    $config->set("force", (int)$force);
-                                    $config->set("vertical_limit", (int)$vertical_limit);
-                                    $config->set("attack_cooldown", (int)$attack_cooldown);
-                                    $config->save();
-                                    $sender_language->getMessage("messages.commands.knockback.success", [
-                                        "{x}" => $x,
-                                        "{y}" => $y,
-                                        "{force}" => $force,
-                                        "{vertical-limit}" => $vertical_limit,
-                                        "{attack-cooldown}" => $attack_cooldown
-                                    ])->send($sender);
-                                }else{
-                                    $sender->sendMessage($this->getUsage());
-                                }
-                            }else{
-                                $sender->sendMessage($this->getUsage());
-                            }
-                        }else{
-                            $sender->sendMessage($this->getUsage());
-                        }
+            if(isset($args[0], $args[1], $args[2])){
+                try {
+                    $force = $args[0];
+                    $vertical_limit = $args[1];
+                    $attack_cooldown = $args[2] ?? 10;
+                    if(is_numeric($force) and is_numeric($vertical_limit) and is_numeric($attack_cooldown)){
+                        $config = Core::getInstance()->getConfig();
+                        $config->setNested("knockback.force", (int)$force);
+                        $config->setNested("knockback.vertical_limit", (int)$vertical_limit);
+                        $config->setNested("knockback.attack_cooldown", (int)$attack_cooldown);
+                        $config->save();
+                        throw new LanguageException("messages.commands.knockback.success", [
+                            "{x}" => $x,
+                            "{y}" => $y,
+                            "{force}" => $force,
+                            "{vertical-limit}" => $vertical_limit,
+                            "{attack-cooldown}" => $attack_cooldown
+                        ]);
                     }else{
-                        $sender->sendMessage($this->getUsage());
+                        throw new LanguageException("messages.commands.knockback.invalid-arguments", ServerUtils::PREFIX_2);
                     }
-                }else{
-                    $sender->sendMessage($this->getUsage());
                 }
-            }else{
+                catch (LanguageException $exception){
+                    $this->getSenderLanguage($sender)->getMessage($exception->getMessage(), $exception->getArgs(), $exception->getPrefix())->send($sender);
+                }
+            } else{
                 $sender->sendMessage($this->getUsage());
             }
         }
