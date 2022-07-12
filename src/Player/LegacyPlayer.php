@@ -19,6 +19,7 @@ final class LegacyPlayer extends Player
 {
     private PlayerProperties $properties;
     private CompoundTag $tag;
+    private bool $nightvision = false;
 
     public function initEntity(CompoundTag $nbt): void
     {
@@ -95,5 +96,15 @@ final class LegacyPlayer extends Player
         }else{
             $this->sendMessage($this->getLanguage()->translateString($message, $parameters));
         }
+    }
+
+    public function isInNightvision(): bool
+    {
+        return $this->nightvision;
+    }
+
+    public function setNightvision(bool $nightvision): void
+    {
+        $this->nightvision = $nightvision;
     }
 }

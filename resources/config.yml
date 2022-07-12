@@ -197,6 +197,17 @@ commands:
     description: "Changer le knockback du serveur"
     aliases:
       - kb
+  nightvision:
+    permission: "legacy.commands.nightvision"
+    usage: "§fVous devez faire §d/nightvision §fpour activer ou désactiver la vision nocturne."
+    description: "Activer la vision nocturne"
+    aliases:
+      - nv
+  ping:
+    permission: "legacy.commands.ping"
+    usage: "§fVous devez faire §d/ping §fpour voir votre ping."
+    description: "Voir votre ping ou d'un joueur"
+    aliases:
 
 items:
   nemo:
