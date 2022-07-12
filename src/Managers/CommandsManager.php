@@ -8,6 +8,8 @@ use Legacy\ThePit\Commands\GlobalMuteCommand;
 use Legacy\ThePit\Commands\KickCommand;
 use Legacy\ThePit\Commands\KnockbackCommand;
 use Legacy\ThePit\Commands\ListRankCommand;
+use Legacy\ThePit\Commands\NightvisionCommand;
+use Legacy\ThePit\Commands\PingCommand;
 use Legacy\ThePit\Commands\SayCommand;
 use Legacy\ThePit\Commands\SetRankCommand;
 use Legacy\ThePit\Commands\TpCommand;
@@ -32,6 +34,8 @@ abstract class CommandsManager
             new TprCommand("tpr"),
             new TpCommand("tp"),
             new KnockbackCommand("knockback"),
+            new PingCommand("ping"),
+            new NightvisionCommand("nightvision"),
         ];
     }
 
