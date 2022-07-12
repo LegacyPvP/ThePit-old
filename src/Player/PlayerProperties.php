@@ -5,13 +5,15 @@ namespace Legacy\ThePit\Player;
 use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Traits\PropertiesTrait;
 use Legacy\ThePit\Utils\PlayerUtils;
+use pocketmine\nbt\tag\CompoundTag;
+use pocketmine\player\Player;
 
 final class PlayerProperties {
     use PropertiesTrait;
 
-    public function __construct(LegacyPlayer $player)
+    public function __construct(public LegacyPlayer $player)
     {
-        if(!$player->getNBT()->getCompoundTag('properties')){
+        if(!($nbt = $this->player->getNBT())->getCompoundTag('properties') || empty($nbt->getCompoundTag("properties")->getValue())){
             $this->setBaseProperties([
                 "stats" => [
                     "kills" => 0,
@@ -29,7 +31,7 @@ final class PlayerProperties {
                 "infos" => [
                     "ip" => "",
                     "platform" => "test",
-                    "rank" => RanksManager::getDefaultRank()->getName(),
+                    "rank" => RanksManager::getDefaultRank()?->getName(),
                 ],
                 "status" => [
                     "muted" => false,
@@ -40,10 +42,14 @@ final class PlayerProperties {
                     "autosprint" => false,
                 ]
             ]);
-        }
-        $nbt = $player->getNBT();
-        foreach ($this->getPropertiesList() as $name => $value){
-            $nbt = PlayerUtils::valueToTag($name, $value, $nbt);
+        }else{
+            $this->setBaseProperties(PlayerUtils::TagtoArray($nbt->getCompoundTag("properties")));
         }
     }
+
+    public function save(CompoundTag $tag)
+    {
+        $tag->setTag("properties", PlayerUtils::arraytoTag($this->getPropertiesList()));
+    }
+
 }
