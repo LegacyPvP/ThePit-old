@@ -14,7 +14,7 @@ final class PlayerJoinEvent implements Listener
     {
         if(($player = $event->getPlayer()) instanceof LegacyPlayer){
             $grade = RanksManager::parseRank($player->getPlayerProperties()->getNestedProperties("infos.rank"));
-            foreach ($grade->getPermissions() as $permission){
+            foreach ($grade?->getPermissions() as $permission){
                 $player->setBasePermission($permission, true);
             }
             $packet = CustomItemManager::getPacket();

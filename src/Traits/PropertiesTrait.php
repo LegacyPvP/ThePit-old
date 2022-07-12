@@ -80,20 +80,20 @@ trait PropertiesTrait
      *
      * @return mixed
      */
-    public function getNestedProperties(string $name): mixed{
+    public function getNestedProperties(string $name, mixed $default = null): mixed{
         $vars = explode(".", $name);
         $base = array_shift($vars);
         if(isset($this->properties[$base])){
             $base = $this->properties[$base];
         }else{
-            return null;
+            return $default;
         }
         while(count($vars) > 0){
             $baseKey = array_shift($vars);
             if(is_array($base) && isset($base[$baseKey])){
                 return $base[$baseKey];
             }else{
-                return null;
+                return $default;
             }
         }
         return $base;

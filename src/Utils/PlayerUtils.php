@@ -2,9 +2,12 @@
 namespace Legacy\ThePit\Utils;
 
 use pocketmine\nbt\tag\CompoundTag;
+use pocketmine\nbt\tag\ListTag;
 
 abstract class PlayerUtils
 {
+    private static array $properties;
+
     public static function valueToTag(string $property, mixed $value, ?CompoundTag $nbt = null): CompoundTag{
         if(!$nbt) $nbt = new CompoundTag();
         return match (gettype($value)){
@@ -14,6 +17,18 @@ abstract class PlayerUtils
             "boolean" => $nbt->setByte($property, $value),
             "array" => $nbt->setTag($property, self::arraytoTag($value)),
         };
+    }
+
+    public static function TagtoArray(CompoundTag|ListTag $nbt, $name = null): array{
+        foreach($nbt->getValue() as $key => $value){
+            if($value instanceof CompoundTag || $value instanceof ListTag){
+                self::TagtoArray($value, array_search($value, $nbt->getValue(), true));
+            }else{
+                $name === null ? self::$properties[$key] = $value->getValue() : self::$properties[$name][$key] = $value->getValue();
+
+            }
+        }
+        return self::$properties;
     }
 
     public static function arraytoTag(array $array): CompoundTag {
