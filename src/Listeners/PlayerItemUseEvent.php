@@ -15,7 +15,7 @@ final class PlayerItemUseEvent implements Listener
             $event->getPlayer()->sendTip($event->getPlayer()->getLanguage()->getMessage("messages.interactions.cooldown", ["{timeleft}" => CooldownManager::getCooldown($event->getItem()) - time()])->__toString());
             $event->cancel();
         }
-        else {
+        else if(CooldownManager::getCooldownConfig($event->getItem()->getId())){
             if($event->getItem() instanceof Sword) return;
             $event->getPlayer()->getInventory()->setItemInHand(CooldownManager::setCooldown($event->getItem(), null));
         }
