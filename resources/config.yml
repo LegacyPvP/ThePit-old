@@ -3,13 +3,6 @@ global-mute: false
 languages:
   - "fr_FR"
 
-knockback:
-  x: 1
-  z: 1
-  force: 1
-  vertical-limit: 1
-  attack-cooldown: 5
-
 scoreboards:
   refresh-time: 15 # (ticks)
   # basic - Le scoreboard par défaut

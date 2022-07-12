@@ -23,20 +23,24 @@ final class KnockbackCommand extends Commands
                             $vertical_limit = $args[3];
                             if(isset($args[4])){
                                 $attack_cooldown = $args[4];
-                                Core::getInstance()->getConfig()->setNested("knockback", [
-                                    "x" => $x,
-                                    "y" => $y,
-                                    "force" => $force,
-                                    "vertical_limit" => $vertical_limit,
-                                    "attack_cooldown" => $attack_cooldown
-                                ]);
-                                $sender_language->getMessage("messages.commands.knockback.success", [
-                                    "{x}" => $x,
-                                    "{y}" => $y,
-                                    "{force}" => $force,
-                                    "{vertical-limit}" => $vertical_limit,
-                                    "{attack-cooldown}" => $attack_cooldown
-                                ])->send($sender);
+                                if(is_numeric($x) and is_numeric($y) and is_numeric($force) and is_numeric($vertical_limit) and is_numeric($attack_cooldown)){
+                                    $config = Core::getInstance()->getConfigByName("knockback");
+                                    $config->set("x", (int)$x);
+                                    $config->set("y", (int)$y);
+                                    $config->set("force", (int)$force);
+                                    $config->set("vertical_limit", (int)$vertical_limit);
+                                    $config->set("attack_cooldown", (int)$attack_cooldown);
+                                    $config->save();
+                                    $sender_language->getMessage("messages.commands.knockback.success", [
+                                        "{x}" => $x,
+                                        "{y}" => $y,
+                                        "{force}" => $force,
+                                        "{vertical-limit}" => $vertical_limit,
+                                        "{attack-cooldown}" => $attack_cooldown
+                                    ])->send($sender);
+                                }else{
+                                    $sender->sendMessage($this->getUsage());
+                                }
                             }else{
                                 $sender->sendMessage($this->getUsage());
                             }

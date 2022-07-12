@@ -104,11 +104,11 @@ final class LegacyPlayer extends Player
 
     public function knockBack(float $x, float $z, float $force = 0.4, ?float $verticalLimit = 0.4): void
     {
-        parent::knockBack(Core::getInstance()->getConfig()->getNested("knockback.x"), Core::getInstance()->getConfig()->getNested("knockback.z"), Core::getInstance()->getConfig()->getNested("knockback.force"), Core::getInstance()->getConfig()->getNested("knockback.vertical-limit"));
+        parent::knockBack(Core::getInstance()->getConfigByName("knockback")->get("x"), Core::getInstance()->getConfigByName("knockback")->get("y"), Core::getInstance()->getConfigByName("knockback")->get("force"), Core::getInstance()->getConfigByName("knockback")->get("vertical-limit"));
     }
 
     public function attack(EntityDamageEvent $source): void
     {
-        $source->setAttackCooldown(Core::getInstance()->getConfig()->getNested("knockback.attack-cooldown"));
+        $source->setAttackCooldown(Core::getInstance()->getConfigByName("knockback")->get("attack-cooldown"));
     }
 }
