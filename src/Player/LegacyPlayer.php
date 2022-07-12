@@ -66,7 +66,6 @@ final class LegacyPlayer extends Player
     {
         $this->setNameTag($this->getGrade()->getNametag($this));
         $this->setScoreTag($this->getGrade()->getScoretag($this));
-        $this->saveNBT();
         return parent::onUpdate($currentTick);
     }
 

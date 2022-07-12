@@ -5,7 +5,7 @@ namespace Legacy\ThePit\Commands;
 use Legacy\ThePit\Managers\LanguageManager;
 use pocketmine\command\CommandSender;
 
-class SayCommand extends Commands {
+final class SayCommand extends Commands {
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {

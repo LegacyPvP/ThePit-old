@@ -24,3 +24,6 @@ messages:
     say:
       success: "Le message a été envoyé"
       no-message-valid: "Vous devez entrer un message valide , plus de 1 caractère"
+    globalmute:
+      muted: "Vous avez mute le serveur entier"
+      unmuted: "Vous avez unmute le serveur entier"

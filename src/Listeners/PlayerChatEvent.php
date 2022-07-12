@@ -3,6 +3,7 @@
 namespace Legacy\ThePit\Listeners;
 
 use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerChatEvent as ClassEvent;
 
@@ -20,7 +21,7 @@ final class PlayerChatEvent implements Listener
                 "{chat}" => $event->getMessage(),
             ]));
             $event->setMessage("");
-            if($player->getPlayerProperties()->getNestedProperties("status.muted") ?? false){
+            if($player->getPlayerProperties()->getNestedProperties("status.muted") ?? false or ServerUtils::isGlobalMute()){
                 $event->cancel();
             }
         }
