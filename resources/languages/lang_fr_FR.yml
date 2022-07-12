@@ -34,5 +34,5 @@ messages:
       unfreeze-success: "§aVous avez dégelé {player}"
       target-unfreeze: "Vous êtes dégelé"
     knockback:
-      success: "§aVous avez mis à jour le knockback ({x], {y}, {force}, {vertical-limit}, {attack-cooldown})"
+      success: "§aVous avez mis à jour le knockback ({x}, {y}, {force}, {vertical-limit}, {attack-cooldown})"
 

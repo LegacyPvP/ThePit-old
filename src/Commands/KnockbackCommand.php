@@ -34,8 +34,8 @@ final class KnockbackCommand extends Commands
                                     "{x}" => $x,
                                     "{y}" => $y,
                                     "{force}" => $force,
-                                    "{vertical_limit}" => $vertical_limit,
-                                    "{attack_cooldown}" => $attack_cooldown
+                                    "{vertical-limit}" => $vertical_limit,
+                                    "{attack-cooldown}" => $attack_cooldown
                                 ])->send($sender);
                             }else{
                                 $sender->sendMessage($this->getUsage());
