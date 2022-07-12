@@ -19,7 +19,7 @@ final class LegacyPlayer extends Player
 {
     private PlayerProperties $properties;
     private CompoundTag $tag;
-    private bool $nightvision;
+    private bool $nightvision = false;
 
     public function initEntity(CompoundTag $nbt): void
     {

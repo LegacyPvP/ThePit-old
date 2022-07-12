@@ -37,4 +37,12 @@ messages:
       target-unfreeze: "Vous êtes dégelé"
     knockback:
       success: "§aVous avez mis à jour le knockback ({x}, {y}, {force}, {vertical-limit}, {attack-cooldown})"
+    nightvision:
+      success-on: "§aVous avez activé la vision nocturne"
+      success-off: "§aVous avez désactivé la vision nocturne"
+    ping:
+      sender-success: "Votre ping est de {ping}"
+      target-success: "Le ping de {player} est de {ping}"
+      target-invalid: "Le joueur mentionné n'existe pas ou n'est pas connecté"
+
 

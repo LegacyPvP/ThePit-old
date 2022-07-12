@@ -18,7 +18,7 @@ class NightvisionCommand extends Commands {
                     $sender->setNightvision(false);
                     $sender->getEffects()->remove(VanillaEffects::NIGHT_VISION());
                     $sender_language->getMessage("messages.commands.nightvision.success-off")->send($sender);
-                } else {
+                }else{
                     $sender->setNightvision(true);
                     $sender->getEffects()->add(new EffectInstance(VanillaEffects::NIGHT_VISION(), 999999999, 1, false));
                     $sender_language->getMessage("messages.commands.nightvision.success-on")->send($sender);

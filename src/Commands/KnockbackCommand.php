@@ -28,8 +28,6 @@ final class KnockbackCommand extends Commands
                         $config->setNested("knockback.attack_cooldown", (int)$attack_cooldown);
                         $config->save();
                         throw new LanguageException("messages.commands.knockback.success", [
-                            "{x}" => $x,
-                            "{y}" => $y,
                             "{force}" => $force,
                             "{vertical-limit}" => $vertical_limit,
                             "{attack-cooldown}" => $attack_cooldown
