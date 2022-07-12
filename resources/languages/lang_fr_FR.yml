@@ -42,8 +42,8 @@ messages:
       success-on: "§aVous avez activé la vision nocturne"
       success-off: "§aVous avez désactivé la vision nocturne"
     ping:
-      sender-success: "Votre ping est de {ping}"
-      target-success: "Le ping de {player} est de {ping}"
+      sender-success: "Votre ping est de {ping} ms"
+      target-success: "Le ping de §d{target}§f est de {ping} ms"
       target-invalid: "Le joueur mentionné n'existe pas ou n'est pas connecté"
 
 
