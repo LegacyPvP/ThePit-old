@@ -23,16 +23,14 @@ final class KnockbackCommand extends Commands
                     $attack_cooldown = $args[2] ?? 10;
                     if(is_numeric($force) and is_numeric($vertical_limit) and is_numeric($attack_cooldown)){
                         $config = Core::getInstance()->getConfig();
-                        $config->setNested("knockback.force", (int)$force);
-                        $config->setNested("knockback.vertical_limit", (int)$vertical_limit);
+                        $config->setNested("knockback.horizontal", (int)$force);
+                        $config->setNested("knockback.vertical", (int)$vertical_limit);
                         $config->setNested("knockback.attack_cooldown", (int)$attack_cooldown);
                         $config->save();
                         throw new LanguageException("messages.commands.knockback.success", [
-                            "{x}" => $x,
-                            "{y}" => $y,
-                            "{force}" => $force,
-                            "{vertical-limit}" => $vertical_limit,
-                            "{attack-cooldown}" => $attack_cooldown
+                            "{horizontal}" => $force,
+                            "{vertical}" => $vertical_limit,
+                            "{attack_cooldown}" => $attack_cooldown
                         ]);
                     }else{
                         throw new LanguageException("messages.commands.knockback.invalid-arguments", ServerUtils::PREFIX_2);

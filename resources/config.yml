@@ -6,6 +6,11 @@ prefixes:
 languages:
   - "fr_FR"
 
+knockback:
+  horizontal: 0.40
+  vertical: 0.40
+  attack_cooldown: 10
+
 scoreboards:
   refresh-time: 15 # (ticks)
   # basic - Le scoreboard par défaut
