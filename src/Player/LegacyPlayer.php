@@ -11,6 +11,7 @@ use pocketmine\entity\ExperienceManager;
 use pocketmine\entity\HungerManager;
 use pocketmine\lang\Translatable;
 use pocketmine\nbt\tag\CompoundTag;
+use pocketmine\nbt\tag\ListTag;
 use pocketmine\network\mcpe\protocol\TextPacket;
 use pocketmine\player\GameMode;
 use pocketmine\player\Player;
@@ -22,37 +23,42 @@ final class LegacyPlayer extends Player
 
     public function initEntity(CompoundTag $nbt): void
     {
+        parent::initEntity($nbt);
         $this->tag = $nbt;
         $this->properties = new PlayerProperties($this);
-        parent::initEntity($nbt);
     }
 
     public function getNBT(): CompoundTag{
         return $this->tag;
     }
 
+    public function setNBT(CompoundTag $nbt): void{
+        $this->tag = $nbt;
+    }
+
     public function getPlayerProperties(): PlayerProperties{
         return $this->properties;
     }
 
+    //TODO: The problem with a player NBT should not crash the server.
     public function saveNBT(): CompoundTag
     {
+        $nbt = parent::saveNBT();
         $this->effectManager ??= new EffectManager($this);
         $this->hungerManager ??= new HungerManager($this);
         $this->xpManager ??= new ExperienceManager($this);
-        if($this->spawned){
-            $nbt = parent::saveNBT();
-            foreach ($this->properties->getPropertiesList() as $property => $value){
-                $nbt = PlayerUtils::valueToTag($property, $value, $nbt);
-            }
-            return $nbt;
-        }
-        return new CompoundTag();
+        !isset($this->properties) ?: $this->properties->save($nbt);
+        return $nbt;
     }
 
     public function getLanguage(): Language
     {
         return LanguageManager::parseLanguage(parent::getLocale());
+    }
+
+    public function syncNBT(): void
+    {
+        $this->setNBT($this->saveNBT());
     }
 
     public function getGrade(): Rank
@@ -64,6 +70,7 @@ final class LegacyPlayer extends Player
     {
         $this->setNameTag($this->getGrade()->getNametag($this));
         $this->setScoreTag($this->getGrade()->getScoretag($this));
+        $currentTick % 20 !== 0 ?: $this->syncNBT();
         return parent::onUpdate($currentTick);
     }
 
@@ -96,4 +103,5 @@ final class LegacyPlayer extends Player
             $this->sendMessage($this->getLanguage()->translateString($message, $parameters));
         }
     }
+
 }
