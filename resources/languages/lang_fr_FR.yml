@@ -45,5 +45,10 @@ messages:
       sender-success: "Votre ping est de {ping}"
       target-success: "Le ping de {player} est de {ping}"
       target-invalid: "Le joueur mentionné n'existe pas ou n'est pas connecté"
-
+    tpr:
+      success: "Vous vous êtes téléporté sur {player}" # {player}
+      failed: "Vous êtes le seul joueur du serveur."
+    tp:
+      success: "Vous vous êtes téléporté sur {player}" # {player}
+      success-others: "Vous avez téléporté {player1} à {player2}" # {player1} is the player who teleported, {player2} is the player who was teleported
 

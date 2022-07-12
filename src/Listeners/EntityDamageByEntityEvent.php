@@ -13,7 +13,7 @@ final class EntityDamageByEntityEvent implements Listener
 {
     public function onEvent(ClassEvent $event): void
     {
-
+        $event->setKnockBack(Core::getInstance()->getConfig()->getNested("knockback.horizontal", 0.40));
         if(($damager = $event->getDamager()) instanceof LegacyPlayer){
             $vector = $damager->getDirectionVector();
             $item = $event->getDamager()->getInventory()->getItemInHand();
@@ -34,11 +34,15 @@ final class EntityDamageByEntityEvent implements Listener
                     }
                     break;
                 default:
-                    $event->getEntity()->knockBack($vector->getX(), $vector->getZ(), Core::getInstance()->getConfig()->getNested("knockback.horizontal", 0.40), Core::getInstance()->getConfig()->getNested("knockback.vertical", 0.40));
+                    $event->getEntity()->knockBack(
+                        $event->getEntity()->getLocation()->getX() - $damager->getLocation()->getX(),
+                        $event->getEntity()->getLocation()->getZ() - $damager->getLocation()->getZ(),
+                        Core::getInstance()->getConfig()->getNested("knockback.horizontal", 0.40),
+                        Core::getInstance()->getConfig()->getNested("knockback.vertical", 0.40)
+                    );
                     break;
             }
             $event->setAttackCooldown(Core::getInstance()->getConfig()->getNested("knockback.attack_cooldown", 10));
-            $event->setKnockBack(0);
         }
     }
 }

@@ -193,7 +193,7 @@ commands:
       - teleport
   knockback:
     permission: "legacy.commands.knockback"
-    usage: "§fVous devez faire §d/knockback <x> <y> <force> [vertical-limit] (attack-cooldown)"
+    usage: "§fVous devez faire §d/knockback <horizontal> <vertical> [attack_cooldown]"
     description: "Changer le knockback du serveur"
     aliases:
       - kb

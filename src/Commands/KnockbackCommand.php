@@ -16,7 +16,7 @@ final class KnockbackCommand extends Commands
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
         if($this->testPermissionSilent($sender)){
-            if(isset($args[0], $args[1], $args[2])){
+            if(isset($args[0], $args[1])){
                 try {
                     $force = $args[0];
                     $vertical_limit = $args[1];
@@ -33,7 +33,7 @@ final class KnockbackCommand extends Commands
                             "{attack_cooldown}" => $attack_cooldown
                         ]);
                     }else{
-                        throw new LanguageException("messages.commands.knockback.invalid-arguments", ServerUtils::PREFIX_2);
+                        throw new LanguageException("messages.commands.knockback.invalid-arguments", [], ServerUtils::PREFIX_2);
                     }
                 }
                 catch (LanguageException $exception){

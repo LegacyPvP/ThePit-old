@@ -8,8 +8,9 @@ use Throwable;
 
 final class LanguageException extends CommandException
 {
-    #[Pure] public function __construct($message = "", public $args = [], public bool $prefix = true, $code = 0, Throwable $previous = null)
+    #[Pure] public function __construct($message = "", public $args = [], public int $prefix = 1, $code = 0, Throwable $previous = null)
     {
+        if(!is_array($this->args)) $this->args = [];
         parent::__construct($message, $code, $previous);
     }
 
@@ -18,7 +19,7 @@ final class LanguageException extends CommandException
         return $this->args;
     }
 
-    public function getPrefix(): bool {
+    public function getPrefix(): int {
         return $this->prefix;
     }
 
