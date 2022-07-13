@@ -209,7 +209,17 @@ commands:
     permission: "legacy.commands.ping"
     usage: "§fVous devez faire §d/ping §fpour voir votre ping."
     description: "Voir votre ping ou d'un joueur"
-    aliases:
+    aliases: []
+  mute:
+    permission: "legacy.commands.mute"
+    usage: "§fVous devez faire §d/mute <nom du joueur> <temps> [raison] §fpour mute un joueur."
+    description: "Mute un joueur"
+    aliases: []
+  unmute:
+    permission: "legacy.commands.unmute"
+    usage: "§fVous devez faire §d/unmute <nom du joueur> §fpour unmute un joueur."
+    description: "Unmute un joueur"
+    aliases: []
 
 items:
   nemo:
