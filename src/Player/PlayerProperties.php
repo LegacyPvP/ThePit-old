@@ -5,6 +5,7 @@ namespace Legacy\ThePit\Player;
 use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Traits\PropertiesTrait;
 use Legacy\ThePit\Utils\PlayerUtils;
+use Legacy\ThePit\Utils\SpellUtils;
 use pocketmine\nbt\tag\CompoundTag;
 
 final class PlayerProperties {
@@ -45,7 +46,10 @@ final class PlayerProperties {
                     "reason" => "",
                     "time" => time(),
                     "staff" => ""
-                ]
+                ],
+                "items" => [
+                    "spell" => SpellUtils::SPELL_NONE,
+                ],
             ]);
         }else{
             $this->setBaseProperties(PlayerUtils::TagtoArray($nbt->getCompoundTag("properties")));
