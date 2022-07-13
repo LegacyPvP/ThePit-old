@@ -13,6 +13,7 @@ namespace Legacy\ThePit\Forms\utils;
 
 
 use Closure;
+use Legacy\ThePit\Exceptions\FormsException;
 use pocketmine\player\Player;
 use pocketmine\utils\Utils;
 
@@ -32,8 +33,13 @@ trait CloseListener {
     }
 
     public function executeCloseListener(Player $player): void {
-        if($this->closeListener !== null) {
-            ($this->closeListener)($player);
+        try {
+            if($this->closeListener !== null) {
+                ($this->closeListener)($player);
+            }
+        }
+        catch (FormsException $exception){
+            $player->getLanguage()->getMessage($exception->getMessage(), $exception->getArgs(), $exception->getPrefix())->send($player);
         }
     }
 

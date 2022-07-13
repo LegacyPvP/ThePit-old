@@ -14,7 +14,7 @@ namespace Legacy\ThePit\Forms\element;
 
 use Legacy\ThePit\Forms\utils\Submittable;
 
-class ModalOption {
+final class ModalOption {
     use Submittable;
 
     private string $text;

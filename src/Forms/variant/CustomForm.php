@@ -14,6 +14,7 @@ namespace Legacy\ThePit\Forms\variant;
 
 use Closure;
 use JetBrains\PhpStorm\ArrayShape;
+use Legacy\ThePit\Exceptions\FormsException;
 use Legacy\ThePit\Forms\element\Element;
 use Legacy\ThePit\Forms\Form;
 use Legacy\ThePit\Forms\utils\Closable;
@@ -21,12 +22,15 @@ use Legacy\ThePit\Forms\utils\FormResponse;
 use pocketmine\player\Player;
 use pocketmine\utils\Utils;
 
-class CustomForm extends Form {
+final class CustomForm extends Form {
     use Closable;
 
     /** @var Element[] */
     private array $elements = [];
 
+    /**
+     * @throws FormsException
+     */
     private ?Closure $submitListener;
 
     public function __construct(string $title, ?Closure $submitListener = null) {
@@ -34,7 +38,7 @@ class CustomForm extends Form {
         parent::__construct($title);
     }
 
-    protected function getType(): string {
+    public function getType(): string {
         return Form::TYPE_CUSTOM_FORM;
     }
 
@@ -60,13 +64,24 @@ class CustomForm extends Form {
         $this->submitListener = $submitListener;
     }
 
+    /**
+     * @throws FormsException
+     */
     public function executeSubmitListener(Player $player, FormResponse $response): void {
-        if($this->submitListener !== null) {
-            ($this->submitListener)($player, $response);
+        try {
+            if($this->submitListener !== null) {
+                ($this->submitListener)($player, $response);
+            }
+            $this->onSubmit($player, $response);
         }
-        $this->onSubmit($player, $response);
+        catch (FormsException $exception){
+            $player->getLanguage()->getMessage($exception->getMessage(), $exception->getArgs(), $exception->getPrefix())->send($player);
+        }
     }
 
+    /**
+     * @throws FormsException
+     */
     public function handleResponse(Player $player, $data): void {
         if($data === null) {
             $this->notifyClose($player);

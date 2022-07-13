@@ -13,6 +13,7 @@ namespace Legacy\ThePit\Forms\utils;
 
 
 use Closure;
+use Legacy\ThePit\Exceptions\FormsException;
 use pocketmine\player\Player;
 use pocketmine\utils\Utils;
 
@@ -32,8 +33,13 @@ trait SubmitListener {
     }
 
     public function executeSubmitListener(Player $player): void {
-        if($this->submitListener !== null) {
-            ($this->submitListener)($player);
+        try {
+            if($this->submitListener !== null) {
+                ($this->submitListener)($player);
+            }
+        }
+        catch (FormsException $exception){
+            $player->getLanguage()->getMessage($exception->getMessage(), $exception->getArgs(), $exception->getPrefix())->send($player);
         }
     }
 

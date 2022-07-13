@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Legacy\ThePit\Forms\element;
 
 
-class Input extends Element {
+final class Input extends Element {
 
     private ?string $defaultText;
     private ?string $placeholder;

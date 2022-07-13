@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Legacy\ThePit\Forms\element;
 
 
-class Slider extends Element {
+final class Slider extends Element {
 
     private float $minStep;
     private float $maxStep;

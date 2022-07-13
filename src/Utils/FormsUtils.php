@@ -4,8 +4,8 @@ namespace Legacy\ThePit\Utils;
 
 use JetBrains\PhpStorm\Pure;
 use Legacy\ThePit\Core;
+use Legacy\ThePit\Forms\Form;
 use Legacy\ThePit\Player\LegacyPlayer;
-use pocketmine\form\Form;
 use pocketmine\scheduler\ClosureTask;
 
 abstract class FormsUtils
@@ -42,10 +42,23 @@ abstract class FormsUtils
 
     /**
      * @param LegacyPlayer $player
-     * @param Form $form
+     * @param array $form_infos
+     * @internal
      */
-    public static function sendForm(LegacyPlayer $player, Form $form): void {
+    public static function sendForm(LegacyPlayer $player, array $form_infos): void {
         if(!self::getOpened($player)){
+            $form = $form_infos["form"];
+            switch ($form_infos["type"]){
+                case Form::TYPE_CUSTOM_FORM:
+                case Form::TYPE_SIMPLE_FORM:
+                     $form->setSubmitListener(reset($form_infos["callable"]) ?? null);
+                     $form->setCloseListener(end($form_infos["callable"]) ?? null);
+                     break;
+                 case Form::TYPE_MODAL_FORM:
+                     $form->setAcceptListener(reset($form_infos["callable"]) ?? null);
+                     $form->setDenyListener(end($form_infos["callable"]) ?? null);
+                     break;
+            }
             $player->sendForm($form);
             self::setOpened($player);
             Core::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(fn() => self::unsetOpened($player)), 5);

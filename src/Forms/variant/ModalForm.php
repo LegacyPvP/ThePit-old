@@ -18,7 +18,7 @@ use Legacy\ThePit\Forms\Form;
 use pocketmine\form\FormValidationException;
 use pocketmine\player\Player;
 
-class ModalForm extends Form {
+final class ModalForm extends Form {
 
     private string $contentText;
 
@@ -56,7 +56,7 @@ class ModalForm extends Form {
         $this->denyOption->setText($text);
     }
 
-    protected function getType(): string {
+    public function getType(): string {
         return Form::TYPE_MODAL_FORM;
     }
 
@@ -65,13 +65,14 @@ class ModalForm extends Form {
             throw new FormValidationException("$data is not a valid response");
         }
 
-        if($data) {
-            $this->onAccept($player);
-            $this->acceptOption->notifySubmit($player);
-        } else {
-            $this->onDeny($player);
-            $this->denyOption->notifySubmit($player);
-        }
+            if($data) {
+                $this->onAccept($player);
+                $this->acceptOption->notifySubmit($player);
+            } else {
+                $this->onDeny($player);
+                $this->denyOption->notifySubmit($player);
+            }
+
     }
 
     protected function serializeBody(): array {

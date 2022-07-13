@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Legacy\ThePit\Forms\element;
 
 
-class Dropdown extends Selector {
+final class Dropdown extends Selector {
 
     public function getType(): string {
         return Element::TYPE_DROPDOWN;

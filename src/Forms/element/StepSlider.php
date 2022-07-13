@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Legacy\ThePit\Forms\element;
 
 
-class StepSlider extends Selector {
+final class StepSlider extends Selector {
 
     public function getType(): string {
         return Element::TYPE_STEP_SLIDER;

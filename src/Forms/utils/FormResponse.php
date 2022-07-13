@@ -22,7 +22,7 @@ use InvalidArgumentException;
 use ReflectionClass;
 use ReflectionException;
 
-class FormResponse {
+final class FormResponse {
 
     /** @var Element[] */
     private array $elements;

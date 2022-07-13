@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Legacy\ThePit\Forms\element;
 
 
-class Toggle extends Element {
+final class Toggle extends Element {
 
     private bool $defaultChoice;
     private ?bool $submittedChoice = null;

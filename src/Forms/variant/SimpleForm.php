@@ -12,13 +12,14 @@ declare(strict_types=1);
 namespace Legacy\ThePit\Forms\variant;
 
 
+use JetBrains\PhpStorm\ArrayShape;
 use Legacy\ThePit\Forms\element\Button;
 use Legacy\ThePit\Forms\Form;
 use Legacy\ThePit\Forms\utils\Closable;
 use pocketmine\form\FormValidationException;
 use pocketmine\player\Player;
 
-class SimpleForm extends Form {
+final class SimpleForm extends Form {
     use Closable;
 
     /** @var Button[] */
@@ -50,7 +51,7 @@ class SimpleForm extends Form {
         $this->headerText = $headerText;
     }
 
-    protected function getType(): string {
+    public function getType(): string {
         return Form::TYPE_SIMPLE_FORM;
     }
 
@@ -64,7 +65,7 @@ class SimpleForm extends Form {
         }
     }
 
-    public function serializeBody(): array {
+    #[ArrayShape(["buttons" => "array|\string[][]", "content" => "string"])] public function serializeBody(): array {
         return [
             "buttons" => array_map(function(Button $button) {
                 return $button->jsonSerialize();

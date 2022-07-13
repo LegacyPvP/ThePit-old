@@ -17,7 +17,7 @@ use Legacy\ThePit\Forms\icon\ButtonIcon;
 use Legacy\ThePit\Forms\utils\Submittable;
 use JsonSerializable;
 
-class Button implements JsonSerializable {
+final class Button implements JsonSerializable {
     use Submittable;
 
     private string $text;

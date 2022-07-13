@@ -14,7 +14,7 @@ namespace Legacy\ThePit\Forms\icon;
 
 use JsonSerializable;
 
-class ButtonIcon implements JsonSerializable {
+final class ButtonIcon implements JsonSerializable {
 
     private string $address;
     private string $type;

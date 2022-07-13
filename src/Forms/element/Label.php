@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Legacy\ThePit\Forms\element;
 
 
-class Label extends Element {
+final class Label extends Element {
 
     public function __construct(string $headerText) {
         parent::__construct($headerText);

@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Legacy\ThePit\Forms\element;
 
 
-class Option {
+final class Option {
 
     private string $id;
     private string $text;
