@@ -33,12 +33,17 @@ final class PlayerProperties {
                     "rank" => RanksManager::getDefaultRank()?->getName(),
                 ],
                 "status" => [
-                    "muted" => false,
+                    "nightvision" => true,
                     "freezed" => false,
                 ],
                 "parameters" => [
                     "cps" => 0,
                     "autosprint" => false,
+                ],
+                "mute" => [
+                    "reason" => "",
+                    "time" => time(),
+                    "staff" => ""
                 ]
             ]);
         }else{
