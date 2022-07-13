@@ -7,8 +7,8 @@ languages:
   - "fr_FR"
 
 knockback:
-  horizontal: 0.40
-  vertical: 0.40
+  horizontal: 0.4
+  vertical: 0.4
   attack_cooldown: 10
 
 scoreboards:
