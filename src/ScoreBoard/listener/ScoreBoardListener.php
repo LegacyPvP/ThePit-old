@@ -1,13 +1,13 @@
 <?php
 
-namespace Legacy\ThePit\Librairies\Voltage\Api\listener;
+namespace Legacy\ThePit\ScoreBoard\listener;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\utils\SingletonTrait;
-use Legacy\ThePit\Librairies\Voltage\Api\ScoreBoardApi;
+use Legacy\ThePit\ScoreBoard\ScoreBoardApi;
 
-class ScoreBoardListener implements Listener
+final class ScoreBoardListener implements Listener
 {
     use SingletonTrait;
 

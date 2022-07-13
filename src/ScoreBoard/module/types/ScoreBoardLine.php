@@ -1,10 +1,10 @@
 <?php
 
-namespace Legacy\ThePit\Librairies\Voltage\Api\module\types;
+namespace Legacy\ThePit\ScoreBoard\module\types;
 
 use pocketmine\network\mcpe\protocol\types\ScorePacketEntry;
 
-class ScoreBoardLine
+final class ScoreBoardLine
 {
     private int $score;
     private string $message;

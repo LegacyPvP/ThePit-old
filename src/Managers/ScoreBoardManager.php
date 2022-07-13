@@ -3,14 +3,14 @@
 namespace Legacy\ThePit\Managers;
 
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Librairies\Voltage\Api\module\types\ScoreBoardLine;
+use Legacy\ThePit\ScoreBoard\module\types\ScoreBoardLine;
 use Legacy\ThePit\Player\LegacyPlayer;
 use Legacy\ThePit\Tasks\ScoreBoardTask;
 use pocketmine\player\Player;
 use pocketmine\scheduler\ClosureTask;
 use pocketmine\Server;
-use Legacy\ThePit\Librairies\Voltage\Api\ScoreBoardApi;
-use Legacy\ThePit\Librairies\Voltage\Api\module\ScoreBoard;
+use Legacy\ThePit\ScoreBoard\ScoreBoardApi;
+use Legacy\ThePit\ScoreBoard\module\ScoreBoard;
 
 abstract class ScoreBoardManager
 {
@@ -35,7 +35,7 @@ abstract class ScoreBoardManager
                     self::initScoreBoards();
                 }), 5*20);
             }
-            else Core::getInstance()->getLogger()->notice("[SCOREBOARDS] ScoreBoard For: $type Loaded");
+            else Core::getInstance()->getLogger()->notice("[SCOREBOARDS] ScoreBoard: $type Loaded");
         }
 
         Core::getInstance()->getScheduler()->scheduleRepeatingTask(new ScoreBoardTask(), Core::getInstance()->getConfig()->getNested("scoreboards.refresh-time", 20));
