@@ -1,6 +1,8 @@
 messages:
   form:
     not-found: "Formulaire non trouvé"
+  mute:
+    muted: "Vous êtes toujours mute par {player} jusqu'au {date} pour: {reason}" # {player} {date} {reason}
   commands:
     not-permission: "§cYou do not have permission to use this command"
     target-not-player: "Le joueur mentionné n'existe pas"
@@ -11,9 +13,15 @@ messages:
       banned: "Vous avez été banni par {player} jusqu'au {date} pour {reason}" # {player} is the player who banned you, {date} is the date of the ban, {reason} is the reason of the ban
     unban:
       success: "Vous avez débanni {player}" # {player} is the player who unbanned you
+    unmute:
+      success: "Vous avez unmute {player}" # {player} is the player who you unmuted
+
     kick:
       success: "Vous avez kick {player} pour {reason}" # {player} is the player who kicked you
       kicked: "Vous avez été kick par {player} pour {reason}" # {player} is the player who kicked you, {reason} is the reason of the kick
+    mute:
+      success: "Vous avez mute {player} jusqu'au {date} pour {reason}" # {player}, {date}, {reason}
+      muted: "Vous avez été mute par {player} jusqu'au {date} pour {reason}" # {player}, {date}, {reason}
     setrank:
       invalid-rank: "Rank {rank} invalide"
       success: "Vous avez changé le rank de {player} à {rank}" # {player} is the player who set his rank, {rank} is the rank he set
@@ -62,4 +70,9 @@ messages:
       already-in-teleportation: "Une téléportation est déjà en cours"
       teleportation-in-progress: "Téléportation dans {time} secondes"
       teleportation-cancelled: "Téléportation annulée"
+    gamemode:
+      invalid-gamemode: "Gamemode {gamemode} invalide"
+      change: "Votre gamemode a été changé à {gamemode}"
+      success-other: "Vous avez changé le gamemode de {player} à {gamemode}" # {player} is the player who set his gamemode, {gamemode} is the gamemode he set
+      success-self: "Vous avez changé votre gamemode à {gamemode}" # {player} is the player who set his gamemode, {gamemode} is the gamemode he set
 

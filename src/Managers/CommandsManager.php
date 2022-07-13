@@ -9,6 +9,7 @@ use Legacy\ThePit\Commands\KickCommand;
 use Legacy\ThePit\Commands\KnockBackCommand;
 use Legacy\ThePit\Commands\ListRankCommand;
 use Legacy\ThePit\Commands\LobbyCommand;
+use Legacy\ThePit\Commands\MuteCommand;
 use Legacy\ThePit\Commands\NightVisionCommand;
 use Legacy\ThePit\Commands\PingCommand;
 use Legacy\ThePit\Commands\SayCommand;
@@ -17,6 +18,7 @@ use Legacy\ThePit\Commands\SpawnCommand;
 use Legacy\ThePit\Commands\TpCommand;
 use Legacy\ThePit\Commands\TprCommand;
 use Legacy\ThePit\Commands\UnbanCommand;
+use Legacy\ThePit\Commands\UnmuteCommand;
 use Legacy\ThePit\Core;
 
 abstract class CommandsManager
@@ -40,6 +42,8 @@ abstract class CommandsManager
             new NightVisionCommand("nightvision"),
             new SpawnCommand("spawn"),
             new LobbyCommand("lobby"),
+            new MuteCommand("mute"),
+            new UnmuteCommand("unmute"),
         ];
     }
 

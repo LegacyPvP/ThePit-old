@@ -182,7 +182,7 @@ commands:
       - sayall
   globalmute:
     permission: "legacy.commands.globalmute"
-    usage: "§fVous devez faire §d/globalmute [mode: [true/false]] §fpour mute tous les joueurs."
+    usage: "§fVous devez faire §d/globalmute [mode: [on/off]] §fpour mute tous les joueurs."
     description: "Mute tous les joueurs"
     aliases:
       - muteall
@@ -227,6 +227,17 @@ commands:
     description: "Se téléporter au lobby"
     aliases:
       - hub
+    aliases: []
+  mute:
+    permission: "legacy.commands.mute"
+    usage: "§fVous devez faire §d/mute <nom du joueur> <temps> [raison] §fpour mute un joueur."
+    description: "Mute un joueur"
+    aliases: []
+  unmute:
+    permission: "legacy.commands.unmute"
+    usage: "§fVous devez faire §d/unmute <nom du joueur> §fpour unmute un joueur."
+    description: "Unmute un joueur"
+    aliases: []
 
 items:
   nemo:

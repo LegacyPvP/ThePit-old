@@ -5,6 +5,7 @@ namespace Legacy\ThePit\Commands;
 use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Player\LegacyPlayer;
 use pocketmine\command\CommandSender;
+use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\nbt\tag\StringTag;
 use pocketmine\player\OfflinePlayer;
 use pocketmine\Server;
@@ -23,8 +24,11 @@ final class SetRankCommand extends Commands
                         $this->getSenderLanguage($sender)->getMessage("messages.commands.setrank.success", ["{player}" => $target->getName(), "{rank}" => $rank->getName()])->send($sender);
                     }
                     else if($target instanceof OfflinePlayer and Server::getInstance()->getOfflinePlayerData($target->getName())){
-                        $properties = Server::getInstance()->getOfflinePlayerData($target->getName());
-                        $properties->getCompoundTag("infos")->setTag("rank", new StringTag($rank->getName()));
+                        $properties = Server::getInstance()->getOfflinePlayerData($target->getName())->getCompoundTag('properties');
+                        $properties ??= (new CompoundTag());
+                        $nbt = (new CompoundTag())->merge($properties);
+                        $nbt->setTag("infos", (new CompoundTag())->setTag("rank", new StringTag($rank->getName())));
+                        $properties->setTag("properties", $nbt);
                         Server::getInstance()->saveOfflinePlayerData($target->getName(), $properties);
                         $this->getSenderLanguage($sender)->getMessage("messages.commands.setrank.success", ["{player}" => $target->getName(), "{rank}" => $rank->getName()])->send($sender);
                     }

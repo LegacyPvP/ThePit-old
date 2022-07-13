@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection PhpVoidFunctionResultUsedInspection */
+
 namespace Legacy\ThePit\Player;
 
 use Legacy\ThePit\Managers\KnockBackManager;
@@ -6,6 +7,7 @@ use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Managers\LanguageManager;
 use Legacy\ThePit\Objects\Rank;
 use Legacy\ThePit\Objects\Language;
+use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\EffectManager;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\entity\ExperienceManager;
@@ -24,7 +26,6 @@ final class LegacyPlayer extends Player
 {
     private PlayerProperties $properties;
     private CompoundTag $tag;
-    private bool $nightvision = false;
     private bool $teleportation = false;
 
     public function initEntity(CompoundTag $nbt): void
@@ -53,6 +54,7 @@ final class LegacyPlayer extends Player
         $this->effectManager ??= new EffectManager($this);
         $this->hungerManager ??= new HungerManager($this);
         $this->xpManager ??= new ExperienceManager($this);
+        $this->updateNightVision();
         !isset($this->properties) ?: $this->properties->save($nbt);
         return $nbt;
     }
@@ -77,7 +79,16 @@ final class LegacyPlayer extends Player
         $this->setNameTag($this->getGrade()->getNametag($this));
         $this->setScoreTag($this->getGrade()->getScoretag($this));
         $currentTick % 20 !== 0 ?: $this->syncNBT();
+
         return parent::onUpdate($currentTick);
+    }
+
+    private function updateNightVision(): void {
+        match(true){
+            $this->getPlayerProperties()->getNestedProperties('status.nightvision') and !$this->getEffects()->has(VanillaEffects::NIGHT_VISION()) => $this->getEffects()->add(new EffectInstance(VanillaEffects::NIGHT_VISION(), 999999, 255, false)),
+            !$this->getPlayerProperties()->getNestedProperties('status.nightvision') and $this->getEffects()->has(VanillaEffects::NIGHT_VISION()) => $this->getEffects()->remove(VanillaEffects::NIGHT_VISION()),
+            default => null,
+        };
     }
 
     public function setGamemode(GameMode $gm): bool
@@ -179,16 +190,6 @@ final class LegacyPlayer extends Player
             $this->applyPostDamageEffects($source);
             $this->doHitAnimation();
         }
-    }
-
-    public function isInNightvision(): bool
-    {
-        return $this->nightvision;
-    }
-
-    public function setNightvision(bool $nightvision): void
-    {
-        $this->nightvision = $nightvision;
     }
 
     public function isInTeleportation(): bool

@@ -26,10 +26,10 @@ final class GameModeCommand extends Commands
                         }
                         else if(!$sender instanceof Player) throw new LanguageException("messages.commands.sender-not-player");
                         $gamemode = match ($args[0]){
-                            "0", "survival" => GameMode::SURVIVAL(),
-                            "1", "creative" => GameMode::CREATIVE(),
-                            "2", "adventure" => GameMode::ADVENTURE(),
-                            "3", "spectator" => GameMode::SPECTATOR(),
+                            "0", "s", "survie", "survival" => GameMode::SURVIVAL(),
+                            "1", "c", "crea", "creative" => GameMode::CREATIVE(),
+                            "2", "a", "adventure" => GameMode::ADVENTURE(),
+                            "3", "sp", "spec", "spectator" => GameMode::SPECTATOR(),
                             default => throw new LanguageException("messages.commands.gamemode.invalid-gamemode", ["{gamemode}" => $args[0]])
                         };
                         $target->setGamemode($gamemode);
