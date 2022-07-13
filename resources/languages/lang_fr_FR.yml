@@ -60,6 +60,16 @@ messages:
     tp:
       success: "Vous vous êtes téléporté sur {player}" # {player}
       success-others: "Vous avez téléporté {player1} à {player2}" # {player1} is the player who teleported, {player2} is the player who was teleported
+    spawn:
+      success: "Vous avez été téléporter au spawn"
+      already-in-teleportation: "Une téléportation est déjà en cours"
+      teleportation-in-progress: "Téléportation dans {time} secondes"
+      teleportation-cancelled: "Téléportation annulée"
+    lobby:
+      success: "Vous avez été téléporter au lobby"
+      already-in-teleportation: "Une téléportation est déjà en cours"
+      teleportation-in-progress: "Téléportation dans {time} secondes"
+      teleportation-cancelled: "Téléportation annulée"
     gamemode:
       invalid-gamemode: "Gamemode {gamemode} invalide"
       change: "Votre gamemode a été changé à {gamemode}"

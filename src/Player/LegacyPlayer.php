@@ -26,6 +26,7 @@ final class LegacyPlayer extends Player
 {
     private PlayerProperties $properties;
     private CompoundTag $tag;
+    private bool $teleportation = false;
 
     public function initEntity(CompoundTag $nbt): void
     {
@@ -189,5 +190,15 @@ final class LegacyPlayer extends Player
             $this->applyPostDamageEffects($source);
             $this->doHitAnimation();
         }
+    }
+
+    public function isInTeleportation(): bool
+    {
+        return $this->teleportation;
+    }
+
+    public function setTeleportation(bool $teleportation): void
+    {
+        $this->teleportation = $teleportation;
     }
 }
