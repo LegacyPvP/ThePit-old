@@ -25,6 +25,7 @@ final class LegacyPlayer extends Player
     private PlayerProperties $properties;
     private CompoundTag $tag;
     private bool $nightvision = false;
+    private bool $teleportation = false;
 
     public function initEntity(CompoundTag $nbt): void
     {
@@ -188,5 +189,15 @@ final class LegacyPlayer extends Player
     public function setNightvision(bool $nightvision): void
     {
         $this->nightvision = $nightvision;
+    }
+
+    public function isInTeleportation(): bool
+    {
+        return $this->teleportation;
+    }
+
+    public function setTeleportation(bool $teleportation): void
+    {
+        $this->teleportation = $teleportation;
     }
 }

@@ -26,6 +26,7 @@ final class PlayerProperties {
                     "killstreak" => 0,
                     "votecoins" => 0,
                     "prestige" => 0,
+                    "keys" => 0,
                 ],
                 "infos" => [
                     "ip" => "",

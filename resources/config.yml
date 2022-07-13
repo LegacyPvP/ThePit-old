@@ -5,6 +5,11 @@ prefixes:
   2: "§5[§d§l!!!§r§5] §r"
   3: "§5[§d§l!§r§5] §r"
 
+server:
+  lobby:
+    ip: azur.mc
+    port: 1915
+
 languages:
   - "fr_FR"
 
@@ -210,6 +215,18 @@ commands:
     usage: "§fVous devez faire §d/ping §fpour voir votre ping."
     description: "Voir votre ping ou d'un joueur"
     aliases:
+  spawn:
+    permission: "legacy.commands.spawn"
+    usage: "§fVous devez faire §d/spawn §fpour vous téléporter au spawn."
+    description: "Se téléporter au spawn"
+    aliases:
+      - spawnpoint
+  lobby:
+    permission: "legacy.commands.lobby"
+    usage: "§fVous devez faire §d/lobby §fpour vous téléporter au lobby."
+    description: "Se téléporter au lobby"
+    aliases:
+      - hub
 
 items:
   nemo:

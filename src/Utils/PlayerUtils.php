@@ -19,10 +19,10 @@ abstract class PlayerUtils
         };
     }
 
-    public static function TagtoArray(CompoundTag|ListTag $nbt, $name = null): array{
+    public static function tagtoArray(CompoundTag|ListTag $nbt, $name = null): array{
         foreach($nbt->getValue() as $key => $value){
             if($value instanceof CompoundTag || $value instanceof ListTag){
-                self::TagtoArray($value, array_search($value, $nbt->getValue(), true));
+                self::tagtoArray($value, array_search($value, $nbt->getValue(), true));
             }else{
                 $name === null ? self::$properties[$key] = $value->getValue() : self::$properties[$name][$key] = $value->getValue();
 
