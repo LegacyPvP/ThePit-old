@@ -17,8 +17,11 @@ class Core extends PluginBase
 {
     use SingletonTrait;
 
+    public static string $filePath = "";
+
     protected function onLoad(): void
     {
+        self::$filePath = $this->getFile();
         CustomItemManager::initCustomItems();
     }
 
@@ -38,6 +41,17 @@ class Core extends PluginBase
         CustomItemManager::registerItems();
         ItemsManager::initItems();
         FormsManager::initForms();
+
+        $default = yaml_parse(file_get_contents($this->getFile() . "resources/" . "config.yml"));
+        if(is_array($default)) $this->getConfig()->setDefaults($default);
+    }
+
+    /**
+     * @return string
+     */
+    public static function getFilePath(): string
+    {
+        return self::$filePath;
     }
 
     /*

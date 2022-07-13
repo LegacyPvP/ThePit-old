@@ -65,24 +65,19 @@ abstract class FormsManager
         if(isset(self::$forms[$form])){
             $form_infos = array();
             $form = (self::$forms[$form])();
-            try {
-                switch($form->getType()){
-                    case Form::TYPE_CUSTOM_FORM:
-                    case Form::TYPE_SIMPLE_FORM:
-                        $form_infos["callable"][] = $form->getSubmitListener();
-                        $form_infos["callable"][] = $form->getCloseListener();
-                        $form->setSubmitListener(reset($form_infos["callable"]) ?? null);
-                        $form->setCloseListener(end($form_infos["callable"]) ?? null);
-                        break;
-                    case Form::TYPE_MODAL_FORM:
-                        $form_infos["callable"][] = $form->getAcceptOption()->getSubmitListener();
-                        $form_infos["callable"][] = $form->getDenyOption()->getSubmitListener();
-                        $form->setAcceptListener(reset($form_infos["callable"]) ?? null);
-                        $form->setDenyListener(end($form_infos["callable"]) ?? null);
-                }
-            }
-            catch (FormsException $exception){
-                var_dump($exception->getMessage());
+            switch($form->getType()){
+                case Form::TYPE_CUSTOM_FORM:
+                case Form::TYPE_SIMPLE_FORM:
+                    $form_infos["callable"][] = $form->getSubmitListener();
+                    $form_infos["callable"][] = $form->getCloseListener();
+                    $form->setSubmitListener(reset($form_infos["callable"]) ?? null);
+                    $form->setCloseListener(end($form_infos["callable"]) ?? null);
+                    break;
+                case Form::TYPE_MODAL_FORM:
+                    $form_infos["callable"][] = $form->getAcceptOption()->getSubmitListener();
+                    $form_infos["callable"][] = $form->getDenyOption()->getSubmitListener();
+                    $form->setAcceptListener(reset($form_infos["callable"]) ?? null);
+                    $form->setDenyListener(end($form_infos["callable"]) ?? null);
             }
             $form_infos["form"] = $form;
             $form_infos["type"] = $form->getType();
