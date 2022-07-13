@@ -246,6 +246,8 @@ items:
     vertical: 0.50
   flap:
     uses: 10
+    horizontal: 1.50
+    vertical: 1
 
 cooldowns:
   461: 15

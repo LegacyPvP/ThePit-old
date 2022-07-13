@@ -34,7 +34,7 @@ final class PlayerProperties {
                     "rank" => RanksManager::getDefaultRank()?->getName(),
                 ],
                 "status" => [
-                    "nightvision" => true,
+                    "nightvision" => false,
                     "freezed" => false,
                 ],
                 "parameters" => [
