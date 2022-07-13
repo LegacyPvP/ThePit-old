@@ -177,7 +177,7 @@ commands:
       - sayall
   globalmute:
     permission: "legacy.commands.globalmute"
-    usage: "§fVous devez faire §d/globalmute [mode: [true/false]] §fpour mute tous les joueurs."
+    usage: "§fVous devez faire §d/globalmute [mode: [on/off]] §fpour mute tous les joueurs."
     description: "Mute tous les joueurs"
     aliases:
       - muteall
