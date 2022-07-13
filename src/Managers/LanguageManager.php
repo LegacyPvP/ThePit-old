@@ -62,7 +62,7 @@ abstract class LanguageManager
     {
         $languages = Core::getInstance()->getConfig()->get("languages", []);
         foreach ($languages as $language){
-            Core::getInstance()->saveResource("languages/lang_$language.yml", false);
+            Core::getInstance()->saveResource("languages/lang_$language.yml", Core::getInstance()->isInDevMode());
         }
     }
 }

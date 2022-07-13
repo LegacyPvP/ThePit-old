@@ -30,7 +30,7 @@ class Core extends PluginBase
         date_default_timezone_set('Europe/Paris');
 
         $this::setInstance($this);
-        $this->saveResource("config.yml", false);
+        $this->saveResource("config.yml", $this->isInDevMode());
 
         ListenersManager::initListeners($this);
         CommandsManager::initCommands();
@@ -44,6 +44,11 @@ class Core extends PluginBase
 
         $default = yaml_parse(file_get_contents($this->getFile() . "resources/" . "config.yml"));
         if(is_array($default)) $this->getConfig()->setDefaults($default);
+    }
+
+    public function isInDevMode(): bool
+    {
+        return $this->getConfig()->get("dev-mode", false);
     }
 
     /**

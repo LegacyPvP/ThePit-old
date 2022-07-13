@@ -1,5 +1,7 @@
 # TODO: SI VOUS METTEZ UNE KEY y, METTEZ LA EN "y" (YAML VERSION 1.1) @Nyrok
 
+dev_mode: true
+
 prefixes:
   1: "§5[§dLegacy§r§5] §r"
   2: "§5[§d§l!!!§r§5] §r"
@@ -225,6 +227,8 @@ items:
   nemo:
     horizontal: 2
     vertical: 0.50
+  flap:
+    uses: 10
 
 cooldowns:
-  1002: 15
+  461: 15
