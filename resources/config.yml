@@ -229,7 +229,6 @@ commands:
     description: "Se téléporter au lobby"
     aliases:
       - hub
-    aliases: []
   mute:
     permission: "legacy.commands.mute"
     usage: "§fVous devez faire §d/mute <nom du joueur> <temps> [raison] §fpour mute un joueur."

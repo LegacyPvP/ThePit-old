@@ -1,12 +1,12 @@
 <?php
 
-namespace Legacy\ThePit\Objects;
+namespace Legacy\ThePit\Currencies;
 
 use Legacy\ThePit\Player\LegacyPlayer;
 
-final class Money
+abstract class Currency
 {
-    public function __construct(private string $name, private bool $byVoting = false)
+    public function __construct(private string $name)
     {
     }
 
@@ -16,14 +16,6 @@ final class Money
     public function getName(): string
     {
         return $this->name;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isByVoting(): bool
-    {
-        return $this->byVoting;
     }
 
     public function add(LegacyPlayer $player, int $amount): void
