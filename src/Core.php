@@ -4,6 +4,7 @@ namespace Legacy\ThePit;
 use Legacy\ThePit\Managers\CommandsManager;
 use Legacy\ThePit\Managers\CustomItemManager;
 use Legacy\ThePit\Managers\EventsManager;
+use Legacy\ThePit\Managers\FormsManager;
 use Legacy\ThePit\Managers\ItemsManager;
 use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Managers\LanguageManager;
@@ -26,7 +27,7 @@ class Core extends PluginBase
         date_default_timezone_set('Europe/Paris');
 
         $this::setInstance($this);
-        $this->saveResource("config.yml", true);
+        $this->saveResource("config.yml", false);
 
         ListenersManager::initListeners($this);
         CommandsManager::initCommands();
@@ -36,6 +37,7 @@ class Core extends PluginBase
         ScoreBoardManager::initScoreBoards();
         CustomItemManager::registerItems();
         ItemsManager::initItems();
+        FormsManager::initForms();
     }
 
     /*

@@ -7,7 +7,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
 
-class NightvisionCommand extends Commands {
+final class NightVisionCommand extends Commands {
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {

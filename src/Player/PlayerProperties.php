@@ -6,7 +6,6 @@ use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Traits\PropertiesTrait;
 use Legacy\ThePit\Utils\PlayerUtils;
 use pocketmine\nbt\tag\CompoundTag;
-use pocketmine\player\Player;
 
 final class PlayerProperties {
     use PropertiesTrait;

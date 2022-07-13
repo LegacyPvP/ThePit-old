@@ -4,5 +4,7 @@ main: Legacy\ThePit\Core
 authors:
   - Legacy
   - Nyrok
+  - Litoz
+  - Zumma
 api: [4.0.0]
 src-namespace-prefix: Legacy\ThePit

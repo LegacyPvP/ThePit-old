@@ -13,7 +13,7 @@ final class EntityDamageByEntityEvent implements Listener
 {
     public function onEvent(ClassEvent $event): void
     {
-        $event->setKnockBack(Core::getInstance()->getConfig()->getNested("knockback.horizontal", 0.40));
+        $event->setKnockBack(0);
         if(($damager = $event->getDamager()) instanceof LegacyPlayer){
             $vector = $damager->getDirectionVector();
             $item = $event->getDamager()->getInventory()->getItemInHand();
@@ -27,19 +27,13 @@ final class EntityDamageByEntityEvent implements Listener
                         $damager->sendTip($damager->getLanguage()->getMessage("messages.interactions.cooldown", ["{timeleft}" => CooldownManager::getCooldown($item) - time()])->__toString());
                         $event->cancel();
                     }
-                    else {
+                    else if(CooldownManager::getCooldownConfig($item->getId())){
                         $event->getEntity()->knockBack($vector->getX(), $vector->getZ(), Core::getInstance()->getConfig()->getNested("items.nemo.horizontal", 2), Core::getInstance()->getConfig()->getNested("items.nemo.vertical", 0.50));
                         $item = CooldownManager::setCooldown($item, null);
                         $damager->getInventory()->setItemInHand($item);
                     }
                     break;
                 default:
-                    $event->getEntity()->knockBack(
-                        $event->getEntity()->getLocation()->getX() - $damager->getLocation()->getX(),
-                        $event->getEntity()->getLocation()->getZ() - $damager->getLocation()->getZ(),
-                        Core::getInstance()->getConfig()->getNested("knockback.horizontal", 0.40),
-                        Core::getInstance()->getConfig()->getNested("knockback.vertical", 0.40)
-                    );
                     break;
             }
             $event->setAttackCooldown(Core::getInstance()->getConfig()->getNested("knockback.attack_cooldown", 10));

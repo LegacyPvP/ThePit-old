@@ -4,7 +4,7 @@ namespace Legacy\ThePit\Commands;
 
 use pocketmine\command\CommandSender;
 
-class FreezeCommand extends Commands {
+final class FreezeCommand extends Commands {
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
