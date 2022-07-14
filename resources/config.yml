@@ -239,6 +239,11 @@ commands:
     usage: "§fVous devez faire §d/unmute <nom du joueur> §fpour unmute un joueur."
     description: "Unmute un joueur"
     aliases: []
+  tps:
+    permission: "legacy.commands.tps"
+    usage: "§fVous devez faire §d/tps §fpour voir le tps du serveur."
+    description: "Voir le tps du serveur"
+    aliases: []
 
 items:
   nemo:
@@ -248,6 +253,14 @@ items:
     uses: 10
     horizontal: 1.50
     vertical: 1
+  spell:
+    repulsion:
+        horizontal: 1.50
+        vertical: 1
+    attraction:
+        horizontal: -1.50
+        vertical: -1
 
 cooldowns:
   461: 15
+  399: 30

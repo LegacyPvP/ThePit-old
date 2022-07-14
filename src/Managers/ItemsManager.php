@@ -16,7 +16,7 @@ abstract class ItemsManager
         return [
             new Nemo(new ItemIdentifier(ItemIds::CLOWNFISH, 0), "Nemo"),
             new Flap(new ItemIdentifier(ItemIds::FEATHER, 0), "Flap"),
-            new Spell(new ItemIdentifier(ItemIds::SHEARS, 0), "Spell")
+            new Spell(new ItemIdentifier(ItemIds::NETHER_STAR, 0), "Spell")
         ];
     }
 

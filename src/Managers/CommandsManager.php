@@ -17,6 +17,7 @@ use Legacy\ThePit\Commands\SetRankCommand;
 use Legacy\ThePit\Commands\SpawnCommand;
 use Legacy\ThePit\Commands\TpCommand;
 use Legacy\ThePit\Commands\TprCommand;
+use Legacy\ThePit\Commands\TPSCommand;
 use Legacy\ThePit\Commands\UnbanCommand;
 use Legacy\ThePit\Commands\UnmuteCommand;
 use Legacy\ThePit\Core;
@@ -44,6 +45,7 @@ abstract class CommandsManager
             new LobbyCommand("lobby"),
             new MuteCommand("mute"),
             new UnmuteCommand("unmute"),
+            new TPSCommand("tps"),
         ];
     }
 

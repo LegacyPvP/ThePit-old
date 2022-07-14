@@ -3,6 +3,17 @@ messages:
     not-found: "Formulaire non trouvé"
   mute:
     muted: "Vous êtes toujours mute par {player} jusqu'au {date} pour: {reason}" # {player} {date} {reason}
+  interactions:
+    cooldown: "Vous devez attendre {time} secondes avant de pouvoir faire cela"
+
+    spells:
+      health:
+        full: "Vous avez déjà tout vos points de vie"
+        success: "Vous avez utilisé votre sort de soin"
+        cooldown: "Vous devez attendre {time} secondes avant de pouvoir utiliser votre sort de soin"
+      speed:
+        success: "Vous avez utilisé votre sort de vitesse"
+        cooldown: "Vous devez attendre {time} secondes avant de pouvoir utiliser votre sort de vitesse"
   commands:
     not-permission: "§cYou do not have permission to use this command"
     target-not-player: "Le joueur mentionné n'existe pas"
@@ -75,4 +86,6 @@ messages:
       change: "Votre gamemode a été changé à {gamemode}"
       success-other: "Vous avez changé le gamemode de {player} à {gamemode}" # {player} is the player who set his gamemode, {gamemode} is the gamemode he set
       success-self: "Vous avez changé votre gamemode à {gamemode}" # {player} is the player who set his gamemode, {gamemode} is the gamemode he set
+    tps:
+      success: "§l§d» §r§fPerformances du serveurs §l§d«\n\n§l§d» §r§fActuel TPS: {ticks} {ticks_per_seconds}/({ticks_usage}%)\n§l§d» §r§fMoyenne TPS: {ticks} {ticks_per_seconds_average}  ({ticks_usage_average}%)"
 

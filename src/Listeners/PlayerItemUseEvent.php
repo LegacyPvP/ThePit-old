@@ -2,22 +2,56 @@
 
 namespace Legacy\ThePit\Listeners;
 
+use Legacy\ThePit\Core;
+use Legacy\ThePit\Exceptions\LanguageException;
+use Legacy\ThePit\Items\List\Spell;
 use Legacy\ThePit\Managers\CooldownManager;
+use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\Utils\ServerUtils;
+use Legacy\ThePit\Utils\SpellUtils;
+use pocketmine\entity\effect\EffectInstance;
+use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerItemUseEvent as ClassEvent;
+use pocketmine\item\Book;
 use pocketmine\item\Sword;
+use pocketmine\plugin\Plugin;
 
 final class PlayerItemUseEvent implements Listener
 {
     public function onEvent(ClassEvent $event): void
     {
         if(CooldownManager::hasCooldown($event->getItem())){
-            $event->getPlayer()->sendTip($event->getPlayer()->getLanguage()->getMessage("messages.interactions.cooldown", ["{timeleft}" => CooldownManager::getCooldown($event->getItem()) - time()])->__toString());
             $event->cancel();
+            $event->getPlayer()->sendTip($event->getPlayer()->getLanguage()->getMessage("messages.interactions.cooldown", [
+                "{time}" => CooldownManager::getCooldown($event->getItem()) - time()
+            ])->__toString());
         }
         else if(CooldownManager::getCooldownConfig($event->getItem()->getId())){
             if($event->getItem() instanceof Sword) return;
             $event->getPlayer()->getInventory()->setItemInHand(CooldownManager::setCooldown($event->getItem(), null));
+        }
+
+        if($event->getItem() instanceof Book){
+            Spell::openSpell($event->getPlayer());
+        }
+
+        if($event->getItem()->getCustomName() == SpellUtils::SPELL_HEALTH_NAME){
+            if (!$event->getPlayer()->getHealth() == $event->getPlayer()->getMaxHealth()) {
+                $event->getPlayer()->setHealth($event->getPlayer()->getHealth() + 4);
+                $event->getPlayer()->sendPopup($event->getPlayer()->getLanguage()->getMessage("messages.interactions.spells.health.success"));
+                if($event->getPlayer()->getInventory()->contains($event->getItem())){
+                    $event->getPlayer()->getInventory()->removeItem($event->getItem());
+                }
+            } else {
+                $event->getPlayer()->sendPopup($event->getPlayer()->getLanguage()->getMessage("messages.interactions.spells.health.full"));
+            }
+        }elseif($event->getItem()->getCustomName() == SpellUtils::SPELL_SPEED_NAME){
+            $event->getPlayer()->getEffects()->add(new EffectInstance(VanillaEffects::SPEED(), 60, 1));
+            $event->getPlayer()->sendPopup($event->getPlayer()->getLanguage()->getMessage("messages.interactions.spells.speed.success"));
+            if($event->getPlayer()->getInventory()->contains($event->getItem())){
+                $event->getPlayer()->getInventory()->removeItem($event->getItem());
+            }
         }
     }
 }

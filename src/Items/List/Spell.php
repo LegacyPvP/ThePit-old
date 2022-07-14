@@ -3,6 +3,7 @@
 namespace Legacy\ThePit\Items\List;
 
 use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\Utils\SpellUtils;
 use pocketmine\block\Block;
 use pocketmine\item\Item;
 use pocketmine\item\ItemIdentifier;
@@ -22,8 +23,11 @@ final class Spell extends Item
         return 1;
     }
 
-    public function switchMode(LegacyPlayer $player): void
+    public static function openSpell(Player $player): void
     {
-        //TODO: Implement switchMode() method.
+        if($player->getInventory()->contains(SpellUtils::getBookItem())){
+            $player->getInventory()->removeItem(SpellUtils::getBookItem());
+            $player->getInventory()->addItem(SpellUtils::randomSpell());
+        }
     }
 }

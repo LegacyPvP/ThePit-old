@@ -46,10 +46,7 @@ final class PlayerProperties {
                     "reason" => "",
                     "time" => time(),
                     "staff" => ""
-                ],
-                "items" => [
-                    "spell" => SpellUtils::SPELL_NONE,
-                ],
+                ]
             ]);
         }else{
             $this->setBaseProperties(PlayerUtils::TagtoArray($nbt->getCompoundTag("properties")));
