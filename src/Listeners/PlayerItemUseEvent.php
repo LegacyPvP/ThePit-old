@@ -21,17 +21,6 @@ final class PlayerItemUseEvent implements Listener
 {
     public function onEvent(ClassEvent $event): void
     {
-        if(CooldownManager::hasCooldown($event->getItem())){
-            $event->cancel();
-            $event->getPlayer()->sendTip($event->getPlayer()->getLanguage()->getMessage("messages.interactions.cooldown", [
-                "{time}" => CooldownManager::getCooldown($event->getItem()) - time()
-            ])->__toString());
-        }
-        else if(CooldownManager::getCooldownConfig($event->getItem()->getId())){
-            if($event->getItem() instanceof Sword) return;
-            $event->getPlayer()->getInventory()->setItemInHand(CooldownManager::setCooldown($event->getItem(), null));
-        }
-
         if($event->getItem() instanceof Book){
             Spell::openSpell($event->getPlayer());
         }
@@ -47,7 +36,7 @@ final class PlayerItemUseEvent implements Listener
                 $event->getPlayer()->sendPopup($event->getPlayer()->getLanguage()->getMessage("messages.interactions.spells.health.full"));
             }
         }elseif($event->getItem()->getCustomName() == SpellUtils::SPELL_SPEED_NAME){
-            $event->getPlayer()->getEffects()->add(new EffectInstance(VanillaEffects::SPEED(), 60, 1));
+            $event->getPlayer()->getEffects()->add(new EffectInstance(VanillaEffects::SPEED(), 100, 3));
             $event->getPlayer()->sendPopup($event->getPlayer()->getLanguage()->getMessage("messages.interactions.spells.speed.success"));
             if($event->getPlayer()->getInventory()->contains($event->getItem())){
                 $event->getPlayer()->getInventory()->removeItem($event->getItem());

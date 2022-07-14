@@ -9,6 +9,7 @@ use Legacy\ThePit\Commands\KickCommand;
 use Legacy\ThePit\Commands\KnockBackCommand;
 use Legacy\ThePit\Commands\ListRankCommand;
 use Legacy\ThePit\Commands\LobbyCommand;
+use Legacy\ThePit\Commands\MessageCommand;
 use Legacy\ThePit\Commands\MuteCommand;
 use Legacy\ThePit\Commands\NightVisionCommand;
 use Legacy\ThePit\Commands\PingCommand;
@@ -46,6 +47,7 @@ abstract class CommandsManager
             new MuteCommand("mute"),
             new UnmuteCommand("unmute"),
             new TPSCommand("tps"),
+            new MessageCommand("msg"),
         ];
     }
 

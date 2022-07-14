@@ -38,9 +38,11 @@ final class PlayerProperties {
                     "nightvision" => false,
                     "freezed" => false,
                 ],
-                "parameters" => [
+                "settings" => [
                     "cps" => 0,
                     "autosprint" => false,
+                    "blocked_players" => [],
+                    "allow_private_messages" => true,
                 ],
                 "mute" => [
                     "reason" => "",

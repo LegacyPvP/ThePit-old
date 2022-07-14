@@ -20,14 +20,14 @@ class SpellUtils {
     const SPELL_HEALTH = "spell_health";
     //TODO les rajouter tous
 
-    const SPELL_ATTRACTION_NAME = "§l§dSort d'attraction";
-    const SPELL_REPULSION_NAME = "§l§dSort de répulsion";
-    const SPELL_LIGHTNING_NAME = "§l§dSort de foudre";
-    const SPELL_REVERSE_NAME = "§l§dSort d'inversement";
-    const SPELL_BLINDNESS_NAME = "§l§dSort d'aveuglement";
-    const SPELL_TELEPORT_NAME = "§l§dSort de téléportation";
-    const SPELL_SPEED_NAME = "§l§dSort de rapidité";
-    const SPELL_HEALTH_NAME = "§l§dSort de soin";
+    const SPELL_ATTRACTION_NAME = "§r§dSort d'attraction";
+    const SPELL_REPULSION_NAME = "§r§dSort de répulsion";
+    const SPELL_LIGHTNING_NAME = "§r§dSort de foudre";
+    const SPELL_REVERSE_NAME = "§r§dSort d'inversement";
+    const SPELL_BLINDNESS_NAME = "§r§dSort d'aveuglement";
+    const SPELL_TELEPORT_NAME = "§r§dSort de téléportation";
+    const SPELL_SPEED_NAME = "§r§dSort de rapidité";
+    const SPELL_HEALTH_NAME = "§r§dSort de soin";
     //TODO les rajouter tous
 
     public static function getBookItem(): Item {
@@ -46,6 +46,6 @@ class SpellUtils {
             self::SPELL_HEALTH_NAME
         ];
         $name_spell = $spells[array_rand($spells)];
-        return ItemFactory::getInstance()->get(ItemIds::NETHER_STAR, 0, 1)->setCustomName($name_spell);
+        return ItemFactory::getInstance()->get(ItemIds::ENCHANTED_BOOK, 0, 1)->setCustomName($name_spell);
     }
 }

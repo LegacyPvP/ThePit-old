@@ -88,4 +88,10 @@ messages:
       success-self: "Vous avez changé votre gamemode à {gamemode}" # {player} is the player who set his gamemode, {gamemode} is the gamemode he set
     tps:
       success: "§l§d» §r§fPerformances du serveurs §l§d«\n\n§l§d» §r§fActuel TPS: {ticks} {ticks_per_seconds}/({ticks_usage}%)\n§l§d» §r§fMoyenne TPS: {ticks} {ticks_per_seconds_average}  ({ticks_usage_average}%)"
+    message:
+      sender-blocked: "Vous ne pouvez pas envoyer de message à {player} car le joueur vous à bloqué"
+      sender-message: "Vous avez bien envoyé un message à {player}: {message}"
+      target-message: "Vous avez reçu un message de {player}: {message}"
+      target-not-found: "Le joueur mentionné n'est pas connecté on n'existe pas"
+
 

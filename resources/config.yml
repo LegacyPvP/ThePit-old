@@ -244,6 +244,14 @@ commands:
     usage: "§fVous devez faire §d/tps §fpour voir le tps du serveur."
     description: "Voir le tps du serveur"
     aliases: []
+  message:
+    permission: "legacy.commands.message"
+    usage: "§fVous devez faire §d/message <nom du joueur> <message> §fpour envoyer un message à un joueur."
+    description: "Envoyer un message à un joueur"
+    aliases:
+      - w
+      - tell
+      - mp
 
 items:
   nemo:
@@ -259,8 +267,7 @@ items:
         vertical: 1
     attraction:
         horizontal: -1.50
-        vertical: -1
+        vertical: 3
 
 cooldowns:
   461: 15
-  399: 30
