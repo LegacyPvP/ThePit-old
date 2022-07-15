@@ -202,4 +202,29 @@ final class LegacyPlayer extends Player
     {
         $this->teleportation = $teleportation;
     }
+
+    public function getGold(): int
+    {
+        return $this->getPlayerProperties()->getNestedProperties('stats.or');
+    }
+
+    public function setGold(int $gold): void
+    {
+        $this->getPlayerProperties()->setNestedProperties('stats.or', $gold);
+    }
+
+    public function addGold(int $amount): void
+    {
+        $this->setGold($this->getGold() + $amount);
+    }
+
+    public function removeGold(int $amount): void
+    {
+        $this->setGold($this->getGold() - $amount);
+    }
+
+    public function hasGold(int $amount): bool
+    {
+        return $this->getGold() >= $amount;
+    }
 }

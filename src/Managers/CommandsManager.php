@@ -12,6 +12,7 @@ use Legacy\ThePit\Commands\LobbyCommand;
 use Legacy\ThePit\Commands\MessageCommand;
 use Legacy\ThePit\Commands\MuteCommand;
 use Legacy\ThePit\Commands\NightVisionCommand;
+use Legacy\ThePit\Commands\PayCommand;
 use Legacy\ThePit\Commands\PingCommand;
 use Legacy\ThePit\Commands\SayCommand;
 use Legacy\ThePit\Commands\SetRankCommand;
@@ -48,6 +49,7 @@ abstract class CommandsManager
             new UnmuteCommand("unmute"),
             new TPSCommand("tps"),
             new MessageCommand("msg"),
+            new PayCommand("pay"),
         ];
     }
 

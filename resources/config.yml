@@ -252,6 +252,11 @@ commands:
       - w
       - tell
       - mp
+  pay:
+    permission: "legacy.commands.pay"
+    usage: "§fVous devez faire §d/pay <nom du joueur> <montant> §fpour payer un joueur avec de l'or."
+    description: "Payer un joueur avec de l'or"
+    aliases: []
 
 items:
   nemo:

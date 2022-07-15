@@ -15,8 +15,9 @@ class MessageCommand extends Commands {
             if(isset($args[0])){
                 $target = $sender->getServer()->getPlayerByPrefix($args[0]);
                 if($target instanceof LegacyPlayer){
+                    var_dump($target->getPlayerProperties()->getNestedProperties("settings.blocked_players"));
                     if($target->isOnline() and $target->getPlayerProperties()->getNestedProperties("settings.allow_private_messages") == true){
-                        if(in_array($sender->getName(), $target->getPlayerProperties()->getNestedProperties("settings.blocked_players"))){
+                        if(substr($sender->getName(), $target->getPlayerProperties()->getNestedProperties("settings.blocked_players"))){
                             $this->getSenderLanguage($sender)->getMessage("messages.commands.message.sender-blocked", [
                                 "{target}" => $target->getName()
                             ], ServerUtils::PREFIX_3)->send($sender);
@@ -24,10 +25,11 @@ class MessageCommand extends Commands {
                             if(isset($args[1])){
                                 $message = $args[1];
                                 $packet = new PlaySoundPacket();
-                                $packet->soundName = "flute";
+                                $packet->soundName = "random.orb";
                                 $packet->x = $target->getLocation()->getX();
                                 $packet->y = $target->getLocation()->getY();
                                 $packet->z = $target->getLocation()->getZ();
+                                $packet->pitch = $target->getLocation()->getPitch();
                                 $packet->volume = 1;
                                 $target->getNetworkSession()->sendDataPacket($packet);
                                 $target->sendMessage($this->getSenderLanguage($sender)->getMessage("messages.commands.message.target-message", [
