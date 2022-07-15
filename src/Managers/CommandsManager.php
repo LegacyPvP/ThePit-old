@@ -7,6 +7,7 @@ use Legacy\ThePit\Commands\GameModeCommand;
 use Legacy\ThePit\Commands\GlobalMuteCommand;
 use Legacy\ThePit\Commands\KickCommand;
 use Legacy\ThePit\Commands\KnockBackCommand;
+use Legacy\ThePit\Commands\ListCommand;
 use Legacy\ThePit\Commands\ListRankCommand;
 use Legacy\ThePit\Commands\LobbyCommand;
 use Legacy\ThePit\Commands\MessageCommand;
@@ -50,6 +51,7 @@ abstract class CommandsManager
             new TPSCommand("tps"),
             new MessageCommand("msg"),
             new PayCommand("pay"),
+            new ListCommand("list"),
         ];
     }
 

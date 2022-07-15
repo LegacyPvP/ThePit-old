@@ -93,5 +93,10 @@ messages:
       sender-message: "Vous avez bien envoyé un message à {player}: {message}"
       target-message: "Vous avez reçu un message de {player}: {message}"
       target-not-found: "Le joueur mentionné n'est pas connecté on n'existe pas"
+    pay:
+
+    list:
+      header: "§l§d- §r§fListe des joueurs connectés§l§d-\n"
+      staff-header: "§l§d- §r§fListe des staff connectés§l§d-\n"
 
 

@@ -227,4 +227,9 @@ final class LegacyPlayer extends Player
     {
         return $this->getGold() >= $amount;
     }
+
+    public function getRank(): Rank
+    {
+        return RanksManager::parseRank($this->getPlayerProperties()->getNestedProperties('infos.rank'));
+    }
 }
