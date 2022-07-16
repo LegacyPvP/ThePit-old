@@ -16,7 +16,7 @@ use pocketmine\player\Player;
 
 abstract class FormsManager
 {
-    #[ArrayShape(["form" => "\Legacy\ThePit\Forms\variant\CustomForm", "callable" => "\Closure[]", "type" => "string"])] static public function knockBackForm(): Form {
+    #[ArrayShape(["form" => "\Legacy\ThePit\Forms\variant\CustomForm", "callable" => "\Closure[]", "type" => "string"])] static public function knockBackForm(LegacyPlayer $player): Form {
         $form = new CustomForm("Knock Back", function (Player $player, FormResponse $response): void {
             $horizontal = $response->getInputSubmittedText("horizontal");
             $vertical = $response->getInputSubmittedText("vertical");
@@ -47,7 +47,7 @@ abstract class FormsManager
 
     #[ArrayShape(["knockback" => "\Legacy\ThePit\Forms\Form"])] public static function getForms(): array {
         return [
-            "knockback" => fn() => self::knockBackForm(),
+            "knockback" => fn(LegacyPlayer $player) => self::knockBackForm($player),
         ];
     }
 
@@ -64,7 +64,7 @@ abstract class FormsManager
     public static function sendForm(LegacyPlayer $player, string $form): void {
         if(isset(self::$forms[$form])){
             $form_infos = array();
-            $form = (self::$forms[$form])();
+            $form = (self::$forms[$form])($player);
             switch($form->getType()){
                 case Form::TYPE_CUSTOM_FORM:
                 case Form::TYPE_SIMPLE_FORM:
