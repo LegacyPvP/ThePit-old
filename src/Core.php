@@ -7,6 +7,7 @@ use Legacy\ThePit\Managers\EventsManager;
 use Legacy\ThePit\Managers\FormsManager;
 use Legacy\ThePit\Managers\ItemsManager;
 use Legacy\ThePit\Managers\CurrenciesManager;
+use Legacy\ThePit\Managers\PrestigesManager;
 use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Managers\LanguageManager;
 use Legacy\ThePit\Managers\ListenersManager;
@@ -43,6 +44,7 @@ class Core extends PluginBase
         ItemsManager::initItems();
         FormsManager::initForms();
         CurrenciesManager::initCurrencies();
+        PrestigesManager::initPrestiges();
 
         $default = yaml_parse(file_get_contents($this->getFile() . "resources/" . "config.yml"));
         if(is_array($default)) $this->getConfig()->setDefaults($default);

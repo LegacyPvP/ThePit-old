@@ -17,7 +17,8 @@ final class PlayerChatEvent implements Listener
     public function onEvent(ClassEvent $event){
         $player = $event->getPlayer();
         if($player instanceof LegacyPlayer){
-            $event->setFormat($player->getGrade()->getFormat([
+            $event->setFormat($player->getRank()->getFormat([
+                "{prestige}" => $player->getPlayerProperties()->getNestedProperties("stats.prestige"),
                 "{player}" => $player->getName(),
                 "{chat}" => $event->getMessage(),
             ]));

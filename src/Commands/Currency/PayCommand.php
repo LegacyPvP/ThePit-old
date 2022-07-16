@@ -1,7 +1,8 @@
 <?php
 
-namespace Legacy\ThePit\Commands;
+namespace Legacy\ThePit\Commands\Currency;
 
+use Legacy\ThePit\Commands\Commands;
 use Legacy\ThePit\Player\LegacyPlayer;
 use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\command\CommandSender;
@@ -17,7 +18,7 @@ class PayCommand extends Commands {
                     $target = $sender->getServer()->getPlayerByPrefix($args[0]);
                     $amount = $args[1];
                     if($target instanceof LegacyPlayer){
-                        if(is_int($amount)){
+                        if(is_numeric($amount)){
                             if($sender->hasGold($amount)){
                                 $packet = new PlaySoundPacket();
                                 $packet->soundName = "random.orb";

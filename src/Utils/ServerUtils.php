@@ -9,6 +9,8 @@ abstract class ServerUtils
     const PREFIX_1 = 1;
     const PREFIX_2 = 2;
     const PREFIX_3 = 3;
+    const PREFIX_4 = 4;
+
     public static bool $global_mute = false;
 
     /**
