@@ -5,6 +5,7 @@ namespace Legacy\ThePit\Player;
 use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Traits\PropertiesTrait;
 use Legacy\ThePit\Utils\PlayerUtils;
+use Legacy\ThePit\Utils\SpellUtils;
 use pocketmine\nbt\tag\CompoundTag;
 
 final class PlayerProperties {
@@ -37,9 +38,11 @@ final class PlayerProperties {
                     "nightvision" => false,
                     "freezed" => false,
                 ],
-                "parameters" => [
+                "settings" => [
                     "cps" => 0,
                     "autosprint" => false,
+                    "blocked_players" => [],
+                    "allow_private_messages" => true,
                 ],
                 "mute" => [
                     "reason" => "",

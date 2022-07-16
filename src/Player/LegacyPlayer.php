@@ -7,6 +7,7 @@ use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Managers\LanguageManager;
 use Legacy\ThePit\Objects\Rank;
 use Legacy\ThePit\Objects\Language;
+use Legacy\ThePit\Utils\SpellUtils;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\EffectManager;
 use pocketmine\entity\effect\VanillaEffects;
@@ -200,5 +201,35 @@ final class LegacyPlayer extends Player
     public function setTeleportation(bool $teleportation): void
     {
         $this->teleportation = $teleportation;
+    }
+
+    public function getGold(): int
+    {
+        return $this->getPlayerProperties()->getNestedProperties('stats.or');
+    }
+
+    public function setGold(int $gold): void
+    {
+        $this->getPlayerProperties()->setNestedProperties('stats.or', $gold);
+    }
+
+    public function addGold(int $amount): void
+    {
+        $this->setGold($this->getGold() + $amount);
+    }
+
+    public function removeGold(int $amount): void
+    {
+        $this->setGold($this->getGold() - $amount);
+    }
+
+    public function hasGold(int $amount): bool
+    {
+        return $this->getGold() >= $amount;
+    }
+
+    public function getRank(): Rank
+    {
+        return RanksManager::parseRank($this->getPlayerProperties()->getNestedProperties('infos.rank'));
     }
 }

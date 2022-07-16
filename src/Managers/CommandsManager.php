@@ -7,16 +7,20 @@ use Legacy\ThePit\Commands\GameModeCommand;
 use Legacy\ThePit\Commands\GlobalMuteCommand;
 use Legacy\ThePit\Commands\KickCommand;
 use Legacy\ThePit\Commands\KnockBackCommand;
+use Legacy\ThePit\Commands\ListCommand;
 use Legacy\ThePit\Commands\ListRankCommand;
 use Legacy\ThePit\Commands\LobbyCommand;
+use Legacy\ThePit\Commands\MessageCommand;
 use Legacy\ThePit\Commands\MuteCommand;
 use Legacy\ThePit\Commands\NightVisionCommand;
+use Legacy\ThePit\Commands\PayCommand;
 use Legacy\ThePit\Commands\PingCommand;
 use Legacy\ThePit\Commands\SayCommand;
 use Legacy\ThePit\Commands\SetRankCommand;
 use Legacy\ThePit\Commands\SpawnCommand;
 use Legacy\ThePit\Commands\TpCommand;
 use Legacy\ThePit\Commands\TprCommand;
+use Legacy\ThePit\Commands\TPSCommand;
 use Legacy\ThePit\Commands\UnbanCommand;
 use Legacy\ThePit\Commands\UnmuteCommand;
 use Legacy\ThePit\Core;
@@ -44,6 +48,10 @@ abstract class CommandsManager
             new LobbyCommand("lobby"),
             new MuteCommand("mute"),
             new UnmuteCommand("unmute"),
+            new TPSCommand("tps"),
+            new MessageCommand("msg"),
+            new PayCommand("pay"),
+            new ListCommand("list"),
         ];
     }
 

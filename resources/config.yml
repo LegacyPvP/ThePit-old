@@ -109,32 +109,32 @@ ranks:
     chat: "§8[§2§lGuide§r§8] §2{player} §l§8» §r§2{chat}"
     nametag: "§2§l{player}"
     scoretag: ""
-    permissions: []
+    permissions: ["thepit.staff"]
   Modo:
     chat: "§8[§e§lModo§r§8] §e{player} §l§8» §r§e{chat}"
     nametag: "§e§l{player}"
     scoretag: ""
-    permissions: []
+    permissions: ["thepit.staff"]
   SuperModo:
     chat: "§8[§6§lSuperModo§r§8] §6{player} §l§8» §r§6{chat}"
     nametag: "§6§l{player}"
     scoretag: ""
-    permissions: []
+    permissions: ["thepit.staff"]
   Développeur:
     chat: "§8[§c§lDéveloppeur§r§8] §c{player} §l§8» §r§c{chat}"
     nametag: "§c§l{player}"
     scoretag: ""
-    permissions: []
+    permissions: ["thepit.staff"]
   Responsable:
     chat: "§8[§c§lResponsable§r§8] §c{player} §l§8» §r§c{chat}"
     nametag: "§c§l{player}"
     scoretag: ""
-    permissions: []
+    permissions: ["thepit.staff"]
   Admin:
     chat: "§8[§4§lAdmin§r§8] §4{player} §l§8» §r§4{chat}"
     nametag: "§l§4{player}"
     scoretag: ""
-    permissions: []
+    permissions: ["thepit.staff"]
 
 commands:
   # <> = obligatoire
@@ -239,6 +239,29 @@ commands:
     usage: "§fVous devez faire §d/unmute <nom du joueur> §fpour unmute un joueur."
     description: "Unmute un joueur"
     aliases: []
+  tps:
+    permission: "legacy.commands.tps"
+    usage: "§fVous devez faire §d/tps §fpour voir le tps du serveur."
+    description: "Voir le tps du serveur"
+    aliases: []
+  message:
+    permission: "legacy.commands.message"
+    usage: "§fVous devez faire §d/message <nom du joueur> <message> §fpour envoyer un message à un joueur."
+    description: "Envoyer un message à un joueur"
+    aliases:
+      - w
+      - tell
+      - mp
+  pay:
+    permission: "legacy.commands.pay"
+    usage: "§fVous devez faire §d/pay <nom du joueur> <montant> §fpour payer un joueur avec de l'or."
+    description: "Payer un joueur avec de l'or"
+    aliases: []
+  list:
+    permission: "legacy.commands.list"
+    usage: "§fVous devez faire §d/list §fpour voir la liste des joueurs."
+    description: "Voir la liste des joueurs"
+    aliases: []
 
 items:
   nemo:
@@ -247,6 +270,13 @@ items:
   flap:
     uses: 10
     horizontal: 1.50
+  spell:
+    repulsion:
+        horizontal: 1.50
+        vertical: 1
+    attraction:
+        horizontal: -1.50
+        vertical: 3
 
 cooldowns:
   461: 15
