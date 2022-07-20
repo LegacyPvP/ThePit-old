@@ -98,5 +98,9 @@ messages:
     list:
       header: "§l§d- §r§fListe des joueurs connectés§l§d-\n"
       staff-header: "§l§d- §r§fListe des staff connectés§l§d-\n"
+  death:
+    killed: "Vous avez été tué par {player}" # {player} is the player who killed you
+  kill: "Vous avez tué {player}" # {player} is the player that you killed
+
 
 
