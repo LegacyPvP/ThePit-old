@@ -6,6 +6,7 @@ prefixes:
   1: "§5[§dLegacy§r§5] §r"
   2: "§5[§d§l!!!§r§5] §r"
   3: "§5[§d§l!§r§5] §r"
+  4: ""
 
 server:
   lobby:
@@ -76,65 +77,65 @@ scoreboards:
 
 ranks:
   Joueur:
-    chat: "§7{player} §l§7» §r§7{chat}"
+    chat: "{prestige} §7{player} §l§7» §r§7{chat}"
     nametag: "§7{player}"
     scoretag: ""
     permissions: []
   Plus:
-    chat: "§8[§a+§8] §a{player} §l§8» §r§f{chat}"
+    chat: "{prestige} §8[§a+§8] §a{player} §l§8» §r§f{chat}"
     nametag: "§a{player}"
     scoretag: ""
     permissions: []
   Star:
-    chat: "§8[§9Star§8] §9{player} §l§8» §r§f{chat}"
+    chat: "{prestige} §8[§9Star§8] §9{player} §l§8» §r§f{chat}"
     nametag: "§9{player}"
     scoretag: ""
     permissions: []
   Booster:
-    chat: "§8[§dBooster§8] §d{player} §l§8» §r§f{chat}"
+    chat: "{prestige} §8[§dBooster§8] §d{player} §l§8» §r§f{chat}"
     nametag: "§d{player}"
     scoretag: ""
     permissions: []
   YouTube:
-    chat: "§8[§bYouTube§8] §b{player} §l§8» §r§f{chat}"
+    chat: "{prestige} §8[§bYouTube§8] §b{player} §l§8» §r§f{chat}"
     nametag: "§b{player}"
     scoretag: ""
     permissions: []
   Famous:
-    chat: "§8[§5Famous§8] §5{player} §l§8» §r§f{chat}"
+    chat: "{prestige} §8[§5Famous§8] §5{player} §l§8» §r§f{chat}"
     nametag: "§5{player}"
     scoretag: ""
     permissions: []
   Guide:
-    chat: "§8[§2§lGuide§r§8] §2{player} §l§8» §r§2{chat}"
+    chat: "{prestige} §8[§2§lGuide§r§8] §2{player} §l§8» §r§2{chat}"
     nametag: "§2§l{player}"
     scoretag: ""
-    permissions: ["thepit.staff"]
+    permissions: []
   Modo:
-    chat: "§8[§e§lModo§r§8] §e{player} §l§8» §r§e{chat}"
+    chat: "{prestige} §8[§e§lModo§r§8] §e{player} §l§8» §r§e{chat}"
     nametag: "§e§l{player}"
     scoretag: ""
-    permissions: ["thepit.staff"]
+    permissions: []
   SuperModo:
-    chat: "§8[§6§lSuperModo§r§8] §6{player} §l§8» §r§6{chat}"
+    chat: "{prestige} §8[§6§lSuperModo§r§8] §6{player} §l§8» §r§6{chat}"
     nametag: "§6§l{player}"
     scoretag: ""
-    permissions: ["thepit.staff"]
+    permissions: []
   Développeur:
-    chat: "§8[§c§lDéveloppeur§r§8] §c{player} §l§8» §r§c{chat}"
+    chat: "{prestige} §8[§c§lDéveloppeur§r§8] §c{player} §l§8» §r§c{chat}"
     nametag: "§c§l{player}"
     scoretag: ""
-    permissions: ["thepit.staff"]
+    permissions: []
   Responsable:
-    chat: "§8[§c§lResponsable§r§8] §c{player} §l§8» §r§c{chat}"
+    chat: "{prestige} §8[§c§lResponsable§r§8] §c{player} §l§8» §r§c{chat}"
     nametag: "§c§l{player}"
     scoretag: ""
-    permissions: ["thepit.staff"]
+    permissions: []
   Admin:
-    chat: "§8[§4§lAdmin§r§8] §4{player} §l§8» §r§4{chat}"
+    chat: "{prestige} §8[§4§lAdmin§r§8] §4{player} §l§8» §r§4{chat}"
     nametag: "§l§4{player}"
     scoretag: ""
-    permissions: ["thepit.staff"]
+    permissions: []
 
 commands:
   # <> = obligatoire
@@ -261,6 +262,27 @@ commands:
     permission: "legacy.commands.list"
     usage: "§fVous devez faire §d/list §fpour voir la liste des joueurs."
     description: "Voir la liste des joueurs"
+    aliases: []
+  statistics:
+    permission: "legacy.commands.statistics"
+    usage: "§fVous devez faire §d/statistics §fpour voir les statistiques du serveur."
+    description: "Voir les statistiques du serveur"
+    aliases:
+      - stats
+  set:
+    permission: "legacy.commands.set"
+    usage: "§fVous devez faire §d/set <nom du joueur> <valeur> §fpour changer la valeur d'un joueur."
+    description: "Changer la valeur d'un joueur"
+    aliases: []
+  add:
+    permission: "legacy.commands.add"
+    usage: "§fVous devez faire §d/add <nom du joueur> <valeur> §fpour ajouter une valeur à un joueur."
+    description: "Ajouter une valeur à un joueur"
+    aliases: []
+  remove:
+    permission: "legacy.commands.remove"
+    usage: "§fVous devez faire §d/remove <nom du joueur> <valeur> §fpour enlever une valeur à un joueur."
+    description: "Enlever une valeur à un joueur"
     aliases: []
 
 items:

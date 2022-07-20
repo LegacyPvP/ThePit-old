@@ -29,6 +29,8 @@ final class LegacyPlayer extends Player
     private CompoundTag $tag;
     private bool $teleportation = false;
 
+
+
     public function initEntity(CompoundTag $nbt): void
     {
         parent::initEntity($nbt);
@@ -70,15 +72,10 @@ final class LegacyPlayer extends Player
         $this->setNBT($this->saveNBT());
     }
 
-    public function getGrade(): Rank
-    {
-        return RanksManager::parseRank($this->getPlayerProperties()->getNestedProperties("infos.rank")) ?? RanksManager::getDefaultRank();
-    }
-
     public function onUpdate(int $currentTick): bool
     {
-        $this->setNameTag($this->getGrade()->getNametag($this));
-        $this->setScoreTag($this->getGrade()->getScoretag($this));
+        $this->setNameTag($this->getRank()->getNametag($this) . "\n" . str_replace("{level}", $this->getPlayerProperties()->getNestedProperties("stats.level"), $this->getPlayerProperties()->getNestedProperties("stats.prestige")));
+        $this->setScoreTag($this->getRank()->getScoretag($this));
         $currentTick % 20 !== 0 ?: $this->syncNBT();
 
         return parent::onUpdate($currentTick);
@@ -224,6 +221,81 @@ final class LegacyPlayer extends Player
     }
 
     public function hasGold(int $amount): bool
+    {
+        return $this->getGold() >= $amount;
+    }
+
+    public function getStars(): int
+    {
+        return $this->getPlayerProperties()->getNestedProperties('stats.etoiles');
+    }
+
+    public function setStars(int $gold): void
+    {
+        $this->getPlayerProperties()->setNestedProperties('stats.etoiles', $gold);
+    }
+
+    public function addStars(int $amount): void
+    {
+        $this->setGold($this->getGold() + $amount);
+    }
+
+    public function removeStars(int $amount): void
+    {
+        $this->setGold($this->getGold() - $amount);
+    }
+
+    public function hasStars(int $amount): bool
+    {
+        return $this->getGold() >= $amount;
+    }
+
+    public function getVoteCoins(): int
+    {
+        return $this->getPlayerProperties()->getNestedProperties('stats.votecoins');
+    }
+
+    public function setVoteCoins(int $gold): void
+    {
+        $this->getPlayerProperties()->setNestedProperties('stats.votecoins', $gold);
+    }
+
+    public function addVoteCoins(int $amount): void
+    {
+        $this->setGold($this->getGold() + $amount);
+    }
+
+    public function removeVoteCoins(int $amount): void
+    {
+        $this->setGold($this->getGold() - $amount);
+    }
+
+    public function hasVoteCoins(int $amount): bool
+    {
+        return $this->getGold() >= $amount;
+    }
+
+    public function getCredits(): int
+    {
+        return $this->getPlayerProperties()->getNestedProperties('stats.credits');
+    }
+
+    public function setCredits(int $gold): void
+    {
+        $this->getPlayerProperties()->setNestedProperties('stats.credits', $gold);
+    }
+
+    public function addCredits(int $amount): void
+    {
+        $this->setGold($this->getGold() + $amount);
+    }
+
+    public function removeCredits(int $amount): void
+    {
+        $this->setGold($this->getGold() - $amount);
+    }
+
+    public function hasCredits(int $amount): bool
     {
         return $this->getGold() >= $amount;
     }

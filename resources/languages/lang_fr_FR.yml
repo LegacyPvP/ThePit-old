@@ -1,6 +1,9 @@
 messages:
   form:
     not-found: "Formulaire non trouvé"
+    shop:
+      votecoins-convert: "Conversion de votecoins en crédits"
+
   mute:
     muted: "Vous êtes toujours mute par {player} jusqu'au {date} pour: {reason}" # {player} {date} {reason}
   interactions:
@@ -94,13 +97,25 @@ messages:
       target-message: "Vous avez reçu un message de {player}: {message}"
       target-not-found: "Le joueur mentionné n'est pas connecté on n'existe pas"
     pay:
-
+      not-enough-gold: "Vous n'avez pas assez d'or"
+      received: "Vous avez reçu {amount} or de la part de {player}"
+      success: "Vous avez payé {amount} or à {target}"
     list:
       header: "§l§d- §r§fListe des joueurs connectés§l§d-\n"
       staff-header: "§l§d- §r§fListe des staff connectés§l§d-\n"
+    set:
+      success: "Vous avez changé le solde de {target} à {amount}"
+      invalid-amount: "Montant invalide"
+    add:
+      success: "Vous avez ajouté {amount} à {target}"
+      invalid-amount: "Montant invalide"
+    remove:
+      success: "Vous avez retiré {amount} à {target}"
+      invalid-amount: "Montant invalide"
+    statistics:
+      success: "§5- §fStatistiques de §d{player} §5-§f\n\n§fOr: §6{gold}§f\n§fÉtoiles: §e{stars}§f\n§fVoteCoins: §9{votecoins}§f\n§fCrédits: §2{credits}§f"
   death:
     killed: "Vous avez été tué par {player}" # {player} is the player who killed you
   kill: "Vous avez tué {player}" # {player} is the player that you killed
-
 
 

@@ -3,6 +3,7 @@
 namespace Legacy\ThePit\Player;
 
 use Legacy\ThePit\Managers\RanksManager;
+use Legacy\ThePit\Objects\Prestige;
 use Legacy\ThePit\Traits\PropertiesTrait;
 use Legacy\ThePit\Utils\PlayerUtils;
 use Legacy\ThePit\Utils\SpellUtils;
@@ -22,7 +23,7 @@ final class PlayerProperties {
                     "level" => 1,
                     "xp" => 0,
                     "killstreak" => 0,
-                    "prestige" => 0,
+                    "prestige" => Prestige::PRESTIGE_0,
                     "prime" => 0,
                 ],
                 "money" => [
