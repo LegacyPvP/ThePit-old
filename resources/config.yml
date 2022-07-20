@@ -302,3 +302,16 @@ items:
 
 cooldowns:
   461: 15
+
+areas:
+  spawn:
+    x: [100, 100]
+    y: [0, 100]
+    z: [100, 100]
+    world: "SkyPvP"
+
+goldspawn:
+  x: [ 100, 100 ]
+  y: [ 60, 80 ]
+  z: [ 100, 100 ]
+  world: "SkyPvP"

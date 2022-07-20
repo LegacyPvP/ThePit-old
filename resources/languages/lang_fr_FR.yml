@@ -3,12 +3,10 @@ messages:
     not-found: "Formulaire non trouvé"
     shop:
       votecoins-convert: "Conversion de votecoins en crédits"
-
   mute:
     muted: "Vous êtes toujours mute par {player} jusqu'au {date} pour: {reason}" # {player} {date} {reason}
   interactions:
     cooldown: "Vous devez attendre {time} secondes avant de pouvoir faire cela"
-
     spells:
       health:
         full: "Vous avez déjà tout vos points de vie"

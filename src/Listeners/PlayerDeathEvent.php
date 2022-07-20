@@ -5,8 +5,6 @@ namespace Legacy\ThePit\Listeners;
 use Legacy\ThePit\Player\LegacyPlayer;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerDeathEvent as ClassEvent;
-use pocketmine\player\Player;
-use pocketmine\Server;
 
 final class PlayerDeathEvent implements Listener
 {
@@ -22,15 +20,17 @@ final class PlayerDeathEvent implements Listener
             # TODO: KILLSTREAK
             $killstreak = ($killer->getPlayerProperties()->getNestedProperties("stats.killstreak") ?? 0) + 1;
             $killer->getPlayerProperties()->setNestedProperties("stats.killstreak", $killstreak);
+            $killer->getPlayerProperties()->setNestedProperties("stats.prime", $killer->getPlayerProperties()->getNestedProperties("stats.prime") + $player->getPlayerProperties()->getNestedProperties("stats.prime"));
             if($killstreak % 10 === 0){
                 $array = [50, 75, 100];
-                $gold = ($killer->getPlayerProperties()->getNestedProperties("money.gold") ?? 0) + $array[array_rand($array)];
-                $killer->getPlayerProperties()->setNestedProperties("money.gold", $gold);
-                $killer->getLanguage()->getMessage("messages.killstreak.player", ["{killstreak}" => $killstreak, "{gold}" => $gold])->send($killer);
-                Server::getInstance()->broadcastMessage($killer->getLanguage()->getMessage("messages.killstreak.broadcast", ["{player}" => $killer->getName(), "{killstreak}" => $killstreak, "{gold}" => $gold])->__toString());
+                $prime = ($killer->getPlayerProperties()->getNestedProperties("stats.prime") ?? 0) + $array[array_rand($array)];
+                $add = $array[array_rand($array)];
+                $killer->getPlayerProperties()->setNestedProperties("stats.prime", $prime);
+                $killer->getLanguage()->getMessage("messages.killstreak.player", ["{killstreak}" => $killstreak, "{prime}" => $add])->send($killer);
+                $killer->getLanguage()->getMessage("messages.killstreak.broadcast", ["{player}" => $killer->getName(), "{killstreak}" => $killstreak, "{prime}" => $add]);
             }
-
-             
+            $player->getPlayerProperties()->setNestedProperties("stats.killstreak", 0);
+            $player->getPlayerProperties()->setNestedProperties("stats.prime", 0);
         }
     }
 }

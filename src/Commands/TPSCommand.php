@@ -8,7 +8,7 @@ use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\command\CommandSender;
 use pocketmine\utils\TextFormat;
 
-class TPSCommand extends Commands {
+final class TPSCommand extends Commands {
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {

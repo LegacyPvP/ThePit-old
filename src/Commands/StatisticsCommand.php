@@ -7,7 +7,7 @@ use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 
-class StatisticsCommand extends Commands {
+final class StatisticsCommand extends Commands {
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {

@@ -202,12 +202,12 @@ final class LegacyPlayer extends Player
 
     public function getGold(): int
     {
-        return $this->getPlayerProperties()->getNestedProperties('stats.or');
+        return $this->getPlayerProperties()->getNestedProperties('money.gold');
     }
 
     public function setGold(int $gold): void
     {
-        $this->getPlayerProperties()->setNestedProperties('stats.or', $gold);
+        $this->getPlayerProperties()->setNestedProperties('money.gold', $gold);
     }
 
     public function addGold(int $amount): void
@@ -227,12 +227,12 @@ final class LegacyPlayer extends Player
 
     public function getStars(): int
     {
-        return $this->getPlayerProperties()->getNestedProperties('stats.etoiles');
+        return $this->getPlayerProperties()->getNestedProperties('money.etoiles');
     }
 
     public function setStars(int $gold): void
     {
-        $this->getPlayerProperties()->setNestedProperties('stats.etoiles', $gold);
+        $this->getPlayerProperties()->setNestedProperties('money.etoiles', $gold);
     }
 
     public function addStars(int $amount): void
@@ -252,12 +252,12 @@ final class LegacyPlayer extends Player
 
     public function getVoteCoins(): int
     {
-        return $this->getPlayerProperties()->getNestedProperties('stats.votecoins');
+        return $this->getPlayerProperties()->getNestedProperties('money.votecoins');
     }
 
     public function setVoteCoins(int $gold): void
     {
-        $this->getPlayerProperties()->setNestedProperties('stats.votecoins', $gold);
+        $this->getPlayerProperties()->setNestedProperties('money.votecoins', $gold);
     }
 
     public function addVoteCoins(int $amount): void
@@ -277,12 +277,12 @@ final class LegacyPlayer extends Player
 
     public function getCredits(): int
     {
-        return $this->getPlayerProperties()->getNestedProperties('stats.credits');
+        return $this->getPlayerProperties()->getNestedProperties('money.credits');
     }
 
     public function setCredits(int $gold): void
     {
-        $this->getPlayerProperties()->setNestedProperties('stats.credits', $gold);
+        $this->getPlayerProperties()->setNestedProperties('money.credits', $gold);
     }
 
     public function addCredits(int $amount): void
