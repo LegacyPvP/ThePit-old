@@ -7,6 +7,7 @@ use Legacy\ThePit\Items\List\Nemo;
 use Legacy\ThePit\Items\List\Spell;
 use Legacy\ThePit\Managers\CooldownManager;
 use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\Tasks\CombatTask;
 use Legacy\ThePit\Utils\SpellUtils;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
@@ -27,6 +28,27 @@ final class EntityDamageByEntityEvent implements Listener
                 $event->cancel();
                 return;
             }
+//je re
+            $target = $event->getEntity();
+            if($target instanceof LegacyPlayer and $damager instanceof LegacyPlayer){
+                if($damager->isInCombat() and $target->isInCombat()){
+                    if(!str_contains($target->getName(), $damager->targetName) and !str_contains($damager->getName(), $target->targetName)){
+                        $damager->getLanguage()->getMessage("messages.combat.already_in_combat")->send($damager);
+                        $event->cancel();
+                    }else{
+                        $damager->setInCombat(true, $target);
+                        $target->setInCombat(true, $damager);
+                        Core::getInstance()->getScheduler()->scheduleRepeatingTask(new CombatTask($target), 20);
+                        Core::getInstance()->getScheduler()->scheduleRepeatingTask(new CombatTask($damager), 20);
+                    }
+                }else{
+                    Core::getInstance()->getScheduler()->scheduleRepeatingTask(new CombatTask($target), 20);
+                    Core::getInstance()->getScheduler()->scheduleRepeatingTask(new CombatTask($damager), 20);
+                    $damager->setInCombat(true, $target);
+                    $target->setInCombat(true, $damager);
+                }
+            }
+
             switch(true){
                 case $item instanceof Nemo:
                     if(CooldownManager::hasCooldown($item)){

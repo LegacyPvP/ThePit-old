@@ -2,6 +2,7 @@
 
 namespace Legacy\ThePit\Player;
 
+use Legacy\ThePit\Core;
 use Legacy\ThePit\Managers\KnockBackManager;
 use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Managers\LanguageManager;
@@ -22,12 +23,14 @@ use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\network\mcpe\protocol\TextPacket;
 use pocketmine\player\GameMode;
 use pocketmine\player\Player;
+use pocketmine\utils\TextFormat;
 
 final class LegacyPlayer extends Player
 {
     private PlayerProperties $properties;
     private CompoundTag $tag;
     private bool $teleportation = false;
+    public string $targetName = "";
 
 
 
@@ -73,8 +76,8 @@ final class LegacyPlayer extends Player
     }
 
     public function onUpdate(int $currentTick): bool
-    {
-        $this->setNameTag($this->getRank()->getNametag($this) . "\n" . str_replace("{level}", $this->getPlayerProperties()->getNestedProperties("stats.level"), $this->getPlayerProperties()->getNestedProperties("stats.prestige")));
+    {//oui ?
+        $this->setNameTag($this->getRank()->getNametag($this) . TextFormat::GOLD . str_replace("{prime}", $this->getPlayerProperties()->getNestedProperties("stats.prime"), $this->getRank()->getNametag($this)) . "\n" . str_replace("{level}", $this->getPlayerProperties()->getNestedProperties("stats.level"), $this->getPlayerProperties()->getNestedProperties("stats.prestige")));
         $this->setScoreTag($this->getRank()->getScoretag($this));
         $currentTick % 20 !== 0 ?: $this->syncNBT();
 
@@ -237,17 +240,17 @@ final class LegacyPlayer extends Player
 
     public function addStars(int $amount): void
     {
-        $this->setGold($this->getGold() + $amount);
+        $this->setStars($this->getStars() + $amount);
     }
 
     public function removeStars(int $amount): void
     {
-        $this->setGold($this->getGold() - $amount);
+        $this->setStars($this->getStars() - $amount);
     }
 
     public function hasStars(int $amount): bool
     {
-        return $this->getGold() >= $amount;
+        return $this->getStars() >= $amount;
     }
 
     public function getVoteCoins(): int
@@ -262,17 +265,17 @@ final class LegacyPlayer extends Player
 
     public function addVoteCoins(int $amount): void
     {
-        $this->setGold($this->getGold() + $amount);
+        $this->setVoteCoins($this->getVoteCoins() + $amount);
     }
 
     public function removeVoteCoins(int $amount): void
     {
-        $this->setGold($this->getGold() - $amount);
+        $this->setVoteCoins($this->getVoteCoins() - $amount);
     }
 
     public function hasVoteCoins(int $amount): bool
     {
-        return $this->getGold() >= $amount;
+        return $this->getVoteCoins() >= $amount;
     }
 
     public function getCredits(): int
@@ -287,21 +290,45 @@ final class LegacyPlayer extends Player
 
     public function addCredits(int $amount): void
     {
-        $this->setGold($this->getGold() + $amount);
+        $this->setCredits($this->getCredits() + $amount);
     }
 
     public function removeCredits(int $amount): void
     {
-        $this->setGold($this->getGold() - $amount);
+        $this->setCredits($this->getCredits() - $amount);
     }
 
     public function hasCredits(int $amount): bool
     {
-        return $this->getGold() >= $amount;
+        return $this->getCredits() >= $amount;
     }
 
     public function getRank(): Rank
     {
         return RanksManager::parseRank($this->getPlayerProperties()->getNestedProperties('infos.rank'));
+    }
+
+    public function isInCombat()
+    {
+        return $this->getPlayerProperties()->getNestedProperties('status.combat');
+    }
+
+    public function setInCombat(bool $combat, LegacyPlayer $target): void
+    {
+        if($combat == true){
+            $this->targetName = $target->getName();
+            $this->getPlayerProperties()->setNestedProperties('status.combat_players', [$this->getName(), $target->getName()]);
+            $this->getPlayerProperties()->setNestedProperties('status.combat', true);
+        }else{
+            $this->getPlayerProperties()->setNestedProperties('status.combat_players', []);
+            $this->getPlayerProperties()->setNestedProperties('status.combat', false);
+        }
+    }
+
+    public function dropInventory()
+    {
+        foreach($this->getInventory()->getContents() as $item){
+            $this->dropItem($item);
+        }
     }
 }

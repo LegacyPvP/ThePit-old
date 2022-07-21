@@ -7,7 +7,9 @@ use Legacy\ThePit\Objects\Prestige;
 use Legacy\ThePit\Traits\PropertiesTrait;
 use Legacy\ThePit\Utils\PlayerUtils;
 use Legacy\ThePit\Utils\SpellUtils;
+use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\CompoundTag;
+use pocketmine\world\Position;
 
 final class PlayerProperties {
     use PropertiesTrait;
@@ -40,6 +42,8 @@ final class PlayerProperties {
                 "status" => [
                     "nightvision" => false,
                     "freezed" => false,
+                    "combat" => false,
+                    "combat_players" => []
                 ],
                 "settings" => [
                     "cps" => 0,
@@ -51,7 +55,12 @@ final class PlayerProperties {
                     "reason" => "",
                     "time" => time(),
                     "staff" => ""
-                ]
+                ],
+                "saved" => [
+                    "last_position" => new Vector3(0, 0, 0),
+                    "last_login" => "",
+                    "last_logout" => ""
+                ],
             ]);
         }else{
             $this->setBaseProperties(PlayerUtils::TagtoArray($nbt->getCompoundTag("properties")));

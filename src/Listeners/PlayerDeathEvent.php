@@ -17,7 +17,6 @@ final class PlayerDeathEvent implements Listener
             $killer->getLanguage()->getMessage("messages.kill", ["{player}" => $player->getName()])->send($killer);
             $player->getLanguage()->getMessage("messages.death.killed", ["{player}" => $killer->getName()])->send($player);
 
-            # TODO: KILLSTREAK
             $killstreak = ($killer->getPlayerProperties()->getNestedProperties("stats.killstreak") ?? 0) + 1;
             $killer->getPlayerProperties()->setNestedProperties("stats.killstreak", $killstreak);
             $killer->getPlayerProperties()->setNestedProperties("stats.prime", $killer->getPlayerProperties()->getNestedProperties("stats.prime") + $player->getPlayerProperties()->getNestedProperties("stats.prime"));

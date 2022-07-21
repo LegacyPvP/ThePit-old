@@ -32,10 +32,10 @@ class SpawnCommand extends Commands {
                     Core::getInstance()->getScheduler()->scheduleRepeatingTask(new ClosureTask(function() use ($sender, $sender_language){
                         try {
                             switch($this->time){
+                                case 5:
                                 case 4:
                                 case 3:
                                 case 2:
-                                case 1:
                                     $this->time--;
                                     $x = $this->location->getX();
                                     $y = $this->location->getY();
@@ -51,9 +51,9 @@ class SpawnCommand extends Commands {
                                             $sender->getEffects()->remove(VanillaEffects::BLINDNESS());
                                             throw new CancelTaskException();
                                         }else{
-                                            throw new LanguageException("messages.commands.spawn.teleportation-in-progress", [
+                                            $sender_language->getMessage("messages.commands.spawn.teleportation-in-progress", [
                                                 "{time}" => $this->time
-                                            ], ServerUtils::PREFIX_2);
+                                            ])->sendPopup($sender);
                                         }
                                     }else{
                                         $sender_language->getMessage("messages.commands.spawn.teleportation-cancelled")->sendPopup($sender);
@@ -62,7 +62,7 @@ class SpawnCommand extends Commands {
                                         $sender->getEffects()->remove(VanillaEffects::BLINDNESS());
                                         throw new CancelTaskException();
                                     }
-                                case 0:
+                                case 1:
                                     $this->time = 4;
                                     $sender_language->getMessage("messages.commands.spawn.success", [
                                         "{time}" => $this->time

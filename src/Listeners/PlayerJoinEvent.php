@@ -12,6 +12,7 @@ final class PlayerJoinEvent implements Listener
 {
     public function onEvent(ClassEvent $event): void
     {
+        $event->setJoinMessage("");
         if(($player = $event->getPlayer()) instanceof LegacyPlayer){
             $grade = RanksManager::parseRank($player->getPlayerProperties()->getNestedProperties("infos.rank"));
             foreach (($grade?->getPermissions() ?? []) as $permission){
@@ -19,6 +20,12 @@ final class PlayerJoinEvent implements Listener
             }
             $packet = CustomItemManager::getPacket();
             if (!is_null($packet)) $player->getNetworkSession()->sendDataPacket($packet);
+        }
+
+        if($player instanceof LegacyPlayer){
+            if($player->isInCombat()){
+                $player->teleport($player->getPlayerProperties()->getProperties("saved.last_position"));
+            }
         }
     }
 

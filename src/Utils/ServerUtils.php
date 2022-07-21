@@ -11,6 +11,8 @@ abstract class ServerUtils
     const PREFIX_3 = 3;
     const PREFIX_4 = 4;
 
+    const RESTART_REASON = "§d- §fThePit §drestarting §d-";
+
     public static bool $global_mute = false;
 
     /**
