@@ -8,7 +8,7 @@ use Legacy\ThePit\Player\LegacyPlayer;
 use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\command\CommandSender;
 
-class SetCommand extends Commands
+final class SetCommand extends Commands
 {
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): void

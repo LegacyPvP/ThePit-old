@@ -21,7 +21,7 @@ final class Flap extends Item
     {
         $motion = $player->getMotion();
         $motion->x += $directionVector->x * (float)Core::getInstance()->getConfig()->getNested("items.flap.horizontal", 1.0);
-        $motion->y += 0.85; // TODO: ($directionVector->y > 0.85 ? 1 : 0.15) * (float)Core::getInstance()->getConfig()->getNested("items.flap.vertical", 1.0)
+        $motion->y += $directionVector->y * (float)Core::getInstance()->getConfig()->getNested("items.flap.vertical", 1.0);; // TODO: ($directionVector->y > 0.85 ? 1 : 0.15) * (float)Core::getInstance()->getConfig()->getNested("items.flap.vertical", 1.0)
         $motion->z += $directionVector->z * (float)Core::getInstance()->getConfig()->getNested("items.flap.horizontal", 1.0);
         $player->setMotion($motion);
         return parent::onClickAir($player, $directionVector);

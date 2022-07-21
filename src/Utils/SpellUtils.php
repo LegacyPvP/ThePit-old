@@ -8,7 +8,7 @@ use pocketmine\item\ItemIds;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\nbt\tag\StringTag;
 
-class SpellUtils {
+abstract class SpellUtils {
 
     const SPELL_ATTRACTION = "spell_attraction";
     const SPELL_REPULSION = "spell_repulsion";

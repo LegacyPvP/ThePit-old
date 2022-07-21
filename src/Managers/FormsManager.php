@@ -18,8 +18,19 @@ use pocketmine\player\Player;
 
 abstract class FormsManager
 {
-    #[ArrayShape(["form" => "\Legacy\ThePit\Forms\variant\CustomForm", "callable" => "\Closure[]", "type" => "string"])] static public function knockBackForm(LegacyPlayer $player): Form {
+    /*#[ArrayShape(["form" => "\Legacy\ThePit\Forms\variant\CustomForm", "callable" => "\Closure[]", "type" => "string"])] static public function knockBackForm(LegacyPlayer $player): Form
+    {
         $form = new CustomForm("Knockback", function (Player $player, FormResponse $response): void {
+        });
+    }*/
+
+    /**
+     * @var Form[]
+     */
+    public static array $forms = [];
+
+    static public function knockBackForm(LegacyPlayer $player): Form {
+        $form = new CustomForm("Knock Back", function (Player $player, FormResponse $response): void {
             $horizontal = $response->getInputSubmittedText("horizontal");
             $vertical = $response->getInputSubmittedText("vertical");
             $cooldown = $response->getInputSubmittedText("cooldown");
@@ -51,6 +62,7 @@ abstract class FormsManager
     }
 
     #[ArrayShape(["form" => "\Legacy\ThePit\Forms\variant\CustomForm", "callable" => "\Closure[]", "type" => "string"])] static public function shopVotecoinsConversion(): Form {
+    static public function openShopVotecoins(LegacyPlayer $player): Form {
         $form = new CustomForm("Boutique de Votecoins", function (Player $player, FormResponse $response): void {
             if($player instanceof LegacyPlayer){
                 $button_convert = $player->getLanguage()->getMessage("messages.forms.shop.votecoins-convert", [], ServerUtils::PREFIX_3);
@@ -64,12 +76,21 @@ abstract class FormsManager
         return $form;
     }
 
-    /**
-     * @var Form[]
-     */
-    public static array $forms = [];
+    static public function openShopVotecoinsC(): Form {
+        $form = new CustomForm("Boutique de Votecoins", function (Player $player, FormResponse $response): void {
+            if($player instanceof LegacyPlayer){
+                $button_convert = $player->getLanguage()->getMessage("messages.forms.shop.votecoins-convert", [], ServerUtils::PREFIX_3);
+            }
+            throw new FormsException('messages.commands.knockback.invalid-arguments',  [], ServerUtils::PREFIX_2);
+        });
 
-    #[ArrayShape(["knockback" => "\Legacy\ThePit\Forms\Form"])] public static function getForms(): array {
+        $form->addElement('', new Button("Conversion en or"));
+        $form->addElement('', new Button("Conversion en boosters"));
+        $form->addElement('', new Button("Conversion en clés"));
+        return $form;
+    }
+
+    public static function getForms(): array {
         return [
             "knockback" => fn(LegacyPlayer $player) => self::knockBackForm($player),
             "shop-votecoins" => fn(LegacyPlayer $player) => self::shopVotecoins($player),
@@ -87,7 +108,7 @@ abstract class FormsManager
      * @throws FormsException
      */
     public static function sendForm(LegacyPlayer $player, string $form): void {
-        if(self::$forms[$form]($player) !== null){
+        if(isset(self::$forms[$form])){
             $form_infos = array();
             $form = (self::$forms[$form])($player);
             switch($form->getType()){
