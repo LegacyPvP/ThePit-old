@@ -292,6 +292,7 @@ items:
   flap:
     uses: 10
     horizontal: 1.50
+    vertical: 2
   spell:
     repulsion:
         horizontal: 1.50
@@ -306,12 +307,12 @@ cooldowns:
 areas:
   spawn:
     x: [100, 100]
-    y: [0, 100]
+    "y": [0, 100]
     z: [100, 100]
-    world: "SkyPvP"
+    world: "Sky"
 
 goldspawn:
-  x: [ 100, 100 ]
-  y: [ 60, 80 ]
-  z: [ 100, 100 ]
-  world: "SkyPvP"
+  x: [-288, -17]
+  "y": [46, 54]
+  z: [127, -368]
+  world: "Sky"

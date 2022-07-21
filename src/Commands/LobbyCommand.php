@@ -13,7 +13,7 @@ use pocketmine\entity\Location;
 use pocketmine\scheduler\CancelTaskException;
 use pocketmine\scheduler\ClosureTask;
 
-class LobbyCommand extends Commands {
+final class LobbyCommand extends Commands {
 
     private int $time = 4;
     private Location $location;

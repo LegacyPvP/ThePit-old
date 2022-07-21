@@ -12,6 +12,7 @@ use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Managers\LanguageManager;
 use Legacy\ThePit\Managers\ListenersManager;
 use Legacy\ThePit\Managers\ScoreBoardManager;
+use Legacy\ThePit\Tasks\GoldSpawnTask;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
 
@@ -48,6 +49,8 @@ class Core extends PluginBase
 
         $default = yaml_parse(file_get_contents($this->getFile() . "resources/" . "config.yml"));
         if(is_array($default)) $this->getConfig()->setDefaults($default);
+
+        $this->getScheduler()->scheduleDelayedRepeatingTask(new GoldSpawnTask(), 20*60, 20);
     }
 
     public function isInDevMode(): bool

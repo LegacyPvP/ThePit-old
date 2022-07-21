@@ -7,7 +7,7 @@ use Legacy\ThePit\Player\LegacyPlayer;
 use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\command\CommandSender;
 
-class RemoveCommand extends Commands {
+final class RemoveCommand extends Commands {
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {

@@ -2,7 +2,6 @@
 
 namespace Legacy\ThePit\Managers;
 
-use JetBrains\PhpStorm\ArrayShape;
 use Legacy\ThePit\Core;
 use Legacy\ThePit\Exceptions\FormsException;
 use Legacy\ThePit\Forms\element\Button;
@@ -17,11 +16,12 @@ use pocketmine\player\Player;
 
 abstract class FormsManager
 {
-<<<<<<< Updated upstream
-    #[ArrayShape(["form" => "\Legacy\ThePit\Forms\variant\CustomForm", "callable" => "\Closure[]", "type" => "string"])] static public function knockBackForm(LegacyPlayer $player): Form {
-=======
-    #[ArrayShape(["form" => "\Legacy\ThePit\Forms\variant\CustomForm", "callable" => "\Closure[]", "type" => "string"])] static public function knockBackForm(LegacyPlayer): Form {
->>>>>>> Stashed changes
+    /**
+     * @var Form[]
+     */
+    public static array $forms = [];
+
+    static public function knockBackForm(LegacyPlayer $player): Form {
         $form = new CustomForm("Knock Back", function (Player $player, FormResponse $response): void {
             $horizontal = $response->getInputSubmittedText("horizontal");
             $vertical = $response->getInputSubmittedText("vertical");
@@ -45,7 +45,7 @@ abstract class FormsManager
         return $form;
     }
 
-    #[ArrayShape(["form" => "\Legacy\ThePit\Forms\variant\CustomForm", "callable" => "\Closure[]", "type" => "string"])] static public function openShopVotecoins(LegacyPlayer $player): Form {
+    static public function openShopVotecoins(LegacyPlayer $player): Form {
         $form = new CustomForm("Boutique de Votecoins", function (Player $player, FormResponse $response): void {
             if($player instanceof LegacyPlayer){
                 $button_convert = $player->getLanguage()->getMessage("messages.forms.shop.votecoins-convert", [], ServerUtils::PREFIX_3);
@@ -59,7 +59,7 @@ abstract class FormsManager
         return $form;
     }
 
-    #[ArrayShape(["form" => "\Legacy\ThePit\Forms\variant\CustomForm", "callable" => "\Closure[]", "type" => "string"])] static public function openShopVotecoinsC(): Form {
+    static public function openShopVotecoinsC(): Form {
         $form = new CustomForm("Boutique de Votecoins", function (Player $player, FormResponse $response): void {
             if($player instanceof LegacyPlayer){
                 $button_convert = $player->getLanguage()->getMessage("messages.forms.shop.votecoins-convert", [], ServerUtils::PREFIX_3);
@@ -73,12 +73,7 @@ abstract class FormsManager
         return $form;
     }
 
-    /**
-     * @var Form[]
-     */
-    public static array $forms = [];
-
-    #[ArrayShape(["knockback" => "\Legacy\ThePit\Forms\Form"])] public static function getForms(): array {
+    public static function getForms(): array {
         return [
             "knockback" => fn(LegacyPlayer $player) => self::knockBackForm($player),
         ];
@@ -95,7 +90,7 @@ abstract class FormsManager
      * @throws FormsException
      */
     public static function sendForm(LegacyPlayer $player, string $form): void {
-        if(self::$forms[$form]($player) !== null){
+        if(isset(self::$forms[$form])){
             $form_infos = array();
             $form = (self::$forms[$form])($player);
             switch($form->getType()){

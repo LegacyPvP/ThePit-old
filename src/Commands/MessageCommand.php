@@ -7,7 +7,7 @@ use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\command\CommandSender;
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 
-class MessageCommand extends Commands {
+final class MessageCommand extends Commands {
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
