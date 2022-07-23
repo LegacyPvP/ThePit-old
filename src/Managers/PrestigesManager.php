@@ -5,6 +5,7 @@ namespace Legacy\ThePit\Managers;
 use JetBrains\PhpStorm\Pure;
 use Legacy\ThePit\Core;
 use Legacy\ThePit\Objects\Prestige;
+use Legacy\ThePit\Utils\PrestigesUtils;
 
 abstract class PrestigesManager
 {
@@ -18,7 +19,7 @@ abstract class PrestigesManager
      */
     #[Pure] public static function getLevels(): array {
         return [
-            new Prestige(Prestige::PRESTIGE_LEVELS_REACH_1, Prestige::PRESTIGE_LEVEL_1, Prestige::PRESTIGE_1),
+            new Prestige(PrestigesUtils::PRESTIGE_LEVELS_REACH_1, PrestigesUtils::PRESTIGE_LEVEL_1, PrestigesUtils::PRESTIGE_1),
         ];
     }
 

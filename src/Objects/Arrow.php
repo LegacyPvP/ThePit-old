@@ -13,7 +13,7 @@ use pocketmine\world\particle\LavaDripParticle;
 use pocketmine\world\particle\Particle;
 use pocketmine\world\sound\XpCollectSound;
 
-class Arrow extends \pocketmine\entity\projectile\Arrow
+final class Arrow extends \pocketmine\entity\projectile\Arrow
 {
     protected $damage = 1.0;
     protected ?Particle $projectile = null;

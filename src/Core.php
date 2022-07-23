@@ -15,6 +15,7 @@ use Legacy\ThePit\Managers\ScoreBoardManager;
 use Legacy\ThePit\Tasks\GoldSpawnTask;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
+use pocketmine\nbt\tag\ShortTag;
 
 class Core extends PluginBase
 {

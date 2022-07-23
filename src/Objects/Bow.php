@@ -12,7 +12,7 @@ use pocketmine\item\VanillaItems;
 use pocketmine\player\Player;
 use pocketmine\world\sound\BowShootSound;
 
-class Bow extends \pocketmine\item\Bow
+final class Bow extends \pocketmine\item\Bow
 {
     public function onReleaseUsing(Player $player) : ItemUseResult{
         $arrow = VanillaItems::ARROW();
