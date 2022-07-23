@@ -17,11 +17,11 @@ final class Sound
     public function play(LegacyPlayer ...$players): void
     {
         foreach ($players as $player){
-            $pk = clone $this->packet;
+            $pk = clone $this->getPacket();
             $pk->x = $player->getLocation()->x;
             $pk->y = $player->getLocation()->y;
             $pk->z = $player->getLocation()->z;
-            $player->getNetworkSession()->sendDataPacket($this->packet);
+            $player->getNetworkSession()->sendDataPacket($pk);
         }
     }
 
