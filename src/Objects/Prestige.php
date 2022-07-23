@@ -2,7 +2,8 @@
 
 namespace Legacy\ThePit\Objects;
 
-final class Prestige {
+final class Prestige
+{
 
     private array $levels;
     private string $name;

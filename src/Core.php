@@ -1,4 +1,5 @@
 <?php
+
 namespace Legacy\ThePit;
 
 use Legacy\ThePit\Managers\CommandsManager;
@@ -48,9 +49,9 @@ class Core extends PluginBase
         PrestigesManager::initPrestiges();
 
         $default = yaml_parse(file_get_contents($this->getFile() . "resources/" . "config.yml"));
-        if(is_array($default)) $this->getConfig()->setDefaults($default);
+        if (is_array($default)) $this->getConfig()->setDefaults($default);
 
-        $this->getScheduler()->scheduleDelayedRepeatingTask(new GoldSpawnTask(), 20*60, 20);
+        $this->getScheduler()->scheduleDelayedRepeatingTask(new GoldSpawnTask(), 20 * 60, 20);
         $this->saveResource("config.yml", $this->isInDevMode());
     }
 

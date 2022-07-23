@@ -10,8 +10,8 @@ final class PlayerDropItemEvent implements Listener
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     public function onEvent(ClassEvent $event): void
     {
-        match($event->getItem()->getId()){
-            298, 299, 300, 301 => match ($event->getItem()->getCustomColor()){
+        match ($event->getItem()->getId()) {
+            298, 299, 300, 301 => match ($event->getItem()->getCustomColor()) {
                 null => $event->cancel(),
                 default => null
             },

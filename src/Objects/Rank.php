@@ -53,9 +53,10 @@ final class Rank
         return $this->applyParameters($this->scoretag, $player);
     }
 
-    public function getFormat(array $params = []): string {
+    public function getFormat(array $params = []): string
+    {
         $format = $this->getChat();
-        foreach ($params as $key => $value){
+        foreach ($params as $key => $value) {
             $format = str_replace($key, $value, $format);
         }
         return $format;
@@ -63,7 +64,7 @@ final class Rank
 
     private function applyParameters(string $value, LegacyPlayer $player): string
     {
-        foreach (RanksManager::getParameters($player) as $key => $param){
+        foreach (RanksManager::getParameters($player) as $key => $param) {
             $value = str_replace($key, $param, $value);
         }
         return $value;

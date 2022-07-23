@@ -33,7 +33,7 @@ final class DataPacketReceiveEvent implements Listener
     {
         $player = $event->getOrigin()->getPlayer();
         $packet = $event->getPacket();
-        switch (true){
+        switch (true) {
             case $packet instanceof AnimatePacket:
                 $event->getOrigin()->getPlayer()->getServer()->broadcastPackets($event->getOrigin()->getPlayer()->getViewers(), [$event->getPacket()]);
                 break;
@@ -49,7 +49,7 @@ final class DataPacketReceiveEvent implements Listener
 
                         if ($action->getActionType() === PlayerAction::START_BREAK) {
                             $item = $player->getInventory()->getItemInHand();
-                            if (!in_array($item::class , [
+                            if (!in_array($item::class, [
                                 Pickaxe::class,
                                 Axe::class,
                                 Shovel::class,

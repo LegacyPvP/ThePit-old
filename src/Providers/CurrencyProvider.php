@@ -1,4 +1,5 @@
 <?php
+
 namespace Legacy\ThePit\Providers;
 
 use Legacy\ThePit\Managers\CurrenciesManager;

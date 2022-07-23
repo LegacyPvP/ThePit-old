@@ -17,28 +17,32 @@ use Legacy\ThePit\Exceptions\FormsException;
 use pocketmine\player\Player;
 use pocketmine\utils\Utils;
 
-trait SubmitListener {
+trait SubmitListener
+{
 
     private ?Closure $submitListener = null;
 
-    public function getSubmitListener(): ?Closure {
+    public function getSubmitListener(): ?Closure
+    {
         return $this->submitListener;
     }
 
-    public function setSubmitListener(?Closure $listener): void {
-        if($listener !== null) {
-            Utils::validateCallableSignature(function(Player $player) {}, $listener);
+    public function setSubmitListener(?Closure $listener): void
+    {
+        if ($listener !== null) {
+            Utils::validateCallableSignature(function (Player $player) {
+            }, $listener);
         }
         $this->submitListener = $listener;
     }
 
-    public function executeSubmitListener(Player $player): void {
+    public function executeSubmitListener(Player $player): void
+    {
         try {
-            if($this->submitListener !== null) {
+            if ($this->submitListener !== null) {
                 ($this->submitListener)($player);
             }
-        }
-        catch (FormsException $exception){
+        } catch (FormsException $exception) {
             $player->getLanguage()->getMessage($exception->getMessage(), $exception->getArgs(), $exception->getPrefix())->send($player);
         }
     }

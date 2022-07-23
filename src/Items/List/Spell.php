@@ -2,13 +2,9 @@
 
 namespace Legacy\ThePit\Items\List;
 
-use Legacy\ThePit\Player\LegacyPlayer;
 use Legacy\ThePit\Utils\SpellUtils;
-use pocketmine\block\Block;
 use pocketmine\item\Item;
 use pocketmine\item\ItemIdentifier;
-use pocketmine\item\ItemUseResult;
-use pocketmine\math\Vector3;
 use pocketmine\player\Player;
 
 final class Spell extends Item
@@ -25,7 +21,7 @@ final class Spell extends Item
 
     public static function openSpell(Player $player): void
     {
-        if($player->getInventory()->contains(SpellUtils::getBookItem())){
+        if ($player->getInventory()->contains(SpellUtils::getBookItem())) {
             $player->getInventory()->removeItem(SpellUtils::getBookItem());
             $player->getInventory()->addItem(SpellUtils::randomSpell());
         }

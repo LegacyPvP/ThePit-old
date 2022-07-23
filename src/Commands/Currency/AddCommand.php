@@ -3,9 +3,7 @@
 namespace Legacy\ThePit\Commands\Currency;
 
 use Legacy\ThePit\Commands\Commands;
-use Legacy\ThePit\Currencies\Currency;
 use Legacy\ThePit\Exceptions\LanguageException;
-use Legacy\ThePit\Managers\CurrenciesManager;
 use Legacy\ThePit\Player\LegacyPlayer;
 use Legacy\ThePit\Utils\CurrencyUtils;
 use Legacy\ThePit\Utils\ServerUtils;

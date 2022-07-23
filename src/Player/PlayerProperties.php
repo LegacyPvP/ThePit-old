@@ -13,12 +13,13 @@ use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\world\Position;
 
-final class PlayerProperties {
+final class PlayerProperties
+{
     use PropertiesTrait;
 
     public function __construct(public LegacyPlayer $player)
     {
-        if(!($nbt = $this->player->getNBT())->getCompoundTag('properties') || empty($nbt->getCompoundTag("properties")->getValue())){
+        if (!($nbt = $this->player->getNBT())->getCompoundTag('properties') || empty($nbt->getCompoundTag("properties")->getValue())) {
             $this->setBaseProperties([
                 "stats" => [
                     "kills" => 0,
@@ -64,7 +65,7 @@ final class PlayerProperties {
                     "last_logout" => ""
                 ],
             ]);
-        }else{
+        } else {
             $this->setBaseProperties(PlayerUtils::TagtoArray($nbt->getCompoundTag("properties")));
         }
     }

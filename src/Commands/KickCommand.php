@@ -14,11 +14,11 @@ final class KickCommand extends Commands
      */
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
-        if($this->testPermissionSilent($sender)){
+        if ($this->testPermissionSilent($sender)) {
             $sender_language = $this->getSenderLanguage($sender);
-            if(isset($args[0], $args[1])){
+            if (isset($args[0], $args[1])) {
                 $target = Server::getInstance()->getPlayerByPrefix($args[0]) ?? Server::getInstance()->getOfflinePlayer($args[0]);
-                if($target instanceof Player){
+                if ($target instanceof Player) {
                     $reason = implode(" ", array_slice($args, 1));
                     $target->kick(
                         $target->getLanguage()->getMessage("messages.commands.kick.kicked",
@@ -28,12 +28,10 @@ final class KickCommand extends Commands
                             ]
                         )
                     );
-                }
-                else {
+                } else {
                     $sender_language->getMessage("messages.commands.target-not-player")->send($sender);
                 }
-            }
-            else {
+            } else {
                 $sender->sendMessage($this->getUsage());
             }
         }

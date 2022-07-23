@@ -32,7 +32,7 @@ final class ScoreBoard
 
     private SetDisplayObjectivePacket $display;
 
-    public function __construct(string $displayName = "",?string $objectiveName = null, ?string $displaySlot = null, ?int $sortOrder = null, ?int $slotOrder = null, ?array $players = null, bool $send = false)
+    public function __construct(string $displayName = "", ?string $objectiveName = null, ?string $displaySlot = null, ?int $sortOrder = null, ?int $slotOrder = null, ?array $players = null, bool $send = false)
     {
         $this->displayName = $displayName;
         if (is_null($objectiveName)) {
@@ -74,7 +74,8 @@ final class ScoreBoard
         return $this->players;
     }
 
-    #[Pure] public function hasPlayer(Player $player) : bool {
+    #[Pure] public function hasPlayer(Player $player): bool
+    {
         return isset($this->players[$player->getId()]);
     }
 
@@ -82,7 +83,7 @@ final class ScoreBoard
      * @param Player[] $players
      * @return self
      */
-    public function addPlayers(array $players) : self
+    public function addPlayers(array $players): self
     {
         foreach ($players as $player) {
             $this->addPlayer($player);
@@ -126,55 +127,55 @@ final class ScoreBoard
         return $this;
     }
 
-    public function setObjectiveName(string $name) : self
+    public function setObjectiveName(string $name): self
     {
         $this->objectiveName = $name;
         $this->display->objectiveName = $name;
         return $this;
     }
 
-    public function getObjectiveName() : string
+    public function getObjectiveName(): string
     {
         return $this->objectiveName;
     }
 
-    public function setDisplayName(string $name) : self
+    public function setDisplayName(string $name): self
     {
         $this->displayName = $name;
         $this->display->displayName = $name;
         return $this;
     }
 
-    public function getDisplayName() : string
+    public function getDisplayName(): string
     {
         return $this->displayName;
     }
 
-    public function setDisplaySlot(string $name) : self
+    public function setDisplaySlot(string $name): self
     {
         $this->displaySlot = $name;
         $this->display->displaySlot = $name;
         return $this;
     }
 
-    public function getDisplaySlot() : string
+    public function getDisplaySlot(): string
     {
         return $this->displaySlot;
     }
 
-    public function setSortOrder(int $number) : self
+    public function setSortOrder(int $number): self
     {
         $this->sortOrder = $number;
         $this->display->sortOrder = $number;
         return $this;
     }
 
-    public function getSortOrder() : string
+    public function getSortOrder(): string
     {
         return $this->sortOrder;
     }
 
-    public function showTo(array $players) : self
+    public function showTo(array $players): self
     {
         foreach ($players as $player) {
             $this->objectives[] = $player->getId();
@@ -202,7 +203,7 @@ final class ScoreBoard
         return $this;
     }
 
-    public function updateTo(array $players) : self
+    public function updateTo(array $players): self
     {
         $this->hideFrom($players);
         $this->showTo($players);
@@ -215,25 +216,29 @@ final class ScoreBoard
         return $this;
     }
 
-    public function setLineToPlayers(array $players, ScoreBoardLine $line) : self {
+    public function setLineToPlayers(array $players, ScoreBoardLine $line): self
+    {
         $line->setObjectiveName($this->getObjectiveName());
-        $this->addEntryPacket($players,SetScorePacket::TYPE_CHANGE,$line->getPacketEntry());
+        $this->addEntryPacket($players, SetScorePacket::TYPE_CHANGE, $line->getPacketEntry());
         return $this;
     }
 
-    public function setLineToAll(ScoreBoardLine $line): self {
+    public function setLineToAll(ScoreBoardLine $line): self
+    {
         $this->setLineToPlayers($this->getPlayers(), $line);
         return $this;
     }
 
-    public function removeLineToPlayers(array $players, ScoreBoardLine $line) : self {
+    public function removeLineToPlayers(array $players, ScoreBoardLine $line): self
+    {
         //after with juste score
         $line->setObjectiveName($this->getObjectiveName());
-        $this->addEntryPacket($players,SetScorePacket::TYPE_REMOVE,$line->getPacketEntry());
+        $this->addEntryPacket($players, SetScorePacket::TYPE_REMOVE, $line->getPacketEntry());
         return $this;
     }
 
-    public function removeLineToAll(ScoreBoardLine $line): self {
+    public function removeLineToAll(ScoreBoardLine $line): self
+    {
         $this->removeLineToPlayers($this->getPlayers(), $line);
         return $this;
     }
@@ -241,21 +246,22 @@ final class ScoreBoard
     /**
      * @param Player[] $players
      */
-    public function sendToPlayers(array $players) : void {
+    public function sendToPlayers(array $players): void
+    {
         foreach ($players as $player) {
-            if(!$player->isOnline()) continue;
-            if (in_array($player->getId(),$this->removes)) {
+            if (!$player->isOnline()) continue;
+            if (in_array($player->getId(), $this->removes)) {
                 $pk = new RemoveObjectivePacket();
                 $pk->objectiveName = $this->getObjectiveName();
-                if($player->isOnline()) {
+                if ($player->isOnline()) {
                     $player->getNetworkSession()->sendDataPacket($pk);
-                    unset($this->removes[array_search($player->getId(),$this->removes)]);
+                    unset($this->removes[array_search($player->getId(), $this->removes)]);
                     unset($this->entries[$player->getId()]);
                 }
             } else {
-                if (in_array($player->getId(),$this->objectives)) {
+                if (in_array($player->getId(), $this->objectives)) {
                     $player->getNetworkSession()->sendDataPacket($this->display);
-                    unset($this->objectives[array_search($player->getId(),$this->objectives)]);
+                    unset($this->objectives[array_search($player->getId(), $this->objectives)]);
                 }
 
                 $entries = $this->getEntriesPacket($player, SetScorePacket::TYPE_CHANGE);
@@ -277,7 +283,8 @@ final class ScoreBoard
         }
     }
 
-    private function addEntryPacket(array $players, int $type, ?ScorePacketEntry $pk = null) {
+    private function addEntryPacket(array $players, int $type, ?ScorePacketEntry $pk = null)
+    {
         if (is_null($pk)) {
             return;
         }
@@ -291,7 +298,8 @@ final class ScoreBoard
         }
     }
 
-    private function getEntriesPacket(Player $player, int $type) : ?array {
+    private function getEntriesPacket(Player $player, int $type): ?array
+    {
         if (isset($this->entries[$player->getId()][$type])) {
             $data = $this->entries[$player->getId()][$type];
             unset($this->entries[$player->getId()]);
@@ -300,7 +308,8 @@ final class ScoreBoard
         return null;
     }
 
-    public function sendToAll() : void {
+    public function sendToAll(): void
+    {
         $this->sendToPlayers($this->getPlayers());
     }
 

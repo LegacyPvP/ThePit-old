@@ -9,9 +9,9 @@ final class ListRankCommand extends Commands
 {
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
-        if($this->testPermissionSilent($sender)){
+        if ($this->testPermissionSilent($sender)) {
             $list = $this->getSenderLanguage($sender)->getMessage("messages.commands.listrank.header")->__toString();
-            foreach(RanksManager::getRanks() as $rank){
+            foreach (RanksManager::getRanks() as $rank) {
                 $list .= str_replace(["{name}"], [$rank->getName()], $this->getSenderLanguage($sender)->getMessage("messages.commands.listrank.format", [], false)->__toString());
             }
             $sender->sendMessage($list);

@@ -16,13 +16,13 @@ final class PlayerQuitEvent implements Listener
     {
         $event->setQuitMessage("");
         $player = $event->getPlayer();
-        if($player instanceof LegacyPlayer){
-            if($player->isInCombat()){
-                if($event->getQuitReason() === "Server Closed" or $event->getQuitReason() === ServerUtils::RESTART_REASON or $event->getQuitReason()){
+        if ($player instanceof LegacyPlayer) {
+            if ($player->isInCombat()) {
+                if ($event->getQuitReason() === "Server Closed" or $event->getQuitReason() === ServerUtils::RESTART_REASON or $event->getQuitReason()) {
                     $player->save();
                     $player->getPlayerProperties()->setNestedProperties("saved.last_logout", time());
                     $player->getPlayerProperties()->setNestedProperties("status.combat", false);
-                }else{
+                } else {
                     $player->getPlayerProperties()->setNestedProperties("saved.last_position", $player->getPosition());
                     $player->getPlayerProperties()->setNestedProperties("saved.last_logout", time());
                     $player->dropInventory();

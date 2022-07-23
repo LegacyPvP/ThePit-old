@@ -48,9 +48,10 @@ final class Grade
         return $this->scoretag;
     }
 
-    public function getFormat(array $params = []): string {
+    public function getFormat(array $params = []): string
+    {
         $format = $this->getChat();
-        foreach ($params as $key => $value){
+        foreach ($params as $key => $value) {
             $format = str_replace($key, $value, $format);
         }
         return $format;

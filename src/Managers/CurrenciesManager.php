@@ -9,7 +9,8 @@ use Legacy\ThePit\Currencies\Gold;
 use Legacy\ThePit\Currencies\VoteCoins;
 use Legacy\ThePit\Currencies\Currency;
 
-abstract class CurrenciesManager {
+abstract class CurrenciesManager
+{
 
     /**
      * @var Currency[]
@@ -19,7 +20,8 @@ abstract class CurrenciesManager {
     /**
      * @return Currency[]
      */
-    public static function getCurrencies(): array {
+    public static function getCurrencies(): array
+    {
         return [
             new Gold(),
             new Credits(),
@@ -28,14 +30,16 @@ abstract class CurrenciesManager {
         ];
     }
 
-    public static function initCurrencies(): void {
-        foreach (self::getCurrencies() as $currency){
+    public static function initCurrencies(): void
+    {
+        foreach (self::getCurrencies() as $currency) {
             self::$currencies[$currency->getName()] = $currency;
             Core::getInstance()->getLogger()->notice("[CURRENCIES] Currency: {$currency->getName()} Loaded");
         }
     }
 
-    public static function getCurrency(string $name): Currency {
+    public static function getCurrency(string $name): Currency
+    {
         return self::$currencies[$name] ?? reset(self::$currencies);
     }
 }

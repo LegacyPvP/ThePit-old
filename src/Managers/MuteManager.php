@@ -16,31 +16,36 @@ abstract class MuteManager
     const DEFAULT_REASON = "Aucune raison donnée";
     const DEFAULT_STAFF = "CONSOLE";
 
-    public static function isMuted(LegacyPlayer $player): bool {
+    public static function isMuted(LegacyPlayer $player): bool
+    {
         return self::getTime($player) > time();
     }
 
-    public static function setMuted(LegacyPlayer $player, int $time, string $reason = self::DEFAULT_REASON, string $staff = self::DEFAULT_STAFF): void {
+    public static function setMuted(LegacyPlayer $player, int $time, string $reason = self::DEFAULT_REASON, string $staff = self::DEFAULT_STAFF): void
+    {
         $player->getPlayerProperties()->setNestedProperties("mute.time", $time);
         $player->getPlayerProperties()->setNestedProperties("mute.reason", $reason);
         $player->getPlayerProperties()->setNestedProperties("mute.staff", $staff);
     }
 
-    public static function getTime(LegacyPlayer $player): int {
+    public static function getTime(LegacyPlayer $player): int
+    {
         return $player->getPlayerProperties()->getNestedProperties("mute.time");
     }
 
-    public static function getReason(LegacyPlayer $player): string {
+    public static function getReason(LegacyPlayer $player): string
+    {
         return $player->getPlayerProperties()->getNestedProperties("mute.reason");
     }
 
-    public static function getStaff(LegacyPlayer $player): string {
+    public static function getStaff(LegacyPlayer $player): string
+    {
         return $player->getPlayerProperties()->getNestedProperties("mute.staff");
     }
 
     public static function removeMute(IPlayer $player)
     {
-        switch ($player::class){
+        switch ($player::class) {
             case Player::class:
             case LegacyPlayer::class:
                 $player->getPlayerProperties()->setNestedProperties("mute.time", 0);

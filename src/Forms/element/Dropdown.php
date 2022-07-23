@@ -12,13 +12,18 @@ declare(strict_types=1);
 namespace Legacy\ThePit\Forms\element;
 
 
-final class Dropdown extends Selector {
+use JetBrains\PhpStorm\ArrayShape;
 
-    public function getType(): string {
+final class Dropdown extends Selector
+{
+
+    public function getType(): string
+    {
         return Element::TYPE_DROPDOWN;
     }
 
-    public function serializeBody(): array {
+    #[ArrayShape(["options" => "array", "default" => "int"])] public function serializeBody(): array
+    {
         return [
             "options" => $this->getOptionsTexts(),
             "default" => $this->getDefaultIndex()

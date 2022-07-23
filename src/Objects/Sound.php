@@ -16,7 +16,7 @@ final class Sound
 
     public function play(LegacyPlayer ...$players): void
     {
-        foreach ($players as $player){
+        foreach ($players as $player) {
             $pk = clone $this->getPacket();
             $pk->x = $player->getLocation()->x;
             $pk->y = $player->getLocation()->y;

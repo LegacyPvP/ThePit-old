@@ -14,8 +14,9 @@ use pocketmine\world\sound\BowShootSound;
 
 final class Bow extends \pocketmine\item\Bow
 {
-    public function onReleaseUsing(Player $player) : ItemUseResult{
-        /*$arrow = VanillaItems::ARROW();
+    /* public function onReleaseUsing(Player $player): ItemUseResult
+    {
+        $arrow = VanillaItems::ARROW();
         $inventory = match(true){
             $player->getOffHandInventory()->contains($arrow) => $player->getOffHandInventory(),
             $player->getInventory()->contains($arrow) => $player->getInventory(),
@@ -91,6 +92,6 @@ final class Bow extends \pocketmine\item\Bow
             $this->applyDamage(1);
         }
 
-        return ItemUseResult::SUCCESS();*/
-    }
+        return ItemUseResult::SUCCESS();
+    } */
 }

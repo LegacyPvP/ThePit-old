@@ -12,21 +12,26 @@ declare(strict_types=1);
 namespace Legacy\ThePit\Forms\element;
 
 
-final class Label extends Element {
+final class Label extends Element
+{
 
-    public function __construct(string $headerText) {
+    public function __construct(string $headerText)
+    {
         parent::__construct($headerText);
     }
 
-    public function getType(): string {
+    public function getType(): string
+    {
         return Element::TYPE_LABEL;
     }
 
-    public function assignResult($result): void {
+    public function assignResult($result): void
+    {
         return;
     }
 
-    public function serializeBody(): array {
+    public function serializeBody(): array
+    {
         return [];
     }
 

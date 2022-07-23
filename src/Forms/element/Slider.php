@@ -12,7 +12,8 @@ declare(strict_types=1);
 namespace Legacy\ThePit\Forms\element;
 
 
-final class Slider extends Element {
+final class Slider extends Element
+{
 
     private float $minStep;
     private float $maxStep;
@@ -22,7 +23,8 @@ final class Slider extends Element {
 
     private ?float $submittedStep = null;
 
-    public function __construct(?string $headerText, float $minStep, float $maxStep, float $defaultStep = 0, float $stepLength = 0) {
+    public function __construct(?string $headerText, float $minStep, float $maxStep, float $defaultStep = 0, float $stepLength = 0)
+    {
         $this->minStep = $minStep;
         $this->maxStep = $maxStep;
         $this->defaultStep = $defaultStep;
@@ -30,51 +32,63 @@ final class Slider extends Element {
         parent::__construct($headerText);
     }
 
-    public function getSubmittedStep(): ?float {
+    public function getSubmittedStep(): ?float
+    {
         return $this->submittedStep;
     }
 
-    public function getType(): string {
+    public function getType(): string
+    {
         return Element::TYPE_SLIDER;
     }
 
-    public function getMinStep(): float {
+    public function getMinStep(): float
+    {
         return $this->minStep;
     }
 
-    public function setMinStep(float $minStep): void {
+    public function setMinStep(float $minStep): void
+    {
         $this->minStep = $minStep;
     }
 
-    public function getMaxStep(): float {
+    public function getMaxStep(): float
+    {
         return $this->maxStep;
     }
 
-    public function setMaxStep(float $maxStep): void {
+    public function setMaxStep(float $maxStep): void
+    {
         $this->maxStep = $maxStep;
     }
 
-    public function getDefaultStep(): float {
+    public function getDefaultStep(): float
+    {
         return $this->defaultStep;
     }
 
-    public function setDefaultStep(float $defaultStep): void {
+    public function setDefaultStep(float $defaultStep): void
+    {
         $this->defaultStep = $defaultStep;
     }
 
-    public function getStepLength(): float {
+    public function getStepLength(): float
+    {
         return $this->stepLength;
     }
 
-    public function setStepLength(float $stepLength): void {
+    public function setStepLength(float $stepLength): void
+    {
         $this->stepLength = $stepLength;
     }
 
-    public function assignResult($result): void {
+    public function assignResult($result): void
+    {
         $this->submittedStep = $result;
     }
 
-    public function serializeBody(): array {
+    public function serializeBody(): array
+    {
         return [
             "min" => $this->minStep,
             "max" => $this->maxStep,

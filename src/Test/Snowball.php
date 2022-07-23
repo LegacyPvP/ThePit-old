@@ -1,4 +1,5 @@
 <?php
+
 namespace Legacy\ThePit\Test;
 
 use pocketmine\entity\Location;

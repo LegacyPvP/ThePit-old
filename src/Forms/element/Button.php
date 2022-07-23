@@ -13,40 +13,48 @@ namespace Legacy\ThePit\Forms\element;
 
 
 use Closure;
+use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\Pure;
 use Legacy\ThePit\Forms\icon\ButtonIcon;
 use Legacy\ThePit\Forms\utils\Submittable;
 use JsonSerializable;
 
-final class Button extends \Legacy\ThePit\Forms\element\Element implements JsonSerializable {
+final class Button implements JsonSerializable
+{
     use Submittable;
 
     private string $text;
     private ?ButtonIcon $icon;
 
-    public function __construct(string $text, ?ButtonIcon $icon = null, ?Closure $listener = null) {
+    public function __construct(string $text, ?ButtonIcon $icon = null, ?Closure $listener = null)
+    {
         $this->text = $text;
         $this->icon = $icon;
         $this->setSubmitListener($listener);
     }
 
-    public function hasIcon(): bool {
+    public function hasIcon(): bool
+    {
         return $this->icon !== null;
     }
 
-    public function getIcon(): ?ButtonIcon {
+    public function getIcon(): ?ButtonIcon
+    {
         return $this->icon;
     }
 
-    public function setIcon(?ButtonIcon $icon): void {
+    public function setIcon(?ButtonIcon $icon): void
+    {
         $this->icon = $icon;
     }
 
-    public function jsonSerialize(): array {
+    #[Pure] #[ArrayShape(["text" => "string", "image" => "array"])] public function jsonSerialize(): array
+    {
         $data = [
             "text" => $this->text
         ];
 
-        if($this->hasIcon()) {
+        if ($this->hasIcon()) {
             $data["image"] = $this->icon->jsonSerialize();
         }
 

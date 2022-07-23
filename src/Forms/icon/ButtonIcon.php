@@ -14,7 +14,8 @@ namespace Legacy\ThePit\Forms\icon;
 
 use JsonSerializable;
 
-final class ButtonIcon implements JsonSerializable {
+final class ButtonIcon implements JsonSerializable
+{
 
     private string $address;
     private string $type;
@@ -22,20 +23,24 @@ final class ButtonIcon implements JsonSerializable {
     public const TYPE_PATH = "path";
     public const TYPE_URL = "url";
 
-    public function __construct(string $address, string $type = self::TYPE_URL) {
+    public function __construct(string $address, string $type = self::TYPE_URL)
+    {
         $this->address = $address;
         $this->type = $type;
     }
 
-    public function getAddress(): string {
+    public function getAddress(): string
+    {
         return $this->address;
     }
 
-    public function getType(): string {
+    public function getType(): string
+    {
         return $this->type;
     }
 
-    public function jsonSerialize(): array {
+    public function jsonSerialize(): array
+    {
         return [
             "type" => $this->type,
             "data" => $this->address

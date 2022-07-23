@@ -13,22 +13,18 @@ final class UnmuteCommand extends Commands
 {
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
-        if($this->testPermissionSilent($sender)){
+        if ($this->testPermissionSilent($sender)) {
             try {
-                $sender_language = $this->getSenderLanguage($sender);
-                if(isset($args[0])){
+                if (isset($args[0])) {
                     $target = Server::getInstance()->getPlayerByPrefix($args[0]) ?? Server::getInstance()->getOfflinePlayer($args[0]);
-                    if($target instanceof LegacyPlayer) {
+                    if ($target instanceof LegacyPlayer) {
                         MuteManager::removeMute($target);
                         throw new LanguageException("messages.commands.unmute.success", ["{player}" => $target->getName()]);
-                    }
-                    else throw new LanguageException("messages.commands.target-not-player", [], ServerUtils::PREFIX_2);
-                }
-                else {
+                    } else throw new LanguageException("messages.commands.target-not-player", [], ServerUtils::PREFIX_2);
+                } else {
                     $sender->sendMessage($this->getUsage());
                 }
-            }
-            catch (LanguageException $exception){
+            } catch (LanguageException $exception) {
                 $this->getSenderLanguage($sender)->getMessage($exception->getMessage(), $exception->getArgs(), $exception->getPrefix())->send($sender);
             }
         }

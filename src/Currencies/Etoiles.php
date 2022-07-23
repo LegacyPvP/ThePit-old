@@ -1,8 +1,8 @@
 <?php
+
 namespace Legacy\ThePit\Currencies;
 
 use JetBrains\PhpStorm\Pure;
-use Legacy\ThePit\Currencies\Currency;
 use Legacy\ThePit\Utils\CurrencyUtils;
 
 final class Etoiles extends Currency

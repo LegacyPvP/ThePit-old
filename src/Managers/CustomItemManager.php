@@ -4,15 +4,10 @@ namespace Legacy\ThePit\Managers;
 
 use Exception;
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Items\CustomFood;
-use Legacy\ThePit\Items\CustomSword;
-use Legacy\ThePit\Items\List\Nemo;
 use pocketmine\inventory\CreativeInventory;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
-use pocketmine\item\ItemIdentifier;
 use pocketmine\item\StringToItemParser;
-use pocketmine\item\ToolTier;
 use pocketmine\item\VanillaItems;
 use pocketmine\network\mcpe\convert\GlobalItemTypeDictionary;
 use pocketmine\network\mcpe\convert\ItemTranslator;
@@ -46,7 +41,8 @@ abstract class CustomItemManager
     public static array $handlers = [];
     public static ?ItemComponentPacket $packet = null;
 
-    public static function initCustomItems(): void {
+    public static function initCustomItems(): void
+    {
 
     }
 
@@ -84,26 +80,28 @@ abstract class CustomItemManager
         }
 
         $creativeItems = json_decode(file_get_contents(Path::join(BEDROCK_DATA_PATH, "creativeitems.json")), true);
-        foreach($creativeItems as $data){
+        foreach ($creativeItems as $data) {
             $item = Item::jsonDeserialize($data);
-            if($item->getName() === "Unknown"){
+            if ($item->getName() === "Unknown") {
                 continue;
             }
             CreativeInventory::getInstance()->add($item);
         }
     }
 
-    public static function register(Item ...$item){
+    public static function register(Item ...$item)
+    {
         foreach ($item as $i) {
             try {
                 self::$items[] = $i;
             } catch (Exception) {
-                Core::getInstance()->getLogger()->error("[!] ". $item::class ." Is not custom item.");
+                Core::getInstance()->getLogger()->error("[!] " . $item::class . " Is not custom item.");
             }
         }
     }
 
-    public static function getItemInCache(): array {
+    public static function getItemInCache(): array
+    {
         return self::$items;
     }
 
@@ -147,7 +145,8 @@ abstract class CustomItemManager
         unset(self::$handlers[$player->getName()][self::blockHash($pos)]);
     }
 
-    public static function getPacket(): ?ItemComponentPacket {
+    public static function getPacket(): ?ItemComponentPacket
+    {
         return self::$packet;
     }
 }

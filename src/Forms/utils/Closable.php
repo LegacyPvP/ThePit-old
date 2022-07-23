@@ -14,14 +14,18 @@ namespace Legacy\ThePit\Forms\utils;
 
 use pocketmine\player\Player;
 
-trait Closable {
+trait Closable
+{
     use CloseListener;
 
-    public function notifyClose(Player $player): void {
+    public function notifyClose(Player $player): void
+    {
         $this->executeCloseListener($player);
         $this->onClose($player);
     }
 
-    protected function onClose(Player $player): void {}
+    protected function onClose(Player $player): void
+    {
+    }
 
 }

@@ -40,19 +40,23 @@ final class LegacyPlayer extends Player
         $this->currencyProvider = new CurrencyProvider($this);
     }
 
-    public function getNBT(): CompoundTag{
+    public function getNBT(): CompoundTag
+    {
         return $this->tag;
     }
 
-    public function setNBT(CompoundTag $nbt): void{
+    public function setNBT(CompoundTag $nbt): void
+    {
         $this->tag = $nbt;
     }
 
-    public function getPlayerProperties(): PlayerProperties{
+    public function getPlayerProperties(): PlayerProperties
+    {
         return $this->properties;
     }
 
-    public function getCurrencyProvider(): CurrencyProvider {
+    public function getCurrencyProvider(): CurrencyProvider
+    {
         return $this->currencyProvider;
     }
 
@@ -87,8 +91,9 @@ final class LegacyPlayer extends Player
         return parent::onUpdate($currentTick);
     }
 
-    private function updateNightVision(): void {
-        match(true){
+    private function updateNightVision(): void
+    {
+        match (true) {
             $this->getPlayerProperties()->getNestedProperties('status.nightvision') and !$this->getEffects()->has(VanillaEffects::NIGHT_VISION()) => $this->getEffects()->add(new EffectInstance(VanillaEffects::NIGHT_VISION(), 999999, 255, false)),
             !$this->getPlayerProperties()->getNestedProperties('status.nightvision') and $this->getEffects()->has(VanillaEffects::NIGHT_VISION()) => $this->getEffects()->remove(VanillaEffects::NIGHT_VISION()),
             default => null,
@@ -101,10 +106,11 @@ final class LegacyPlayer extends Player
         return parent::setGamemode($gm);
     }
 
-    public function getTranslation(string $message, array $parameters = []): string {
+    public function getTranslation(string $message, array $parameters = []): string
+    {
         $parameters = array_map(fn(string|Translatable $p) => $p instanceof Translatable ? $this->getLanguage()->translate($p) : $p, $parameters);
-        if(!$this->server->isLanguageForced()){
-            foreach($parameters as $i => $p){
+        if (!$this->server->isLanguageForced()) {
+            foreach ($parameters as $i => $p) {
                 $parameters[$i] = $this->getLanguage()->translateString($p, [], "pocketmine.");
             }
             return TextPacket::translation($this->getLanguage()->translateString($message, $parameters, "pocketmine."), $parameters)->message;
@@ -115,49 +121,49 @@ final class LegacyPlayer extends Player
     public function sendTranslation(string $message, array $parameters = []): void
     {
         $parameters = array_map(fn(string|Translatable $p) => $p instanceof Translatable ? $this->getLanguage()->translate($p) : $p, $parameters);
-        if(!$this->server->isLanguageForced()){
-            foreach($parameters as $i => $p){
+        if (!$this->server->isLanguageForced()) {
+            foreach ($parameters as $i => $p) {
                 $parameters[$i] = $this->getLanguage()->translateString($p, [], "pocketmine.");
             }
             $this->getNetworkSession()->onTranslatedChatMessage($this->getLanguage()->translateString($message, $parameters, "pocketmine."), $parameters);
-        }else{
+        } else {
             $this->sendMessage($this->getLanguage()->translateString($message, $parameters));
         }
     }
 
     public function attack(EntityDamageEvent $source): void
     {
-        if(!$this->isAlive()){
+        if (!$this->isAlive()) {
             return;
         }
 
-        if($this->isCreative()
+        if ($this->isCreative()
             && $source->getCause() !== EntityDamageEvent::CAUSE_SUICIDE
-        ){
+        ) {
             $source->cancel();
-        }elseif($this->allowFlight && $source->getCause() === EntityDamageEvent::CAUSE_FALL){
-            $source->cancel();
-        }
-
-        if($this->noDamageTicks > 0){
+        } elseif ($this->allowFlight && $source->getCause() === EntityDamageEvent::CAUSE_FALL) {
             $source->cancel();
         }
 
-        if($this->effectManager->has(VanillaEffects::FIRE_RESISTANCE()) && (
+        if ($this->noDamageTicks > 0) {
+            $source->cancel();
+        }
+
+        if ($this->effectManager->has(VanillaEffects::FIRE_RESISTANCE()) && (
                 $source->getCause() === EntityDamageEvent::CAUSE_FIRE
                 || $source->getCause() === EntityDamageEvent::CAUSE_FIRE_TICK
                 || $source->getCause() === EntityDamageEvent::CAUSE_LAVA
             )
-        ){
+        ) {
             $source->cancel();
         }
 
         $this->applyDamageModifiers($source);
 
-        if($source instanceof EntityDamageByEntityEvent && (
+        if ($source instanceof EntityDamageByEntityEvent && (
                 $source->getCause() === EntityDamageEvent::CAUSE_BLOCK_EXPLOSION ||
                 $source->getCause() === EntityDamageEvent::CAUSE_ENTITY_EXPLOSION)
-        ){
+        ) {
             //TODO: knockback should not just apply for entity damage sources
             //this doesn't matter for TNT right now because the PrimedTNT entity is considered the source, not the block.
             $base = $source->getKnockBack();
@@ -165,7 +171,7 @@ final class LegacyPlayer extends Player
         }
 
         $source->call();
-        if($source->isCancelled()){
+        if ($source->isCancelled()) {
             return;
         }
 
@@ -175,22 +181,22 @@ final class LegacyPlayer extends Player
 
         $this->attackTime = $source->getAttackCooldown();
 
-        if($source instanceof EntityDamageByChildEntityEvent){
+        if ($source instanceof EntityDamageByChildEntityEvent) {
             $e = $source->getChild();
-            if($e !== null){
+            if ($e !== null) {
                 $motion = $e->getMotion();
                 $this->knockBack($motion->x, $motion->z, KnockBackManager::getHorizontal(), KnockBackManager::getVertical());
             }
-        }elseif($source instanceof EntityDamageByEntityEvent){
+        } elseif ($source instanceof EntityDamageByEntityEvent) {
             $e = $source->getDamager();
-            if($e !== null){
+            if ($e !== null) {
                 $deltaX = $this->location->x - $e->location->x;
                 $deltaZ = $this->location->z - $e->location->z;
                 $this->knockBack($deltaX, $deltaZ, KnockBackManager::getHorizontal(), KnockBackManager::getVertical());
             }
         }
 
-        if($this->isAlive()){
+        if ($this->isAlive()) {
             $this->applyPostDamageEffects($source);
             $this->doHitAnimation();
         }
@@ -218,11 +224,11 @@ final class LegacyPlayer extends Player
 
     public function setInCombat(bool $combat, LegacyPlayer $target): void
     {
-        if($combat == true){
+        if ($combat == true) {
             $this->targetName = $target->getName();
             $this->getPlayerProperties()->setNestedProperties('status.combat_players', [$this->getName(), $target->getName()]);
             $this->getPlayerProperties()->setNestedProperties('status.combat', true);
-        }else{
+        } else {
             $this->getPlayerProperties()->setNestedProperties('status.combat_players', []);
             $this->getPlayerProperties()->setNestedProperties('status.combat', false);
         }
@@ -230,7 +236,7 @@ final class LegacyPlayer extends Player
 
     public function dropInventory()
     {
-        foreach($this->getInventory()->getContents() as $item){
+        foreach ($this->getInventory()->getContents() as $item) {
             $this->dropItem($item);
         }
     }

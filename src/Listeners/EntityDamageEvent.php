@@ -9,7 +9,7 @@ final class EntityDamageEvent implements Listener
 {
     public function onEvent(ClassEvent $event): void
     {
-        match ($event->getCause()){
+        match ($event->getCause()) {
             $event::CAUSE_FALL => $event->cancel(),
             default => null
         };

@@ -18,7 +18,8 @@ final class LanguageException extends Exception
         return $this->args;
     }
 
-    public function getPrefix(): int {
+    public function getPrefix(): int
+    {
         return $this->prefix;
     }
 

@@ -7,22 +7,22 @@ use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\command\CommandSender;
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 
-final class MessageCommand extends Commands {
+final class MessageCommand extends Commands
+{
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
-        if($this->testPermissionSilent($sender)){
-            if(isset($args[0])){
+        if ($this->testPermissionSilent($sender)) {
+            if (isset($args[0])) {
                 $target = $sender->getServer()->getPlayerByPrefix($args[0]);
-                if($target instanceof LegacyPlayer){
-                    var_dump($target->getPlayerProperties()->getNestedProperties("settings.blocked_players"));
-                    if($target->isOnline() and $target->getPlayerProperties()->getNestedProperties("settings.allow_private_messages") == true){
-                        if(substr($sender->getName(), $target->getPlayerProperties()->getNestedProperties("settings.blocked_players"))){
+                if ($target instanceof LegacyPlayer) {
+                    if ($target->isOnline() and $target->getPlayerProperties()->getNestedProperties("settings.allow_private_messages") == true) {
+                        if (substr($sender->getName(), $target->getPlayerProperties()->getNestedProperties("settings.blocked_players"))) {
                             $this->getSenderLanguage($sender)->getMessage("messages.commands.message.sender-blocked", [
                                 "{target}" => $target->getName()
                             ], ServerUtils::PREFIX_3)->send($sender);
-                        }else{
-                            if(isset($args[1])){
+                        } else {
+                            if (isset($args[1])) {
                                 $message = $args[1];
                                 $packet = new PlaySoundPacket();
                                 $packet->soundName = "random.orb";
@@ -40,19 +40,19 @@ final class MessageCommand extends Commands {
                                     "{player}" => $target->getName(),
                                     "{message}" => $message
                                 ], ServerUtils::PREFIX_3));
-                            }else{
+                            } else {
                                 $sender->sendMessage($this->getUsage());
                             }
                         }
-                    }else{
+                    } else {
                         $sender->sendMessage($this->getSenderLanguage($sender)->getMessage("messages.commands.message.sender-blocked", [
                             "{player}" => $target->getName()
                         ], ServerUtils::PREFIX_3));
                     }
-                }else{
+                } else {
                     $this->getSenderLanguage($sender)->getMessage("messages.commands.target-not-found", [], ServerUtils::PREFIX_2)->send($sender);
                 }
-            }else{
+            } else {
                 $sender->sendMessage($this->getUsage());
             }
         }

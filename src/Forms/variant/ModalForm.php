@@ -13,69 +13,82 @@ namespace Legacy\ThePit\Forms\variant;
 
 
 use Closure;
+use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\Pure;
 use Legacy\ThePit\Forms\element\ModalOption;
 use Legacy\ThePit\Forms\Form;
 use pocketmine\form\FormValidationException;
 use pocketmine\player\Player;
 
-final class ModalForm extends Form {
+final class ModalForm extends Form
+{
 
     private string $contentText;
 
     private ModalOption $acceptOption;
     private ModalOption $denyOption;
 
-    public function __construct(string $title, string $contentText, ?ModalOption $acceptOption = null, ?ModalOption $denyOption = null) {
+    public function __construct(string $title, string $contentText, ?ModalOption $acceptOption = null, ?ModalOption $denyOption = null)
+    {
         $this->contentText = $contentText;
         $this->acceptOption = $acceptOption ?? new ModalOption("Accept");
         $this->denyOption = $denyOption ?? new ModalOption("Deny");
         parent::__construct($title);
     }
 
-    public function getAcceptOption(): ModalOption {
+    public function getAcceptOption(): ModalOption
+    {
         return $this->acceptOption;
     }
 
-    public function getDenyOption(): ModalOption {
+    public function getDenyOption(): ModalOption
+    {
         return $this->denyOption;
     }
 
-    public function setAcceptListener(?Closure $closure): void {
+    public function setAcceptListener(?Closure $closure): void
+    {
         $this->acceptOption->setSubmitListener($closure);
     }
 
-    public function setAcceptText(string $text): void {
+    public function setAcceptText(string $text): void
+    {
         $this->acceptOption->setText($text);
     }
 
-    public function setDenyListener(?Closure $closure): void {
+    public function setDenyListener(?Closure $closure): void
+    {
         $this->denyOption->setSubmitListener($closure);
     }
 
-    public function setDenyText(string $text): void {
+    public function setDenyText(string $text): void
+    {
         $this->denyOption->setText($text);
     }
 
-    public function getType(): string {
+    public function getType(): string
+    {
         return Form::TYPE_MODAL_FORM;
     }
 
-    public function handleResponse(Player $player, $data): void {
-        if(!is_bool($data)) {
+    public function handleResponse(Player $player, $data): void
+    {
+        if (!is_bool($data)) {
             throw new FormValidationException("$data is not a valid response");
         }
 
-            if($data) {
-                $this->onAccept($player);
-                $this->acceptOption->notifySubmit($player);
-            } else {
-                $this->onDeny($player);
-                $this->denyOption->notifySubmit($player);
-            }
+        if ($data) {
+            $this->onAccept($player);
+            $this->acceptOption->notifySubmit($player);
+        } else {
+            $this->onDeny($player);
+            $this->denyOption->notifySubmit($player);
+        }
 
     }
 
-    protected function serializeBody(): array {
+    #[Pure] #[ArrayShape(["content" => "string", "button1" => "string", "button2" => "string"])] protected function serializeBody(): array
+    {
         return [
             "content" => $this->contentText,
             "button1" => $this->acceptOption->getText(),
@@ -83,8 +96,12 @@ final class ModalForm extends Form {
         ];
     }
 
-    protected function onAccept(Player $player): void {}
+    protected function onAccept(Player $player): void
+    {
+    }
 
-    protected function onDeny(Player $player): void {}
+    protected function onDeny(Player $player): void
+    {
+    }
 
 }

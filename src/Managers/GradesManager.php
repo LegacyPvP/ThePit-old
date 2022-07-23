@@ -12,8 +12,9 @@ abstract class GradesManager
      */
     private static array $grades = [];
 
-    public static function initGrades(): void {
-        foreach (Core::getInstance()->getConfig()->get('grades', []) as $name => $grade){
+    public static function initGrades(): void
+    {
+        foreach (Core::getInstance()->getConfig()->get('grades', []) as $name => $grade) {
             self::$grades[$name] = new Grade($name, $grade["permissions"], $grade["chat"], $grade["nametag"], $grade["scoretag"]);
             Core::getInstance()->getLogger()->notice("[GRADES] Grade: $name Loaded");
         }
@@ -32,7 +33,8 @@ abstract class GradesManager
         return self::$grades[$grade];
     }
 
-    public static function getDefaultGrade(): ?Grade {
+    public static function getDefaultGrade(): ?Grade
+    {
         return reset(self::$grades) ?? null;
     }
 

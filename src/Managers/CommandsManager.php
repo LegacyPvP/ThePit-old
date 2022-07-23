@@ -1,4 +1,5 @@
 <?php
+
 namespace Legacy\ThePit\Managers;
 
 use Legacy\ThePit\Commands\BanCommand;
@@ -67,16 +68,17 @@ abstract class CommandsManager
         ];
     }
 
-    public static function initCommands(): void {
+    public static function initCommands(): void
+    {
         foreach (Core::getInstance()->getServer()->getCommandMap()->getCommands() as $command) {
-            foreach(self::getCommands() as $cmd) {
-                if($cmd->getName() === $command->getName()){
+            foreach (self::getCommands() as $cmd) {
+                if ($cmd->getName() === $command->getName()) {
                     Core::getInstance()->getServer()->getCommandMap()->unregister($command);
                 }
             }
         }
 
-        foreach(self::getCommands() as $command){
+        foreach (self::getCommands() as $command) {
             Core::getInstance()->getServer()->getCommandMap()->register($command->getName(), $command);
             Core::getInstance()->getLogger()->notice("[COMMANDS] Command: /{$command->getName()} Loaded");
         }
@@ -86,7 +88,8 @@ abstract class CommandsManager
      * @param string $name
      * @return string
      */
-    public static function getDescription(string $name): string {
+    public static function getDescription(string $name): string
+    {
         return Core::getInstance()->getConfig()->getNested("commands.$name", ['description' => ""])['description'] ?? "";
     }
 
@@ -94,7 +97,8 @@ abstract class CommandsManager
      * @param string $name
      * @return string
      */
-    public static function getUsage(string $name): string {
+    public static function getUsage(string $name): string
+    {
         return Core::getInstance()->getConfig()->getNested("commands.$name", ['usage' => "/$name"])['usage'] ?? "";
     }
 
@@ -102,7 +106,8 @@ abstract class CommandsManager
      * @param string $name
      * @return array
      */
-    public static function getAliases(string $name): array {
+    public static function getAliases(string $name): array
+    {
         return Core::getInstance()->getConfig()->getNested("commands.$name", ['aliases' => []])['aliases'] ?? [];
     }
 
@@ -110,7 +115,8 @@ abstract class CommandsManager
      * @param string $name
      * @return string
      */
-    public static function getPermission(string $name): string {
+    public static function getPermission(string $name): string
+    {
         return Core::getInstance()->getConfig()->getNested("commands.$name", ['permission' => "core.commands.$name"])['permission'] ?? "core.commands.$name";
     }
 }

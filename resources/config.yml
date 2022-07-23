@@ -10,8 +10,8 @@ prefixes:
 
 server:
   lobby:
-    ip: azur.mc
-    port: 1915
+    ip: play.nyrok.fr
+    port: 19133
 
 languages:
   - "fr_FR"

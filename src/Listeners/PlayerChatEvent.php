@@ -14,16 +14,17 @@ final class PlayerChatEvent implements Listener
      * @param ClassEvent $event
      * @priority LOWEST
      */
-    public function onEvent(ClassEvent $event){
+    public function onEvent(ClassEvent $event)
+    {
         $player = $event->getPlayer();
-        if($player instanceof LegacyPlayer){
+        if ($player instanceof LegacyPlayer) {
             $event->setFormat($player->getRank()->getFormat([
                 "{prestige}" => $player->getPlayerProperties()->getNestedProperties("stats.prestige"),
                 "{player}" => $player->getName(),
                 "{chat}" => $event->getMessage(),
             ]));
             $event->setMessage("");
-            switch (true){
+            switch (true) {
                 case MuteManager::isMuted($player):
                     $player->getLanguage()->getMessage("messages.mute.muted", ["{player}" => MuteManager::getStaff($player),
                         "{date}" => date("d/m/Y H:i:s", MuteManager::getTime($player)), "{reason}" => MuteManager::getReason($player)], ServerUtils::PREFIX_3)->send($player);
