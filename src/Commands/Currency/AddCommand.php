@@ -17,7 +17,7 @@ final class AddCommand extends Commands
             try {
                 if (isset($args[0], $args[1], $args[2])) {
                     $target = $sender->getServer()->getPlayerByPrefix($args[0]);
-                    $amount = is_numeric((int)$args[1]) ? (int)$args[1] : throw new LanguageException("messages.commands.add.invalid-amount", [], ServerUtils::PREFIX_2);
+                    $amount = is_numeric($args[1]) ? (int)$args[1] : throw new LanguageException("messages.commands.add.invalid-amount", ["{amount}" => $args[1]], ServerUtils::PREFIX_2);
                     $currency = match ($args[2]) {
                         "stars", "étoiles", "etoiles", "star", "étoile", "etoile" => CurrencyUtils::STARS,
                         "gold", "golds", "or" => CurrencyUtils::GOLD,

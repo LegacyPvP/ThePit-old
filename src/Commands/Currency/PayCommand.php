@@ -20,7 +20,7 @@ final class PayCommand extends Commands
                 if ($sender instanceof LegacyPlayer) {
                     if (isset($args[0], $args[1])) {
                         $target = $sender->getServer()->getPlayerByPrefix($args[0]) ?? Server::getInstance()->getOfflinePlayer($args[0]);
-                        $amount = is_numeric((int)$args[1]) ? (int)$args[1] : throw new LanguageException("messages.commands.pay.invalid-amount", [], ServerUtils::PREFIX_2);
+                        $amount = is_numeric($args[1]) ? (int)$args[1] : throw new LanguageException("messages.commands.pay.invalid-amount", ["{amount}" => $args[1]], ServerUtils::PREFIX_2);
                         if ($sender->getCurrencyProvider()->has(CurrencyUtils::GOLD, $amount)) {
                             if ($target instanceof LegacyPlayer) {
                                 (new Sound("random.orb"))->play($sender, $target);
