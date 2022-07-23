@@ -53,7 +53,7 @@ abstract class FormsManager
         return $form;
     }
 
-    #[ArrayShape(["form" => "\Legacy\ThePit\Forms\variant\CustomForm", "callable" => "\Closure[]", "type" => "string"])] static public function shopVotecoins(LegacyPlayer $player): Form {
+    /*#[ArrayShape(["form" => "\Legacy\ThePit\Forms\variant\CustomForm", "callable" => "\Closure[]", "type" => "string"])] static public function shopVotecoins(LegacyPlayer $player): Form {
         $form = new SimpleForm($player->getLanguage()->getMessage("forms.headers.shop-votecoins"), "");
         $form->addButton(new Button($player->getLanguage()->getMessage("forms.buttons.shop-votecoins.conversion-gold")->__toString()));
         $form->addButton(new Button($player->getLanguage()->getMessage("forms.buttons.shop-votecoins.conversion-keys")->__toString()));
@@ -88,12 +88,11 @@ abstract class FormsManager
         $form->addElement('', new Button("Conversion en boosters"));
         $form->addElement('', new Button("Conversion en clés"));
         return $form;
-    }
+    }*/
 
     public static function getForms(): array {
         return [
             "knockback" => fn(LegacyPlayer $player) => self::knockBackForm($player),
-            "shop-votecoins" => fn(LegacyPlayer $player) => self::shopVotecoins($player),
         ];
     }
 
