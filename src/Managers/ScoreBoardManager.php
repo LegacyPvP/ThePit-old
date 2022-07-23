@@ -6,6 +6,7 @@ use Legacy\ThePit\Core;
 use Legacy\ThePit\ScoreBoard\module\types\ScoreBoardLine;
 use Legacy\ThePit\Player\LegacyPlayer;
 use Legacy\ThePit\Tasks\ScoreBoardTask;
+use Legacy\ThePit\Utils\CurrencyUtils;
 use pocketmine\player\Player;
 use pocketmine\scheduler\ClosureTask;
 use pocketmine\Server;
@@ -97,20 +98,20 @@ abstract class ScoreBoardManager
             "basic" => [
                 "{level}" => $player?->getPlayerProperties()->getNestedProperties("stats.level") ?? 1,
                 "{xp}" => $player?->getPlayerProperties()->getNestedProperties("stats.xp") ?? 0,
-                "{or}" => $player?->getPlayerProperties()->getNestedProperties("stats.or") ?? 0,
-                "{credits}" => $player?->getPlayerProperties()->getNestedProperties("stats.coins") ?? 0,
-                "{etoiles}" => $player?->getPlayerProperties()->getNestedProperties("stats.etoiles") ?? 0,
-                "{votecoins}" => $player?->getPlayerProperties()->getNestedProperties("stats.votecoins") ?? 0,
+                "{or}" => $player?->getCurrencyProvider()?->get(CurrencyUtils::GOLD),
+                "{credits}" => $player?->getCurrencyProvider()?->get(CurrencyUtils::CREDITS),
+                "{etoiles}" => $player?->getCurrencyProvider()?->get(CurrencyUtils::STARS),
+                "{votecoins}" => $player?->getCurrencyProvider()?->get(CurrencyUtils::VOTECOINS),
                 "{online}" => count(Server::getInstance()->getOnlinePlayers())
             ],
             "prestige" => [
                 "{prestige}" => $player?->getPlayerProperties()->getNestedProperties("stats.prestige") ?? 0,
                 "{level}" => $player?->getPlayerProperties()->getNestedProperties("stats.level") ?? 1,
                 "{xp}" => $player?->getPlayerProperties()->getNestedProperties("stats.xp") ?? 0,
-                "{or}" => $player?->getPlayerProperties()->getNestedProperties("stats.or") ?? 0,
-                "{credits}" => $player?->getPlayerProperties()->getNestedProperties("stats.credits") ?? 0,
-                "{etoiles}" => $player?->getPlayerProperties()->getNestedProperties("stats.etoiles") ?? 0,
-                "{votecoins}" => $player?->getPlayerProperties()->getNestedProperties("stats.votecoins") ?? 0,
+                "{or}" => $player?->getCurrencyProvider()?->get(CurrencyUtils::GOLD),
+                "{credits}" => $player?->getCurrencyProvider()?->get(CurrencyUtils::CREDITS),
+                "{etoiles}" => $player?->getCurrencyProvider()?->get(CurrencyUtils::STARS),
+                "{votecoins}" => $player?->getCurrencyProvider()?->get(CurrencyUtils::VOTECOINS),
                 "{online}" => count(Server::getInstance()->getOnlinePlayers())
             ],
             "deathmatch" => [
