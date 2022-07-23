@@ -46,7 +46,7 @@ final class GoldSpawnTask extends Task
         }
         $block = $this->findBlock();
         $item = VanillaItems::GOLD_INGOT();
-        $this->getWorld()->dropItem($block->getPosition()->ceil(), $item);
+        ($this->getWorld()->dropItem($block->getPosition()->ceil(), $item))->setDespawnDelay(2400);
     }
 
     /**

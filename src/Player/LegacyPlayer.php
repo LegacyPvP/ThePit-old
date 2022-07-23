@@ -2,13 +2,11 @@
 
 namespace Legacy\ThePit\Player;
 
-use Legacy\ThePit\Core;
 use Legacy\ThePit\Managers\KnockBackManager;
 use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Managers\LanguageManager;
 use Legacy\ThePit\Objects\Rank;
 use Legacy\ThePit\Objects\Language;
-use Legacy\ThePit\Utils\SpellUtils;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\EffectManager;
 use pocketmine\entity\effect\VanillaEffects;
