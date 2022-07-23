@@ -5,7 +5,7 @@ namespace Legacy\ThePit\Tasks;
 use Legacy\ThePit\Player\LegacyPlayer;
 use pocketmine\scheduler\Task;
 
-class CombatTask extends Task {
+final class CombatTask extends Task {
 
     private LegacyPlayer $player;
     private int $time;

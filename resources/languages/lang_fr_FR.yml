@@ -104,12 +104,15 @@ messages:
     set:
       success: "Vous avez changé le solde de {target} à {amount}"
       invalid-amount: "Montant invalide"
+      invalid-currency: "Monnaie {currency} invalide" # {currency} is the currency name
     add:
       success: "Vous avez ajouté {amount} à {target}"
       invalid-amount: "Montant invalide"
+      invalid-currency: "Monnaie {currency} invalide" # {currency} is the currency name
     remove:
       success: "Vous avez retiré {amount} à {target}"
       invalid-amount: "Montant invalide"
+      invalid-currency: "Monnaie {currency} invalide" # {currency} is the currency name
     statistics:
       success: "§5- §fStatistiques de §d{player} §5-§f\n\n§fOr: §6{gold}§f\n§fÉtoiles: §e{stars}§f\n§fVoteCoins: §9{votecoins}§f\n§fCrédits: §2{credits}§f"
   death:

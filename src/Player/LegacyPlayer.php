@@ -2,6 +2,7 @@
 
 namespace Legacy\ThePit\Player;
 
+use CurrencyProvider;
 use Legacy\ThePit\Managers\KnockBackManager;
 use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Managers\LanguageManager;
@@ -26,17 +27,17 @@ use pocketmine\utils\TextFormat;
 final class LegacyPlayer extends Player
 {
     private PlayerProperties $properties;
+    private CurrencyProvider $currencyProvider;
     private CompoundTag $tag;
     private bool $teleportation = false;
     public string $targetName = "";
-
-
 
     public function initEntity(CompoundTag $nbt): void
     {
         parent::initEntity($nbt);
         $this->tag = $nbt;
         $this->properties = new PlayerProperties($this);
+        $this->currencyProvider = new CurrencyProvider($this);
     }
 
     public function getNBT(): CompoundTag{
@@ -49,6 +50,10 @@ final class LegacyPlayer extends Player
 
     public function getPlayerProperties(): PlayerProperties{
         return $this->properties;
+    }
+
+    public function getCurrencyProvider(): CurrencyProvider {
+        return $this->currencyProvider;
     }
 
     //TODO: The problem with a player NBT should not crash the server.
@@ -199,106 +204,6 @@ final class LegacyPlayer extends Player
     public function setTeleportation(bool $teleportation): void
     {
         $this->teleportation = $teleportation;
-    }
-
-    public function getGold(): int
-    {
-        return $this->getPlayerProperties()->getNestedProperties('money.gold');
-    }
-
-    public function setGold(int $gold): void
-    {
-        $this->getPlayerProperties()->setNestedProperties('money.gold', $gold);
-    }
-
-    public function addGold(int $amount): void
-    {
-        $this->setGold($this->getGold() + $amount);
-    }
-
-    public function removeGold(int $amount): void
-    {
-        $this->setGold($this->getGold() - $amount);
-    }
-
-    public function hasGold(int $amount): bool
-    {
-        return $this->getGold() >= $amount;
-    }
-
-    public function getStars(): int
-    {
-        return $this->getPlayerProperties()->getNestedProperties('money.etoiles');
-    }
-
-    public function setStars(int $gold): void
-    {
-        $this->getPlayerProperties()->setNestedProperties('money.etoiles', $gold);
-    }
-
-    public function addStars(int $amount): void
-    {
-        $this->setStars($this->getStars() + $amount);
-    }
-
-    public function removeStars(int $amount): void
-    {
-        $this->setStars($this->getStars() - $amount);
-    }
-
-    public function hasStars(int $amount): bool
-    {
-        return $this->getStars() >= $amount;
-    }
-
-    public function getVoteCoins(): int
-    {
-        return $this->getPlayerProperties()->getNestedProperties('money.votecoins');
-    }
-
-    public function setVoteCoins(int $gold): void
-    {
-        $this->getPlayerProperties()->setNestedProperties('money.votecoins', $gold);
-    }
-
-    public function addVoteCoins(int $amount): void
-    {
-        $this->setVoteCoins($this->getVoteCoins() + $amount);
-    }
-
-    public function removeVoteCoins(int $amount): void
-    {
-        $this->setVoteCoins($this->getVoteCoins() - $amount);
-    }
-
-    public function hasVoteCoins(int $amount): bool
-    {
-        return $this->getVoteCoins() >= $amount;
-    }
-
-    public function getCredits(): int
-    {
-        return $this->getPlayerProperties()->getNestedProperties('money.credits');
-    }
-
-    public function setCredits(int $gold): void
-    {
-        $this->getPlayerProperties()->setNestedProperties('money.credits', $gold);
-    }
-
-    public function addCredits(int $amount): void
-    {
-        $this->setCredits($this->getCredits() + $amount);
-    }
-
-    public function removeCredits(int $amount): void
-    {
-        $this->setCredits($this->getCredits() - $amount);
-    }
-
-    public function hasCredits(int $amount): bool
-    {
-        return $this->getCredits() >= $amount;
     }
 
     public function getRank(): Rank
