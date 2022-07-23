@@ -2,7 +2,7 @@
 
 namespace Legacy\ThePit\Player;
 
-use CurrencyProvider;
+use Legacy\ThePit\Providers\CurrencyProvider;
 use Legacy\ThePit\Managers\KnockBackManager;
 use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Managers\LanguageManager;
