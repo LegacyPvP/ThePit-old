@@ -13,7 +13,6 @@ use pocketmine\console\ConsoleCommandSender;
 use pocketmine\lang\Translatable;
 use pocketmine\plugin\Plugin;
 use pocketmine\plugin\PluginOwned;
-use pocketmine\Server;
 
 abstract class Commands extends Command implements PluginOwned
 {

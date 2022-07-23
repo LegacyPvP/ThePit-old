@@ -15,7 +15,6 @@ use Legacy\ThePit\Managers\ScoreBoardManager;
 use Legacy\ThePit\Tasks\GoldSpawnTask;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
-use pocketmine\nbt\tag\ShortTag;
 
 class Core extends PluginBase
 {
@@ -25,6 +24,7 @@ class Core extends PluginBase
 
     protected function onLoad(): void
     {
+        $this->saveDefaultConfig();
         self::$filePath = $this->getFile();
         CustomItemManager::initCustomItems();
     }
@@ -34,7 +34,6 @@ class Core extends PluginBase
         date_default_timezone_set('Europe/Paris');
 
         $this::setInstance($this);
-        $this->saveResource("config.yml", $this->isInDevMode());
 
         ListenersManager::initListeners($this);
         CommandsManager::initCommands();
@@ -52,11 +51,12 @@ class Core extends PluginBase
         if(is_array($default)) $this->getConfig()->setDefaults($default);
 
         $this->getScheduler()->scheduleDelayedRepeatingTask(new GoldSpawnTask(), 20*60, 20);
+        $this->saveResource("config.yml", $this->isInDevMode());
     }
 
     public function isInDevMode(): bool
     {
-        return $this->getConfig()->get("dev-mode", false);
+        return $this->getConfig()->get("dev-mode", true);
     }
 
     /**

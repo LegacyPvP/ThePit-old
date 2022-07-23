@@ -24,7 +24,7 @@ final class LobbyCommand extends Commands {
             if($sender instanceof LegacyPlayer){
                 $sender_language = $this->getSenderLanguage($sender);
                 if($sender->isInTeleportation()){
-                    $sender->sendMessage($this->getSenderLanguage($sender)->getMessage("messages.commands.lobby.already-in-teleportation"));
+                    $sender_language->getMessage("messages.commands.lobby.already-in-teleportation")->send($sender);
                 }else{
                     $sender->setTeleportation(true);
                     $this->location = $sender->getLocation();

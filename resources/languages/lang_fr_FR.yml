@@ -114,7 +114,7 @@ messages:
       invalid-amount: "Montant invalide"
       invalid-currency: "Monnaie {currency} invalide" # {currency} is the currency name
     statistics:
-      success: "§5- §fStatistiques de §d{player} §5-§f\n\n§fOr: §6{gold}§f\n§fÉtoiles: §e{stars}§f\n§fVoteCoins: §9{votecoins}§f\n§fCrédits: §2{credits}§f"
+      success: "§5- §fStatistiques de §d{player} §5-§f\n§fOr: §6{gold}§f\n§fÉtoiles: §e{stars}§f\n§fVoteCoins: §9{votecoins}§f\n§fCrédits: §2{credits}§f"
   death:
     killed: "Vous avez été tué par {player}" # {player} is the player who killed you
   kill: "Vous avez tué {player}" # {player} is the player that you killed

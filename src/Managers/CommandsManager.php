@@ -3,30 +3,34 @@ namespace Legacy\ThePit\Managers;
 
 use Legacy\ThePit\Commands\BanCommand;
 use Legacy\ThePit\Commands\BanListCommand;
-use Legacy\ThePit\Commands\Currency\AddCommand;
-use Legacy\ThePit\Commands\Currency\PayCommand;
-use Legacy\ThePit\Commands\Currency\RemoveCommand;
-use Legacy\ThePit\Commands\Currency\SetCommand;
-use Legacy\ThePit\Commands\GameModeCommand;
-use Legacy\ThePit\Commands\GlobalMuteCommand;
-use Legacy\ThePit\Commands\KickCommand;
-use Legacy\ThePit\Commands\KnockBackCommand;
-use Legacy\ThePit\Commands\ListCommand;
-use Legacy\ThePit\Commands\ListRankCommand;
-use Legacy\ThePit\Commands\LobbyCommand;
-use Legacy\ThePit\Commands\MessageCommand;
-use Legacy\ThePit\Commands\MuteCommand;
-use Legacy\ThePit\Commands\NightVisionCommand;
-use Legacy\ThePit\Commands\PingCommand;
-use Legacy\ThePit\Commands\SayCommand;
-use Legacy\ThePit\Commands\SetRankCommand;
-use Legacy\ThePit\Commands\SpawnCommand;
-use Legacy\ThePit\Commands\StatisticsCommand;
-use Legacy\ThePit\Commands\TpCommand;
-use Legacy\ThePit\Commands\TprCommand;
-use Legacy\ThePit\Commands\TPSCommand;
-use Legacy\ThePit\Commands\UnbanCommand;
-use Legacy\ThePit\Commands\UnmuteCommand;
+use Legacy\ThePit\Commands\Currency\{
+    AddCommand,
+    PayCommand,
+    RemoveCommand,
+    SetCommand
+};
+use Legacy\ThePit\Commands\{
+    GameModeCommand,
+    GlobalMuteCommand,
+    KickCommand,
+    KnockBackCommand,
+    ListCommand,
+    ListRankCommand,
+    LobbyCommand,
+    MessageCommand,
+    MuteCommand,
+    NightVisionCommand,
+    PingCommand,
+    SayCommand,
+    SetRankCommand,
+    SpawnCommand,
+    StatisticsCommand,
+    TpCommand,
+    TprCommand,
+    TPSCommand,
+    UnbanCommand,
+    UnmuteCommand,
+};
 use Legacy\ThePit\Core;
 
 abstract class CommandsManager
@@ -56,9 +60,9 @@ abstract class CommandsManager
             new MessageCommand("msg"),
             new PayCommand("pay"),
             new ListCommand("list"),
-            new SetCommand("setmoney"),
-            new RemoveCommand("removemoney"),
-            new AddCommand("addmoney"),
+            new SetCommand("set"),
+            new RemoveCommand("remove"),
+            new AddCommand("add"),
             new StatisticsCommand("statistics"),
         ];
     }
