@@ -102,15 +102,15 @@ messages:
       header: "§l§d- §r§fListe des joueurs connectés§l§d-\n"
       staff-header: "§l§d- §r§fListe des staff connectés§l§d-\n"
     set:
-      success: "Vous avez changé le solde de {target} à {amount}"
+      success: "Vous avez changé le solde de {target} à {amount} ({currency})"
       invalid-amount: "Montant invalide"
       invalid-currency: "Monnaie {currency} invalide" # {currency} is the currency name
     add:
-      success: "Vous avez ajouté {amount} à {target}"
+      success: "Vous avez ajouté {amount} à {target} ({currency})"
       invalid-amount: "Montant invalide"
       invalid-currency: "Monnaie {currency} invalide" # {currency} is the currency name
     remove:
-      success: "Vous avez retiré {amount} à {target}"
+      success: "Vous avez retiré {amount} à {target} ({currency})"
       invalid-amount: "Montant invalide"
       invalid-currency: "Monnaie {currency} invalide" # {currency} is the currency name
     statistics:
