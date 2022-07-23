@@ -12,7 +12,8 @@ class ScoreBoardApi extends PluginBase
     /**
      * @return ScoreBoardManager|null
      */
-    public static function getManager() : ?ScoreBoardManager {
+    public static function getManager(): ?ScoreBoardManager
+    {
         return self::$manager;
     }
 

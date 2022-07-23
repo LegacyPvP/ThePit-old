@@ -15,11 +15,11 @@ final class MuteCommand extends Commands
 {
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
-        if($this->testPermissionSilent($sender)){
-            if(isset($args[0], $args[1])){
+        if ($this->testPermissionSilent($sender)) {
+            if (isset($args[0], $args[1])) {
                 try {
                     $target = Server::getInstance()->getPlayerByPrefix($args[0]) ?? Server::getInstance()->getOfflinePlayer($args[0]);
-                    if($target instanceof LegacyPlayer) {
+                    if ($target instanceof LegacyPlayer) {
                         $time = TimeUtils::strToDate($args[1]) ?? new DateTime("now");
                         $reason = isset($args[2]) ? implode(" ", array_slice($args, 2)) : "Aucune raison donnée.";
                         MuteManager::setMuted($target, $time->getTimestamp(), $reason, $sender->getName());
@@ -33,13 +33,11 @@ final class MuteCommand extends Commands
                             "{date}" => $time->format("d/m/Y H:i:s"),
                             "{reason}" => $reason
                         ], ServerUtils::PREFIX_3);
-                    }
-                    else throw new LanguageException("messages.commands.target-not-found");
-                }
-                catch (LanguageException $exception){
+                    } else throw new LanguageException("messages.commands.target-not-found");
+                } catch (LanguageException $exception) {
                     $this->getSenderLanguage($sender)->getMessage($exception->getMessage(), $exception->getArgs(), $exception->getPrefix())->send($sender);
                 }
-            }else{
+            } else {
                 $sender->sendMessage($this->getUsage());
             }
         }

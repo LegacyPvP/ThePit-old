@@ -22,11 +22,11 @@ class CustomHoe extends Hoe
 
     public function __construct(
         ItemIdentifier $identifier,
-        string $name,
-        ToolTier $tier,
-        string $textureName,
-        int $durability,
-        int $attackPoints
+        string         $name,
+        ToolTier       $tier,
+        string         $textureName,
+        int            $durability,
+        int            $attackPoints
     )
     {
         $this->textureName = $textureName;
@@ -68,19 +68,23 @@ class CustomHoe extends Hoe
     }
 
 
-    public function getTextureName(): string {
+    public function getTextureName(): string
+    {
         return $this->textureName;
     }
 
-    public function getMaxDurability(): int{
+    public function getMaxDurability(): int
+    {
         return $this->durability;
     }
 
-    public function getAttackPoints(): int{
+    public function getAttackPoints(): int
+    {
         return $this->attackPoints;
     }
 
-    public function getBaseMiningEfficiency(): float{
+    public function getBaseMiningEfficiency(): float
+    {
         return $this->miningSpeed;
     }
 }

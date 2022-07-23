@@ -23,49 +23,54 @@ final class Arrow extends \pocketmine\entity\projectile\Arrow
     /**
      * @param Player[]|null $players
      */
-    public function __construct(Location $location, ?Entity $shootingEntity, bool $critical, ?CompoundTag $nbt = null, ?array $players = null){
+    public function __construct(Location $location, ?Entity $shootingEntity, bool $critical, ?CompoundTag $nbt = null, ?array $players = null)
+    {
         parent::__construct($location, $shootingEntity, $critical, $nbt);
         $this->players = $players;
-        if($this->players !== null){
-            foreach($this->players as $p){
+        if ($this->players !== null) {
+            foreach ($this->players as $p) {
                 $this->spawnTo($p);
             }
-        }else{
+        } else {
             $this->spawnToAll();
         }
-        if($shootingEntity !== null){
+        if ($shootingEntity !== null) {
             $this->setMotion($shootingEntity->getDirectionVector());
         }
     }
 
-    public function entityBaseTick(int $tickDiff = 1) : bool{
+    public function entityBaseTick(int $tickDiff = 1): bool
+    {
         $hasUpdate = parent::entityBaseTick($tickDiff);
         $owner = $this->getOwningEntity();
-        if($owner === null || !$owner->isAlive() || $owner->isClosed() || $owner->getWorld() !== $this->getWorld() || $this->ticksLived > 60){
+        if ($owner === null || !$owner->isAlive() || $owner->isClosed() || $owner->getWorld() !== $this->getWorld() || $this->ticksLived > 60) {
             $this->close();
         }
-        if($this->projectile !== null && !$this->isFlaggedForDespawn() && $this->isAlive()){
+        if ($this->projectile !== null && !$this->isFlaggedForDespawn() && $this->isAlive()) {
             $this->getWorld()->addParticle($this->lastLocation->subtractVector($this->lastMotion), $this->projectile, $this->players);
         }
         $this->projectile = new LavaDripParticle();
         return $hasUpdate;
     }
 
-    public function canCollideWith(Entity $entity) : bool{
+    public function canCollideWith(Entity $entity): bool
+    {
         $player = $this->getOwningEntity();
         return parent::canCollideWith($entity);
     }
 
-    protected function onHitBlock(Block $blockHit, RayTraceResult $hitResult) : void{
+    protected function onHitBlock(Block $blockHit, RayTraceResult $hitResult): void
+    {
         parent::onHitBlock($blockHit, $hitResult);
         $this->flagForDespawn();
     }
 
-    protected function onHitEntity(Entity $entityHit, RayTraceResult $hitResult) : void{
+    protected function onHitEntity(Entity $entityHit, RayTraceResult $hitResult): void
+    {
         parent::onHitEntity($entityHit, $hitResult);
-        if(($owner = $this->getOwningEntity()) !== null && $owner instanceof Player && !$entityHit->isSilent()){
-            if($entityHit instanceof Player){
-                if($owner->getId() !== $entityHit->getId()){
+        if (($owner = $this->getOwningEntity()) !== null && $owner instanceof Player && !$entityHit->isSilent()) {
+            if ($entityHit instanceof Player) {
+                if ($owner->getId() !== $entityHit->getId()) {
                     $owner->broadcastSound(new XpCollectSound(), [$owner]);
                     $owner->sendMessage(TextFormat::RED . $entityHit->getDisplayName() . TextFormat::YELLOW . " is now on " . TextFormat::RED . round($entityHit->getHealth() / 2, 1) . TextFormat::YELLOW . " HP!");
                 }

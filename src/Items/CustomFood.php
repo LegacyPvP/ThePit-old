@@ -24,12 +24,12 @@ class CustomFood extends Food
 
     public function __construct(
         ItemIdentifier $identifier,
-        string $name,
-        string $textureName,
-        bool $canAlwaysEat,
-        int $foodRestore,
-        float $saturationRestore,
-        int $maxStackSize,
+        string         $name,
+        string         $textureName,
+        bool           $canAlwaysEat,
+        int            $foodRestore,
+        float          $saturationRestore,
+        int            $maxStackSize,
 
     )
     {
@@ -82,7 +82,7 @@ class CustomFood extends Food
                     )
                 )
                 ->setTag('minecraft:food', CompoundTag::create()
-                    // for hack microsoft is empty xd
+                // for hack microsoft is empty xd
                 )
                 ->setShort("minecraft:identifier", $this->getRuntimeId($this->getId()))
                 ->setTag("minecraft:display_name", CompoundTag::create()
@@ -91,23 +91,28 @@ class CustomFood extends Food
             );
     }
 
-    public function getTextureName(): string {
+    public function getTextureName(): string
+    {
         return $this->textureName;
     }
 
-    public function getFoodRestore(): int{
+    public function getFoodRestore(): int
+    {
         return $this->foodRestore;
     }
 
-    public function canAlwaysEat(): bool {
+    public function canAlwaysEat(): bool
+    {
         return $this->canAlwaysEat;
     }
 
-    public function getMaxStackSize(): int{
+    public function getMaxStackSize(): int
+    {
         return $this->maxStackSize;
     }
 
-    public function getSaturationRestore(): float{
+    public function getSaturationRestore(): float
+    {
         return $this->saturation;
     }
 

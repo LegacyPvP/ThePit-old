@@ -10,7 +10,8 @@ final class ScoreBoardManager
     private int $id = 0;
     private array $scoreboards = [];
 
-    public function createScoreBoard(?int $id = null, string $displayName = "",?string $objectiveName = null, string $displaySlot = ScoreBoard::SLOT_SIDEBAR, int $sortOrder = ScoreBoard::SORT_ASCENDING, int $slotOrder = SetDisplayObjectivePacket::SORT_ORDER_ASCENDING,?array $players = null, bool $send = false) : int {
+    public function createScoreBoard(?int $id = null, string $displayName = "", ?string $objectiveName = null, string $displaySlot = ScoreBoard::SLOT_SIDEBAR, int $sortOrder = ScoreBoard::SORT_ASCENDING, int $slotOrder = SetDisplayObjectivePacket::SORT_ORDER_ASCENDING, ?array $players = null, bool $send = false): int
+    {
         if (is_null($id)) {
             $id = $this->id++;
         }
@@ -21,31 +22,36 @@ final class ScoreBoardManager
         return $id;
     }
 
-    public function removeScoreBoard(int $id) : void {
+    public function removeScoreBoard(int $id): void
+    {
         if ($this->issetScoreBoard($id)) {
             unset($this->scoreboards[$id]);
         }
     }
 
-    public function removeAllScoreBoard() : void {
+    public function removeAllScoreBoard(): void
+    {
         $this->scoreboards = [];
     }
 
-    public function getScoreBoard(int $id) : ?ScoreBoard {
+    public function getScoreBoard(int $id): ?ScoreBoard
+    {
         if ($this->issetScoreBoard($id)) {
             return $this->scoreboards[$id];
         }
         return null;
     }
 
-    public function issetScoreBoard(int $id) : bool {
+    public function issetScoreBoard(int $id): bool
+    {
         return isset($this->scoreboards[$id]);
     }
 
     /**
      * @return ScoreBoard[]
      */
-    public function getAllScoreBoard() : array {
+    public function getAllScoreBoard(): array
+    {
         return $this->scoreboards;
     }
 

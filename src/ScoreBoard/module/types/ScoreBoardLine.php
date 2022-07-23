@@ -18,17 +18,19 @@ final class ScoreBoardLine
         if (is_null($scoreid)) {
             $this->scoreid = $score;
         }
-        if($score > 15 or $score < 1){
+        if ($score > 15 or $score < 1) {
         }
         $this->message = $message;
         $this->type = $type;
     }
-    
-    public function setObjectiveName(string $name) : void {
+
+    public function setObjectiveName(string $name): void
+    {
         $this->objectivename = $name;
     }
 
-    public function getObjectiveName() : string {
+    public function getObjectiveName(): string
+    {
         return $this->objectivename;
     }
 
@@ -40,35 +42,43 @@ final class ScoreBoardLine
         $this->message = $message;
     }
 
-    public function getMessage() : string {
+    public function getMessage(): string
+    {
         return $this->message;
     }
 
-    public function setScore(int $score) : void {
+    public function setScore(int $score): void
+    {
         $this->score = $score;
     }
 
-    public function getScore() : int {
+    public function getScore(): int
+    {
         return $this->score;
     }
 
-    public function setScoreId(int $score) : void {
+    public function setScoreId(int $score): void
+    {
         $this->scoreid = $score;
     }
 
-    public function getScoreId() : int {
+    public function getScoreId(): int
+    {
         return $this->scoreid;
     }
 
-    public function setType(int $type) : void {
+    public function setType(int $type): void
+    {
         $this->type = $type;
     }
 
-    public function getType() : int {
+    public function getType(): int
+    {
         return $this->type;
     }
-    
-    public function getPacketEntry() : ?ScorePacketEntry {
+
+    public function getPacketEntry(): ?ScorePacketEntry
+    {
         if (is_null($this->objectivename)) {
             return null;
         }

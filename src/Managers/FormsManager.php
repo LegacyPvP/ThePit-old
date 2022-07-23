@@ -54,6 +54,7 @@ abstract class FormsManager
     }
 
     /*#[ArrayShape(["form" => "\Legacy\ThePit\Forms\variant\CustomForm", "callable" => "\Closure[]", "type" => "string"])] static public function shopVotecoins(LegacyPlayer $player): Form {
+    static public function shopVotecoins(LegacyPlayer $player): Form {
         $form = new SimpleForm($player->getLanguage()->getMessage("forms.headers.shop-votecoins"), "");
         $form->addButton(new Button($player->getLanguage()->getMessage("forms.buttons.shop-votecoins.conversion-gold")->__toString()));
         $form->addButton(new Button($player->getLanguage()->getMessage("forms.buttons.shop-votecoins.conversion-keys")->__toString()));
@@ -61,7 +62,6 @@ abstract class FormsManager
         return $form;
     }
 
-    #[ArrayShape(["form" => "\Legacy\ThePit\Forms\variant\CustomForm", "callable" => "\Closure[]", "type" => "string"])] static public function shopVotecoinsConversion(): Form {
     static public function openShopVotecoins(LegacyPlayer $player): Form {
         $form = new CustomForm("Boutique de Votecoins", function (Player $player, FormResponse $response): void {
             if($player instanceof LegacyPlayer){

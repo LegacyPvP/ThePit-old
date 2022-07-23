@@ -14,20 +14,24 @@ namespace Legacy\ThePit\Forms\element;
 
 use Legacy\ThePit\Forms\utils\Submittable;
 
-final class ModalOption {
+final class ModalOption
+{
     use Submittable;
 
     private string $text;
 
-    public function __construct(string $text) {
+    public function __construct(string $text)
+    {
         $this->text = $text;
     }
 
-    public function getText(): string {
+    public function getText(): string
+    {
         return $this->text;
     }
 
-    public function setText(string $text): void {
+    public function setText(string $text): void
+    {
         $this->text = $text;
     }
 

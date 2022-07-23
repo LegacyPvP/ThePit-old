@@ -22,7 +22,8 @@ use Legacy\ThePit\Forms\utils\FormResponse;
 use pocketmine\player\Player;
 use pocketmine\utils\Utils;
 
-final class CustomForm extends Form {
+final class CustomForm extends Form
+{
     use Closable;
 
     /** @var Element[] */
@@ -33,33 +34,40 @@ final class CustomForm extends Form {
      */
     private ?Closure $submitListener;
 
-    public function __construct(string $title, ?Closure $submitListener = null) {
+    public function __construct(string $title, ?Closure $submitListener = null)
+    {
         $this->setSubmitListener($submitListener);
         parent::__construct($title);
     }
 
-    public function getType(): string {
+    public function getType(): string
+    {
         return Form::TYPE_CUSTOM_FORM;
     }
 
     /**
      * @return Element[]
      */
-    public function getElements(): array {
+    public function getElements(): array
+    {
         return $this->elements;
     }
 
-    public function addElement(string $id, Element $element): void {
+    public function addElement(string $id, Element $element): void
+    {
         $this->elements[$id] = $element;
     }
 
-    public function getSubmitListener(): ?Closure {
+    public function getSubmitListener(): ?Closure
+    {
         return $this->submitListener;
     }
 
-    public function setSubmitListener(?Closure $submitListener): void {
-        if($submitListener !== null) {
-            Utils::validateCallableSignature(function(Player $player, FormResponse $response) {}, $submitListener);
+    public function setSubmitListener(?Closure $submitListener): void
+    {
+        if ($submitListener !== null) {
+            Utils::validateCallableSignature(function (Player $player, FormResponse $response) {
+            }, $submitListener);
         }
         $this->submitListener = $submitListener;
     }
@@ -67,14 +75,14 @@ final class CustomForm extends Form {
     /**
      * @throws FormsException
      */
-    public function executeSubmitListener(Player $player, FormResponse $response): void {
+    public function executeSubmitListener(Player $player, FormResponse $response): void
+    {
         try {
-            if($this->submitListener !== null) {
+            if ($this->submitListener !== null) {
                 ($this->submitListener)($player, $response);
             }
             $this->onSubmit($player, $response);
-        }
-        catch (FormsException $exception){
+        } catch (FormsException $exception) {
             $player->getLanguage()->getMessage($exception->getMessage(), $exception->getArgs(), $exception->getPrefix())->send($player);
         }
     }
@@ -82,14 +90,15 @@ final class CustomForm extends Form {
     /**
      * @throws FormsException
      */
-    public function handleResponse(Player $player, $data): void {
-        if($data === null) {
+    public function handleResponse(Player $player, $data): void
+    {
+        if ($data === null) {
             $this->notifyClose($player);
         } else {
             $elementCopies = [];
 
             $index = 0;
-            foreach($this->elements as $id => $element) {
+            foreach ($this->elements as $id => $element) {
                 $copy = clone $element;
                 $copy->assignResult($data[$index]);
                 $elementCopies[$id] = $copy;
@@ -101,12 +110,15 @@ final class CustomForm extends Form {
         }
     }
 
-    #[ArrayShape(["content" => "\Legacy\ThePit\Forms\element\Element[]"])] protected function serializeBody(): array {
+    #[ArrayShape(["content" => "\Legacy\ThePit\Forms\element\Element[]"])] protected function serializeBody(): array
+    {
         return [
             "content" => array_values($this->elements)
         ];
     }
 
-    protected function onSubmit(Player $player, FormResponse $response): void {}
+    protected function onSubmit(Player $player, FormResponse $response): void
+    {
+    }
 
 }

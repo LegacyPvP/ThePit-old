@@ -6,11 +6,13 @@ namespace Legacy\ThePit\Traits;
 
 trait CustomItemTrait
 {
-    public function getRuntimeId(int $id): int {
+    public function getRuntimeId(int $id): int
+    {
         return $id + ($id > 0 ? 5000 : -5000);
     }
 
-    public function checkName(string $name): string {
+    public function checkName(string $name): string
+    {
         $name = strtolower($name);
         $str = preg_replace('/\s+/', '-', $name);
         return "item." . $str . ".name";

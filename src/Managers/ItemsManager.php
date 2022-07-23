@@ -13,7 +13,8 @@ use pocketmine\item\ItemIds;
 
 abstract class ItemsManager
 {
-    public static function getItems(): array {
+    public static function getItems(): array
+    {
         return [
             new Nemo(new ItemIdentifier(ItemIds::CLOWNFISH, 0), "Nemo"),
             new Flap(new ItemIdentifier(ItemIds::FEATHER, 0), "Flap"),
@@ -22,8 +23,9 @@ abstract class ItemsManager
         ];
     }
 
-    public static function initItems(): void {
-        foreach (self::getItems() as $item){
+    public static function initItems(): void
+    {
+        foreach (self::getItems() as $item) {
             ItemFactory::getInstance()->register($item, true);
             Core::getInstance()->getLogger()->notice("[ITEMS] Item: {$item->getName()} Loaded");
         }

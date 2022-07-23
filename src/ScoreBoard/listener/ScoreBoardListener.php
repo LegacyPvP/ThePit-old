@@ -13,16 +13,19 @@ final class ScoreBoardListener implements Listener
 
     private static ScoreBoardApi $pg;
 
-    public function __construct(ScoreBoardApi $pg){
+    public function __construct(ScoreBoardApi $pg)
+    {
         self::$pg = $pg;
-        $pg->getServer()->getPluginManager()->registerEvents($this,$pg);
+        $pg->getServer()->getPluginManager()->registerEvents($this, $pg);
     }
 
-    public function getPlugin() : ScoreBoardApi {
+    public function getPlugin(): ScoreBoardApi
+    {
         return self::$pg;
     }
 
-    public function onQuit(PlayerQuitEvent $event) : void {
+    public function onQuit(PlayerQuitEvent $event): void
+    {
         $player = $event->getPlayer();
         foreach (ScoreBoardApi::getManager()->getAllScoreBoard() as $scoreBoard) {
             if ($scoreBoard->hasPlayer($player)) {

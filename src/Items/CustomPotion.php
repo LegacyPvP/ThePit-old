@@ -24,12 +24,12 @@ class CustomPotion extends Food
 
     public function __construct(
         ItemIdentifier $identifier,
-        string $name,
-        string $textureName,
-        bool $canAlwaysEat,
-        int $foodRestore,
-        float $saturationRestore,
-        int $maxStackSize,
+        string         $name,
+        string         $textureName,
+        bool           $canAlwaysEat,
+        int            $foodRestore,
+        float          $saturationRestore,
+        int            $maxStackSize,
 
     )
     {
@@ -46,7 +46,7 @@ class CustomPotion extends Food
         if (!$consumer instanceof Player) return;
         if ($this->getCount() <= 1) {
             $consumer->getInventory()->setItemInHand(VanillaItems::AIR());
-        }  else $consumer->getInventory()->setItemInHand($this->setCount($this->getCount() - 1));
+        } else $consumer->getInventory()->setItemInHand($this->setCount($this->getCount() - 1));
 
         $food = $consumer->getHungerManager()->getFood();
         $saturation = $consumer->getHungerManager()->getSaturation();
@@ -94,23 +94,28 @@ class CustomPotion extends Food
             );
     }
 
-    public function getTextureName(): string {
+    public function getTextureName(): string
+    {
         return $this->textureName;
     }
 
-    public function getFoodRestore(): int{
+    public function getFoodRestore(): int
+    {
         return $this->foodRestore;
     }
 
-    public function canAlwaysEat(): bool {
+    public function canAlwaysEat(): bool
+    {
         return $this->canAlwaysEat;
     }
 
-    public function getMaxStackSize(): int{
+    public function getMaxStackSize(): int
+    {
         return $this->maxStackSize;
     }
 
-    public function getSaturationRestore(): float{
+    public function getSaturationRestore(): float
+    {
         return $this->saturation;
     }
 }

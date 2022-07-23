@@ -20,7 +20,7 @@ final class PlayerDeathEvent implements Listener
             $killstreak = ($killer->getPlayerProperties()->getNestedProperties("stats.killstreak") ?? 0) + 1;
             $killer->getPlayerProperties()->setNestedProperties("stats.killstreak", $killstreak);
             $killer->getPlayerProperties()->setNestedProperties("stats.prime", $killer->getPlayerProperties()->getNestedProperties("stats.prime") + $player->getPlayerProperties()->getNestedProperties("stats.prime"));
-            if($killstreak % 10 === 0){
+            if ($killstreak % 10 === 0) {
                 $array = [50, 75, 100];
                 $prime = ($killer->getPlayerProperties()->getNestedProperties("stats.prime") ?? 0) + $array[array_rand($array)];
                 $add = $array[array_rand($array)];

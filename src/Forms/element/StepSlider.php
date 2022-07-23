@@ -12,13 +12,19 @@ declare(strict_types=1);
 namespace Legacy\ThePit\Forms\element;
 
 
-final class StepSlider extends Selector {
+use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\Pure;
 
-    public function getType(): string {
+final class StepSlider extends Selector
+{
+
+    public function getType(): string
+    {
         return Element::TYPE_STEP_SLIDER;
     }
 
-    public function serializeBody(): array {
+    #[Pure] #[ArrayShape(["steps" => "array", "default" => "int"])] public function serializeBody(): array
+    {
         return [
             "steps" => $this->getOptionsTexts(),
             "default" => $this->getDefaultIndex()

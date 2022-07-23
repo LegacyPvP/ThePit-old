@@ -13,25 +13,26 @@ use pocketmine\entity\Location;
 use pocketmine\scheduler\CancelTaskException;
 use pocketmine\scheduler\ClosureTask;
 
-class SpawnCommand extends Commands {
+class SpawnCommand extends Commands
+{
 
     private int $time = 4;
     private Location $location;
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
-        if($this->testPermissionSilent($sender)){
-            if($sender instanceof LegacyPlayer){
+        if ($this->testPermissionSilent($sender)) {
+            if ($sender instanceof LegacyPlayer) {
                 $sender_language = $this->getSenderLanguage($sender);
-                if($sender->isInTeleportation()){
+                if ($sender->isInTeleportation()) {
                     $sender->sendMessage($this->getSenderLanguage($sender)->getMessage("messages.commands.spawn.already-in-teleportation"));
-                }else{
+                } else {
                     $sender->setTeleportation(true);
                     $this->location = $sender->getLocation();
                     $sender->getEffects()->add(new EffectInstance(VanillaEffects::BLINDNESS(), 20 * 10, 1));
-                    Core::getInstance()->getScheduler()->scheduleRepeatingTask(new ClosureTask(function() use ($sender, $sender_language){
+                    Core::getInstance()->getScheduler()->scheduleRepeatingTask(new ClosureTask(function () use ($sender, $sender_language) {
                         try {
-                            switch($this->time){
+                            switch ($this->time) {
                                 case 5:
                                 case 4:
                                 case 3:
@@ -43,19 +44,19 @@ class SpawnCommand extends Commands {
                                     $playerX = $sender->getLocation()->getX();
                                     $playerY = $sender->getLocation()->getY();
                                     $playerZ = $sender->getLocation()->getZ();
-                                    if($sender->isOnline()){
-                                        if($x != $playerX or $y != $playerY or $z != $playerZ){
+                                    if ($sender->isOnline()) {
+                                        if ($x != $playerX or $y != $playerY or $z != $playerZ) {
                                             $sender_language->getMessage("messages.commands.spawn.teleportation-cancelled")->sendPopup($sender);
                                             $sender->setTeleportation(false);
                                             $this->time = 4;
                                             $sender->getEffects()->remove(VanillaEffects::BLINDNESS());
                                             throw new CancelTaskException();
-                                        }else{
+                                        } else {
                                             $sender_language->getMessage("messages.commands.spawn.teleportation-in-progress", [
                                                 "{time}" => $this->time
                                             ])->sendPopup($sender);
                                         }
-                                    }else{
+                                    } else {
                                         $sender_language->getMessage("messages.commands.spawn.teleportation-cancelled")->sendPopup($sender);
                                         $sender->setTeleportation(false);
                                         $this->time = 4;
@@ -72,7 +73,7 @@ class SpawnCommand extends Commands {
                                     $sender->setTeleportation(false);
                                     throw new CancelTaskException();
                             }
-                        }catch (LanguageException $exception){
+                        } catch (LanguageException $exception) {
                             $this->getSenderLanguage($sender)->getMessage($exception->getMessage(), $exception->getArgs(), $exception->getPrefix())->send($sender);
                         }
                     }), 20);

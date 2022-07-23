@@ -37,27 +37,28 @@ final class GoldSpawnTask extends Task
      */
     public function onRun(): void
     {
-        if(!$this->cleared){
-            foreach($this->getWorld()->getEntities() as $entity){
-                if(!$entity instanceof ItemEntity) continue;
+        if (!$this->cleared) {
+            foreach ($this->getWorld()->getEntities() as $entity) {
+                if (!$entity instanceof ItemEntity) continue;
                 $entity->flagForDespawn();
             }
             $this->cleared = true;
         }
         $block = $this->findBlock();
         $item = VanillaItems::GOLD_INGOT();
-        $this->getWorld()->dropItem($block->getPosition()->ceil(), $item);
+        ($this->getWorld()->dropItem($block->getPosition()->ceil(), $item))->setDespawnDelay(2400);
     }
 
     /**
      * @throws Exception
      */
-    public function findBlock(): Block {
+    public function findBlock(): Block
+    {
         retry:
         $x = rand(min($this->getX()), max($this->getX()) + 1);
         $z = rand(min($this->getZ()), max($this->getZ()) + 1);
         $block = $this->getSafeBlock($x, $this->getY(), $z);
-        if(!$block) goto retry;
+        if (!$block) goto retry;
         return $block;
     }
 
@@ -102,9 +103,9 @@ final class GoldSpawnTask extends Task
     private function getSafeBlock(int $x, array $y, int $z): ?Block
     {
         $block = null;
-        for($i = max($y); $i >= min($y); $i--) {
+        for ($i = max($y); $i >= min($y); $i--) {
             $block = $this->getWorld()?->getBlockAt($x, $i, $z);
-            if($block instanceof Air){
+            if ($block instanceof Air) {
                 continue;
             }
             break;

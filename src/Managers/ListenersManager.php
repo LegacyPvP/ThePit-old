@@ -1,4 +1,5 @@
 <?php
+
 namespace Legacy\ThePit\Managers;
 
 use JetBrains\PhpStorm\Pure;
@@ -17,7 +18,8 @@ use pocketmine\plugin\Plugin;
 
 abstract class ListenersManager
 {
-    #[Pure] public static function getListeners(): array {
+    #[Pure] public static function getListeners(): array
+    {
         return [
             new PlayerCreationEvent(),
             new DataPacketReceiveEvent(),
@@ -32,10 +34,11 @@ abstract class ListenersManager
         ];
     }
 
-    public static function initListeners(Plugin $plugin): void {
-        foreach (self::getListeners() as $event){
+    public static function initListeners(Plugin $plugin): void
+    {
+        foreach (self::getListeners() as $event) {
             $plugin->getServer()->getPluginManager()->registerEvents($event, $plugin);
-            Core::getInstance()->getLogger()->notice("[LISTENERS] Listener: ".$event::class." Loaded");
+            Core::getInstance()->getLogger()->notice("[LISTENERS] Listener: " . $event::class . " Loaded");
         }
     }
 

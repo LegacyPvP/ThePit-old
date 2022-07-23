@@ -18,12 +18,14 @@ trait CommandTrait
     /**
      * @param Command $command
      */
-    private static function setCommand(Command $command): void {
+    private static function setCommand(Command $command): void
+    {
         self::$command = $command;
     }
 
-    public static function init(){
-        if(self::$command !== null){
+    public static function init()
+    {
+        if (self::$command !== null) {
             self::$command->setDescription(CommandsManager::getDescription(self::$command->getName()));
             self::$command->setAliases(CommandsManager::getAliases(self::$command->getName()));
             self::$command->setUsage(CommandsManager::getUsage(self::$command->getName()));

@@ -18,22 +18,20 @@ final class KnockBackCommand extends Commands
      */
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
-        if($this->testPermissionSilent($sender)){
+        if ($this->testPermissionSilent($sender)) {
             try {
-                if($sender instanceof LegacyPlayer){
+                if ($sender instanceof LegacyPlayer) {
                     try {
                         FormsManager::sendForm($sender, "knockback");
-                    }
-                    catch (FormsException $exception){
+                    } catch (FormsException $exception) {
                         throw new LanguageException($exception->getMessage(), $exception->getArgs(), $exception->getPrefix(), $exception->getCode(), $exception);
                     }
-                }
-                else {
-                    if(isset($args[0], $args[1])){
+                } else {
+                    if (isset($args[0], $args[1])) {
                         $force = $args[0];
                         $vertical_limit = $args[1];
                         $attack_cooldown = $args[2] ?? 10;
-                        if(is_numeric($force) and is_numeric($vertical_limit) and is_numeric($attack_cooldown)){
+                        if (is_numeric($force) and is_numeric($vertical_limit) and is_numeric($attack_cooldown)) {
                             $config = Core::getInstance()->getConfig();
                             $config->setNested("knockback.horizontal", (int)$force);
                             $config->setNested("knockback.vertical", (int)$vertical_limit);
@@ -47,12 +45,11 @@ final class KnockBackCommand extends Commands
                         } else {
                             throw new LanguageException("messages.commands.knockback.invalid-arguments", [], ServerUtils::PREFIX_2);
                         }
-                    } else{
+                    } else {
                         $sender->sendMessage($this->getUsage());
                     }
                 }
-            }
-            catch (LanguageException $exception){
+            } catch (LanguageException $exception) {
                 exception:
                 $this->getSenderLanguage($sender)->getMessage($exception->getMessage(), $exception->getArgs(), $exception->getPrefix())->send($sender);
             }

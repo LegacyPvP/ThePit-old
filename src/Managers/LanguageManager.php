@@ -1,4 +1,5 @@
 <?php
+
 namespace Legacy\ThePit\Managers;
 
 use Legacy\ThePit\Core;
@@ -12,10 +13,11 @@ abstract class LanguageManager
      */
     public static array $languages = [];
 
-    public static function initLanguages(): void {
-        @mkdir(Core::getInstance()->getDataFolder()."languages");
+    public static function initLanguages(): void
+    {
+        @mkdir(Core::getInstance()->getDataFolder() . "languages");
         self::saveDefaultConfig();
-        foreach (self::getConfigLanguages() as $language){
+        foreach (self::getConfigLanguages() as $language) {
             self::$languages[$language] = new Language($language, new LanguageDatabase($language));
             Core::getInstance()->getLogger()->notice("[LANGUAGES] Lang: $language Loaded");
         }
@@ -33,7 +35,7 @@ abstract class LanguageManager
     {
         $languages = [];
         foreach (scandir(Core::getInstance()->getDataFolder() . "languages") as $file) {
-            if($file === "." or $file === "..") continue;
+            if ($file === "." or $file === "..") continue;
             $languages[] = str_replace([".yml", "lang_"], ["", ""], $file);
         }
         return $languages;
@@ -44,12 +46,14 @@ abstract class LanguageManager
         return self::$languages[$language] ?? reset(self::$languages);
     }
 
-    public static function getPrefix(int $prefix): string {
+    public static function getPrefix(int $prefix): string
+    {
         $prefixes = self::getPrefixes();
         return $prefixes[$prefix] ?? reset($prefixes) ?? "";
     }
 
-    public static function getPrefixes(): array {
+    public static function getPrefixes(): array
+    {
         return Core::getInstance()->getConfig()->get("prefixes", []);
     }
 
@@ -61,7 +65,7 @@ abstract class LanguageManager
     private static function saveDefaultConfig(): void
     {
         $languages = Core::getInstance()->getConfig()->get("languages", []);
-        foreach ($languages as $language){
+        foreach ($languages as $language) {
             Core::getInstance()->saveResource("languages/lang_$language.yml", Core::getInstance()->isInDevMode());
         }
     }

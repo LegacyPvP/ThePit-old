@@ -18,7 +18,7 @@ class CustomArmor extends Armor
 {
     use CustomItemTrait;
 
-    protected $lore  = [''];
+    protected $lore = [''];
 
     const ARMOR_CLASS = [
         "gold",
@@ -59,10 +59,10 @@ class CustomArmor extends Armor
 
     public function __construct(
         ItemIdentifier $identifier,
-        string $name,
-        ArmorTypeInfo $info,
-        string $textureName,
-        string $classArmor = 'diamond'
+        string         $name,
+        ArmorTypeInfo  $info,
+        string         $textureName,
+        string         $classArmor = 'diamond'
     )
     {
         if (!in_array($classArmor, self::ARMOR_CLASS)) {
@@ -73,14 +73,15 @@ class CustomArmor extends Armor
         parent::__construct($identifier, $name, $info);
     }
 
-    public function onClickAir(Player $player, Vector3 $directionVector) : ItemUseResult{
+    public function onClickAir(Player $player, Vector3 $directionVector): ItemUseResult
+    {
         $existing = $player->getArmorInventory()->getItem($this->getArmorSlot());
         $thisCopy = clone $this;
         $new = $thisCopy->pop();
         $player->getArmorInventory()->setItem($this->getArmorSlot(), $new);
-        if($thisCopy->getCount() === 0){
+        if ($thisCopy->getCount() === 0) {
             $player->getInventory()->setItemInHand($existing);
-        }else{ //if the stack size was bigger than 1 (usually won't happen, but might be caused by plugins
+        } else { //if the stack size was bigger than 1 (usually won't happen, but might be caused by plugins
             $player->getInventory()->setItemInHand($thisCopy);
             $player->getInventory()->addItem($existing);
         }
@@ -88,7 +89,8 @@ class CustomArmor extends Armor
         return ItemUseResult::SUCCESS();
     }
 
-    public function getComponents(): CompoundTag {
+    public function getComponents(): CompoundTag
+    {
         return CompoundTag::create()
             ->setTag("components", CompoundTag::create()
                 ->setTag("minecraft:durability", CompoundTag::create()
@@ -131,11 +133,13 @@ class CustomArmor extends Armor
     }
 
 
-    public function getTextureName(): string {
+    public function getTextureName(): string
+    {
         return $this->textureName;
     }
 
-    public function getArmorClass(): string {
+    public function getArmorClass(): string
+    {
         return $this->armorClass;
     }
 }

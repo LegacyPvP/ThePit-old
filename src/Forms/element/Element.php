@@ -17,7 +17,8 @@ use JsonSerializable;
 /**
  * Element is exclusive for the elements of CustomForms
  */
-abstract class Element implements JsonSerializable {
+abstract class Element implements JsonSerializable
+{
 
     private ?string $headerText;
 
@@ -28,15 +29,18 @@ abstract class Element implements JsonSerializable {
     public const TYPE_STEP_SLIDER = "step_slider";
     public const TYPE_TOGGLE = "toggle";
 
-    public function __construct(?string $headerText) {
+    public function __construct(?string $headerText)
+    {
         $this->headerText = $headerText;
     }
 
-    public function getHeaderText(): ?string {
+    public function getHeaderText(): ?string
+    {
         return $this->headerText;
     }
 
-    public function setHeaderText(?string $headerText): void {
+    public function setHeaderText(?string $headerText): void
+    {
         $this->headerText = $headerText;
     }
 
@@ -46,7 +50,8 @@ abstract class Element implements JsonSerializable {
 
     abstract public function assignResult($result): void;
 
-    public function jsonSerialize(): array {
+    public function jsonSerialize(): array
+    {
         return array_merge($this->serializeBody(), [
             "type" => $this->getType(),
             "text" => $this->headerText ?? ""

@@ -19,7 +19,8 @@ use Legacy\ThePit\Forms\utils\Closable;
 use pocketmine\form\FormValidationException;
 use pocketmine\player\Player;
 
-final class SimpleForm extends Form {
+final class SimpleForm extends Form
+{
     use Closable;
 
     /** @var Button[] */
@@ -27,7 +28,8 @@ final class SimpleForm extends Form {
 
     private ?string $headerText;
 
-    public function __construct(string $title, ?string $headerText = null) {
+    public function __construct(string $title, ?string $headerText = null)
+    {
         $this->headerText = $headerText;
         parent::__construct($title);
     }
@@ -35,39 +37,46 @@ final class SimpleForm extends Form {
     /**
      * @return Button[]
      */
-    public function getButtons(): array {
+    public function getButtons(): array
+    {
         return $this->buttons;
     }
 
-    public function addButton(Button $button): void {
+    public function addButton(Button $button): void
+    {
         $this->buttons[] = $button;
     }
 
-    public function getHeaderText(): ?string {
+    public function getHeaderText(): ?string
+    {
         return $this->headerText;
     }
 
-    public function setHeaderText(?string $headerText): void {
+    public function setHeaderText(?string $headerText): void
+    {
         $this->headerText = $headerText;
     }
 
-    public function getType(): string {
+    public function getType(): string
+    {
         return Form::TYPE_SIMPLE_FORM;
     }
 
-    public function handleResponse(Player $player, $data): void {
-        if($data === null) {
+    public function handleResponse(Player $player, $data): void
+    {
+        if ($data === null) {
             $this->notifyClose($player);
-        } elseif(!is_int($data) or !isset($this->buttons[$data])) {
-            throw new FormValidationException( "Couldn't find the option $data");
+        } elseif (!is_int($data) or !isset($this->buttons[$data])) {
+            throw new FormValidationException("Couldn't find the option $data");
         } else {
             $this->buttons[$data]->notifySubmit($player);
         }
     }
 
-    #[ArrayShape(["buttons" => "array|\string[][]", "content" => "string"])] public function serializeBody(): array {
+    #[ArrayShape(["buttons" => "array|\string[][]", "content" => "string"])] public function serializeBody(): array
+    {
         return [
-            "buttons" => array_map(function(Button $button) {
+            "buttons" => array_map(function (Button $button) {
                 return $button->jsonSerialize();
             }, $this->buttons),
             "content" => $this->headerText ?? ""

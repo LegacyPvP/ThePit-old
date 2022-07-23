@@ -14,7 +14,8 @@ namespace Legacy\ThePit\Forms;
 
 use pocketmine\form\Form as PmForm;
 
-abstract class Form implements PmForm {
+abstract class Form implements PmForm
+{
 
     private string $title;
 
@@ -22,16 +23,19 @@ abstract class Form implements PmForm {
     public const TYPE_CUSTOM_FORM = "custom_form";
     public const TYPE_MODAL_FORM = "modal";
 
-    public function __construct(string $title) {
+    public function __construct(string $title)
+    {
         $this->title = $title;
         $this->onCreation();
     }
 
-    public function getTitle(): string {
+    public function getTitle(): string
+    {
         return $this->title;
     }
 
-    public function setTitle(string $title): void {
+    public function setTitle(string $title): void
+    {
         $this->title = $title;
     }
 
@@ -39,13 +43,16 @@ abstract class Form implements PmForm {
 
     abstract protected function serializeBody(): array;
 
-    public function jsonSerialize(): array {
+    public function jsonSerialize(): array
+    {
         $body = $this->serializeBody();
         $body["title"] = $this->title;
         $body["type"] = $this->getType();
         return $body;
     }
 
-    protected function onCreation(): void {}
+    protected function onCreation(): void
+    {
+    }
 
 }

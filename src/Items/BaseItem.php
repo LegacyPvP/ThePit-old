@@ -20,10 +20,10 @@ class BaseItem extends Item
 
     public function __construct(
         ItemIdentifier $identifier,
-        string $name,
-        string $textureName,
-        int $maxStackSize,
-        bool $allowOffHand,
+        string         $name,
+        string         $textureName,
+        int            $maxStackSize,
+        bool           $allowOffHand,
     )
     {
         $this->textureName = $textureName;
@@ -32,7 +32,8 @@ class BaseItem extends Item
         parent::__construct($identifier, $name);
     }
 
-    public function getComponents(): CompoundTag {
+    public function getComponents(): CompoundTag
+    {
         return CompoundTag::create()->setTag("components", CompoundTag::create()
             ->setTag("item_properties", CompoundTag::create()
                 ->setInt("use_duration", 32)
@@ -60,19 +61,23 @@ class BaseItem extends Item
             );
     }
 
-    public function getMaxStackSize(): int {
+    public function getMaxStackSize(): int
+    {
         return $this->maxStackSize;
     }
 
-    public function getTextureName(): string {
+    public function getTextureName(): string
+    {
         return $this->textureName;
     }
 
-    public function getHandEquipped(): bool {
+    public function getHandEquipped(): bool
+    {
         return $this->handEquipped;
     }
 
-    public function allowOffHand(): bool {
+    public function allowOffHand(): bool
+    {
         return $this->allowOffHand;
     }
 }

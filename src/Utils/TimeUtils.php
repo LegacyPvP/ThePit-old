@@ -21,7 +21,7 @@ abstract class TimeUtils
                     strtolower($date)
                 )
             );
-            if($datetime->getTimestamp() <= time()){
+            if ($datetime->getTimestamp() <= time()) {
                 throw new Exception("La Date est invalide");
             }
             return $datetime;

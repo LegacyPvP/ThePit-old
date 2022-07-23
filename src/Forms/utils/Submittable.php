@@ -14,14 +14,18 @@ namespace Legacy\ThePit\Forms\utils;
 
 use pocketmine\player\Player;
 
-trait Submittable {
+trait Submittable
+{
     use SubmitListener;
 
-    public function notifySubmit(Player $player): void {
+    public function notifySubmit(Player $player): void
+    {
         $this->executeSubmitListener($player);
         $this->onSubmit($player);
     }
 
-    protected function onSubmit(Player $player): void {}
+    protected function onSubmit(Player $player): void
+    {
+    }
 
 }

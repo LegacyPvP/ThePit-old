@@ -17,7 +17,8 @@ final class CommandException extends \pocketmine\command\utils\CommandException
         return $this->args;
     }
 
-    public function getPrefix(): bool {
+    public function getPrefix(): bool
+    {
         return $this->prefix;
     }
 

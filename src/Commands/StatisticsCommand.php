@@ -2,54 +2,54 @@
 
 namespace Legacy\ThePit\Commands;
 
+use Legacy\ThePit\Exceptions\LanguageException;
 use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\Utils\CurrencyUtils;
 use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\command\CommandSender;
+use pocketmine\player\OfflinePlayer;
 use pocketmine\player\Player;
+use pocketmine\Server;
 
-final class StatisticsCommand extends Commands {
+final class StatisticsCommand extends Commands
+{
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
-        if($this->testPermissionSilent($sender)){
-            if($sender instanceof LegacyPlayer){
-                if(!isset($args[0])){
-                    $sender->sendMessage($this->getSenderLanguage($sender)->getMessage("messages.commands.statistics.success", [
+        if ($this->testPermissionSilent($sender)) {
+            try {
+                if ($sender instanceof LegacyPlayer) {
+                    if (!isset($args[0])) throw new LanguageException("messages.commands.statistics.success", [
                         "{player}" => $sender->getName(),
-                        "{stars}" => $sender->getStars(),
-                        "{gold}" => $sender->getGold(),
-                        "{votecoins}" => $sender->getVoteCoins(),
-                        "{credits}" => $sender->getCredits()
-                    ], ServerUtils::PREFIX_4));
-                }else{
-                    $target = $sender->getServer()->getPlayerByPrefix($args[0]);
-                    $offline_target = $sender->getServer()->getOfflinePlayer($args[0]);
-                    if($target instanceof LegacyPlayer){
-                        if($target->isOnline()){
-                            $sender->sendMessage($this->getSenderLanguage($sender)->getMessage("messages.commands.statistics.success", [
+                        "{stars}" => $sender->getCurrencyProvider()->get(CurrencyUtils::STARS),
+                        "{gold}" => $sender->getCurrencyProvider()->get(CurrencyUtils::GOLD),
+                        "{votecoins}" => $sender->getCurrencyProvider()->get(CurrencyUtils::VOTECOINS),
+                        "{credits}" => $sender->getCurrencyProvider()->get(CurrencyUtils::CREDITS),
+                    ], ServerUtils::PREFIX_4);
+                    else {
+                        $target = $sender->getServer()->getPlayerByPrefix($args[0]) ?? $sender->getServer()->getOfflinePlayer($args[0]);
+                        if ($target instanceof LegacyPlayer) throw new LanguageException("messages.commands.statistics.success", [
+                            "{player}" => $target->getName(),
+                            "{stars}" => $target->getCurrencyProvider()->get(CurrencyUtils::STARS),
+                            "{gold}" => $target->getCurrencyProvider()->get(CurrencyUtils::GOLD),
+                            "{votecoins}" => $target->getCurrencyProvider()->get(CurrencyUtils::VOTECOINS),
+                            "{credits}" => $target->getCurrencyProvider()->get(CurrencyUtils::CREDITS),
+                        ], ServerUtils::PREFIX_4);
+                        elseif ($target instanceof OfflinePlayer and
+                            ($data = Server::getInstance()->getOfflinePlayerData($target->getName())) and
+                            ($properties = $data->getCompoundTag('properties')->getCompoundTag('money')))
+                            throw new LanguageException("messages.commands.statistics.success", [
                                 "{player}" => $target->getName(),
-                                "{stars}" => $target->getStars(),
-                                "{gold}" => $target->getGold(),
-                                "{votecoins}" => $target->getVoteCoins(),
-                                "{credits}" => $target->getCredits()
-                            ], ServerUtils::PREFIX_4));
-                        }elseif($offline_target instanceof LegacyPlayer){
-                            $sender->sendMessage($this->getSenderLanguage($sender)->getMessage("messages.commands.statistics.success", [
-                                "{player}" => $offline_target->getName(),
-                                "{stars}" => $offline_target->getStars(),
-                                "{gold}" => $offline_target->getGold(),
-                                "{votecoins}" => $offline_target->getVoteCoins(),
-                                "{credits}" => $offline_target->getCredits()
-                            ], ServerUtils::PREFIX_4));
-                        }else{
-                            $this->getSenderLanguage($sender)->getMessage("messages.commands.target-not-player", [], ServerUtils::PREFIX_2)->send($sender);
-                        }
-                    }else{
-                        $this->getSenderLanguage($sender)->getMessage("messages.commands.target-not-found", [], ServerUtils::PREFIX_2)->send($sender);
+                                "{stars}" => $properties->getTag(CurrencyUtils::STARS)->getValue() ?? 0,
+                                "{gold}" => $properties->getTag(CurrencyUtils::GOLD)->getValue() ?? 0,
+                                "{votecoins}" => $properties->getTag(CurrencyUtils::VOTECOINS)->getValue() ?? 0,
+                                "{credits}" => $properties->getTag(CurrencyUtils::CREDITS)->getValue() ?? 0,
+                            ], ServerUtils::PREFIX_4);
+                        else throw new LanguageException("messages.commands.target-not-player", [], ServerUtils::PREFIX_2);
                     }
-                }
-            }else{
-                $sender->sendMessage($this->getSenderLanguage($sender)->getMessage("messages.commands.no-player", [], ServerUtils::PREFIX_4));
+                } else throw new LanguageException("messages.commands.no-player", [], ServerUtils::PREFIX_4);
+            } catch (LanguageException $exception) {
+                $this->getSenderLanguage($sender)->getMessage($exception->getMessage(), $exception->getArgs(), $exception->getPrefix())->send($sender);
             }
         }
     }

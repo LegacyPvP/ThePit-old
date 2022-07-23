@@ -3,8 +3,9 @@
 namespace Legacy\ThePit\Commands\Currency;
 
 use Legacy\ThePit\Commands\Commands;
-
+use Legacy\ThePit\Exceptions\LanguageException;
 use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\Utils\CurrencyUtils;
 use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\command\CommandSender;
 
@@ -13,71 +14,29 @@ final class SetCommand extends Commands
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
-        if ($this->testPermissionSilent($sender)){
-            if($sender instanceof LegacyPlayer){
-                if(isset($args[0]) and isset($args[1]) and isset($args[2])){
+        if ($this->testPermissionSilent($sender)) {
+            try {
+                if (isset($args[0], $args[1], $args[2])) {
                     $target = $sender->getServer()->getPlayerByPrefix($args[0]);
-                    $amount = $args[1];
-                    $currency = $args[2];
-                    if($target instanceof LegacyPlayer){
-                        if($target->isOnline()){
-                            if(is_numeric($amount)) {
-                                switch($currency) {
-                                    case "stars":
-                                    case "étoiles":
-                                    case "etoiles":
-                                    case "star":
-                                    case "étoile":
-                                    case "etoile":
-                                        $target->setStars($amount);
-                                        $sender->sendMessage($this->getSenderLanguage($sender)->getMessage("messages.commands.set.success", [
-                                            "{target}" => $target->getName(),
-                                            "{amount}" => $amount
-                                        ], ServerUtils::PREFIX_3));
-                                        var_dump($target->getStars());
-                                        break;
-                                    case "gold":
-                                    case "golds":
-                                    case "or":
-                                        $target->setGold($amount);
-                                        $sender->sendMessage($this->getSenderLanguage($sender)->getMessage("messages.commands.set.success", [
-                                            "{target}" => $target->getName(),
-                                            "{amount}" => $amount
-                                        ], ServerUtils::PREFIX_3));
-                                        break;
-                                    case "vote":
-                                    case "votecoins":
-                                        $target->setVoteCoins($amount);
-                                        $sender->sendMessage($this->getSenderLanguage($sender)->getMessage("messages.commands.set.success", [
-                                            "{target}" => $target->getName(),
-                                            "{amount}" => $amount
-                                        ], ServerUtils::PREFIX_3));
-                                        break;
-                                    case "crédits":
-                                    case "crédit":
-                                    case "credits":
-                                    case "credit":
-                                        $target->setCredits($amount);
-                                        $sender->sendMessage($this->getSenderLanguage($sender)->getMessage("messages.commands.set.success", [
-                                            "{target}" => $target->getName(),
-                                            "{amount}" => $amount
-                                        ], ServerUtils::PREFIX_3));
-                                        break;
-                                }
-                            }else{
-                                $sender->sendMessage($this->getSenderLanguage($sender)->getMessage("messages.commands.set.invalid-amount", [], ServerUtils::PREFIX_2));
-                            }
-                        }else{
-                            $sender->sendMessage($this->getSenderLanguage($sender)->getMessage("messages.commands.target-not-found", [], ServerUtils::PREFIX_2));
-                        }
-                    }else{
-                        $sender->sendMessage($this->getSenderLanguage($sender)->getMessage("messages.commands.target-not-found", [], ServerUtils::PREFIX_2));
-                    }
-                }else{
-                    $sender->sendMessage($this->getUsage());
-                }
-            }else{
-                $sender->sendMessage($this->getSenderLanguage($sender)->getMessage("messages.commands.no-player", [], ServerUtils::PREFIX_2));
+                    $amount = is_numeric($args[1]) ? (int)$args[1] : throw new LanguageException("messages.commands.set.invalid-amount", ["{amount}" => $args[1]], ServerUtils::PREFIX_2);
+                    $currency = match ($args[2]) {
+                        "stars", "étoiles", "etoiles", "star", "étoile", "etoile" => CurrencyUtils::STARS,
+                        "gold", "golds", "or" => CurrencyUtils::GOLD,
+                        "vote", "votecoins" => CurrencyUtils::VOTECOINS,
+                        "crédits", "crédit", "credits", "credit" => CurrencyUtils::CREDITS,
+                        default => throw new LanguageException("messages.commands.set.invalid-currency", ["{currency}" => $args[2]], ServerUtils::PREFIX_2)
+                    };
+                    if ($target instanceof LegacyPlayer) {
+                        $target->getCurrencyProvider()->set($currency, $amount);
+                        $sender->sendMessage($this->getSenderLanguage($sender)->getMessage("messages.commands.set.success", [
+                            "{target}" => $target->getName(),
+                            "{currency}" => $currency,
+                            "{amount}" => $amount
+                        ], ServerUtils::PREFIX_3));
+                    } else throw new LanguageException("messages.commands.target-not-found", [], ServerUtils::PREFIX_2);
+                } else $sender->sendMessage($this->getUsage());
+            } catch (LanguageException $exception) {
+                $this->getSenderLanguage($sender)->getMessage($exception->getMessage(), $exception->getArgs(), $exception->getPrefix())->send($sender);
             }
         }
     }

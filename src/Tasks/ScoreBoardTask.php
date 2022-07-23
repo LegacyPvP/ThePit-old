@@ -10,7 +10,7 @@ final class ScoreBoardTask extends Task
 {
     public function onRun(): void
     {
-        match (EventsManager::getCurrentEvent() ?? EventsManager::TYPE_NONE){
+        match (EventsManager::getCurrentEvent() ?? EventsManager::TYPE_NONE) {
             EventsManager::TYPE_NONE => ScoreBoardManager::updateScoreboard(null, EventsManager::TYPE_NONE),
             EventsManager::TYPE_DEATHMATCH => ScoreBoardManager::updateScoreboard(ScoreBoardManager::getScoreboards()["deathmatch"], EventsManager::TYPE_DEATHMATCH),
             EventsManager::TYPE_RAFFLE => ScoreBoardManager::updateScoreboard(ScoreBoardManager::getScoreboards()["raffle"], EventsManager::TYPE_RAFFLE),

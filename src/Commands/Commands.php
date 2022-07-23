@@ -1,4 +1,5 @@
 <?php
+
 namespace Legacy\ThePit\Commands;
 
 use Legacy\ThePit\Core;
@@ -13,7 +14,6 @@ use pocketmine\console\ConsoleCommandSender;
 use pocketmine\lang\Translatable;
 use pocketmine\plugin\Plugin;
 use pocketmine\plugin\PluginOwned;
-use pocketmine\Server;
 
 abstract class Commands extends Command implements PluginOwned
 {
@@ -30,11 +30,12 @@ abstract class Commands extends Command implements PluginOwned
 
     public function getUsage(): Translatable|string
     {
-        return LanguageManager::getPrefix(ServerUtils::PREFIX_3).parent::getUsage();
+        return LanguageManager::getPrefix(ServerUtils::PREFIX_3) . parent::getUsage();
     }
 
-    public function getSenderLanguage(CommandSender $sender): ?Language {
-        return (match($sender::class){
+    public function getSenderLanguage(CommandSender $sender): ?Language
+    {
+        return (match ($sender::class) {
             LegacyPlayer::class => $sender->getLanguage(),
             ConsoleCommandSender::class => LanguageManager::getDefaultLanguage(),
             default => null
@@ -48,7 +49,7 @@ abstract class Commands extends Command implements PluginOwned
 
     public function testPermissionSilent(CommandSender $target, ?string $permission = null): bool
     {
-        if(!parent::testPermissionSilent($target)){
+        if (!parent::testPermissionSilent($target)) {
             self::getSenderLanguage($target)->getMessage("messages.commands.not-permission")->send($target);
             return false;
         }

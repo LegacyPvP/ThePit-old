@@ -10,8 +10,8 @@ prefixes:
 
 server:
   lobby:
-    ip: azur.mc
-    port: 1915
+    ip: play.nyrok.fr
+    port: 19133
 
 languages:
   - "fr_FR"
@@ -80,62 +80,62 @@ ranks:
     chat: "{prestige} §7{player} §l§7» §r§7{chat}"
     nametag: "§7{player}"
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   Plus:
     chat: "{prestige} §8[§a+§8] §a{player} §l§8» §r§f{chat}"
     nametag: "§a{player}"
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   Star:
     chat: "{prestige} §8[§9Star§8] §9{player} §l§8» §r§f{chat}"
     nametag: "§9{player}"
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   Booster:
     chat: "{prestige} §8[§dBooster§8] §d{player} §l§8» §r§f{chat}"
     nametag: "§d{player}"
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   YouTube:
     chat: "{prestige} §8[§bYouTube§8] §b{player} §l§8» §r§f{chat}"
     nametag: "§b{player}"
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   Famous:
     chat: "{prestige} §8[§5Famous§8] §5{player} §l§8» §r§f{chat}"
     nametag: "§5{player}"
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   Guide:
     chat: "{prestige} §8[§2§lGuide§r§8] §2{player} §l§8» §r§2{chat}"
     nametag: "§2§l{player}"
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   Modo:
     chat: "{prestige} §8[§e§lModo§r§8] §e{player} §l§8» §r§e{chat}"
     nametag: "§e§l{player}"
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   SuperModo:
     chat: "{prestige} §8[§6§lSuperModo§r§8] §6{player} §l§8» §r§6{chat}"
     nametag: "§6§l{player}"
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   Développeur:
     chat: "{prestige} §8[§c§lDéveloppeur§r§8] §c{player} §l§8» §r§c{chat}"
     nametag: "§c§l{player}"
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   Responsable:
     chat: "{prestige} §8[§c§lResponsable§r§8] §c{player} §l§8» §r§c{chat}"
     nametag: "§c§l{player}"
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   Admin:
     chat: "{prestige} §8[§4§lAdmin§r§8] §4{player} §l§8» §r§4{chat}"
     nametag: "§l§4{player}"
     scoretag: ""
-    permissions: []
+    permissions: [ ]
 
 commands:
   # <> = obligatoire
@@ -144,32 +144,32 @@ commands:
     permission: "legacy.commands.ban"
     usage: "§fVous devez faire §d/ban <nom du joueur> <temps> [ip: [oui/non]] [raison] §fpour bannir un joueur."
     description: "Bannir un joueur"
-    aliases: []
+    aliases: [ ]
   unban:
     permission: "legacy.commands.unban"
     usage: "§fVous devez faire §d/unban <nom du joueur> §fpour débannir un joueur."
     description: "Débannir un joueur"
-    aliases: []
+    aliases: [ ]
   kick:
     permission: "legacy.commands.kick"
     usage: "§fVous devez faire §d/kick <nom du joueur> §fpour expulser un joueur."
     description: "Expulser un joueur"
-    aliases: []
+    aliases: [ ]
   setrank:
     permission: "legacy.commands.setrank"
     usage: "§fVous devez faire §d/setrank <nom du joueur> <grade> §fpour mettre un grade à un joueur."
     description: "Mettre un grade à un joueur"
-    aliases: []
+    aliases: [ ]
   listrank:
     permission: "legacy.commands.listrank"
     usage: "§fVous devez faire §d/listrank §fpour voir la liste des grades."
     description: "Voir la liste des ranks"
-    aliases: []
+    aliases: [ ]
   banlist:
     permission: "legacy.commands.banlist"
     usage: "§fVous devez faire §d/banlist §fpour voir la liste des joueurs bannis."
     description: "Voir la liste des joueurs bannis"
-    aliases: []
+    aliases: [ ]
   gamemode:
     permission: "legacy.commands.gamemode"
     usage: "§fVous devez faire §d/gamemode <mode> [nom du joueur] §fpour changer le mode de jeu d'un joueur."
@@ -217,7 +217,7 @@ commands:
     permission: "legacy.commands.ping"
     usage: "§fVous devez faire §d/ping §fpour voir votre ping."
     description: "Voir votre ping ou d'un joueur"
-    aliases:
+    aliases: [ ]
   spawn:
     permission: "legacy.commands.spawn"
     usage: "§fVous devez faire §d/spawn §fpour vous téléporter au spawn."
@@ -234,17 +234,17 @@ commands:
     permission: "legacy.commands.mute"
     usage: "§fVous devez faire §d/mute <nom du joueur> <temps> [raison] §fpour mute un joueur."
     description: "Mute un joueur"
-    aliases: []
+    aliases: [ ]
   unmute:
     permission: "legacy.commands.unmute"
     usage: "§fVous devez faire §d/unmute <nom du joueur> §fpour unmute un joueur."
     description: "Unmute un joueur"
-    aliases: []
+    aliases: [ ]
   tps:
     permission: "legacy.commands.tps"
     usage: "§fVous devez faire §d/tps §fpour voir le tps du serveur."
     description: "Voir le tps du serveur"
-    aliases: []
+    aliases: [ ]
   message:
     permission: "legacy.commands.message"
     usage: "§fVous devez faire §d/message <nom du joueur> <message> §fpour envoyer un message à un joueur."
@@ -257,12 +257,12 @@ commands:
     permission: "legacy.commands.pay"
     usage: "§fVous devez faire §d/pay <nom du joueur> <montant> §fpour payer un joueur avec de l'or."
     description: "Payer un joueur avec de l'or"
-    aliases: []
+    aliases: [ ]
   list:
     permission: "legacy.commands.list"
     usage: "§fVous devez faire §d/list §fpour voir la liste des joueurs."
     description: "Voir la liste des joueurs"
-    aliases: []
+    aliases: [ ]
   statistics:
     permission: "legacy.commands.statistics"
     usage: "§fVous devez faire §d/statistics §fpour voir les statistiques du serveur."
@@ -271,19 +271,19 @@ commands:
       - stats
   set:
     permission: "legacy.commands.set"
-    usage: "§fVous devez faire §d/set <nom du joueur> <valeur> §fpour changer la valeur d'un joueur."
+    usage: "§fVous devez faire §d/set <nom du joueur> <valeur> <monnaie> §fpour changer la valeur d'un joueur."
     description: "Changer la valeur d'un joueur"
-    aliases: []
+    aliases: [ ]
   add:
     permission: "legacy.commands.add"
-    usage: "§fVous devez faire §d/add <nom du joueur> <valeur> §fpour ajouter une valeur à un joueur."
+    usage: "§fVous devez faire §d/add <nom du joueur> <valeur> <monnaie> §fpour ajouter une valeur à un joueur."
     description: "Ajouter une valeur à un joueur"
-    aliases: []
+    aliases: [ ]
   remove:
     permission: "legacy.commands.remove"
-    usage: "§fVous devez faire §d/remove <nom du joueur> <valeur> §fpour enlever une valeur à un joueur."
+    usage: "§fVous devez faire §d/remove <nom du joueur> <valeur> <monnaie> §fpour enlever une valeur à un joueur."
     description: "Enlever une valeur à un joueur"
-    aliases: []
+    aliases: [ ]
 
 items:
   nemo:
@@ -295,24 +295,24 @@ items:
     vertical: 2
   spell:
     repulsion:
-        horizontal: 1.50
-        vertical: 1
+      horizontal: 1.50
+      vertical: 1
     attraction:
-        horizontal: -1.50
-        vertical: 3
+      horizontal: -1.50
+      vertical: 3
 
 cooldowns:
   461: 15
 
 areas:
   spawn:
-    x: [100, 100]
-    "y": [0, 100]
-    z: [100, 100]
+    x: [ 100, 100 ]
+    "y": [ 0, 100 ]
+    z: [ 100, 100 ]
     world: "Sky"
 
 goldspawn:
-  x: [-288, -17]
-  "y": [46, 54]
-  z: [127, -368]
+  x: [ -288, -17 ]
+  "y": [ 46, 54 ]
+  z: [ 127, -368 ]
   world: "Sky"
