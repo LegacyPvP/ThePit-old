@@ -2,6 +2,7 @@
 
 namespace Legacy\ThePit\Managers;
 
+use JsonException;
 use Legacy\ThePit\Core;
 use Legacy\ThePit\Providers\BaseProvider;
 use Legacy\ThePit\Providers\YAMLProvider;
@@ -49,6 +50,9 @@ final class DataManager extends Managers
         return $this->providers;
     }
 
+    /**
+     * @throws JsonException
+     */
     public function saveAll(): void
     {
         foreach ($this->getAll() as $provider) {

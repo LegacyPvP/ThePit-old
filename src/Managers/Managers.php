@@ -52,7 +52,6 @@ abstract class Managers implements Manager
     {
         return [
             new DataManager('data'),
-
             new CooldownManager('cooldowns'),
             new CurrenciesManager('currencies'),
             new CustomItemsManager('customitems'),
