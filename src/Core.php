@@ -4,6 +4,7 @@ namespace Legacy\ThePit;
 
 use Legacy\ThePit\Managers\Managers;
 use Legacy\ThePit\Tasks\GoldSpawnTask;
+use pocketmine\permission\DefaultPermissions;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
 
@@ -39,6 +40,7 @@ class Core extends PluginBase
     protected function onDisable(): void
     {
         Managers::DATA()->saveAll();
+
     }
 
     public function isInDevMode(): bool

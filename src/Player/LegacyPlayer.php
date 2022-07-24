@@ -9,6 +9,7 @@ use Legacy\ThePit\Providers\CurrencyProvider;
 use Legacy\ThePit\Objects\Rank;
 use Legacy\ThePit\Objects\Language;
 use Legacy\ThePit\Utils\EquipmentUtils;
+use Legacy\ThePit\Traits\CacheTrait;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\EffectManager;
 use pocketmine\entity\effect\VanillaEffects;
@@ -27,10 +28,11 @@ use pocketmine\utils\TextFormat;
 
 final class LegacyPlayer extends Player
 {
+    use CacheTrait;
+
     private PlayerProperties $properties;
     private CurrencyProvider $currencyProvider;
     private CompoundTag $tag;
-    private bool $teleportation = false;
     public string $targetName = "";
     private ?FishingHook $isFishing = null;
 
@@ -204,36 +206,9 @@ final class LegacyPlayer extends Player
         }
     }
 
-    public function isInTeleportation(): bool
-    {
-        return $this->teleportation;
-    }
-
-    public function setTeleportation(bool $teleportation): void
-    {
-        $this->teleportation = $teleportation;
-    }
-
     public function getRank(): Rank
     {
         return Managers::RANKS()->get($this->getPlayerProperties()->getNestedProperties('infos.rank'));
-    }
-
-    public function isInCombat()
-    {
-        return $this->getPlayerProperties()->getNestedProperties('status.combat');
-    }
-
-    public function setInCombat(bool $combat, LegacyPlayer $target): void
-    {
-        if ($combat == true) {
-            $this->targetName = $target->getName();
-            $this->getPlayerProperties()->setNestedProperties('status.combat_players', [$this->getName(), $target->getName()]);
-            $this->getPlayerProperties()->setNestedProperties('status.combat', true);
-        } else {
-            $this->getPlayerProperties()->setNestedProperties('status.combat_players', []);
-            $this->getPlayerProperties()->setNestedProperties('status.combat', false);
-        }
     }
 
     public function dropInventory()

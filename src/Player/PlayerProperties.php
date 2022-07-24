@@ -44,8 +44,6 @@ final class PlayerProperties
                 "status" => [
                     "nightvision" => false,
                     "freezed" => false,
-                    "combat" => false,
-                    "combat_players" => []
                 ],
                 "settings" => [
                     "cps" => 0,
