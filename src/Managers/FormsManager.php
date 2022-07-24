@@ -87,6 +87,10 @@ final class FormsManager extends Managers
         return $form;
     }*/
 
+    public function equipmentForm(LegacyPlayer $player): Form {
+
+    }
+
     #[ArrayShape(["knockback" => "\Closure"])] public function getAll(): array {
         return [
             "knockback" => fn(LegacyPlayer $player) => $this->knockBackForm($player),

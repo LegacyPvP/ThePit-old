@@ -12,7 +12,7 @@ use pocketmine\entity\Location;
 use pocketmine\scheduler\CancelTaskException;
 use pocketmine\scheduler\ClosureTask;
 
-class SpawnCommand extends Commands
+final class SpawnCommand extends Commands
 {
 
     private int $time = 4;

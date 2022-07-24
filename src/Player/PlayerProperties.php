@@ -66,22 +66,22 @@ final class PlayerProperties
                     "last_logout" => ""
                 ],
                 "inventory" => [
-                    "helmet" => ItemFactory::getInstance()->get(ItemIds::CHAIN_HELMET),
-                    "chestplate" => ItemFactory::getInstance()->get(ItemIds::CHAIN_CHESTPLATE),
-                    "leggings" => ItemFactory::getInstance()->get(ItemIds::CHAIN_LEGGINGS),
-                    "boots" => ItemFactory::getInstance()->get(ItemIds::CHAIN_BOOTS),
+                    "helmet" => 1,
+                    "chestplate" => 1,
+                    "leggings" => 1,
+                    "boots" => 1,
 
-                    "sword" => ItemFactory::getInstance()->get(ItemIds::STONE_SWORD),
-                    "bow" => ItemFactory::getInstance()->get(ItemIds::BOW),
-                    "arrow" => ItemFactory::getInstance()->get(ItemIds::ARROW, 0, 16),
+                    "sword" => 1,
+                    "bow" => 1,
+                    "arrow" => 1,
 
-                    "rod" => false, //1k gold
-                    "bucket" => false, //500 gold
-                    "snowball" => false, //500 gold
-                    "blocks" => false, //1k gold
-                    "flap" => false, //1,5k gold
-                    "nemo" => false, //1,5k gold
-                ]
+                    "rod" => 0, //1k gold
+                    "bucket" => 0, //500 gold
+                    "snowball" => 0, //500 gold
+                    "blocks" => 0, //1k gold
+                    "flap" => 0, //1,5k gold
+                    "nemo" => 0, //1,5k gold
+                ],
             ]);
         } else {
             $this->setBaseProperties(PlayerUtils::TagtoArray($nbt->getCompoundTag("properties")));
