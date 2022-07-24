@@ -2,6 +2,7 @@
 
 namespace Legacy\ThePit\Player;
 
+use Legacy\ThePit\Entities\List\FishingHook;
 use Legacy\ThePit\Providers\CurrencyProvider;
 use Legacy\ThePit\Managers\KnockBackManager;
 use Legacy\ThePit\Managers\RanksManager;
@@ -33,6 +34,7 @@ final class LegacyPlayer extends Player
     private CompoundTag $tag;
     private bool $teleportation = false;
     public string $targetName = "";
+    private ?FishingHook $isFishing = null;
 
     public function initEntity(CompoundTag $nbt): void
     {
@@ -263,7 +265,13 @@ final class LegacyPlayer extends Player
         $this->getInventory()->setItem(8, $arrow);
     }
 
-    public function setAttackCooldown(){
-        //oui mais je peux pas set celui de pocketmine tu ne peux pas à part dans l'event
+    public function getFishingHook(): ?FishingHook
+    {
+        return $this->isFishing;
+    }
+
+    public function setFishing(?FishingHook $fishing): void
+    {
+        $this->isFishing = $fishing;
     }
 }

@@ -4,6 +4,7 @@ namespace Legacy\ThePit;
 
 use Legacy\ThePit\Managers\CommandsManager;
 use Legacy\ThePit\Managers\CustomItemManager;
+use Legacy\ThePit\Managers\EntitiesManager;
 use Legacy\ThePit\Managers\EventsManager;
 use Legacy\ThePit\Managers\FormsManager;
 use Legacy\ThePit\Managers\ItemsManager;
@@ -44,6 +45,7 @@ class Core extends PluginBase
         ScoreBoardManager::initScoreBoards();
         CustomItemManager::registerItems();
         ItemsManager::initItems();
+        EntitiesManager::initEntities();
         FormsManager::initForms();
         CurrenciesManager::initCurrencies();
         PrestigesManager::initPrestiges();
