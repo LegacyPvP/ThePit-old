@@ -16,6 +16,8 @@ use pocketmine\event\entity\EntityDamageByChildEntityEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\item\enchantment\VanillaEnchantments;
+use pocketmine\item\ItemFactory;
+use pocketmine\item\ItemIds;
 use pocketmine\lang\Translatable;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\network\mcpe\protocol\TextPacket;
@@ -83,8 +85,8 @@ final class LegacyPlayer extends Player
     }
 
     public function onUpdate(int $currentTick): bool
-    {//oui ?
-        $this->setNameTag($this->getRank()->getNametag($this) . TextFormat::GOLD . str_replace("{prime}", $this->getPlayerProperties()->getNestedProperties("stats.prime"), $this->getRank()->getNametag($this)) . "\n" . str_replace("{level}", $this->getPlayerProperties()->getNestedProperties("stats.level"), $this->getPlayerProperties()->getNestedProperties("stats.prestige")));
+    {
+        $this->setNameTag($this->getRank()->getNametag($this) . TextFormat::GOLD . "\n" . str_replace("{level}", $this->getPlayerProperties()->getNestedProperties("stats.level"), $this->getPlayerProperties()->getNestedProperties("stats.prestige")));
         $this->setScoreTag($this->getRank()->getScoretag($this));
         $currentTick % 20 !== 0 ?: $this->syncNBT();
 
@@ -239,6 +241,26 @@ final class LegacyPlayer extends Player
         foreach ($this->getInventory()->getContents() as $item) {
             $this->dropItem($item);
         }
+    }
+
+    public function setStuff(): void {
+        $helmet = $this->getPlayerProperties()->getNestedProperties("inventory.helmet");
+        $chestplate = $this->getPlayerProperties()->getNestedProperties("inventory.chestplate");
+        $leggings = $this->getPlayerProperties()->getNestedProperties("inventory.leggings");
+        var_dump($boots = $this->getPlayerProperties()->getNestedProperties("inventory.boots"));
+
+        $this->getArmorInventory()->setHelmet($helmet);
+        $this->getArmorInventory()->setChestplate($chestplate);
+        $this->getArmorInventory()->setLeggings($leggings);
+        $this->getArmorInventory()->setBoots($boots);
+
+        $sword = $this->getPlayerProperties()->getNestedProperties("inventory.sword");
+        $bow = $this->getPlayerProperties()->getNestedProperties("inventory.bow");
+        $arrow = $this->getPlayerProperties()->getNestedProperties("inventory.arrow");
+
+        $this->getInventory()->setItem(0, $sword);
+        $this->getInventory()->setItem(1, $bow);
+        $this->getInventory()->setItem(8, $arrow);
     }
 
     public function getFishingHook(): ?FishingHook

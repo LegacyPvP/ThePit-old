@@ -41,19 +41,11 @@ class Core extends PluginBase
     }
 
     /**
+     * @internal
      * @return string
      */
     public static function getFilePath(): string
     {
         return self::$filePath;
     }
-
-    /*
-
-    public function getConfigByName(string $name): Config
-    {
-        return new Config($this->getDataFolder() . $name . ".yml", Config::YAML);
-    }
-
-    */
 }

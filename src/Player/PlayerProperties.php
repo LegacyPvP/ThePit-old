@@ -75,12 +75,12 @@ final class PlayerProperties
                     "bow" => ItemFactory::getInstance()->get(ItemIds::BOW),
                     "arrow" => ItemFactory::getInstance()->get(ItemIds::ARROW, 0, 16),
 
-                    "rod" => ItemFactory::getInstance()->get(ItemIds::AIR), //1k gold
-                    "bucket" => ItemFactory::getInstance()->get(ItemIds::AIR), //500 gold
-                    "snowball" => ItemFactory::getInstance()->get(ItemIds::AIR), //500 gold
-                    "blocks" => ItemFactory::getInstance()->get(ItemIds::AIR), //1k gold
-                    "flap" => ItemFactory::getInstance()->get(ItemIds::AIR), //1,5k gold
-                    "nemo" => ItemFactory::getInstance()->get(ItemIds::AIR), //1,5k gold
+                    "rod" => false, //1k gold
+                    "bucket" => false, //500 gold
+                    "snowball" => false, //500 gold
+                    "blocks" => false, //1k gold
+                    "flap" => false, //1,5k gold
+                    "nemo" => false, //1,5k gold
                 ]
             ]);
         } else {

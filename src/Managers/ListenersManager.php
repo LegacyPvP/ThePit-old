@@ -8,6 +8,7 @@ use Legacy\ThePit\Listeners\DataPacketReceiveEvent;
 use Legacy\ThePit\Listeners\DataPacketSendEvent;
 use Legacy\ThePit\Listeners\EntityDamageByEntityEvent;
 use Legacy\ThePit\Listeners\EntityDamageEvent;
+use Legacy\ThePit\Listeners\EntityPickupItemEvent;
 use Legacy\ThePit\Listeners\EntityShootBowEvent;
 use Legacy\ThePit\Listeners\PlayerChatEvent;
 use Legacy\ThePit\Listeners\PlayerCreationEvent;
@@ -31,6 +32,7 @@ final class ListenersManager extends Managers
             new EntityDamageEvent(),
             new PlayerDropItemEvent(),
             new EntityShootBowEvent(),
+            new EntityPickupItemEvent(),
         ];
     }
 

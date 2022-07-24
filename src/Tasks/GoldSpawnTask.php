@@ -8,6 +8,7 @@ use pocketmine\block\Air;
 use pocketmine\block\Block;
 use pocketmine\entity\object\ItemEntity;
 use pocketmine\item\VanillaItems;
+use pocketmine\scheduler\CancelTaskException;
 use pocketmine\scheduler\Task;
 use pocketmine\world\World;
 
@@ -37,8 +38,11 @@ final class GoldSpawnTask extends Task
      */
     public function onRun(): void
     {
+        if (!empty($this->getWorld()?->getEntities())) {
+            throw new CancelTaskException();
+        }
         if (!$this->cleared) {
-            foreach ($this->getWorld()->getEntities() as $entity) {
+            foreach ($this->getWorld()?->getEntities() as $entity) {
                 if (!$entity instanceof ItemEntity) continue;
                 $entity->flagForDespawn();
             }
