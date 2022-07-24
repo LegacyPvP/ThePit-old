@@ -19,7 +19,6 @@ use pocketmine\utils\Random;
 
 class FishingHook extends Projectile
 {
-
     protected $gravity = 0.1;
 
     public static function getNetworkTypeId(): string
@@ -42,24 +41,6 @@ class FishingHook extends Projectile
         //NOTHING
     }
 
-    public function handle(float $x, float $y, float $z, float $f1, float $f2)
-    {
-        $rand = new Random();
-        $f = sqrt($x * $x + $y * $y + $z * $z);
-        $x = $x / (float)$f;
-        $y = $y / (float)$f;
-        $z = $z / (float)$f;
-        $x = $x + $rand->nextSignedFloat() * 0.0074 * (float)$f2;
-        $y = $y + $rand->nextSignedFloat() * 0.0074 * (float)$f2;
-        $z = $z + $rand->nextSignedFloat() * 0.0074 * (float)$f2;
-        $x = $x * (float)$f1;
-        $y = $y * (float)$f1;
-        $z = $z * (float)$f1;
-        $this->motion->x += $x;
-        $this->motion->y += $y;
-        $this->motion->z += $z;
-    }
-
     public function entityBaseTick(int $tickDiff = 1): bool
     {
         $hasUpdate = parent::entityBaseTick($tickDiff);
@@ -70,15 +51,6 @@ class FishingHook extends Projectile
         } else $this->delete();
 
         return $hasUpdate;
-    }
-
-    private function getGrapplingSpeed(float $dist): float
-    {
-        if ($dist < 40) {
-            return 0.8;
-        } else {
-            return round($dist * 0.26 / 600, 2);
-        }
     }
 
     public function attack(EntityDamageEvent $source): void
@@ -99,7 +71,23 @@ class FishingHook extends Projectile
             $owner->setFishing(null);
         }
     }
-
+    public function handle(float $x, float $y, float $z, float $f1, float $f2): void
+    {
+        $rand = new Random();
+        $f = sqrt($x * $x + $y * $y + $z * $z);
+        $x = $x / (float)$f;
+        $y = $y / (float)$f;
+        $z = $z / (float)$f;
+        $x = $x + $rand->nextSignedFloat() * 0.0074 * (float)$f2;
+        $y = $y + $rand->nextSignedFloat() * 0.0074 * (float)$f2;
+        $z = $z + $rand->nextSignedFloat() * 0.0074 * (float)$f2;
+        $x = $x * (float)$f1;
+        $y = $y * (float)$f1;
+        $z = $z * (float)$f1;
+        $this->motion->x += $x;
+        $this->motion->y += $y;
+        $this->motion->z += $z;
+    }
 
     public function getInitialSizeInfo(): EntitySizeInfo
     {

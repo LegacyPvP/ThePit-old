@@ -29,6 +29,14 @@ final class PlayerQuitEvent implements Listener
                 }
             }
         }
+
+        foreach($player->getServer()->getOnlinePlayers() as $_player){
+            if($_player instanceof LegacyPlayer){
+                if($_player->getPlayerProperties()->getNestedProperties("settings.show-leave-message")){
+                    $_player->getLanguage()->getMessage("messages.player-quit", ["{player}" => $player->getName()], ServerUtils::PREFIX_4)->sendPopup($_player);
+                }
+            }
+        }
     }
 
 }

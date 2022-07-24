@@ -14,7 +14,7 @@ use pocketmine\world\sound\BowShootSound;
 
 final class Bow extends \pocketmine\item\Bow
 {
-    /* public function onReleaseUsing(Player $player): ItemUseResult
+    public function onReleaseUsing(Player $player) : ItemUseResult
     {
         $arrow = VanillaItems::ARROW();
         $inventory = match(true){
@@ -62,7 +62,7 @@ final class Bow extends \pocketmine\item\Bow
 
         $ev->call();
 
-        $entity = $ev->getProjectile(); //This might have been changed by plugins
+        $entity = $ev->getProjectile();
 
         if($ev->isCancelled()){
             $entity->flagForDespawn();
@@ -93,5 +93,5 @@ final class Bow extends \pocketmine\item\Bow
         }
 
         return ItemUseResult::SUCCESS();
-    } */
+    }
 }

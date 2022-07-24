@@ -25,10 +25,10 @@ final class GoldSpawnTask extends Task
         $this->y = Core::getInstance()->getConfig()->getNested("goldspawn.y", [0, 0]);
         $this->z = Core::getInstance()->getConfig()->getNested("goldspawn.z", [0, 0]);
         Core::getInstance()->getServer()->getWorldManager()->loadWorld(
-            Core::getInstance()->getConfig()->getNested("goldspawn.world", "world")
+            Core::getInstance()->getConfig()->getNested("goldspawn.world", "Sky")
         );
         $this->world = Core::getInstance()->getServer()->getWorldManager()->getWorldByName(
-            Core::getInstance()->getConfig()->getNested("goldspawn.world", "world")
+            Core::getInstance()->getConfig()->getNested("goldspawn.world", "Sky")
         );
     }
 

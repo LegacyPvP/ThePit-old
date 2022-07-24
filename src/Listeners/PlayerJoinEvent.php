@@ -5,6 +5,7 @@ namespace Legacy\ThePit\Listeners;
 use Legacy\ThePit\Managers\CustomItemManager;
 use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent as ClassEvent;
 
@@ -22,11 +23,12 @@ final class PlayerJoinEvent implements Listener
             if (!is_null($packet)) $player->getNetworkSession()->sendDataPacket($packet);
         }
 
-        if ($player instanceof LegacyPlayer) {
-            if ($player->isInCombat()) {
-                $player->teleport($player->getPlayerProperties()->getProperties("saved.last_position"));
+        foreach($player->getServer()->getOnlinePlayers() as $_player) {
+            if ($_player instanceof LegacyPlayer) {
+                if ($_player->getPlayerProperties()->getNestedProperties("settings.show-join-message")) {
+                    $_player->getLanguage()->getMessage("messages.player-join", ["{player}" => $player->getName()], ServerUtils::PREFIX_4)->sendPopup($_player);
+                }
             }
         }
     }
-
 }

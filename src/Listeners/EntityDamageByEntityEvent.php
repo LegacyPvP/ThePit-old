@@ -14,11 +14,37 @@ use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\event\entity\EntityDamageByEntityEvent as ClassEvent;
 use pocketmine\event\Listener;
 
-final class EntityDamageByEntityEvent implements Listener
-{
+final class EntityDamageByEntityEvent implements Listener {
+    /** @var array<string, array<string, bool|int>> $cachedData */
+        public static array $cachedData = [];
+
     public function onEvent(ClassEvent $event): void
     {
         $event->setKnockBack(0);
+        if($event->getEntity()->getId() !== $event->getDamager()?->getId() && $event->getModifier(\pocketmine\event\entity\EntityDamageEvent::MODIFIER_PREVIOUS_DAMAGE_COOLDOWN) >= 0.0){
+            if(($damager = $event->getDamager()) instanceof LegacyPlayer) {
+                $vector = $damager->getDirectionVector();
+                $item = $event->getDamager()->getInventory()->getItemInHand();
+                if ($damager->isImmobile()) {
+                    $event->cancel();
+                    return;
+                }
+
+
+
+                $target = $event->getEntity();
+                if ($target instanceof LegacyPlayer and $damager instanceof LegacyPlayer) {
+                    if ($damager->isInCombat() and $target->isInCombat()) {
+                        if (!str_contains($target->getName(), $damager->targetName) and !str_contains($damager->getName(), $target->targetName)) {
+                            $damager->getLanguage()->getMessage("messages.combat.already_in_combat")->send($damager);
+                            $event->cancel();
+                        } else {
+                            $damager->setInCombat(true, $target);
+                            $target->setInCombat(true, $damager);
+                            Core::getInstance()->getScheduler()->scheduleRepeatingTask(new CombatTask($target), 20);
+                            Core::getInstance()->getScheduler()->scheduleRepeatingTask(new CombatTask($damager), 20);
+                        }
+                    } else {
         if (($damager = $event->getDamager()) instanceof LegacyPlayer) {
             $vector = $damager->getDirectionVector();
             $item = $event->getDamager()->getInventory()->getItemInHand();
@@ -26,7 +52,7 @@ final class EntityDamageByEntityEvent implements Listener
                 $event->cancel();
                 return;
             }
-//je re
+
             $target = $event->getEntity();
             if ($target instanceof LegacyPlayer and $damager instanceof LegacyPlayer) {
                 if ($damager->isInCombat() and $target->isInCombat()) {
@@ -38,12 +64,48 @@ final class EntityDamageByEntityEvent implements Listener
                         $target->setInCombat(true, $damager);
                         Core::getInstance()->getScheduler()->scheduleRepeatingTask(new CombatTask($target), 20);
                         Core::getInstance()->getScheduler()->scheduleRepeatingTask(new CombatTask($damager), 20);
-                    }
-                } else {
-                    Core::getInstance()->getScheduler()->scheduleRepeatingTask(new CombatTask($target), 20);
-                    Core::getInstance()->getScheduler()->scheduleRepeatingTask(new CombatTask($damager), 20);
-                    $damager->setInCombat(true, $target);
-                    $target->setInCombat(true, $damager);
+                        $damager->setInCombat(true, $target);
+                        $target->setInCombat(true, $damager);
+                }
+
+                switch (true) {
+                    case $item instanceof Nemo:
+                        if (CooldownManager::hasCooldown($item)) {
+                            $damager->sendTip($damager->getLanguage()->getMessage("messages.interactions.cooldown", ["{timeleft}" => CooldownManager::getCooldown($item) - time()])->__toString());
+                            $event->cancel();
+                        } elseif (CooldownManager::getCooldownConfig($item->getId())) {
+                            $event->getEntity()->knockBack($vector->getX(), $vector->getZ(), Core::getInstance()->getConfig()->getNested("items.nemo.horizontal", 2), Core::getInstance()->getConfig()->getNested("items.nemo.vertical", 0.50));
+                            $item = CooldownManager::setCooldown($item, null);
+                            $damager->getInventory()->setItemInHand($item);
+                        }
+                        break;
+                    case $item instanceof Spell:
+                        if (CooldownManager::hasCooldown($item)) {
+                            $damager->sendTip($damager->getLanguage()->getMessage("messages.interactions.cooldown", ["{timeleft}" => CooldownManager::getCooldown($item) - time()])->__toString());
+                            $event->cancel();
+                        } elseif (CooldownManager::getCooldownConfig($item->getId())) {
+                            $item = CooldownManager::setCooldown($item, null);
+                            $damager->getInventory()->setItemInHand($item);
+                        }
+
+                        if ($item->getName() == SpellUtils::SPELL_LIGHTNING_NAME) {
+                        } elseif ($item->getName() == SpellUtils::SPELL_REPULSION_NAME) {
+                            $target = $event->getEntity();
+                            $target->knockBack($vector->getX(), $vector->getZ(), Core::getInstance()->getConfig()->getNested("items.spell.repulsion.horizontal", 1.5), Core::getInstance()->getConfig()->getNested("items.spell.repulsion.vertical", 0.50));
+                        } elseif ($item->getName() == SpellUtils::SPELL_ATTRACTION_NAME) {
+                            $target = $event->getEntity();
+                            $target->knockBack($vector->getX(), $vector->getZ(), Core::getInstance()->getConfig()->getNested("items.spell.attraction.horizontal", -1.5), Core::getInstance()->getConfig()->getNested("items.spell.attraction.vertical", -0.50));
+                        } elseif ($item->getName() == SpellUtils::SPELL_TELEPORT_NAME) {
+                            $target = $event->getEntity();
+                            $damager->teleport($target->getPosition());
+                        } elseif ($item->getName() == SpellUtils::SPELL_BLINDNESS_NAME) {
+                            $target = $event->getEntity();
+                            if ($target instanceof LegacyPlayer) {
+                                $target->getEffects()->add(new EffectInstance(VanillaEffects::BLINDNESS(), 100, 3));
+                            }
+                        }
+                    default:
+                        break;
                 }
             }
 
@@ -86,6 +148,7 @@ final class EntityDamageByEntityEvent implements Listener
                     break;
                 default:
                     break;
+            }
             }
             $event->setAttackCooldown(Core::getInstance()->getConfig()->getNested("knockback.attack_cooldown", 10));
         }

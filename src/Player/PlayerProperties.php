@@ -9,6 +9,10 @@ use Legacy\ThePit\Utils\CurrencyUtils;
 use Legacy\ThePit\Utils\PlayerUtils;
 use Legacy\ThePit\Utils\PrestigesUtils;
 use Legacy\ThePit\Utils\SpellUtils;
+use pocketmine\item\Armor;
+use pocketmine\item\Item;
+use pocketmine\item\ItemFactory;
+use pocketmine\item\ItemIds;
 use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\world\Position;
@@ -53,6 +57,8 @@ final class PlayerProperties
                     "autosprint" => false,
                     "blocked_players" => [],
                     "allow_private_messages" => true,
+                    "show-join-message" => true,
+                    "show-leave-message" => true,
                 ],
                 "mute" => [
                     "reason" => "",
@@ -64,6 +70,23 @@ final class PlayerProperties
                     "last_login" => "",
                     "last_logout" => ""
                 ],
+                "inventory" => [
+                    "helmet" => ItemFactory::getInstance()->get(ItemIds::CHAIN_HELMET),
+                    "chestplate" => ItemFactory::getInstance()->get(ItemIds::CHAIN_CHESTPLATE),
+                    "leggings" => ItemFactory::getInstance()->get(ItemIds::CHAIN_LEGGINGS),
+                    "boots" => ItemFactory::getInstance()->get(ItemIds::CHAIN_BOOTS),
+
+                    "sword" => ItemFactory::getInstance()->get(ItemIds::STONE_SWORD),
+                    "bow" => ItemFactory::getInstance()->get(ItemIds::BOW),
+                    "arrow" => ItemFactory::getInstance()->get(ItemIds::ARROW, 0, 16),
+
+                    "rod" => ItemFactory::getInstance()->get(ItemIds::AIR), //1k gold
+                    "bucket" => ItemFactory::getInstance()->get(ItemIds::AIR), //500 gold
+                    "snowball" => ItemFactory::getInstance()->get(ItemIds::AIR), //500 gold
+                    "blocks" => ItemFactory::getInstance()->get(ItemIds::AIR), //1k gold
+                    "flap" => ItemFactory::getInstance()->get(ItemIds::AIR), //1,5k gold
+                    "nemo" => ItemFactory::getInstance()->get(ItemIds::AIR), //1,5k gold
+                ]
             ]);
         } else {
             $this->setBaseProperties(PlayerUtils::TagtoArray($nbt->getCompoundTag("properties")));

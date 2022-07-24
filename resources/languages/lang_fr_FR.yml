@@ -15,6 +15,8 @@ messages:
       speed:
         success: "Vous avez utilisé votre sort de vitesse"
         cooldown: "Vous devez attendre {time} secondes avant de pouvoir utiliser votre sort de vitesse"
+  player-join: "§a+ {player} +"
+  player-quit: "§c- {player} -"
   commands:
     not-permission: "§cYou do not have permission to use this command"
     target-not-player: "Le joueur mentionné n'existe pas"
