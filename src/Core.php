@@ -4,6 +4,7 @@ namespace Legacy\ThePit;
 
 use Legacy\ThePit\Managers\CommandsManager;
 use Legacy\ThePit\Managers\CustomItemManager;
+use Legacy\ThePit\Managers\DataManager;
 use Legacy\ThePit\Managers\EntitiesManager;
 use Legacy\ThePit\Managers\EventsManager;
 use Legacy\ThePit\Managers\FormsManager;
@@ -14,6 +15,7 @@ use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Managers\LanguageManager;
 use Legacy\ThePit\Managers\ListenersManager;
 use Legacy\ThePit\Managers\ScoreBoardManager;
+use Legacy\ThePit\Providers\YAMLProvider;
 use Legacy\ThePit\Tasks\GoldSpawnTask;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
@@ -49,12 +51,15 @@ class Core extends PluginBase
         FormsManager::initForms();
         CurrenciesManager::initCurrencies();
         PrestigesManager::initPrestiges();
-
         $default = yaml_parse(file_get_contents($this->getFile() . "resources/" . "config.yml"));
         if (is_array($default)) $this->getConfig()->setDefaults($default);
 
         $this->getScheduler()->scheduleDelayedRepeatingTask(new GoldSpawnTask(), 20 * 60, 20);
         $this->saveResource("config.yml", $this->isInDevMode());
+        DataManager::register([
+            new YAMLProvider("config",$this->getFile() . "resources/" . "config.yml"),
+
+        ]);
     }
 
     public function isInDevMode(): bool
