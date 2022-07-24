@@ -23,10 +23,10 @@ class SpawnCommand extends Commands
         if ($this->testPermissionSilent($sender)) {
             if ($sender instanceof LegacyPlayer) {
                 $sender_language = $this->getSenderLanguage($sender);
-                if ($sender->isInTeleportation()) {
+                if ($sender->getInCache("teleportation", false)) {
                     $sender->sendMessage($this->getSenderLanguage($sender)->getMessage("messages.commands.spawn.already-in-teleportation"));
                 } else {
-                    $sender->setTeleportation(true);
+                    $sender->setInCache("teleportation", true);
                     $this->location = $sender->getLocation();
                     $sender->getEffects()->add(new EffectInstance(VanillaEffects::BLINDNESS(), 20 * 10, 1));
                     Core::getInstance()->getScheduler()->scheduleRepeatingTask(new ClosureTask(function () use ($sender, $sender_language) {
@@ -46,7 +46,7 @@ class SpawnCommand extends Commands
                                     if ($sender->isOnline()) {
                                         if ($x != $playerX or $y != $playerY or $z != $playerZ) {
                                             $sender_language->getMessage("messages.commands.spawn.teleportation-cancelled")->sendPopup($sender);
-                                            $sender->setTeleportation(false);
+                                            $sender->setInCache("teleportation", false);
                                             $this->time = 4;
                                             $sender->getEffects()->remove(VanillaEffects::BLINDNESS());
                                             throw new CancelTaskException();
@@ -57,7 +57,7 @@ class SpawnCommand extends Commands
                                         }
                                     } else {
                                         $sender_language->getMessage("messages.commands.spawn.teleportation-cancelled")->sendPopup($sender);
-                                        $sender->setTeleportation(false);
+                                        $sender->setInCache("teleportation", false);
                                         $this->time = 4;
                                         $sender->getEffects()->remove(VanillaEffects::BLINDNESS());
                                         throw new CancelTaskException();
@@ -69,7 +69,7 @@ class SpawnCommand extends Commands
                                     ])->sendPopup($sender);
                                     $sender->getEffects()->remove(VanillaEffects::BLINDNESS());
                                     $sender->teleport(Core::getInstance()->getServer()->getWorldManager()->getDefaultWorld()->getSpawnLocation());
-                                    $sender->setTeleportation(false);
+                                    $sender->setInCache("teleportation", false);
                                     throw new CancelTaskException();
                             }
                         } catch (LanguageException $exception) {

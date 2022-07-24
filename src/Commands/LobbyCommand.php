@@ -25,10 +25,10 @@ final class LobbyCommand extends Commands
         if ($this->testPermissionSilent($sender)) {
             if ($sender instanceof LegacyPlayer) {
                 $sender_language = $this->getSenderLanguage($sender);
-                if ($sender->isInTeleportation()) {
+                if ($sender->getInCache("teleportation", false)) {
                     $sender_language->getMessage("messages.commands.lobby.already-in-teleportation")->send($sender);
                 } else {
-                    $sender->setTeleportation(true);
+                    $sender->setInCache("teleportation", true);
                     $this->location = $sender->getLocation();
                     $sender->getEffects()->add(new EffectInstance(VanillaEffects::BLINDNESS(), 20 * 10, 1));
                     Core::getInstance()->getScheduler()->scheduleRepeatingTask(new ClosureTask(function () use ($sender, $sender_language) {
@@ -48,7 +48,7 @@ final class LobbyCommand extends Commands
                                     if ($sender->isOnline()) {
                                         if ($x != $playerX or $y != $playerY or $z != $playerZ) {
                                             $sender_language->getMessage("messages.commands.lobby.teleportation-cancelled")->sendPopup($sender);
-                                            $sender->setTeleportation(false);
+                                            $sender->setInCache("teleportation", false);
                                             $this->time = 4;
                                             $sender->getEffects()->remove(VanillaEffects::BLINDNESS());
                                             throw new CancelTaskException();
@@ -59,7 +59,7 @@ final class LobbyCommand extends Commands
                                         }
                                     } else {
                                         $sender_language->getMessage("messages.commands.lobby.teleportation-cancelled")->sendPopup($sender);
-                                        $sender->setTeleportation(false);
+                                        $sender->setInCache("teleportation", false);
                                         $this->time = 4;
                                         $sender->getEffects()->remove(VanillaEffects::BLINDNESS());
                                         throw new CancelTaskException();
@@ -70,7 +70,7 @@ final class LobbyCommand extends Commands
                                         "{time}" => $this->time
                                     ])->sendPopup($sender);
                                     $sender->teleport(Core::getInstance()->getServer()->getWorldManager()->getDefaultWorld()->getSpawnLocation());
-                                    $sender->setTeleportation(false);
+                                    $sender->setInCache("teleportation", false);
                                     $sender->getEffects()->remove(VanillaEffects::BLINDNESS());
                                     $sender->transfer(Managers::DATA()->get("config")->getNested("server.lobby.ip"), Managers::DATA()->get("config")->getNested("server.lobby.port"));
                                     throw new CancelTaskException();

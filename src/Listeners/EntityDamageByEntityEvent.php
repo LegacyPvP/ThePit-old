@@ -37,13 +37,13 @@ final class EntityDamageByEntityEvent implements Listener
                 return;
             }
 
-            if ($damager->isInCombat() and $target->isInCombat()) {
+            if ($damager->getInCache("combat", false) and $target->getInCache("combat", false)) {
                 if (!str_contains($target->getName(), $damager->targetName) and !str_contains($damager->getName(), $target->targetName)) {
                     $damager->getLanguage()->getMessage("messages.combat.already_in_combat")->send($damager);
                     $event->cancel();
                 } else {
-                    $damager->setInCombat(true, $target);
-                    $target->setInCombat(true, $damager);
+                    $damager->setInCache("combat", true);
+                    $target->setInCache("combat", true);
                     Core::getInstance()->getScheduler()->scheduleRepeatingTask(new CombatTask($target), 20);
                     Core::getInstance()->getScheduler()->scheduleRepeatingTask(new CombatTask($damager), 20);
                 }
