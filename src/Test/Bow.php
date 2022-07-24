@@ -14,6 +14,7 @@ use pocketmine\world\sound\BowShootSound;
 
 final class Bow extends \pocketmine\item\Bow
 {
+
     public function onReleaseUsing(Player $player) : ItemUseResult
     {
         $arrow = VanillaItems::ARROW();
