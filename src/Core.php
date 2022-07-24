@@ -58,7 +58,6 @@ class Core extends PluginBase
         $this->saveResource("config.yml", $this->isInDevMode());
         DataManager::register([
             new YAMLProvider("config",$this->getFile() . "resources/" . "config.yml"),
-
         ]);
     }
 
@@ -68,19 +67,11 @@ class Core extends PluginBase
     }
 
     /**
+     * @deprecated
      * @return string
      */
     public static function getFilePath(): string
     {
         return self::$filePath;
     }
-
-    /*
-
-    public function getConfigByName(string $name): Config
-    {
-        return new Config($this->getDataFolder() . $name . ".yml", Config::YAML);
-    }
-
-    */
 }
