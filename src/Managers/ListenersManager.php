@@ -14,11 +14,11 @@ use Legacy\ThePit\Listeners\PlayerCreationEvent;
 use Legacy\ThePit\Listeners\PlayerDropItemEvent;
 use Legacy\ThePit\Listeners\PlayerItemUseEvent;
 use Legacy\ThePit\Listeners\PlayerJoinEvent;
-use pocketmine\plugin\Plugin;
+use pocketmine\Server;
 
-abstract class ListenersManager
+final class ListenersManager extends Managers
 {
-    #[Pure] public static function getListeners(): array
+    #[Pure] public function getAll(): array
     {
         return [
             new PlayerCreationEvent(),
@@ -34,12 +34,17 @@ abstract class ListenersManager
         ];
     }
 
-    public static function initListeners(Plugin $plugin): void
+    public function init(): void
     {
-        foreach (self::getListeners() as $event) {
-            $plugin->getServer()->getPluginManager()->registerEvents($event, $plugin);
+        foreach ($this->getAll() as $event) {
+            Server::getInstance()->getPluginManager()->registerEvents($event, Core::getInstance());
             Core::getInstance()->getLogger()->notice("[LISTENERS] Listener: " . $event::class . " Loaded");
         }
+    }
+
+    public function get(string $name): ?object
+    {
+        return null;
     }
 
 }

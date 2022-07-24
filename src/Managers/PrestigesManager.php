@@ -7,33 +7,33 @@ use Legacy\ThePit\Core;
 use Legacy\ThePit\Objects\Prestige;
 use Legacy\ThePit\Utils\PrestigesUtils;
 
-abstract class PrestigesManager
+final class PrestigesManager extends Managers
 {
     /**
      * @var Prestige[]
      */
-    private static array $levels = [];
+    private array $levels = [];
 
     /**
      * @return Prestige[]
      */
-    #[Pure] public static function getLevels(): array
+    #[Pure] public function getAll(): array
     {
         return [
             new Prestige(PrestigesUtils::PRESTIGE_LEVELS_REACH_1, PrestigesUtils::PRESTIGE_LEVEL_1, PrestigesUtils::PRESTIGE_1),
         ];
     }
 
-    public static function initPrestiges(): void
+    public function init(): void
     {
-        foreach (self::getLevels() as $level) {
-            self::$levels[$level->getName()] = $level;
+        foreach ($this->getAll() as $level) {
+            $this->levels[$level->getName()] = $level;
             Core::getInstance()->getLogger()->notice("[PRESTIGES] Loaded");
         }
     }
 
-    public static function getLevel(string $name): Prestige
+    public function get(string $name): ?Prestige
     {
-        return self::$levels[$name] ?? reset(self::$levels);
+        return $this->levels[$name] ?? reset($this->levels) ?: null;
     }
 }

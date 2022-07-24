@@ -34,9 +34,9 @@ use Legacy\ThePit\Commands\{
 };
 use Legacy\ThePit\Core;
 
-abstract class CommandsManager
+final class CommandsManager extends Managers
 {
-    public static function getCommands(): array
+    public function getAll(): array
     {
         return [
             new BanCommand('ban'),
@@ -68,27 +68,32 @@ abstract class CommandsManager
         ];
     }
 
-    public static function initCommands(): void
+    public function init(): void
     {
         foreach (Core::getInstance()->getServer()->getCommandMap()->getCommands() as $command) {
-            foreach (self::getCommands() as $cmd) {
+            foreach ($this->getAll() as $cmd) {
                 if ($cmd->getName() === $command->getName()) {
                     Core::getInstance()->getServer()->getCommandMap()->unregister($command);
                 }
             }
         }
 
-        foreach (self::getCommands() as $command) {
+        foreach ($this->getAll() as $command) {
             Core::getInstance()->getServer()->getCommandMap()->register($command->getName(), $command);
             Core::getInstance()->getLogger()->notice("[COMMANDS] Command: /{$command->getName()} Loaded");
         }
+    }
+
+    public function get(string $name): ?object
+    {
+        return Core::getInstance()->getServer()->getCommandMap()->getCommand($name);
     }
 
     /**
      * @param string $name
      * @return string
      */
-    public static function getDescription(string $name): string
+    public function getDescription(string $name): string
     {
         return Core::getInstance()->getConfig()->getNested("commands.$name", ['description' => ""])['description'] ?? "";
     }
@@ -97,7 +102,7 @@ abstract class CommandsManager
      * @param string $name
      * @return string
      */
-    public static function getUsage(string $name): string
+    public function getUsage(string $name): string
     {
         return Core::getInstance()->getConfig()->getNested("commands.$name", ['usage' => "/$name"])['usage'] ?? "";
     }
@@ -106,7 +111,7 @@ abstract class CommandsManager
      * @param string $name
      * @return array
      */
-    public static function getAliases(string $name): array
+    public function getAliases(string $name): array
     {
         return Core::getInstance()->getConfig()->getNested("commands.$name", ['aliases' => []])['aliases'] ?? [];
     }
@@ -115,7 +120,7 @@ abstract class CommandsManager
      * @param string $name
      * @return string
      */
-    public static function getPermission(string $name): string
+    public function getPermission(string $name): string
     {
         return Core::getInstance()->getConfig()->getNested("commands.$name", ['permission' => "core.commands.$name"])['permission'] ?? "core.commands.$name";
     }

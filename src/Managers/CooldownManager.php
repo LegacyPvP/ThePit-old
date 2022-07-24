@@ -6,8 +6,9 @@ use Legacy\ThePit\Core;
 use pocketmine\item\Item;
 use pocketmine\nbt\tag\IntTag;
 
-abstract class CooldownManager
+final class CooldownManager extends Managers
 {
+
     public static function getCooldownConfig(int $item): bool
     {
         return Core::getInstance()->getConfig()->getNested("cooldowns.$item", 0);

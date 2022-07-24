@@ -11,34 +11,34 @@ use pocketmine\player\OfflinePlayer;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
-abstract class MuteManager
+final class MutesManager extends Managers
 {
-    const DEFAULT_REASON = "Aucune raison donnée";
-    const DEFAULT_STAFF = "CONSOLE";
+    private const DEFAULT_REASON = "Aucune raison donnée";
+    private const DEFAULT_STAFF = "CONSOLE";
 
-    public static function isMuted(LegacyPlayer $player): bool
+    public function isMuted(LegacyPlayer $player): bool
     {
-        return self::getTime($player) > time();
+        return $this->getTime($player) > time();
     }
 
-    public static function setMuted(LegacyPlayer $player, int $time, string $reason = self::DEFAULT_REASON, string $staff = self::DEFAULT_STAFF): void
+    public function setMuted(LegacyPlayer $player, int $time, string $reason = self::DEFAULT_REASON, string $staff = self::DEFAULT_STAFF): void
     {
         $player->getPlayerProperties()->setNestedProperties("mute.time", $time);
         $player->getPlayerProperties()->setNestedProperties("mute.reason", $reason);
         $player->getPlayerProperties()->setNestedProperties("mute.staff", $staff);
     }
 
-    public static function getTime(LegacyPlayer $player): int
+    public function getTime(LegacyPlayer $player): int
     {
         return $player->getPlayerProperties()->getNestedProperties("mute.time");
     }
 
-    public static function getReason(LegacyPlayer $player): string
+    public function getReason(LegacyPlayer $player): string
     {
         return $player->getPlayerProperties()->getNestedProperties("mute.reason");
     }
 
-    public static function getStaff(LegacyPlayer $player): string
+    public function getStaff(LegacyPlayer $player): string
     {
         return $player->getPlayerProperties()->getNestedProperties("mute.staff");
     }

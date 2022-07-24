@@ -5,7 +5,6 @@ namespace Legacy\ThePit\Commands;
 use Legacy\ThePit\Core;
 use Legacy\ThePit\Exceptions\LanguageException;
 use Legacy\ThePit\Player\LegacyPlayer;
-use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\command\CommandSender;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;

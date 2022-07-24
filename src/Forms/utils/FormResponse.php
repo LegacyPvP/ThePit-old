@@ -14,7 +14,6 @@ namespace Legacy\ThePit\Forms\utils;
 use Legacy\ThePit\Forms\element\Dropdown;
 use Legacy\ThePit\Forms\element\Element;
 use Legacy\ThePit\Forms\element\Input;
-use Legacy\ThePit\Forms\element\Selector;
 use Legacy\ThePit\Forms\element\Slider;
 use Legacy\ThePit\Forms\element\StepSlider;
 use Legacy\ThePit\Forms\element\Toggle;
@@ -65,7 +64,7 @@ final class FormResponse
     /**
      * @param string $id
      * @param string $expectedClass
-     * @return Element|Input|Toggle|Slider|Selector
+     * @return Element
      */
     private function getElement(string $id, string $expectedClass): Element
     {

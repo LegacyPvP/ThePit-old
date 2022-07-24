@@ -4,7 +4,7 @@ namespace Legacy\ThePit\Commands;
 
 use DateTime;
 use Legacy\ThePit\Exceptions\LanguageException;
-use Legacy\ThePit\Managers\MuteManager;
+use Legacy\ThePit\Managers\Managers;
 use Legacy\ThePit\Player\LegacyPlayer;
 use Legacy\ThePit\Utils\ServerUtils;
 use Legacy\ThePit\Utils\TimeUtils;
@@ -22,7 +22,7 @@ final class MuteCommand extends Commands
                     if ($target instanceof LegacyPlayer) {
                         $time = TimeUtils::strToDate($args[1]) ?? new DateTime("now");
                         $reason = isset($args[2]) ? implode(" ", array_slice($args, 2)) : "Aucune raison donnée.";
-                        MuteManager::setMuted($target, $time->getTimestamp(), $reason, $sender->getName());
+                        Managers::MUTES()->setMuted($target, $time->getTimestamp(), $reason, $sender->getName());
                         $target->getLanguage()->getMessage("messages.commands.mute.muted", [
                             "{player}" => $sender->getName(),
                             "{date}" => $time->format("d/m/Y H:i:s"),

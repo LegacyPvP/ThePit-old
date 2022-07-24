@@ -12,6 +12,9 @@ declare(strict_types=1);
 namespace Legacy\ThePit\Forms\element;
 
 
+use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\Pure;
+
 final class Input extends Element
 {
 
@@ -19,7 +22,7 @@ final class Input extends Element
     private ?string $placeholder;
     private ?string $submittedText = null;
 
-    public function __construct(?string $headerText, ?string $defaultText = null, ?string $placeholder = null)
+    #[Pure] public function __construct(?string $headerText, ?string $defaultText = null, ?string $placeholder = null)
     {
         $this->defaultText = $defaultText;
         $this->placeholder = $placeholder;
@@ -41,7 +44,7 @@ final class Input extends Element
         $this->submittedText = $result;
     }
 
-    public function serializeBody(): array
+    #[ArrayShape(["default" => "string", "placeholder" => "string"])] public function serializeBody(): array
     {
         return [
             "default" => $this->defaultText ?? "",

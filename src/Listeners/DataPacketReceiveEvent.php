@@ -3,7 +3,7 @@
 namespace Legacy\ThePit\Listeners;
 
 use Exception;
-use Legacy\ThePit\Managers\CustomItemManager;
+use Legacy\ThePit\Managers\Managers;
 use pocketmine\block\BlockFactory;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\block\BlockToolType;
@@ -106,13 +106,13 @@ final class DataPacketReceiveEvent implements Listener
                             if ($pass) {
                                 if (!$player->isCreative()) {
                                     $breakTime = ceil($target->getBreakInfo()->getBreakTime($player->getInventory()->getItemInHand()) * 20);
-                                    CustomItemManager::scheduleTask(Position::fromObject($pos, $player->getWorld()), $player->getInventory()->getItemInHand(), $player, $breakTime, $player->getInventory()->getHeldItemIndex());
+                                    Managers::CUSTOMITEMS()->scheduleTask(Position::fromObject($pos, $player->getWorld()), $player->getInventory()->getItemInHand(), $player, $breakTime, $player->getInventory()->getHeldItemIndex());
                                     $player->getWorld()->broadcastPacketToViewers($pos, LevelSoundEventPacket::nonActorSound(LevelSoundEvent::BREAK_BLOCK, $pos, false));
                                 }
                             }
                         } elseif ($action->getActionType() === PlayerAction::ABORT_BREAK) {
                             $player->getWorld()->broadcastPacketToViewers($pos, LevelEventPacket::create(LevelEvent::BLOCK_STOP_BREAK, 0, $pos->asVector3()));
-                            CustomItemManager::stopTask($player, Position::fromObject($pos, $player->getWorld()));
+                            Managers::CUSTOMITEMS()->stopTask($player, Position::fromObject($pos, $player->getWorld()));
                         }
                     }
                 } catch (Exception) {

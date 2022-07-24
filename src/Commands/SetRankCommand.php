@@ -2,7 +2,7 @@
 
 namespace Legacy\ThePit\Commands;
 
-use Legacy\ThePit\Managers\RanksManager;
+use Legacy\ThePit\Managers\Managers;
 use Legacy\ThePit\Player\LegacyPlayer;
 use pocketmine\command\CommandSender;
 use pocketmine\nbt\tag\CompoundTag;
@@ -16,7 +16,7 @@ final class SetRankCommand extends Commands
     {
         if ($this->testPermissionSilent($sender)) {
             if (isset($args[0], $args[1])) {
-                $rank = RanksManager::parseRank($args[1]);
+                $rank = Managers::RANKS()->get($args[1]);
                 if ($rank) {
                     $target = Server::getInstance()->getPlayerByPrefix($args[0]) ?? Server::getInstance()->getOfflinePlayer($args[0]);
                     if ($target instanceof LegacyPlayer) {

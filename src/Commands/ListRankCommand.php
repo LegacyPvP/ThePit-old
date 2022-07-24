@@ -2,7 +2,7 @@
 
 namespace Legacy\ThePit\Commands;
 
-use Legacy\ThePit\Managers\RanksManager;
+use Legacy\ThePit\Managers\Managers;
 use pocketmine\command\CommandSender;
 
 final class ListRankCommand extends Commands
@@ -11,7 +11,7 @@ final class ListRankCommand extends Commands
     {
         if ($this->testPermissionSilent($sender)) {
             $list = $this->getSenderLanguage($sender)->getMessage("messages.commands.listrank.header")->__toString();
-            foreach (RanksManager::getRanks() as $rank) {
+            foreach (Managers::RANKS()->getAll() as $rank) {
                 $list .= str_replace(["{name}"], [$rank->getName()], $this->getSenderLanguage($sender)->getMessage("messages.commands.listrank.format", [], false)->__toString());
             }
             $sender->sendMessage($list);

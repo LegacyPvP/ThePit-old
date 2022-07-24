@@ -3,10 +3,8 @@
 namespace Legacy\ThePit\Player;
 
 use Legacy\ThePit\Entities\List\FishingHook;
+use Legacy\ThePit\Managers\Managers;
 use Legacy\ThePit\Providers\CurrencyProvider;
-use Legacy\ThePit\Managers\KnockBackManager;
-use Legacy\ThePit\Managers\RanksManager;
-use Legacy\ThePit\Managers\LanguageManager;
 use Legacy\ThePit\Objects\Rank;
 use Legacy\ThePit\Objects\Language;
 use pocketmine\entity\effect\EffectInstance;
@@ -76,7 +74,7 @@ final class LegacyPlayer extends Player
 
     public function getLanguage(): Language
     {
-        return LanguageManager::parseLanguage(parent::getLocale());
+        return Managers::LANGUAGES()->get(parent::getLocale());
     }
 
     public function syncNBT(): void
@@ -187,14 +185,14 @@ final class LegacyPlayer extends Player
             $e = $source->getChild();
             if ($e !== null) {
                 $motion = $e->getMotion();
-                $this->knockBack($motion->x, $motion->z, KnockBackManager::getHorizontal(), KnockBackManager::getVertical());
+                $this->knockBack($motion->x, $motion->z, Managers::KNOCKBACK()->getHorizontal(), Managers::KNOCKBACK()->getVertical());
             }
         } elseif ($source instanceof EntityDamageByEntityEvent) {
             $e = $source->getDamager();
             if ($e !== null) {
                 $deltaX = $this->location->x - $e->location->x;
                 $deltaZ = $this->location->z - $e->location->z;
-                $this->knockBack($deltaX, $deltaZ, KnockBackManager::getHorizontal(), KnockBackManager::getVertical());
+                $this->knockBack($deltaX, $deltaZ, Managers::KNOCKBACK()->getHorizontal(), Managers::KNOCKBACK()->getVertical());
             }
         }
 
@@ -216,7 +214,7 @@ final class LegacyPlayer extends Player
 
     public function getRank(): Rank
     {
-        return RanksManager::parseRank($this->getPlayerProperties()->getNestedProperties('infos.rank'));
+        return Managers::RANKS()->get($this->getPlayerProperties()->getNestedProperties('infos.rank'));
     }
 
     public function isInCombat()

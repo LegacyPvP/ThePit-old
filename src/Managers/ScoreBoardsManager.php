@@ -13,28 +13,28 @@ use pocketmine\Server;
 use Legacy\ThePit\ScoreBoard\ScoreBoardApi;
 use Legacy\ThePit\ScoreBoard\module\ScoreBoard;
 
-abstract class ScoreBoardManager
+final class ScoreBoardsManager extends Managers
 {
-    public static array $scoreboards = [];
+    public array $scoreboards = [];
 
-    public static function initScoreBoards(): void
+    public function init(): void
     {
         ScoreBoardApi::loadManager();
 
         $scoreboards = Core::getInstance()->getConfig()->get("scoreboards");
         foreach ($scoreboards as $type => $scoreboard) {
             if (!is_array($scoreboard)) continue;
-            self::$scoreboards[$type] = [
+            $this->scoreboards[$type] = [
                 "id" => array_search($type, array_keys($scoreboards)) + 1,
                 "scoreboard" => ($manager = ScoreBoardApi::getManager())?->getScoreBoard(
                     $manager?->createScoreBoard(array_search($type, array_keys($scoreboards)) + 1)
                 )
             ];
-            if (!isset(self::$scoreboards[$type])) {
+            if (!isset($this->scoreboards[$type])) {
                 Core::getInstance()->getLogger()->emergency("[SCOREBOARDS] Failed to load ScoreBoard: $type ... Retrying in 5 seconds");
                 Core::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(function () use ($type): void {
                     Core::getInstance()->getLogger()->notice("[SCOREBOARDS] Retrying to load ScoreBoard: $type");
-                    self::initScoreBoards();
+                    $this->init();
                 }), 5 * 20);
             } else Core::getInstance()->getLogger()->notice("[SCOREBOARDS] ScoreBoard: $type Loaded");
         }
@@ -45,51 +45,56 @@ abstract class ScoreBoardManager
     /**
      * @return array
      */
-    public static function getScoreboards(): array
+    public function getAll(): array
     {
-        return self::$scoreboards;
+        return $this->scoreboards;
     }
 
-    public static function getTitle(string $type): string
+    public function get(string $name): ?ScoreBoard
     {
-        $type = $type === EventsManager::TYPE_NONE ? "basic" : $type;
+        return $this->scoreboards[$name];
+    }
+
+    public function getTitle(string $type): string
+    {
+        $type = $type === Managers::EVENTS()::TYPE_NONE ? "basic" : $type;
         return Core::getInstance()->getConfig()->getNested("scoreboards.$type.title", "Legacy");
     }
 
-    public static function getLines(string $type): array
+    public function getLines(string $type): array
     {
         return Core::getInstance()->getConfig()->getNested("scoreboards.$type.lines", []);
     }
 
-    public static function updateScoreboard(?ScoreBoard $scoreboard, string $type): void
+    public function updateScoreboard(?ScoreBoard $scoreboard, string $type): void
     {
         foreach (Server::getInstance()->getOnlinePlayers() as $player) {
-            foreach (self::getScoreboards() as $scoreboard) {
+            foreach ($this->getAll() as $scoreboard) {
                 $scoreboard["scoreboard"]->removePlayer($player);
             }
             $scoreboard = match ($type) {
-                EventsManager::TYPE_NONE => match ($player->getPlayerProperties()->getNestedProperties("stats.prestige") ?? 0) {
-                    0 => self::$scoreboards["basic"]["scoreboard"],
-                    default => self::$scoreboards["prestige"]["scoreboard"],
+                Managers::EVENTS()::TYPE_NONE => match ($player->getPlayerProperties()->getNestedProperties("stats.prestige") ?? 0) {
+                    0 => $this->scoreboards["basic"]["scoreboard"],
+                    default => $this->scoreboards["prestige"]["scoreboard"],
                 },
-                EventsManager::TYPE_DEATHMATCH => self::$scoreboards[EventsManager::TYPE_DEATHMATCH]["scoreboard"],
-                EventsManager::TYPE_RAFFLE => self::$scoreboards[EventsManager::TYPE_RAFFLE]["scoreboard"],
-                EventsManager::TYPE_SPIRE => self::$scoreboards[EventsManager::TYPE_SPIRE]["scoreboard"],
+                Managers::EVENTS()::TYPE_DEATHMATCH => $this->scoreboards[Managers::EVENTS()::TYPE_DEATHMATCH]["scoreboard"],
+                Managers::EVENTS()::TYPE_RAFFLE => $this->scoreboards[Managers::EVENTS()::TYPE_RAFFLE]["scoreboard"],
+                Managers::EVENTS()::TYPE_SPIRE => $this->scoreboards[Managers::EVENTS()::TYPE_SPIRE]["scoreboard"],
             };
             if ($player->getPlayerProperties()->getNestedProperties("parameters.scoreboard") ?? true) {
                 $scoreboard?->addPlayer($player);
             }
-            $scoreboard = self::updateLines($scoreboard, $type, $player);
+            $scoreboard = $this->updateLines($scoreboard, $type, $player);
         }
-        $scoreboard = self::updateTitle($scoreboard, $type);
+        $scoreboard = $this->updateTitle($scoreboard, $type);
         $scoreboard?->sendToAll();
     }
 
-    public static function updateLines(ScoreBoard $scoreboard, string $type, Player|LegacyPlayer|null $player = null): ScoreBoard
+    public function updateLines(ScoreBoard $scoreboard, string $type, Player|LegacyPlayer|null $player = null): ScoreBoard
     {
-        if ($type === EventsManager::TYPE_NONE) $type = ($player?->getPlayerProperties()?->getNestedProperties("stats.prestige") ?? 0) >= 1 ? "prestige" : "basic";
-        foreach (array_slice(self::getLines($type), 0, 15) as $i => $line) {
-            foreach (self::getParameters($type, $player) as $parameter => $value) {
+        if ($type === Managers::EVENTS()::TYPE_NONE) $type = ($player?->getPlayerProperties()?->getNestedProperties("stats.prestige") ?? 0) >= 1 ? "prestige" : "basic";
+        foreach (array_slice($this->getLines($type), 0, 15) as $i => $line) {
+            foreach ($this->getParameters($type, $player) as $parameter => $value) {
                 $line = str_replace($parameter, $value, $line);
             }
             $scoreboard->setLineToAll(new ScoreBoardLine($i + 1, $line));
@@ -97,7 +102,7 @@ abstract class ScoreBoardManager
         return $scoreboard;
     }
 
-    public static function getParameters(string $type, ?LegacyPlayer $player): array
+    public function getParameters(string $type, ?LegacyPlayer $player): array
     {
         return match ($type) {
             "basic" => [
@@ -154,9 +159,9 @@ abstract class ScoreBoardManager
         };
     }
 
-    public static function updateTitle(?ScoreBoard $scoreboard, string $type): ?ScoreBoard
+    public function updateTitle(?ScoreBoard $scoreboard, string $type): ?ScoreBoard
     {
-        $scoreboard?->setDisplayName(self::getTitle($type));
+        $scoreboard?->setDisplayName($this->getTitle($type));
         return $scoreboard;
     }
 }

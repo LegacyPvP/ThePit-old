@@ -2,10 +2,8 @@
 
 namespace Legacy\ThePit\Commands;
 
-use Legacy\ThePit\Managers\RanksManager;
 use Legacy\ThePit\Player\LegacyPlayer;
 use pocketmine\command\CommandSender;
-use pocketmine\player\Player;
 
 final class ListCommand extends Commands
 {

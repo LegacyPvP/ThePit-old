@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Legacy\ThePit\Forms\icon;
 
 
+use JetBrains\PhpStorm\ArrayShape;
 use JsonSerializable;
 
 final class ButtonIcon implements JsonSerializable
@@ -39,7 +40,7 @@ final class ButtonIcon implements JsonSerializable
         return $this->type;
     }
 
-    public function jsonSerialize(): array
+    #[ArrayShape(["type" => "string", "data" => "string"])] public function jsonSerialize(): array
     {
         return [
             "type" => $this->type,

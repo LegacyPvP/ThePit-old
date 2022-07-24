@@ -6,7 +6,7 @@ use JsonException;
 use Legacy\ThePit\Core;
 use Legacy\ThePit\Exceptions\FormsException;
 use Legacy\ThePit\Exceptions\LanguageException;
-use Legacy\ThePit\Managers\FormsManager;
+use Legacy\ThePit\Managers\Managers;
 use Legacy\ThePit\Player\LegacyPlayer;
 use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\command\CommandSender;
@@ -22,7 +22,7 @@ final class KnockBackCommand extends Commands
             try {
                 if ($sender instanceof LegacyPlayer) {
                     try {
-                        FormsManager::sendForm($sender, "knockback");
+                        Managers::FORMS()->sendForm($sender, "knockback");
                     } catch (FormsException $exception) {
                         throw new LanguageException($exception->getMessage(), $exception->getArgs(), $exception->getPrefix(), $exception->getCode(), $exception);
                     }

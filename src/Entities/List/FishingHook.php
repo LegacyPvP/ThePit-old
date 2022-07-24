@@ -2,6 +2,7 @@
 
 namespace Legacy\ThePit\Entities\List;
 
+use JetBrains\PhpStorm\Pure;
 use Legacy\ThePit\Items\List\FishingRod;
 use Legacy\ThePit\Player\LegacyPlayer;
 use pocketmine\block\Block;
@@ -75,21 +76,21 @@ class FishingHook extends Projectile
     {
         $rand = new Random();
         $f = sqrt($x * $x + $y * $y + $z * $z);
-        $x = $x / (float)$f;
-        $y = $y / (float)$f;
-        $z = $z / (float)$f;
-        $x = $x + $rand->nextSignedFloat() * 0.0074 * (float)$f2;
-        $y = $y + $rand->nextSignedFloat() * 0.0074 * (float)$f2;
-        $z = $z + $rand->nextSignedFloat() * 0.0074 * (float)$f2;
-        $x = $x * (float)$f1;
-        $y = $y * (float)$f1;
-        $z = $z * (float)$f1;
+        $x = $x / $f;
+        $y = $y / $f;
+        $z = $z / $f;
+        $x = $x + $rand->nextSignedFloat() * 0.0074 * $f2;
+        $y = $y + $rand->nextSignedFloat() * 0.0074 * $f2;
+        $z = $z + $rand->nextSignedFloat() * 0.0074 * $f2;
+        $x = $x * $f1;
+        $y = $y * $f1;
+        $z = $z * $f1;
         $this->motion->x += $x;
         $this->motion->y += $y;
         $this->motion->z += $z;
     }
 
-    public function getInitialSizeInfo(): EntitySizeInfo
+    #[Pure] public function getInitialSizeInfo(): EntitySizeInfo
     {
         return new EntitySizeInfo(0.25, 0.25);
     }

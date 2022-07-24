@@ -2,20 +2,15 @@
 
 namespace Legacy\ThePit\Player;
 
-use Legacy\ThePit\Managers\RanksManager;
-use Legacy\ThePit\Objects\Prestige;
+use Legacy\ThePit\Managers\Managers;
 use Legacy\ThePit\Traits\PropertiesTrait;
 use Legacy\ThePit\Utils\CurrencyUtils;
 use Legacy\ThePit\Utils\PlayerUtils;
 use Legacy\ThePit\Utils\PrestigesUtils;
-use Legacy\ThePit\Utils\SpellUtils;
-use pocketmine\item\Armor;
-use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
 use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\CompoundTag;
-use pocketmine\world\Position;
 
 final class PlayerProperties
 {
@@ -44,7 +39,7 @@ final class PlayerProperties
                 "infos" => [
                     "ip" => "",
                     "platform" => "test",
-                    "rank" => RanksManager::getDefaultRank()?->getName(),
+                    "rank" => Managers::RANKS()->getDefaultRank()?->getName(),
                 ],
                 "status" => [
                     "nightvision" => false,

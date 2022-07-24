@@ -2,7 +2,7 @@
 
 namespace Legacy\ThePit\Listeners;
 
-use Legacy\ThePit\Managers\CustomItemManager;
+use Legacy\ThePit\Managers\Managers;
 use pocketmine\event\server\DataPacketSendEvent as ClassEvent;
 use pocketmine\event\Listener;
 use pocketmine\network\mcpe\protocol\ResourcePackStackPacket;
@@ -15,11 +15,11 @@ final class DataPacketSendEvent implements Listener
     {
         $packets = $event->getPackets();
         $experimentsOverridden = [
-            CustomItemManager::DATA_DRIVEN_ITEMS => true,
-            CustomItemManager::EXPERIMENTAL_MOLANG_FEATURES => true,
-            CustomItemManager::GAMETEST => true,
-            CustomItemManager::SCRIPTING => true,
-            CustomItemManager::UPCOMING_CREATOR_FEATURES => true
+            Managers::CUSTOMITEMS()::DATA_DRIVEN_ITEMS => true,
+            Managers::CUSTOMITEMS()::EXPERIMENTAL_MOLANG_FEATURES => true,
+            Managers::CUSTOMITEMS()::GAMETEST => true,
+            Managers::CUSTOMITEMS()::SCRIPTING => true,
+            Managers::CUSTOMITEMS()::UPCOMING_CREATOR_FEATURES => true
         ];
 
         foreach ($packets as $packet) {

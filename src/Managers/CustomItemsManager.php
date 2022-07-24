@@ -26,7 +26,7 @@ use ReflectionClass;
 use Webmozart\PathUtil\Path;
 use const pocketmine\BEDROCK_DATA_PATH;
 
-abstract class CustomItemManager
+final class CustomItemsManager extends Managers
 {
     const SCRIPTING = "scripting";
     const UPCOMING_CREATOR_FEATURES = "upcoming_creator_features";
@@ -35,18 +35,18 @@ abstract class CustomItemManager
     const EXPERIMENTAL_MOLANG_FEATURES = "experimental_molang_features";
 
     /** @var Item[] */
-    public static array $items = [];
-    public static array $packetEntries = [];
-    public static array $registered = [];
-    public static array $handlers = [];
-    public static ?ItemComponentPacket $packet = null;
+    public array $items = [];
+    public array $packetEntries = [];
+    public array $registered = [];
+    public array $handlers = [];
+    public ?ItemComponentPacket $packet = null;
 
-    public static function initCustomItems(): void
+    public function load(): void
     {
 
     }
 
-    public static function registerItems()
+    public function init(): void
     {
         CreativeInventory::getInstance()->clear();
         $ref = new ReflectionClass(ItemTranslator::class);
@@ -60,14 +60,14 @@ abstract class CustomItemManager
         $itemTypeMap = $ref_1->getProperty("itemTypes");
         $itemTypeMap->setAccessible(true);
         $itemTypeEntries = $itemTypeMap->getValue(GlobalItemTypeDictionary::getInstance()->getDictionary());
-        self::$packetEntries = [];
-        foreach (self::getItemInCache() as $item) {
+        $this->packetEntries = [];
+        foreach ($this->getAll() as $item) {
             $runtimeId = $item->getId() + ($item->getId() > 0 ? 5000 : -5000);
             $coreToNetValues[$item->getId()] = $runtimeId;
             $netToCoreValues[$runtimeId] = $item->getId();
             $itemTypeEntries[] = new ItemTypeEntry("custom:" . $item->getName(), $runtimeId, true);
-            self::$packetEntries[] = new ItemComponentPacketEntry("custom:" . $item->getName(), new CacheableNbt($item->getComponents()));
-            self::$registered[] = $item;
+            $this->packetEntries[] = new ItemComponentPacketEntry("custom:" . $item->getName(), new CacheableNbt($item->getComponents()));
+            $this->registered[] = $item;
             $new = clone $item;
             StringToItemParser::getInstance()->register($item->getName() . ':custom', fn() => $new);
             ItemFactory::getInstance()->register($item, true);
@@ -75,7 +75,7 @@ abstract class CustomItemManager
             $netToCoreMap->setValue(ItemTranslator::getInstance(), $netToCoreValues);
             $coreToNetMap->setValue(ItemTranslator::getInstance(), $coreToNetValues);
             $itemTypeMap->setValue(GlobalItemTypeDictionary::getInstance()->getDictionary(), $itemTypeEntries);
-            self::$packet = ItemComponentPacket::create(self::$packetEntries);
+            $this->packet = ItemComponentPacket::create($this->packetEntries);
             Core::getInstance()->getLogger()->notice("[ITEMS] Custom Item: {$item->getName()} ({$item->getId()}) Loaded");
         }
 
@@ -89,23 +89,23 @@ abstract class CustomItemManager
         }
     }
 
-    public static function register(Item ...$item)
+    public function registerItems(Item ...$item)
     {
         foreach ($item as $i) {
             try {
-                self::$items[] = $i;
+                $this->items[] = $i;
             } catch (Exception) {
                 Core::getInstance()->getLogger()->error("[!] " . $item::class . " Is not custom item.");
             }
         }
     }
 
-    public static function getItemInCache(): array
+    public function getAll(): array
     {
-        return self::$items;
+        return $this->items;
     }
 
-    public static function scheduleTask(Position $pos, Item $item, Player $player, float $breakTime, int $slot): void
+    public function scheduleTask(Position $pos, Item $item, Player $player, float $breakTime, int $slot): void
     {
 
         $handler = Core::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(function () use ($pos, $item, $player, $breakTime, $slot): void {
@@ -121,32 +121,32 @@ abstract class CustomItemManager
                 $player->getWorld()->broadcastPacketToViewers($pos, LevelEventPacket::create(LevelEvent::BLOCK_START_BREAK, (int)(65535 / $breakTime), $pos->asVector3()));
             }
             $item->applyDamage(1);
-            unset(self::$handlers[$player->getName()][self::blockHash($pos)]);
+            unset($this->handlers[$player->getName()][$this->blockHash($pos)]);
         }), (int)floor($breakTime));
-        if (!isset(self::$handlers[$player->getName()])) {
-            self::$handlers[$player->getName()] = [];
+        if (!isset($this->handlers[$player->getName()])) {
+            $this->handlers[$player->getName()] = [];
         }
-        self::$handlers[$player->getName()][self::blockHash($pos)] = $handler;
+        $this->handlers[$player->getName()][$this->blockHash($pos)] = $handler;
     }
 
-    public static function blockHash(Position $pos): string
+    public function blockHash(Position $pos): string
     {
         return implode(":", [$pos->getFloorX(), $pos->getFloorY(), $pos->getFloorZ(), $pos->getWorld()->getFolderName()]);
     }
 
-    public static function stopTask(Player $player, Position $pos): void
+    public function stopTask(Player $player, Position $pos): void
     {
-        if (!isset(self::$handlers[$player->getName()][self::blockHash($pos)])) {
+        if (!isset($this->handlers[$player->getName()][$this->blockHash($pos)])) {
             return;
         }
-        $handler = self::$handlers[$player->getName()][self::blockHash($pos)];
+        $handler = $this->handlers[$player->getName()][$this->blockHash($pos)];
         $handler->cancel();
         $player->getWorld()->broadcastPacketToViewers($pos, LevelEventPacket::create(LevelEvent::BLOCK_STOP_BREAK, 1, $pos->asVector3()));
-        unset(self::$handlers[$player->getName()][self::blockHash($pos)]);
+        unset($this->handlers[$player->getName()][$this->blockHash($pos)]);
     }
 
-    public static function getPacket(): ?ItemComponentPacket
+    public function getPacket(): ?ItemComponentPacket
     {
-        return self::$packet;
+        return $this->packet;
     }
 }
