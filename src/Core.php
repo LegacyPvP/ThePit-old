@@ -12,6 +12,7 @@ class Core extends PluginBase
     use SingletonTrait;
 
     public static string $filePath = "";
+    public static array $cache = [];
 
     protected function onLoad(): void
     {
@@ -33,6 +34,11 @@ class Core extends PluginBase
 
         $this->getScheduler()->scheduleDelayedRepeatingTask(new GoldSpawnTask(), 20 * 60, 20);
         $this->saveResource("config.yml", $this->isInDevMode());
+    }
+
+    protected function onDisable(): void
+    {
+        Managers::DATA()->saveAll();
     }
 
     public function isInDevMode(): bool

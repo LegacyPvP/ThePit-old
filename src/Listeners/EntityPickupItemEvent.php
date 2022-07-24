@@ -8,10 +8,7 @@ use Legacy\ThePit\Utils\CurrencyUtils;
 use pocketmine\entity\object\ItemEntity;
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityItemPickupEvent as ClassEvent;
-use pocketmine\item\Item;
-use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
-use pocketmine\item\VanillaItems;
 
 final class EntityPickupItemEvent implements Listener {
 

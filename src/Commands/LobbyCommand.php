@@ -4,6 +4,7 @@ namespace Legacy\ThePit\Commands;
 
 use Legacy\ThePit\Core;
 use Legacy\ThePit\Exceptions\LanguageException;
+use Legacy\ThePit\Managers\Managers;
 use Legacy\ThePit\Player\LegacyPlayer;
 use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\command\CommandSender;
@@ -71,7 +72,7 @@ final class LobbyCommand extends Commands
                                     $sender->teleport(Core::getInstance()->getServer()->getWorldManager()->getDefaultWorld()->getSpawnLocation());
                                     $sender->setTeleportation(false);
                                     $sender->getEffects()->remove(VanillaEffects::BLINDNESS());
-                                    $sender->transfer(Core::getInstance()->getConfig()->getNested("server.lobby.ip"), Core::getInstance()->getConfig()->getNested("server.lobby.port"));
+                                    $sender->transfer(Managers::DATA()->get("config")->getNested("server.lobby.ip"), Managers::DATA()->get("config")->getNested("server.lobby.port"));
                                     throw new CancelTaskException();
                             }
                         } catch (LanguageException $exception) {

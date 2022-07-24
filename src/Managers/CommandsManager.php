@@ -95,7 +95,7 @@ final class CommandsManager extends Managers
      */
     public function getDescription(string $name): string
     {
-        return Core::getInstance()->getConfig()->getNested("commands.$name", ['description' => ""])['description'] ?? "";
+        return Managers::DATA()->get("config")->getNested("commands.$name", ['description' => ""])['description'] ?? "";
     }
 
     /**
@@ -104,7 +104,7 @@ final class CommandsManager extends Managers
      */
     public function getUsage(string $name): string
     {
-        return Core::getInstance()->getConfig()->getNested("commands.$name", ['usage' => "/$name"])['usage'] ?? "";
+        return Managers::DATA()->get("config")->getNested("commands.$name", ['usage' => "/$name"])['usage'] ?? "";
     }
 
     /**
@@ -113,7 +113,7 @@ final class CommandsManager extends Managers
      */
     public function getAliases(string $name): array
     {
-        return Core::getInstance()->getConfig()->getNested("commands.$name", ['aliases' => []])['aliases'] ?? [];
+        return Managers::DATA()->get("config")->getNested("commands.$name", ['aliases' => []])['aliases'] ?? [];
     }
 
     /**
@@ -122,6 +122,6 @@ final class CommandsManager extends Managers
      */
     public function getPermission(string $name): string
     {
-        return Core::getInstance()->getConfig()->getNested("commands.$name", ['permission' => "core.commands.$name"])['permission'] ?? "core.commands.$name";
+        return Managers::DATA()->get("config")->getNested("commands.$name", ['permission' => "core.commands.$name"])['permission'] ?? "core.commands.$name";
     }
 }

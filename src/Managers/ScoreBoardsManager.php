@@ -21,7 +21,7 @@ final class ScoreBoardsManager extends Managers
     {
         ScoreBoardApi::loadManager();
 
-        $scoreboards = Core::getInstance()->getConfig()->get("scoreboards");
+        $scoreboards = Managers::DATA()->get("config")->get("scoreboards");
         foreach ($scoreboards as $type => $scoreboard) {
             if (!is_array($scoreboard)) continue;
             $this->scoreboards[$type] = [
@@ -39,7 +39,7 @@ final class ScoreBoardsManager extends Managers
             } else Core::getInstance()->getLogger()->notice("[SCOREBOARDS] ScoreBoard: $type Loaded");
         }
 
-        Core::getInstance()->getScheduler()->scheduleRepeatingTask(new ScoreBoardTask(), Core::getInstance()->getConfig()->getNested("scoreboards.refresh-time", 20));
+        Core::getInstance()->getScheduler()->scheduleRepeatingTask(new ScoreBoardTask(), Managers::DATA()->get("config")->getNested("scoreboards.refresh-time", 20));
     }
 
     /**
@@ -58,12 +58,12 @@ final class ScoreBoardsManager extends Managers
     public function getTitle(string $type): string
     {
         $type = $type === Managers::EVENTS()::TYPE_NONE ? "basic" : $type;
-        return Core::getInstance()->getConfig()->getNested("scoreboards.$type.title", "Legacy");
+        return Managers::DATA()->get("config")->getNested("scoreboards.$type.title", "Legacy");
     }
 
     public function getLines(string $type): array
     {
-        return Core::getInstance()->getConfig()->getNested("scoreboards.$type.lines", []);
+        return Managers::DATA()->get("config")->getNested("scoreboards.$type.lines", []);
     }
 
     public function updateScoreboard(?ScoreBoard $scoreboard, string $type): void

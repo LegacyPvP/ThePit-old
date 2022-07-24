@@ -16,7 +16,7 @@ final class RanksManager extends Managers
 
     public function init(): void
     {
-        foreach (Core::getInstance()->getConfig()->get('ranks', []) as $name => $grade) {
+        foreach (Managers::DATA()->get("config")->get('ranks', []) as $name => $grade) {
             $this->ranks[$name] = new Rank($name, $grade["permissions"], $grade["chat"], $grade["nametag"], $grade["scoretag"]);
             Core::getInstance()->getLogger()->notice("[RANKS] Rank: $name Loaded");
         }

@@ -25,6 +25,7 @@ use pocketmine\utils\EnumTrait;
  * @method static PrestigesManager PRESTIGES()
  * @method static RanksManager RANKS()
  * @method static ScoreBoardsManager SCOREBOARDS()
+ * @method static DataManager DATA()
  */
 abstract class Managers implements Manager
 {
@@ -50,7 +51,8 @@ abstract class Managers implements Manager
     protected static function getManagers(): array
     {
         return [
-            new CommandsManager('commands'),
+            new DataManager('data'),
+
             new CooldownManager('cooldowns'),
             new CurrenciesManager('currencies'),
             new CustomItemsManager('customitems'),
@@ -64,7 +66,9 @@ abstract class Managers implements Manager
             new MutesManager('mutes'),
             new PrestigesManager('prestiges'),
             new RanksManager('ranks'),
-            new ScoreBoardsManager('scoreboards')
+            new ScoreBoardsManager('scoreboards'),
+            new CommandsManager('commands'),
+
         ];
     }
 
@@ -81,19 +85,13 @@ abstract class Managers implements Manager
         return [];
     }
 
-    public function init(): void
-    {
-
-    }
+    public function init(): void {}
 
     public function get(string $name): ?object
     {
         return null;
     }
 
-    public function load(): void
-    {
-
-    }
+    public function load(): void {}
 
 }

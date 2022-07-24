@@ -55,7 +55,7 @@ final class EntityDamageByEntityEvent implements Listener
                         $damager->sendTip($damager->getLanguage()->getMessage("messages.interactions.cooldown", ["{timeleft}" => Managers::COOLDOWNS()->getCooldown($item) - time()])->__toString());
                         $event->cancel();
                     } elseif (Managers::COOLDOWNS()->getCooldownConfig($item->getId())) {
-                        $event->getEntity()->knockBack($vector->getX(), $vector->getZ(), Core::getInstance()->getConfig()->getNested("items.nemo.horizontal", 2), Core::getInstance()->getConfig()->getNested("items.nemo.vertical", 0.50));
+                        $event->getEntity()->knockBack($vector->getX(), $vector->getZ(), Managers::DATA()->get("config")->getNested("items.nemo.horizontal", 2), Managers::DATA()->get("config")->getNested("items.nemo.vertical", 0.50));
                         $item = Managers::COOLDOWNS()->setCooldown($item, null);
                         $damager->getInventory()->setItemInHand($item);
                     }
@@ -72,10 +72,10 @@ final class EntityDamageByEntityEvent implements Listener
                     if ($item->getName() == SpellUtils::SPELL_LIGHTNING_NAME) {
                     } elseif ($item->getName() == SpellUtils::SPELL_REPULSION_NAME) {
                         $target = $event->getEntity();
-                        $target->knockBack($vector->getX(), $vector->getZ(), Core::getInstance()->getConfig()->getNested("items.spell.repulsion.horizontal", 1.5), Core::getInstance()->getConfig()->getNested("items.spell.repulsion.vertical", 0.50));
+                        $target->knockBack($vector->getX(), $vector->getZ(), Managers::DATA()->get("config")->getNested("items.spell.repulsion.horizontal", 1.5), Managers::DATA()->get("config")->getNested("items.spell.repulsion.vertical", 0.50));
                     } elseif ($item->getName() == SpellUtils::SPELL_ATTRACTION_NAME) {
                         $target = $event->getEntity();
-                        $target->knockBack($vector->getX(), $vector->getZ(), Core::getInstance()->getConfig()->getNested("items.spell.attraction.horizontal", -1.5), Core::getInstance()->getConfig()->getNested("items.spell.attraction.vertical", -0.50));
+                        $target->knockBack($vector->getX(), $vector->getZ(), Managers::DATA()->get("config")->getNested("items.spell.attraction.horizontal", -1.5), Managers::DATA()->get("config")->getNested("items.spell.attraction.vertical", -0.50));
                     } elseif ($item->getName() == SpellUtils::SPELL_TELEPORT_NAME) {
                         $target = $event->getEntity();
                         $damager->teleport($target->getPosition());
@@ -90,6 +90,6 @@ final class EntityDamageByEntityEvent implements Listener
                     break;
             }
         }
-        $event->setAttackCooldown(Core::getInstance()->getConfig()->getNested("knockback.attack_cooldown", 10));
+        $event->setAttackCooldown(Managers::DATA()->get("config")->getNested("knockback.attack_cooldown", 10));
     }
 }

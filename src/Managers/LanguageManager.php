@@ -54,7 +54,7 @@ final class LanguageManager extends Managers
 
     public function getPrefixes(): array
     {
-        return Core::getInstance()->getConfig()->get("prefixes", []);
+        return Managers::DATA()->get("config")->get("prefixes", []);
     }
 
     public function getDefaultLanguage(): Language
@@ -64,7 +64,7 @@ final class LanguageManager extends Managers
 
     private static function saveDefaultConfig(): void
     {
-        $languages = Core::getInstance()->getConfig()->get("languages", []);
+        $languages = Managers::DATA()->get("config")->get("languages", []);
         foreach ($languages as $language) {
             Core::getInstance()->saveResource("languages/lang_$language.yml", Core::getInstance()->isInDevMode());
         }

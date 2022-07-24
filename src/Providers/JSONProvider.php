@@ -4,7 +4,7 @@ namespace Legacy\ThePit\Providers;
 
 use pocketmine\utils\Config;
 
-class JSONProvider extends BaseProvider
+final class JSONProvider extends BaseProvider // On ne va pas extends ça ?
 {
     private string $name;
     private array $data;
@@ -32,21 +32,20 @@ class JSONProvider extends BaseProvider
         return $this->name;
     }
 
-    public function get(mixed $k): mixed
+    public function get(mixed $k, mixed $default = null): mixed
     {
-        return $this->data[$k];
+        return $this->data[$k] ?? $default;
     }
 
     public function set(mixed $k, mixed $v): void
     {
-        $this->getConfig()->set($k, $v);
         $this->data[$k] = $v;
     }
 
-    public function getNested(mixed $k): mixed
+    public function getNested(mixed $k, mixed $default = null): mixed
     {
         if(isset($this->data[$k])){
-            return $this->data[$k];
+            return $this->data[$k] ?? $default;
         }
 
         $vars = explode(".", $k);
@@ -54,7 +53,7 @@ class JSONProvider extends BaseProvider
         if(isset($this->config[$base])){
             $base = $this->config[$base];
         }else{
-            return null; //''?
+            return $default; //''?
         }
 
         while(count($vars) > 0){
@@ -62,7 +61,7 @@ class JSONProvider extends BaseProvider
             if(is_array($base) && isset($base[$basek])){
                 $base = $base[$basek];
             }else{
-                return null; //''?
+                return $default; //''?
             }
         }
 
@@ -99,5 +98,9 @@ class JSONProvider extends BaseProvider
     public function getPath(): string
     {
         return $this->path;
+    }
+
+    public function dump(): array {
+        return $this->data;
     }
 }

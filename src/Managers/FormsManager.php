@@ -33,10 +33,9 @@ final class FormsManager extends Managers
             $vertical = $response->getInputSubmittedText("vertical");
             $cooldown = $response->getInputSubmittedText("cooldown");
             if(is_numeric($horizontal) and is_numeric($vertical) and is_numeric($cooldown)) {
-                Core::getInstance()->getConfig()->setNested("knockback.horizontal", (float)$horizontal);
-                Core::getInstance()->getConfig()->setNested("knockback.vertical", (float)$vertical);
-                Core::getInstance()->getConfig()->setNested("knockback.attack_cooldown", (float)$cooldown);
-                Core::getInstance()->getConfig()->save();
+                Managers::DATA()->get("config")->setNested("knockback.horizontal", (float)$horizontal);
+                Managers::DATA()->get("config")->setNested("knockback.vertical", (float)$vertical);
+                Managers::DATA()->get("config")->setNested("knockback.attack_cooldown", (float)$cooldown);
                 throw new FormsException('messages.commands.knockback.success', [
                     "{horizontal}" => (float)$horizontal,
                     "{vertical}" => (float)$vertical,

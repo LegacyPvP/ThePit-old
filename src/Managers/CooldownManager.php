@@ -2,7 +2,6 @@
 
 namespace Legacy\ThePit\Managers;
 
-use Legacy\ThePit\Core;
 use pocketmine\item\Item;
 use pocketmine\nbt\tag\IntTag;
 
@@ -11,7 +10,7 @@ final class CooldownManager extends Managers
 
     public static function getCooldownConfig(int $item): bool
     {
-        return Core::getInstance()->getConfig()->getNested("cooldowns.$item", 0);
+        return Managers::DATA()->get("config")->getNested("cooldowns.$item", 0);
     }
 
     public static function setCooldown(Item $item, ?int $value): Item
