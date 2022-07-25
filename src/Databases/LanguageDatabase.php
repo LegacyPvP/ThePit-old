@@ -1,6 +1,6 @@
 <?php
 
-namespace Legacy\ThePit\Databases;
+namespace Legacy\ThePit\databases;
 
 use Legacy\ThePit\Core;
 use pocketmine\utils\Config;

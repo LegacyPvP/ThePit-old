@@ -1,9 +1,9 @@
 <?php
 
-namespace Legacy\ThePit\Listeners;
+namespace Legacy\ThePit\listeners;
 
 use Exception;
-use Legacy\ThePit\Managers\Managers;
+use Legacy\ThePit\managers\Managers;
 use pocketmine\block\BlockFactory;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\block\BlockToolType;
@@ -37,7 +37,7 @@ final class DataPacketReceiveEvent implements Listener
             case $packet instanceof AnimatePacket:
                 $event->getOrigin()->getPlayer()->getServer()->broadcastPackets($event->getOrigin()->getPlayer()->getViewers(), [$event->getPacket()]);
                 break;
-            case $packet instanceof PlayerAuthInputPacket: // Custom Items
+            case $packet instanceof PlayerAuthInputPacket: // Custom items
                 try {
                     $actions = $packet->getBlockActions();
                     if (is_null($actions)) return;

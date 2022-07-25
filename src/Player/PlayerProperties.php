@@ -1,12 +1,12 @@
 <?php
 
-namespace Legacy\ThePit\Player;
+namespace Legacy\ThePit\player;
 
-use Legacy\ThePit\Managers\Managers;
+use Legacy\ThePit\managers\Managers;
 use Legacy\ThePit\Traits\PropertiesTrait;
-use Legacy\ThePit\Utils\CurrencyUtils;
-use Legacy\ThePit\Utils\PlayerUtils;
-use Legacy\ThePit\Utils\PrestigesUtils;
+use Legacy\ThePit\utils\CurrencyUtils;
+use Legacy\ThePit\utils\PlayerUtils;
+use Legacy\ThePit\utils\PrestigesUtils;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
 use pocketmine\math\Vector3;

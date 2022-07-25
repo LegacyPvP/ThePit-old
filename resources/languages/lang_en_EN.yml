@@ -1,0 +1,122 @@
+messages:
+  form:
+    not-found: "Form not found"
+    shop:
+      votecoins-convert: "Conversion of votecoins to credits"
+  mute:
+    muted: "You are still muted by {player} until {date} for: {reason}" # {player} {date} {reason}
+  interactions:
+    cooldown: "You must wait {time} seconds before you can do this"
+    spells:
+      health:
+        full: "You already have all your health"
+        success: "You used your health spell"
+        cooldown: "You must wait {time} seconds before you can use your health spell"
+      speed:
+        success: "You used your speed spell"
+        cooldown: "You must wait {time} seconds before you can use your speed spell"
+  player-join: "§a+ {player} +"
+  player-quit: "§c- {player} -"
+  commands:
+    not-permission: "§cYou do not have permission to use this command"
+    target-not-player: "The target player does not exist"
+    target-not-found: "The target player is not connected"
+    sender-not-player: "You must be a player to use this command"
+    ban:
+      success: "You banned {player} until {date} for {reason}" # {player}, {date}, {reason}
+      banned: "You were banned by {player} until {date} for {reason}" # {player} is the player who banned you, {date} is the date of the ban, {reason} is the reason of the ban
+    unban:
+      success: "You unbanned {player}" # {player} is the player who unbanned you
+    unmute:
+      success: "You unmuted {player}" # {player} is the player who unmuted you
+    kick:
+      success: "You kicked {player} for {reason}" # {player} is the player who kicked you, {reason} is the reason of the kick
+      kicked: "You were kicked by {player} for {reason}" # {player} is the player who kicked you, {reason} is the reason of the kick
+    mute:
+      success: "You muted {player} for {reason}" # {player} is the player who muted you, {reason} is the reason of the mute
+      muted: "You were muted by {player} for {reason}" # {player} is the player who muted you, {reason} is the reason of the mute
+    setrank:
+      invalid-rank: "The rank you specified is invalid"
+      success: "You set {player}'s rank to {rank}" # {player} is the player who set his rank, {rank} is the rank he got
+    listrank:
+      header: "Here is the list of ranks:\n"
+      format: "{name}, "
+    banlist:
+      header: "Here is the list of banned players:\n"
+      format: "- {name} [{date}] -> {reason}\n"
+    say:
+      success: "The message was sent"
+      no-message-valid: "You must to enter a valid message, more than 1 characters"
+    globalmute:
+      muted: "You've muted down the whole server"
+      unmuted: "You've unmuted down the whole server"
+      success-false: "You can't mute down the whole server"
+      success-true: "You've muted down the whole server"
+      error: "You must enter either <true> or <false>"
+    freeze:
+      freeze-success: "§aYou froze {player}" # {player} is the player who froze you
+      target-freeze: "§aYou were frozen"
+      unfreeze-success: "§aYou unfroze {player}" # {player} is the player who unfroze you
+      target-unfreeze: "§aYou were unfrozen"
+    knockback:
+      success: "§aYou have updated knockback ({horizontal}, {vertical}, {attack_cooldown})"
+      invalid-arguments: "You must enter valid values"
+    nightvision:
+      success-on: "§aYou have activated nightvision"
+      success-off: "§aYou have deactivated the nightvision"
+    ping:
+      sender-success: "Your ping is {ping} ms"
+      target-success: "The ping from §d{target}§f is {ping} ms"
+    tpr:
+      success: "You have teleported to {player}" # {player}
+      failed: "You are the only player on the server."
+    tp:
+      success: "You have teleported to {player}" # {player}
+      success-others: "You teleported {player1} to {player2}" # {player1} is the player who teleported, {player2} is the player who was teleported
+    spawn:
+      success: "You have been teleported to the spawn"
+      already-in-teleportation: "A teleportation is already in progress".
+      teleportation-in-progress: "Teleportation in {time} seconds"
+      teleportation-cancelled: "Teleportation cancelled"
+    lobby:
+      success: "You have been teleported to the lobby"
+      already-in-teleportation: "A teleportation is already in progress"
+      teleportation-in-progress: "Teleportation in {time} seconds"
+      teleportation-cancelled: "Teleportation cancelled"
+    gamemode:
+      invalid-gamemode: "Gamemode {gamemode} invalid"
+      change: "Your gamemode has been changed to {gamemode}"
+      success-other: "You changed the gamemode from {player} to {gamemode}" # {player} is the player who set his gamemode, {gamemode} is the gamemode he set
+      success-self: "You changed your gamemode to {gamemode}" # {player} is the player who set his gamemode, {gamemode} is the gamemode he set
+    tps:
+      success: "§l§d» §r§fServer performance «\n\n§l§d»Actual TPS: {ticks} {ticks_per_seconds}/({ticks_usage}%)\n§l§d»§r§fAverage TPS: {ticks} {ticks_per_seconds_average} ({ticks_usage_average}%)"
+    message:
+      sender-blocked: "You can't send a message to {player} because the player has blocked you"
+      sender-message: "You have sent a message to {player}: {message}"
+      target-message: "You have received a message from {player}: {message}"
+      target-not-found: "The mentioned player is not logged in or does not exist"
+    pay:
+      invalid-amount: "Amount §5'{amount}' §finvalid"
+      not-enough-gold: "You don't have enough gold"
+      received: "You have received {amount} gold from {player}"
+      success: "You have paid {amount} or to {target}"
+    list:
+      header: "§l§d- §r§fList of connected players§l§d-\n"
+      staff-header: "§l§d- §r§fList of connected staff§l§d-\n"
+    set:
+      success: "You have changed the balance from {target} to {amount} ({currency})"
+      invalid-amount: "Amount §5'{amount}' §finvalide"
+      invalid-currency: "Currency {currency} is invalid" # {currency} is the currency name
+    add:
+      success: "You have added {amount} to {target} ({currency})"
+      invalid-amount: "Amount §5'{amount}' §finvalid"
+      invalid-currency: "Invalid currency {currency}" # {currency} is the currency name
+    remove:
+      success: "You have removed {amount} at {target} ({currency})"
+      invalid-amount: "Amount §5'{amount}' §finvalid"
+      invalid-currency: "Invalid currency {currency}" # {currency} is the currency name
+    statistics:
+      success: "§5- §fStatistics of §d{player} §5-§f\n§fGold: §6{gold}§f\n§fStars: §e{stars}§f\n§fVoteCoins: §9{votecoins}§f\n§fCredits: §2{credits}§f"
+  death:
+    killed: "You were killed by {player}" # {player} is the player who killed you
+  kill: "You were killed by {player}" # {player} is the player that you killed

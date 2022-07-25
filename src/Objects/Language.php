@@ -1,10 +1,10 @@
 <?php
 
-namespace Legacy\ThePit\Objects;
+namespace Legacy\ThePit\objects;
 
 use JetBrains\PhpStorm\Pure;
-use Legacy\ThePit\Databases\LanguageDatabase;
-use Legacy\ThePit\Managers\Managers;
+use Legacy\ThePit\databases\LanguageDatabase;
+use Legacy\ThePit\managers\Managers;
 
 final class Language extends \pocketmine\lang\Language
 {

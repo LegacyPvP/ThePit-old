@@ -9,14 +9,14 @@
 declare(strict_types=1);
 
 
-namespace Legacy\ThePit\Forms\variant;
+namespace Legacy\ThePit\forms\variant;
 
 
 use Closure;
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;
-use Legacy\ThePit\Forms\element\ModalOption;
-use Legacy\ThePit\Forms\Form;
+use Legacy\ThePit\forms\element\ModalOption;
+use Legacy\ThePit\forms\Form;
 use pocketmine\form\FormValidationException;
 use pocketmine\player\Player;
 

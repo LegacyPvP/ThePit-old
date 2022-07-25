@@ -1,9 +1,9 @@
 <?php
 
-namespace Legacy\ThePit\ScoreBoard\manager;
+namespace Legacy\ThePit\scoreboard\manager;
 
 use pocketmine\network\mcpe\protocol\SetDisplayObjectivePacket;
-use Legacy\ThePit\ScoreBoard\module\ScoreBoard;
+use Legacy\ThePit\scoreboard\module\ScoreBoard;
 
 final class ScoreBoardManager
 {

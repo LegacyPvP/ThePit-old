@@ -9,14 +9,14 @@
 declare(strict_types=1);
 
 
-namespace Legacy\ThePit\Forms\utils;
+namespace Legacy\ThePit\forms\utils;
 
-use Legacy\ThePit\Forms\element\Dropdown;
-use Legacy\ThePit\Forms\element\Element;
-use Legacy\ThePit\Forms\element\Input;
-use Legacy\ThePit\Forms\element\Slider;
-use Legacy\ThePit\Forms\element\StepSlider;
-use Legacy\ThePit\Forms\element\Toggle;
+use Legacy\ThePit\forms\element\Dropdown;
+use Legacy\ThePit\forms\element\Element;
+use Legacy\ThePit\forms\element\Input;
+use Legacy\ThePit\forms\element\Slider;
+use Legacy\ThePit\forms\element\StepSlider;
+use Legacy\ThePit\forms\element\Toggle;
 use InvalidArgumentException;
 use ReflectionClass;
 use ReflectionException;

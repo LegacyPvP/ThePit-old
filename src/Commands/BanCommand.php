@@ -1,10 +1,10 @@
 <?php
 
-namespace Legacy\ThePit\Commands;
+namespace Legacy\ThePit\commands;
 
 use Exception;
-use Legacy\ThePit\Exceptions\LanguageException;
-use Legacy\ThePit\Utils\TimeUtils;
+use Legacy\ThePit\exceptions\LanguageException;
+use Legacy\ThePit\utils\TimeUtils;
 use pocketmine\command\CommandSender;
 use pocketmine\player\IPlayer;
 use pocketmine\player\Player;

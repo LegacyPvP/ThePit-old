@@ -9,14 +9,14 @@
 declare(strict_types=1);
 
 
-namespace Legacy\ThePit\Forms\element;
+namespace Legacy\ThePit\forms\element;
 
 
 use Closure;
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;
-use Legacy\ThePit\Forms\icon\ButtonIcon;
-use Legacy\ThePit\Forms\utils\Submittable;
+use Legacy\ThePit\forms\icon\ButtonIcon;
+use Legacy\ThePit\forms\utils\Submittable;
 use JsonSerializable;
 
 final class Button implements JsonSerializable

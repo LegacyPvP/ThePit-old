@@ -1,6 +1,6 @@
 <?php
 
-namespace Legacy\ThePit\Managers;
+namespace Legacy\ThePit\managers;
 
 use pocketmine\item\Item;
 use pocketmine\nbt\tag\IntTag;

@@ -1,13 +1,13 @@
 <?php
 
-namespace Legacy\ThePit\Managers;
+namespace Legacy\ThePit\managers;
 
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Items\List\FishingRod;
-use Legacy\ThePit\Items\List\Flap;
-use Legacy\ThePit\Items\List\Nemo;
-use Legacy\ThePit\Items\List\Spell;
-use Legacy\ThePit\Test\Bow;
+use Legacy\ThePit\items\list\FishingRod;
+use Legacy\ThePit\items\list\Flap;
+use Legacy\ThePit\items\list\Nemo;
+use Legacy\ThePit\items\list\Spell;
+use Legacy\ThePit\test\Bow;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\item\ItemIds;

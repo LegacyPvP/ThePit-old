@@ -1,6 +1,6 @@
 <?php
 
-namespace Legacy\ThePit\Managers;
+namespace Legacy\ThePit\managers;
 
 use pocketmine\utils\EnumTrait;
 

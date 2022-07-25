@@ -1,8 +1,8 @@
 <?php
 
-namespace Legacy\ThePit\Managers;
+namespace Legacy\ThePit\managers;
 
-use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\player\LegacyPlayer;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\nbt\tag\IntTag;
 use pocketmine\nbt\tag\StringTag;

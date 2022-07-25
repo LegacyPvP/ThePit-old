@@ -1,13 +1,13 @@
 <?php
 
-namespace Legacy\ThePit\Commands;
+namespace Legacy\ThePit\commands;
 
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Managers\Managers;
-use Legacy\ThePit\Objects\Language;
-use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\managers\Managers;
+use Legacy\ThePit\objects\Language;
+use Legacy\ThePit\player\LegacyPlayer;
 use Legacy\ThePit\Traits\CommandTrait;
-use Legacy\ThePit\Utils\ServerUtils;
+use Legacy\ThePit\utils\ServerUtils;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\console\ConsoleCommandSender;

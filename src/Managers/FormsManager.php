@@ -1,24 +1,24 @@
 <?php
 
-namespace Legacy\ThePit\Managers;
+namespace Legacy\ThePit\managers;
 
 use JetBrains\PhpStorm\ArrayShape;
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Exceptions\FormsException;
-use Legacy\ThePit\Forms\element\Input;
-use Legacy\ThePit\Forms\Form;
-use Legacy\ThePit\Forms\utils\FormResponse;
-use Legacy\ThePit\Forms\variant\CustomForm;
-use Legacy\ThePit\Player\LegacyPlayer;
-use Legacy\ThePit\Utils\FormsUtils;
-use Legacy\ThePit\Utils\ServerUtils;
+use Legacy\ThePit\exceptions\FormsException;
+use Legacy\ThePit\forms\element\Input;
+use Legacy\ThePit\forms\Form;
+use Legacy\ThePit\forms\utils\FormResponse;
+use Legacy\ThePit\forms\variant\CustomForm;
+use Legacy\ThePit\player\LegacyPlayer;
+use Legacy\ThePit\utils\FormsUtils;
+use Legacy\ThePit\utils\ServerUtils;
 use pocketmine\player\Player;
 
 final class FormsManager extends Managers
 {
-    /*#[ArrayShape(["form" => "\Legacy\ThePit\Forms\variant\CustomForm", "callable" => "\Closure[]", "type" => "string"])] static public function knockBackForm(LegacyPlayer $player): Form
+    /*#[ArrayShape(["form" => "\Legacy\ThePit\forms\variant\CustomForm", "callable" => "\Closure[]", "type" => "string"])] static public function knockBackForm(LegacyPlayer $player): Form
     {
-        $form = new CustomForm("Knockback", function (Player $player, FormResponse $response): void {
+        $form = new CustomForm("Knockback", function (player $player, FormResponse $response): void {
         });
     }*/
 
@@ -50,7 +50,7 @@ final class FormsManager extends Managers
         return $form;
     }
 
-    /*#[ArrayShape(["form" => "\Legacy\ThePit\Forms\variant\CustomForm", "callable" => "\Closure[]", "type" => "string"])] static public function shopVotecoins(LegacyPlayer $player): Form {
+    /*#[ArrayShape(["form" => "\Legacy\ThePit\forms\variant\CustomForm", "callable" => "\Closure[]", "type" => "string"])] static public function shopVotecoins(LegacyPlayer $player): Form {
     static public function shopVotecoins(LegacyPlayer $player): Form {
         $form = new SimpleForm($player->getLanguage()->getMessage("forms.headers.shop-votecoins"), "");
         $form->addButton(new Button($player->getLanguage()->getMessage("forms.buttons.shop-votecoins.conversion-gold")->__toString()));
@@ -60,7 +60,7 @@ final class FormsManager extends Managers
     }
 
     static public function openShopVotecoins(LegacyPlayer $player): Form {
-        $form = new CustomForm("Boutique de Votecoins", function (Player $player, FormResponse $response): void {
+        $form = new CustomForm("Boutique de Votecoins", function (player $player, FormResponse $response): void {
             if($player instanceof LegacyPlayer){
                 $button_convert = $player->getLanguage()->getMessage("messages.forms.shop.votecoins-convert", [], ServerUtils::PREFIX_3);
             }
@@ -74,7 +74,7 @@ final class FormsManager extends Managers
     }
 
     static public function openShopVotecoinsC(): Form {
-        $form = new CustomForm("Boutique de Votecoins", function (Player $player, FormResponse $response): void {
+        $form = new CustomForm("Boutique de Votecoins", function (player $player, FormResponse $response): void {
             if($player instanceof LegacyPlayer){
                 $button_convert = $player->getLanguage()->getMessage("messages.forms.shop.votecoins-convert", [], ServerUtils::PREFIX_3);
             }

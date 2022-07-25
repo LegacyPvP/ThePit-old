@@ -1,12 +1,12 @@
 <?php
 
-namespace Legacy\ThePit\Commands\Currency;
+namespace Legacy\ThePit\commands\currency;
 
-use Legacy\ThePit\Commands\Commands;
-use Legacy\ThePit\Exceptions\LanguageException;
-use Legacy\ThePit\Player\LegacyPlayer;
-use Legacy\ThePit\Utils\CurrencyUtils;
-use Legacy\ThePit\Utils\ServerUtils;
+use Legacy\ThePit\commands\Commands;
+use Legacy\ThePit\exceptions\LanguageException;
+use Legacy\ThePit\player\LegacyPlayer;
+use Legacy\ThePit\utils\CurrencyUtils;
+use Legacy\ThePit\utils\ServerUtils;
 use pocketmine\command\CommandSender;
 
 final class SetCommand extends Commands

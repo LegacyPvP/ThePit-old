@@ -2,8 +2,8 @@
 
 namespace Legacy\ThePit;
 
-use Legacy\ThePit\Managers\Managers;
-use Legacy\ThePit\Tasks\GoldSpawnTask;
+use Legacy\ThePit\managers\Managers;
+use Legacy\ThePit\tasks\GoldSpawnTask;
 use pocketmine\permission\DefaultPermissions;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;

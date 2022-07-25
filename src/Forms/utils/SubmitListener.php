@@ -9,11 +9,11 @@
 declare(strict_types=1);
 
 
-namespace Legacy\ThePit\Forms\utils;
+namespace Legacy\ThePit\forms\utils;
 
 
 use Closure;
-use Legacy\ThePit\Exceptions\FormsException;
+use Legacy\ThePit\exceptions\FormsException;
 use pocketmine\player\Player;
 use pocketmine\utils\Utils;
 

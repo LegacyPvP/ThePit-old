@@ -1,6 +1,6 @@
 <?php
 
-namespace Legacy\ThePit\Utils;
+namespace Legacy\ThePit\utils;
 
 abstract class PrestigesUtils
 {

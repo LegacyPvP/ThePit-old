@@ -1,10 +1,10 @@
 <?php
 
-namespace Legacy\ThePit\Listeners;
+namespace Legacy\ThePit\listeners;
 
-use Legacy\ThePit\Objects\Sound;
-use Legacy\ThePit\Player\LegacyPlayer;
-use Legacy\ThePit\Utils\CurrencyUtils;
+use Legacy\ThePit\objects\Sound;
+use Legacy\ThePit\player\LegacyPlayer;
+use Legacy\ThePit\utils\CurrencyUtils;
 use pocketmine\entity\object\ItemEntity;
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityItemPickupEvent as ClassEvent;

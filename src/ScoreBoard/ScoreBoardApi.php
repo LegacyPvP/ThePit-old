@@ -1,9 +1,9 @@
 <?php
 
-namespace Legacy\ThePit\ScoreBoard;
+namespace Legacy\ThePit\scoreboard;
 
 use pocketmine\plugin\PluginBase;
-use Legacy\ThePit\ScoreBoard\manager\ScoreBoardManager;
+use Legacy\ThePit\scoreboard\manager\ScoreBoardManager;
 
 abstract class ScoreBoardApi
 {

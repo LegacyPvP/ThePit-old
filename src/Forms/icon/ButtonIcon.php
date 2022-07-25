@@ -9,7 +9,7 @@
 declare(strict_types=1);
 
 
-namespace Legacy\ThePit\Forms\icon;
+namespace Legacy\ThePit\forms\icon;
 
 
 use JetBrains\PhpStorm\ArrayShape;

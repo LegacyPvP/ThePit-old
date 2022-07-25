@@ -1,8 +1,8 @@
 <?php
 
-namespace Legacy\ThePit\Commands;
+namespace Legacy\ThePit\commands;
 
-use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\player\LegacyPlayer;
 use pocketmine\command\CommandSender;
 
 final class ListCommand extends Commands

@@ -1,9 +1,9 @@
 <?php
 
-namespace Legacy\ThePit\Currencies;
+namespace Legacy\ThePit\currencies;
 
 use JetBrains\PhpStorm\Pure;
-use Legacy\ThePit\Utils\CurrencyUtils;
+use Legacy\ThePit\utils\CurrencyUtils;
 
 final class VoteCoins extends Currency
 {

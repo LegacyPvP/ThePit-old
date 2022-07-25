@@ -1,10 +1,10 @@
 <?php
 
-namespace Legacy\ThePit\Managers;
+namespace Legacy\ThePit\managers;
 
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Databases\LanguageDatabase;
-use Legacy\ThePit\Objects\Language;
+use Legacy\ThePit\databases\LanguageDatabase;
+use Legacy\ThePit\objects\Language;
 
 final class LanguageManager extends Managers
 {

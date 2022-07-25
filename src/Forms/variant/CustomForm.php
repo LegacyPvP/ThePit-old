@@ -9,16 +9,16 @@
 declare(strict_types=1);
 
 
-namespace Legacy\ThePit\Forms\variant;
+namespace Legacy\ThePit\forms\variant;
 
 
 use Closure;
 use JetBrains\PhpStorm\ArrayShape;
-use Legacy\ThePit\Exceptions\FormsException;
-use Legacy\ThePit\Forms\element\Element;
-use Legacy\ThePit\Forms\Form;
-use Legacy\ThePit\Forms\utils\Closable;
-use Legacy\ThePit\Forms\utils\FormResponse;
+use Legacy\ThePit\exceptions\FormsException;
+use Legacy\ThePit\forms\element\Element;
+use Legacy\ThePit\forms\Form;
+use Legacy\ThePit\forms\utils\Closable;
+use Legacy\ThePit\forms\utils\FormResponse;
 use pocketmine\player\Player;
 use pocketmine\utils\Utils;
 
@@ -111,7 +111,7 @@ final class CustomForm extends Form
         }
     }
 
-    #[ArrayShape(["content" => "\Legacy\ThePit\Forms\element\Element[]"])] protected function serializeBody(): array
+    #[ArrayShape(["content" => "\Legacy\ThePit\forms\element\Element[]"])] protected function serializeBody(): array
     {
         return [
             "content" => array_values($this->elements)

@@ -1,8 +1,8 @@
 <?php
 
-namespace Legacy\ThePit\Commands;
+namespace Legacy\ThePit\commands;
 
-use Legacy\ThePit\Exceptions\LanguageException;
+use Legacy\ThePit\exceptions\LanguageException;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use pocketmine\Server;

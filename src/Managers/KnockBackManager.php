@@ -1,6 +1,6 @@
 <?php
 
-namespace Legacy\ThePit\Managers;
+namespace Legacy\ThePit\managers;
 
 final class KnockBackManager extends Managers
 {

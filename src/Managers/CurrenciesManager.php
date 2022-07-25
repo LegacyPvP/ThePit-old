@@ -1,14 +1,14 @@
 <?php
 
-namespace Legacy\ThePit\Managers;
+namespace Legacy\ThePit\managers;
 
 use JetBrains\PhpStorm\Pure;
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Currencies\Credits;
-use Legacy\ThePit\Currencies\Etoiles;
-use Legacy\ThePit\Currencies\Gold;
-use Legacy\ThePit\Currencies\VoteCoins;
-use Legacy\ThePit\Currencies\Currency;
+use Legacy\ThePit\currencies\Credits;
+use Legacy\ThePit\currencies\Etoiles;
+use Legacy\ThePit\currencies\Gold;
+use Legacy\ThePit\currencies\VoteCoins;
+use Legacy\ThePit\currencies\Currency;
 
 final class CurrenciesManager extends Managers
 {
@@ -35,7 +35,7 @@ final class CurrenciesManager extends Managers
     {
         foreach ($this->getAll() as $currency) {
             $this->currencies[$currency->getName()] = $currency;
-            Core::getInstance()->getLogger()->notice("[CURRENCIES] Currency: {$currency->getName()} Loaded");
+            Core::getInstance()->getLogger()->notice("[CURRENCIES] currency: {$currency->getName()} Loaded");
         }
     }
 

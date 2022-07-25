@@ -1,6 +1,6 @@
 <?php
 
-namespace Legacy\ThePit\Items\List;
+namespace Legacy\ThePit\items\list;
 
 use pocketmine\item\Item;
 use pocketmine\item\ItemIdentifier;

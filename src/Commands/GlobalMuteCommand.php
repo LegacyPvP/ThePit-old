@@ -1,8 +1,8 @@
 <?php
 
-namespace Legacy\ThePit\Commands;
+namespace Legacy\ThePit\commands;
 
-use Legacy\ThePit\Utils\ServerUtils;
+use Legacy\ThePit\utils\ServerUtils;
 use pocketmine\command\CommandSender;
 
 final class GlobalMuteCommand extends Commands

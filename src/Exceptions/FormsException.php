@@ -1,6 +1,6 @@
 <?php
 
-namespace Legacy\ThePit\Exceptions;
+namespace Legacy\ThePit\exceptions;
 
 use Exception;
 use JetBrains\PhpStorm\Pure;

@@ -1,11 +1,11 @@
 <?php
 
-namespace Legacy\ThePit\Managers;
+namespace Legacy\ThePit\managers;
 
 use JsonException;
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Providers\BaseProvider;
-use Legacy\ThePit\Providers\YAMLProvider;
+use Legacy\ThePit\providers\BaseProvider;
+use Legacy\ThePit\providers\YAMLProvider;
 
 final class DataManager extends Managers
 {
@@ -18,6 +18,7 @@ final class DataManager extends Managers
     {
         $this->add(
             new YAMLProvider("config", Core::getFilePath() . "resources/" . "config.yml"),
+            new YAMLProvider("lang_fr", Core::getFilePath() . "resources/languages/" . "lang_fr_FR.yml"),
         );
     }
 

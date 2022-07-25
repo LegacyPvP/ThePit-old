@@ -1,6 +1,6 @@
 <?php
 
-namespace Legacy\ThePit\ScoreBoard\module\types;
+namespace Legacy\ThePit\scoreboard\module\types;
 
 use JetBrains\PhpStorm\Pure;
 use pocketmine\network\mcpe\protocol\types\ScorePacketEntry;

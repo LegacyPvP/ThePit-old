@@ -1,6 +1,6 @@
 <?php
 
-namespace Legacy\ThePit\Listeners;
+namespace Legacy\ThePit\listeners;
 
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityDamageEvent as ClassEvent;

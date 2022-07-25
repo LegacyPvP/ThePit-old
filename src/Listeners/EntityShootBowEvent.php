@@ -1,9 +1,9 @@
 <?php
 
-namespace Legacy\ThePit\Listeners;
+namespace Legacy\ThePit\listeners;
 
 use JetBrains\PhpStorm\Pure;
-use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\player\LegacyPlayer;
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityShootBowEvent as ClassEvent;
 

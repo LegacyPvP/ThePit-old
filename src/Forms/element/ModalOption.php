@@ -9,10 +9,10 @@
 declare(strict_types=1);
 
 
-namespace Legacy\ThePit\Forms\element;
+namespace Legacy\ThePit\forms\element;
 
 
-use Legacy\ThePit\Forms\utils\Submittable;
+use Legacy\ThePit\forms\utils\Submittable;
 
 final class ModalOption
 {

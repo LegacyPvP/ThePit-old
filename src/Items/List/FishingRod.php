@@ -1,10 +1,9 @@
 <?php
 
-namespace Legacy\ThePit\Items\List;
+namespace Legacy\ThePit\items\list;
 
-use Legacy\ThePit\Entities\List\FishingHook;
-use Legacy\ThePit\Player\LegacyPlayer;
-use pocketmine\entity\animation\ArmSwingAnimation;
+use Legacy\ThePit\entities\list\FishingHook;
+use Legacy\ThePit\player\LegacyPlayer;
 use pocketmine\entity\Entity;
 use pocketmine\item\ItemUseResult;
 use pocketmine\item\Tool;

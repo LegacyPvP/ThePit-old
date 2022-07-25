@@ -1,10 +1,10 @@
 <?php
 
-namespace Legacy\ThePit\Tasks;
+namespace Legacy\ThePit\tasks;
 
 use Exception;
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Managers\Managers;
+use Legacy\ThePit\managers\Managers;
 use pocketmine\block\Air;
 use pocketmine\block\Block;
 use pocketmine\entity\object\ItemEntity;

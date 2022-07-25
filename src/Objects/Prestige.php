@@ -1,6 +1,6 @@
 <?php
 
-namespace Legacy\ThePit\Objects;
+namespace Legacy\ThePit\objects;
 
 final class Prestige
 {

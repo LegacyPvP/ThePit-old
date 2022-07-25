@@ -1,14 +1,14 @@
 <?php
 
-namespace Legacy\ThePit\Listeners;
+namespace Legacy\ThePit\listeners;
 
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Items\List\Nemo;
-use Legacy\ThePit\Items\List\Spell;
-use Legacy\ThePit\Managers\Managers;
-use Legacy\ThePit\Player\LegacyPlayer;
-use Legacy\ThePit\Tasks\CombatTask;
-use Legacy\ThePit\Utils\SpellUtils;
+use Legacy\ThePit\items\list\Nemo;
+use Legacy\ThePit\items\list\Spell;
+use Legacy\ThePit\managers\Managers;
+use Legacy\ThePit\player\LegacyPlayer;
+use Legacy\ThePit\tasks\CombatTask;
+use Legacy\ThePit\utils\SpellUtils;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\event\entity\EntityDamageByEntityEvent as ClassEvent;

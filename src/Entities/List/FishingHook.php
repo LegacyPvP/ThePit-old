@@ -1,10 +1,11 @@
 <?php
 
-namespace Legacy\ThePit\Entities\List;
+namespace Legacy\ThePit\entities\list;
 
-use Legacy\ThePit\Items\List\FishingRod;
-use Legacy\ThePit\Managers\DataManager;
-use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\items\list\FishingRod;
+use Legacy\ThePit\managers\DataManager;
+use Legacy\ThePit\managers\Managers;
+use Legacy\ThePit\player\LegacyPlayer;
 use pocketmine\block\Block;
 use pocketmine\entity\Entity;
 use pocketmine\entity\EntitySizeInfo;
@@ -41,17 +42,7 @@ class FishingHook extends Projectile
             $this->setPosition($this->getLocation()->add(0, $entity->getEyeHeight() - 0.1, 0));
             $this->setMotion($entity->getDirectionVector()->multiply(0.4));
             $this->handle($this->motion->x, $this->motion->y, $this->motion->z, 1.5, 1.0);
-            $this->dropsTime = mt_rand(min(DataManager::getProvider("config")->getNested("items.fishingRod.drops-interval")[0], DataManager::getProvider("config")->getNested("items.fishingRod.drops-interval")[1]), max(DataManager::getProvider("config")->getNested("items.fishingRod.drops-interval")[0], DataManager::getProvider("config")->getNested("items.fishingRod.drops-interval")[1]));
-            $this->lostDropTime = mt_rand(min(DataManager::getProvider("config")->getNested("items.fishingRod.lost-drop-interval")[0], DataManager::getProvider("config")->getNested("items.fishingRod.lost-drop-interval")[1]), max(DataManager::getProvider("config")->getNested("items.fishingRod.lost-drop-interval")[0], DataManager::getProvider("config")->getNested("items.fishingRod.lost-drop-interval")[1]));
-            while(true)
-            {
-                $drop = $this->getRandomDrop();
-                if($drop != null)
-                {
-                    $this->drop = $drop;
-                    break;
-                }
-            }
+            $this->loadDrops();
         }
         parent::__construct($location, $entity, CompoundTag::create());
     }
@@ -68,12 +59,25 @@ class FishingHook extends Projectile
         $owner = $this->getOwningEntity();
         if (!$owner instanceof Player) $this->delete();
         if (!$owner->getInventory()->getItemInHand() instanceof FishingRod or !$owner->isAlive() or $owner->isClosed()) $this->delete();
-        $this->dropsTime -= $tickDiff;
-        if ($this->dropsTime <= 0) {
-            $this->lostDropTime -= $tickDiff;
-            if($this->lostDropTime <= 0)
-            {
-                
+        if($this->isUnderwater())
+        {
+            $this->motion->y -= $this->gravity;
+        }
+        if($this->isUnderwater())
+        {
+            $this->dropsTime -= $tickDiff;
+            if ($this->dropsTime <= 0) {
+                $this->lostDropTime -= $tickDiff;
+                if ($this->lostDropTime <= 0) {
+                    $this->loadDrops();
+                } elseif ($this->isFlaggedForDespawn()) {
+                    $drop = $owner->getWorld()->dropItem($this->getLocation(), $this->drop);
+                    $motionX = $drop->getPosition()->x - $owner->getPosition()->x;
+                    $motionY = $drop->getPosition()->y - $owner->getPosition()->y;
+                    $motionZ = $drop->getPosition()->z - $owner->getPosition()->z;
+                    $drop->setMotion(new Vector3($motionX, $motionY, $motionZ));
+                    $this->loadDrops();
+                }
             }
         }
         return $hasUpdate;
@@ -102,7 +106,7 @@ class FishingHook extends Projectile
 
     private function getRandomDrop(): ?Item
     {
-        $drops = DataManager::getProvider("config")->getNested("items.fishingRod.drops");
+        $drops = Managers::DATA()->get("config")->getNested("items.fishingRod.drops");
         foreach ($drops as $drop => $data) {
             if (100 <= $data["chance"]) {
                 return ItemFactory::getInstance()->get((int)$data["id"], (int)$data["meta"], (int)$data["amount"])
@@ -115,21 +119,32 @@ class FishingHook extends Projectile
     {
         $rand = new Random();
         $f = sqrt($x * $x + $y * $y + $z * $z);
-        $x = $x / (float)$f;
-        $y = $y / (float)$f;
-        $z = $z / (float)$f;
-        $x = $x + $rand->nextSignedFloat() * 0.0074 * (float)$f2;
-        $y = $y + $rand->nextSignedFloat() * 0.0074 * (float)$f2;
-        $z = $z + $rand->nextSignedFloat() * 0.0074 * (float)$f2;
-        $x = $x * (float)$f1;
-        $y = $y * (float)$f1;
-        $z = $z * (float)$f1;
+        $x = $x / $f;
+        $y = $y / $f;
+        $z = $z / $f;
+        $x = $x + $rand->nextSignedFloat() * 0.0074 * $f2;
+        $y = $y + $rand->nextSignedFloat() * 0.0074 * $f2;
+        $z = $z + $rand->nextSignedFloat() * 0.0074 * $f2;
+        $x = $x * $f1;
+        $y = $y * $f1;
+        $z = $z * $f1;
         $this->motion->x += $x;
         $this->motion->y += $y;
         $this->motion->z += $z;
     }
 
-
+    private function loadDrops(): void
+    {
+        $this->dropsTime = mt_rand(min(Managers::DATA()->get("config")->getNested("items.fishingRod.drops-interval")[0], Managers::DATA()->get("config")->getNested("items.fishingRod.drops-interval")[1]), max(Managers::DATA()->get("config")->getNested("items.fishingRod.drops-interval")[0], Managers::DATA()->get("config")->getNested("items.fishingRod.drops-interval")[1]));
+        $this->lostDropTime = mt_rand(min(Managers::DATA()->get("config")->getNested("items.fishingRod.lost-drop-interval")[0], Managers::DATA()->get("config")->getNested("items.fishingRod.lost-drop-interval")[1]), max(Managers::DATA()->get("config")->getNested("items.fishingRod.lost-drop-interval")[0], Managers::DATA()->get("config")->getNested("items.fishingRod.lost-drop-interval")[1]));
+        while (true) {
+            $drop = $this->getRandomDrop();
+            if ($drop != null) {
+                $this->drop = $drop;
+                break;
+            }
+        }
+    }
     public function getInitialSizeInfo(): EntitySizeInfo
     {
         return new EntitySizeInfo(0.25, 0.25);

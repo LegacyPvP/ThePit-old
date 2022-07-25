@@ -1,8 +1,8 @@
 <?php
 
-namespace Legacy\ThePit\Tasks;
+namespace Legacy\ThePit\tasks;
 
-use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\player\LegacyPlayer;
 use pocketmine\scheduler\Task;
 
 final class CombatTask extends Task

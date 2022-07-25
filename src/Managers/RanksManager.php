@@ -1,11 +1,11 @@
 <?php
 
-namespace Legacy\ThePit\Managers;
+namespace Legacy\ThePit\managers;
 
 use JetBrains\PhpStorm\ArrayShape;
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Objects\Rank;
-use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\objects\Rank;
+use Legacy\ThePit\player\LegacyPlayer;
 
 final class RanksManager extends Managers
 {

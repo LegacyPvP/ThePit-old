@@ -1,6 +1,6 @@
 <?php
 
-namespace Legacy\ThePit\Providers;
+namespace Legacy\ThePit\providers;
 
 use pocketmine\utils\Config;
 

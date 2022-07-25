@@ -1,9 +1,9 @@
 <?php
 
-namespace Legacy\ThePit\Listeners;
+namespace Legacy\ThePit\listeners;
 
-use Legacy\ThePit\Items\List\Spell;
-use Legacy\ThePit\Utils\SpellUtils;
+use Legacy\ThePit\items\list\Spell;
+use Legacy\ThePit\utils\SpellUtils;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\event\Listener;
