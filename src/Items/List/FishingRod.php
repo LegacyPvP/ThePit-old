@@ -10,7 +10,7 @@ use pocketmine\item\Tool;
 use pocketmine\math\Vector3;
 use pocketmine\player\Player;
 
-class FishingRod extends Tool
+final class FishingRod extends Tool
 {
     public function onAttackEntity(Entity $victim): bool
     {
