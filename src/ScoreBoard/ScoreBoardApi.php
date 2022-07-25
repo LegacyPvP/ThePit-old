@@ -5,7 +5,7 @@ namespace Legacy\ThePit\ScoreBoard;
 use pocketmine\plugin\PluginBase;
 use Legacy\ThePit\ScoreBoard\manager\ScoreBoardManager;
 
-class ScoreBoardApi extends PluginBase
+abstract class ScoreBoardApi
 {
     private static ?ScoreBoardManager $manager = null;
 

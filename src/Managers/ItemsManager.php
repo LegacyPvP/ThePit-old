@@ -12,9 +12,9 @@ use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\item\ItemIds;
 
-abstract class ItemsManager
+final class ItemsManager extends Managers
 {
-    public static function getItems(): array
+    public function getAll(): array
     {
         return [
             new Nemo(new ItemIdentifier(ItemIds::CLOWNFISH, 0), "Nemo"),
@@ -25,9 +25,9 @@ abstract class ItemsManager
         ];
     }
 
-    public static function initItems(): void
+    public function init(): void
     {
-        foreach (self::getItems() as $item) {
+        foreach (self::getAll() as $item) {
             ItemFactory::getInstance()->register($item, true);
             Core::getInstance()->getLogger()->notice("[ITEMS] Item: {$item->getName()} Loaded");
         }

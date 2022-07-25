@@ -2,21 +2,9 @@
 
 namespace Legacy\ThePit;
 
-use Legacy\ThePit\Managers\CommandsManager;
-use Legacy\ThePit\Managers\CustomItemManager;
-use Legacy\ThePit\Managers\DataManager;
-use Legacy\ThePit\Managers\EntitiesManager;
-use Legacy\ThePit\Managers\EventsManager;
-use Legacy\ThePit\Managers\FormsManager;
-use Legacy\ThePit\Managers\ItemsManager;
-use Legacy\ThePit\Managers\CurrenciesManager;
-use Legacy\ThePit\Managers\PrestigesManager;
-use Legacy\ThePit\Managers\RanksManager;
-use Legacy\ThePit\Managers\LanguageManager;
-use Legacy\ThePit\Managers\ListenersManager;
-use Legacy\ThePit\Managers\ScoreBoardManager;
-use Legacy\ThePit\Providers\YAMLProvider;
+use Legacy\ThePit\Managers\Managers;
 use Legacy\ThePit\Tasks\GoldSpawnTask;
+use pocketmine\permission\DefaultPermissions;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
 
@@ -25,12 +13,13 @@ class Core extends PluginBase
     use SingletonTrait;
 
     public static string $filePath = "";
+    public static array $cache = [];
 
     protected function onLoad(): void
     {
         $this->saveDefaultConfig();
         self::$filePath = $this->getFile();
-        CustomItemManager::initCustomItems();
+        Managers::loadManagers();
     }
 
     public function onEnable(): void
@@ -39,26 +28,19 @@ class Core extends PluginBase
 
         $this::setInstance($this);
 
-        ListenersManager::initListeners($this);
-        CommandsManager::initCommands();
-        EventsManager::initEvents();
-        RanksManager::initRanks();
-        LanguageManager::initLanguages();
-        ScoreBoardManager::initScoreBoards();
-        CustomItemManager::registerItems();
-        ItemsManager::initItems();
-        EntitiesManager::initEntities();
-        FormsManager::initForms();
-        CurrenciesManager::initCurrencies();
-        PrestigesManager::initPrestiges();
+        Managers::initManagers();
+
         $default = yaml_parse(file_get_contents($this->getFile() . "resources/" . "config.yml"));
         if (is_array($default)) $this->getConfig()->setDefaults($default);
 
         $this->getScheduler()->scheduleDelayedRepeatingTask(new GoldSpawnTask(), 20 * 60, 20);
         $this->saveResource("config.yml", $this->isInDevMode());
-        DataManager::register([
-            new YAMLProvider("config",$this->getFile() . "resources/" . "config.yml"),
-        ]);
+    }
+
+    protected function onDisable(): void
+    {
+        Managers::DATA()->saveAll();
+
     }
 
     public function isInDevMode(): bool
@@ -67,7 +49,7 @@ class Core extends PluginBase
     }
 
     /**
-     * @deprecated
+     * @internal
      * @return string
      */
     public static function getFilePath(): string

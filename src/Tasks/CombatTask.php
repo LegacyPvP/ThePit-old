@@ -18,7 +18,7 @@ final class CombatTask extends Task
 
     public function onRun(): void
     {
-        if ($this->player->isInCombat()) {
+        if ($this->player->getInCache("combat", false)) {
             $this->resetTime();
         } else {
             if ($this->time >= 0) {
@@ -26,7 +26,7 @@ final class CombatTask extends Task
                 $this->time--;
             } else {
                 $this->player->getLanguage()->getMessage("messages.combat.timeout")->send($this->player);
-                $this->player->getPlayerProperties()->setNestedProperties("status.combat_players", []);
+                $this->player->setInCache("combat_players", []);
                 self::getHandler()->cancel();
             }
         }

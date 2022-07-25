@@ -3,7 +3,7 @@
 namespace Legacy\ThePit\Commands;
 
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Managers\LanguageManager;
+use Legacy\ThePit\Managers\Managers;
 use Legacy\ThePit\Objects\Language;
 use Legacy\ThePit\Player\LegacyPlayer;
 use Legacy\ThePit\Traits\CommandTrait;
@@ -30,14 +30,14 @@ abstract class Commands extends Command implements PluginOwned
 
     public function getUsage(): Translatable|string
     {
-        return LanguageManager::getPrefix(ServerUtils::PREFIX_3) . parent::getUsage();
+        return Managers::LANGUAGES()->getPrefix(ServerUtils::PREFIX_3) . parent::getUsage();
     }
 
     public function getSenderLanguage(CommandSender $sender): ?Language
     {
         return (match ($sender::class) {
             LegacyPlayer::class => $sender->getLanguage(),
-            ConsoleCommandSender::class => LanguageManager::getDefaultLanguage(),
+            ConsoleCommandSender::class => Managers::LANGUAGES()->getDefaultLanguage(),
             default => null
         });
     }

@@ -5,18 +5,16 @@ namespace Legacy\ThePit\Managers;
 use JetBrains\PhpStorm\ArrayShape;
 use Legacy\ThePit\Core;
 use Legacy\ThePit\Exceptions\FormsException;
-use Legacy\ThePit\Forms\element\Button;
 use Legacy\ThePit\Forms\element\Input;
 use Legacy\ThePit\Forms\Form;
 use Legacy\ThePit\Forms\utils\FormResponse;
 use Legacy\ThePit\Forms\variant\CustomForm;
-use Legacy\ThePit\Forms\variant\SimpleForm;
 use Legacy\ThePit\Player\LegacyPlayer;
 use Legacy\ThePit\Utils\FormsUtils;
 use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\player\Player;
 
-abstract class FormsManager
+final class FormsManager extends Managers
 {
     /*#[ArrayShape(["form" => "\Legacy\ThePit\Forms\variant\CustomForm", "callable" => "\Closure[]", "type" => "string"])] static public function knockBackForm(LegacyPlayer $player): Form
     {
@@ -27,18 +25,17 @@ abstract class FormsManager
     /**
      * @var Form[]
      */
-    public static array $forms = [];
+    public array $forms = [];
 
-    static public function knockBackForm(LegacyPlayer $player): Form {
+    public function knockBackForm(LegacyPlayer $player): Form {
         $form = new CustomForm("Knock Back", function (Player $player, FormResponse $response): void {
             $horizontal = $response->getInputSubmittedText("horizontal");
             $vertical = $response->getInputSubmittedText("vertical");
             $cooldown = $response->getInputSubmittedText("cooldown");
             if(is_numeric($horizontal) and is_numeric($vertical) and is_numeric($cooldown)) {
-                Core::getInstance()->getConfig()->setNested("knockback.horizontal", (float)$horizontal);
-                Core::getInstance()->getConfig()->setNested("knockback.vertical", (float)$vertical);
-                Core::getInstance()->getConfig()->setNested("knockback.attack_cooldown", (float)$cooldown);
-                Core::getInstance()->getConfig()->save();
+                Managers::DATA()->get("config")->setNested("knockback.horizontal", (float)$horizontal);
+                Managers::DATA()->get("config")->setNested("knockback.vertical", (float)$vertical);
+                Managers::DATA()->get("config")->setNested("knockback.attack_cooldown", (float)$cooldown);
                 throw new FormsException('messages.commands.knockback.success', [
                     "{horizontal}" => (float)$horizontal,
                     "{vertical}" => (float)$vertical,
@@ -47,9 +44,9 @@ abstract class FormsManager
             }
             throw new FormsException('messages.commands.knockback.invalid-arguments',  [], ServerUtils::PREFIX_2);
         });
-        $form->addElement('horizontal', new Input('Horizontal', KnockBackManager::getHorizontal(), '0.40'));
-        $form->addElement('vertical', new Input('Vertical', KnockBackManager::getVertical(), '0.40'));
-        $form->addElement('cooldown', new Input('Attack Cooldown', KnockBackManager::getAttackCooldown(), '10'));
+        $form->addElement('horizontal', new Input('Horizontal', Managers::KNOCKBACK()->getHorizontal(), '0.40'));
+        $form->addElement('vertical', new Input('Vertical', Managers::KNOCKBACK()->getVertical(), '0.40'));
+        $form->addElement('cooldown', new Input('Attack Cooldown', Managers::KNOCKBACK()->getAttackCooldown(), '10'));
         return $form;
     }
 
@@ -90,26 +87,34 @@ abstract class FormsManager
         return $form;
     }*/
 
-    public static function getForms(): array {
+    public function equipmentForm(LegacyPlayer $player): Form {
+
+    }
+
+    #[ArrayShape(["knockback" => "\Closure"])] public function getAll(): array {
         return [
-            "knockback" => fn(LegacyPlayer $player) => self::knockBackForm($player),
+            "knockback" => fn(LegacyPlayer $player) => $this->knockBackForm($player),
         ];
     }
 
-    static public function initForms(): void {
-        foreach (self::getForms() as $id => $form){
-            self::$forms[$id] = $form;
+    public function init(): void {
+        foreach ($this->getAll() as $id => $form){
+            $this->forms[$id] = $form;
             Core::getInstance()->getLogger()->notice("[FORMS] Form: $id Loaded");
         }
+    }
+
+    public function get(string $name): ?Form {
+        return isset($this->forms[$name]) ? ($this->forms[$name]) : null; 
     }
 
     /**
      * @throws FormsException
      */
-    public static function sendForm(LegacyPlayer $player, string $form): void {
-        if(isset(self::$forms[$form])){
+    public function sendForm(LegacyPlayer $player, string $form): void {
+        if(isset($this->forms[$form])){
             $form_infos = array();
-            $form = (self::$forms[$form])($player);
+            $form = ($this->forms[$form])($player);
             switch($form->getType()){
                 case Form::TYPE_CUSTOM_FORM:
                 case Form::TYPE_SIMPLE_FORM:

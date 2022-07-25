@@ -2,7 +2,7 @@
 
 namespace Legacy\ThePit\Providers;
 
-use Legacy\ThePit\Managers\CurrenciesManager;
+use Legacy\ThePit\Managers\Managers;
 use Legacy\ThePit\Player\LegacyPlayer;
 
 final class CurrencyProvider
@@ -13,26 +13,26 @@ final class CurrencyProvider
 
     public function get(string $currency): int
     {
-        return CurrenciesManager::getCurrency($currency)->get($this->player);
+        return Managers::CURRENCIES()->get($currency)->get($this->player);
     }
 
     public function has(string $currency, int $amount): bool
     {
-        return CurrenciesManager::getCurrency($currency)->has($this->player, $amount);
+        return Managers::CURRENCIES()->get($currency)->has($this->player, $amount);
     }
 
     public function set(string $currency, int $amount): void
     {
-        CurrenciesManager::getCurrency($currency)->set($this->player, $amount);
+        Managers::CURRENCIES()->get($currency)->set($this->player, $amount);
     }
 
     public function add(string $currency, int $amount): void
     {
-        CurrenciesManager::getCurrency($currency)->add($this->player, $amount);
+        Managers::CURRENCIES()->get($currency)->add($this->player, $amount);
     }
 
     public function remove(string $currency, int $amount): void
     {
-        CurrenciesManager::getCurrency($currency)->remove($this->player, $amount);
+        Managers::CURRENCIES()->get($currency)->remove($this->player, $amount);
     }
 }

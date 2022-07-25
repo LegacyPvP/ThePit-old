@@ -12,10 +12,12 @@ declare(strict_types=1);
 namespace Legacy\ThePit\Forms\element;
 
 
+use JetBrains\PhpStorm\Pure;
+
 final class Label extends Element
 {
 
-    public function __construct(string $headerText)
+    #[Pure] public function __construct(string $headerText)
     {
         parent::__construct($headerText);
     }

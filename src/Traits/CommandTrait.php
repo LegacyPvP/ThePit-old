@@ -2,7 +2,7 @@
 
 namespace Legacy\ThePit\Traits;
 
-use Legacy\ThePit\Managers\CommandsManager;
+use Legacy\ThePit\Managers\Managers;
 use pocketmine\command\Command;
 use pocketmine\permission\DefaultPermissions;
 use pocketmine\permission\Permission;
@@ -26,12 +26,12 @@ trait CommandTrait
     public static function init()
     {
         if (self::$command !== null) {
-            self::$command->setDescription(CommandsManager::getDescription(self::$command->getName()));
-            self::$command->setAliases(CommandsManager::getAliases(self::$command->getName()));
-            self::$command->setUsage(CommandsManager::getUsage(self::$command->getName()));
+            self::$command->setDescription(Managers::COMMANDS()->getDescription(self::$command->getName()));
+            self::$command->setAliases(Managers::COMMANDS()->getAliases(self::$command->getName()));
+            self::$command->setUsage(Managers::COMMANDS()->getUsage(self::$command->getName()));
             self::$command->setPermission(
-                PermissionManager::getInstance()->addPermission(new Permission(CommandsManager::getPermission(self::$command->getName())))
-                    ? CommandsManager::getPermission(self::$command->getName())
+                PermissionManager::getInstance()->addPermission(new Permission(Managers::COMMANDS()->getPermission(self::$command->getName())))
+                    ? Managers::COMMANDS()->getPermission(self::$command->getName())
                     : DefaultPermissions::ROOT_OPERATOR
             );
         }

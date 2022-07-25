@@ -2,7 +2,7 @@
 
 namespace Legacy\ThePit\Objects;
 
-use Legacy\ThePit\Managers\RanksManager;
+use Legacy\ThePit\Managers\Managers;
 use Legacy\ThePit\Player\LegacyPlayer;
 
 final class Rank
@@ -64,7 +64,7 @@ final class Rank
 
     private function applyParameters(string $value, LegacyPlayer $player): string
     {
-        foreach (RanksManager::getParameters($player) as $key => $param) {
+        foreach (Managers::RANKS()->getParameters($player) as $key => $param) {
             $value = str_replace($key, $param, $value);
         }
         return $value;

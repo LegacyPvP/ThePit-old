@@ -2,8 +2,7 @@
 
 namespace Legacy\ThePit\Listeners;
 
-use Legacy\ThePit\Managers\CustomItemManager;
-use Legacy\ThePit\Managers\RanksManager;
+use Legacy\ThePit\Managers\Managers;
 use Legacy\ThePit\Player\LegacyPlayer;
 use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\event\Listener;
@@ -15,11 +14,11 @@ final class PlayerJoinEvent implements Listener
     {
         $event->setJoinMessage("");
         if (($player = $event->getPlayer()) instanceof LegacyPlayer) {
-            $grade = RanksManager::parseRank($player->getPlayerProperties()->getNestedProperties("infos.rank"));
+            $grade = Managers::RANKS()->get($player->getPlayerProperties()->getNestedProperties("infos.rank"));
             foreach (($grade?->getPermissions() ?? []) as $permission) {
                 $player->setBasePermission($permission, true);
             }
-            $packet = CustomItemManager::getPacket();
+            $packet = Managers::CUSTOMITEMS()->getPacket();
             if (!is_null($packet)) $player->getNetworkSession()->sendDataPacket($packet);
             //$player->setStuff();
         }

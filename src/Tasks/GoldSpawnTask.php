@@ -4,6 +4,7 @@ namespace Legacy\ThePit\Tasks;
 
 use Exception;
 use Legacy\ThePit\Core;
+use Legacy\ThePit\Managers\Managers;
 use pocketmine\block\Air;
 use pocketmine\block\Block;
 use pocketmine\entity\object\ItemEntity;
@@ -22,14 +23,14 @@ final class GoldSpawnTask extends Task
 
     public function __construct()
     {
-        $this->x = Core::getInstance()->getConfig()->getNested("goldspawn.x", [0, 0]);
-        $this->y = Core::getInstance()->getConfig()->getNested("goldspawn.y", [0, 0]);
-        $this->z = Core::getInstance()->getConfig()->getNested("goldspawn.z", [0, 0]);
+        $this->x = Managers::DATA()->get("config")->getNested("goldspawn.x", [0, 0]);
+        $this->y = Managers::DATA()->get("config")->getNested("goldspawn.y", [0, 0]);
+        $this->z = Managers::DATA()->get("config")->getNested("goldspawn.z", [0, 0]);
         Core::getInstance()->getServer()->getWorldManager()->loadWorld(
-            Core::getInstance()->getConfig()->getNested("goldspawn.world", "Sky")
+            Managers::DATA()->get("config")->getNested("goldspawn.world", "Sky")
         );
         $this->world = Core::getInstance()->getServer()->getWorldManager()->getWorldByName(
-            Core::getInstance()->getConfig()->getNested("goldspawn.world", "Sky")
+            Managers::DATA()->get("config")->getNested("goldspawn.world", "Sky")
         );
     }
 

@@ -73,7 +73,8 @@ final class CustomForm extends Form
     }
 
     /**
-     * @throws FormsException
+     * @param Player $player
+     * @param FormResponse $response
      */
     public function executeSubmitListener(Player $player, FormResponse $response): void
     {

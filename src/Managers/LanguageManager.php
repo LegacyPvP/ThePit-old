@@ -6,19 +6,19 @@ use Legacy\ThePit\Core;
 use Legacy\ThePit\Databases\LanguageDatabase;
 use Legacy\ThePit\Objects\Language;
 
-abstract class LanguageManager
+final class LanguageManager extends Managers
 {
     /**
      * @var Language[]
      */
-    public static array $languages = [];
+    public array $languages = [];
 
-    public static function initLanguages(): void
+    public function init(): void
     {
         @mkdir(Core::getInstance()->getDataFolder() . "languages");
-        self::saveDefaultConfig();
-        foreach (self::getConfigLanguages() as $language) {
-            self::$languages[$language] = new Language($language, new LanguageDatabase($language));
+        $this->saveDefaultConfig();
+        foreach ($this->getConfigLanguages() as $language) {
+            $this->languages[$language] = new Language($language, new LanguageDatabase($language));
             Core::getInstance()->getLogger()->notice("[LANGUAGES] Lang: $language Loaded");
         }
     }
@@ -26,9 +26,9 @@ abstract class LanguageManager
     /**
      * @return Language[]
      */
-    public static function getLanguages(): array
+    public function getAll(): array
     {
-        return self::$languages;
+        return $this->languages;
     }
 
     public static function getConfigLanguages(): array
@@ -41,30 +41,30 @@ abstract class LanguageManager
         return $languages;
     }
 
-    public static function parseLanguage(string $language): Language|bool
+    public function get(string $name): ?Language
     {
-        return self::$languages[$language] ?? reset(self::$languages);
+        return $this->languages[$name] ?? reset($this->languages) ?: null;
     }
 
-    public static function getPrefix(int $prefix): string
+    public function getPrefix(int $prefix): string
     {
-        $prefixes = self::getPrefixes();
+        $prefixes = $this->getPrefixes();
         return $prefixes[$prefix] ?? reset($prefixes) ?? "";
     }
 
-    public static function getPrefixes(): array
+    public function getPrefixes(): array
     {
-        return Core::getInstance()->getConfig()->get("prefixes", []);
+        return Managers::DATA()->get("config")->get("prefixes", []);
     }
 
-    public static function getDefaultLanguage(): Language
+    public function getDefaultLanguage(): Language
     {
-        return reset(self::$languages);
+        return reset($this->languages);
     }
 
     private static function saveDefaultConfig(): void
     {
-        $languages = Core::getInstance()->getConfig()->get("languages", []);
+        $languages = Managers::DATA()->get("config")->get("languages", []);
         foreach ($languages as $language) {
             Core::getInstance()->saveResource("languages/lang_$language.yml", Core::getInstance()->isInDevMode());
         }

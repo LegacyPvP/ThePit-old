@@ -8,7 +8,6 @@ use Legacy\ThePit\Utils\CurrencyUtils;
 use Legacy\ThePit\Utils\ServerUtils;
 use pocketmine\command\CommandSender;
 use pocketmine\player\OfflinePlayer;
-use pocketmine\player\Player;
 use pocketmine\Server;
 
 final class StatisticsCommand extends Commands

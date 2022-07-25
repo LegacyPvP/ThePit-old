@@ -2,6 +2,7 @@
 
 namespace Legacy\ThePit\ScoreBoard\module\types;
 
+use JetBrains\PhpStorm\Pure;
 use pocketmine\network\mcpe\protocol\types\ScorePacketEntry;
 
 final class ScoreBoardLine
@@ -77,7 +78,7 @@ final class ScoreBoardLine
         return $this->type;
     }
 
-    public function getPacketEntry(): ?ScorePacketEntry
+    #[Pure] public function getPacketEntry(): ?ScorePacketEntry
     {
         if (is_null($this->objectivename)) {
             return null;

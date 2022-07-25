@@ -4,16 +4,15 @@ namespace Legacy\ThePit\Managers;
 
 use Legacy\ThePit\Core;
 use Legacy\ThePit\Entities\List\FishingHook;
-use Legacy\ThePit\Items\List\FishingRod;
 use pocketmine\data\bedrock\EntityLegacyIds;
 use pocketmine\entity\EntityDataHelper;
 use pocketmine\entity\EntityFactory;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\world\World;
 
-abstract class EntitiesManager
+final class EntitiesManager extends Managers
 {
-    public static function getEntities(): array
+    public function getAll(): array
     {
         return [
             [FishingHook::class, function (World $world, CompoundTag $nbt): FishingHook {
@@ -22,12 +21,11 @@ abstract class EntitiesManager
         ];
     }
 
-    public static function initEntities(): void
+    public function init(): void
     {
-        foreach (self::getEntities() as [$class, $callback, $names, $id]) {
+        foreach (self::getAll() as [$class, $callback, $names, $id]) {
             EntityFactory::getInstance()->register($class, $callback, $names, $id);
-            Core::getInstance()->getLogger()->notice("[ENTITIES] Entity: {$names[0]} Loaded");
+            Core::getInstance()->getLogger()->notice("[ENTITIES] Entity: $names[0] Loaded");
         }
-
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Legacy\ThePit\Managers;
 
+use JetBrains\PhpStorm\Pure;
 use Legacy\ThePit\Core;
 use Legacy\ThePit\Currencies\Credits;
 use Legacy\ThePit\Currencies\Etoiles;
@@ -9,18 +10,18 @@ use Legacy\ThePit\Currencies\Gold;
 use Legacy\ThePit\Currencies\VoteCoins;
 use Legacy\ThePit\Currencies\Currency;
 
-abstract class CurrenciesManager
+final class CurrenciesManager extends Managers
 {
 
     /**
      * @var Currency[]
      */
-    private static array $currencies = [];
+    private array $currencies = [];
 
     /**
      * @return Currency[]
      */
-    public static function getCurrencies(): array
+    #[Pure] public function getAll(): array
     {
         return [
             new Gold(),
@@ -30,16 +31,16 @@ abstract class CurrenciesManager
         ];
     }
 
-    public static function initCurrencies(): void
+    public function init(): void
     {
-        foreach (self::getCurrencies() as $currency) {
-            self::$currencies[$currency->getName()] = $currency;
+        foreach ($this->getAll() as $currency) {
+            $this->currencies[$currency->getName()] = $currency;
             Core::getInstance()->getLogger()->notice("[CURRENCIES] Currency: {$currency->getName()} Loaded");
         }
     }
 
-    public static function getCurrency(string $name): Currency
+    public function get(string $name): ?Currency
     {
-        return self::$currencies[$name] ?? reset(self::$currencies);
+        return $this->currencies[$name] ?? reset($this->currencies) ?: null;
     }
 }

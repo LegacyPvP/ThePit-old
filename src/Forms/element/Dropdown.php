@@ -13,6 +13,7 @@ namespace Legacy\ThePit\Forms\element;
 
 
 use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\Pure;
 
 final class Dropdown extends Selector
 {
@@ -22,7 +23,7 @@ final class Dropdown extends Selector
         return Element::TYPE_DROPDOWN;
     }
 
-    #[ArrayShape(["options" => "array", "default" => "int"])] public function serializeBody(): array
+    #[Pure] #[ArrayShape(["options" => "array", "default" => "int"])] public function serializeBody(): array
     {
         return [
             "options" => $this->getOptionsTexts(),

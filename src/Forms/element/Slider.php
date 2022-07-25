@@ -12,6 +12,9 @@ declare(strict_types=1);
 namespace Legacy\ThePit\Forms\element;
 
 
+use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\Pure;
+
 final class Slider extends Element
 {
 
@@ -23,7 +26,7 @@ final class Slider extends Element
 
     private ?float $submittedStep = null;
 
-    public function __construct(?string $headerText, float $minStep, float $maxStep, float $defaultStep = 0, float $stepLength = 0)
+    #[Pure] public function __construct(?string $headerText, float $minStep, float $maxStep, float $defaultStep = 0, float $stepLength = 0)
     {
         $this->minStep = $minStep;
         $this->maxStep = $maxStep;
@@ -87,7 +90,7 @@ final class Slider extends Element
         $this->submittedStep = $result;
     }
 
-    public function serializeBody(): array
+    #[ArrayShape(["min" => "float", "max" => "float", "default" => "float|int", "step" => "float|int"])] public function serializeBody(): array
     {
         return [
             "min" => $this->minStep,

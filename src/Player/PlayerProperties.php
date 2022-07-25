@@ -2,20 +2,15 @@
 
 namespace Legacy\ThePit\Player;
 
-use Legacy\ThePit\Managers\RanksManager;
-use Legacy\ThePit\Objects\Prestige;
+use Legacy\ThePit\Managers\Managers;
 use Legacy\ThePit\Traits\PropertiesTrait;
 use Legacy\ThePit\Utils\CurrencyUtils;
 use Legacy\ThePit\Utils\PlayerUtils;
 use Legacy\ThePit\Utils\PrestigesUtils;
-use Legacy\ThePit\Utils\SpellUtils;
-use pocketmine\item\Armor;
-use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
 use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\CompoundTag;
-use pocketmine\world\Position;
 
 final class PlayerProperties
 {
@@ -44,13 +39,11 @@ final class PlayerProperties
                 "infos" => [
                     "ip" => "",
                     "platform" => "test",
-                    "rank" => RanksManager::getDefaultRank()?->getName(),
+                    "rank" => Managers::RANKS()->getDefaultRank()?->getName(),
                 ],
                 "status" => [
                     "nightvision" => false,
                     "freezed" => false,
-                    "combat" => false,
-                    "combat_players" => []
                 ],
                 "settings" => [
                     "cps" => 0,
@@ -71,22 +64,22 @@ final class PlayerProperties
                     "last_logout" => ""
                 ],
                 "inventory" => [
-                    "helmet" => ItemFactory::getInstance()->get(ItemIds::CHAIN_HELMET),
-                    "chestplate" => ItemFactory::getInstance()->get(ItemIds::CHAIN_CHESTPLATE),
-                    "leggings" => ItemFactory::getInstance()->get(ItemIds::CHAIN_LEGGINGS),
-                    "boots" => ItemFactory::getInstance()->get(ItemIds::CHAIN_BOOTS),
+                    "helmet" => 1,
+                    "chestplate" => 1,
+                    "leggings" => 1,
+                    "boots" => 1,
 
-                    "sword" => ItemFactory::getInstance()->get(ItemIds::STONE_SWORD),
-                    "bow" => ItemFactory::getInstance()->get(ItemIds::BOW),
-                    "arrow" => ItemFactory::getInstance()->get(ItemIds::ARROW, 0, 16),
+                    "sword" => 1,
+                    "bow" => 1,
+                    "arrow" => 1,
 
-                    "rod" => false, //1k gold
-                    "bucket" => false, //500 gold
-                    "snowball" => false, //500 gold
-                    "blocks" => false, //1k gold
-                    "flap" => false, //1,5k gold
-                    "nemo" => false, //1,5k gold
-                ]
+                    "rod" => 0, //1k gold
+                    "bucket" => 0, //500 gold
+                    "snowball" => 0, //500 gold
+                    "blocks" => 0, //1k gold
+                    "flap" => 0, //1,5k gold
+                    "nemo" => 0, //1,5k gold
+                ],
             ]);
         } else {
             $this->setBaseProperties(PlayerUtils::TagtoArray($nbt->getCompoundTag("properties")));

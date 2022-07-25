@@ -7,17 +7,17 @@ use Legacy\ThePit\Core;
 use Legacy\ThePit\Objects\Rank;
 use Legacy\ThePit\Player\LegacyPlayer;
 
-abstract class RanksManager
+final class RanksManager extends Managers
 {
     /**
      * @var array
      */
-    private static array $ranks = [];
+    private array $ranks = [];
 
-    public static function initRanks(): void
+    public function init(): void
     {
-        foreach (Core::getInstance()->getConfig()->get('ranks', []) as $name => $grade) {
-            self::$ranks[$name] = new Rank($name, $grade["permissions"], $grade["chat"], $grade["nametag"], $grade["scoretag"]);
+        foreach (Managers::DATA()->get("config")->get('ranks', []) as $name => $grade) {
+            $this->ranks[$name] = new Rank($name, $grade["permissions"], $grade["chat"], $grade["nametag"], $grade["scoretag"]);
             Core::getInstance()->getLogger()->notice("[RANKS] Rank: $name Loaded");
         }
     }
@@ -25,19 +25,19 @@ abstract class RanksManager
     /**
      * @return array
      */
-    public static function getRanks(): array
+    public function getAll(): array
     {
-        return self::$ranks;
+        return $this->ranks;
     }
 
-    public static function parseRank(string $grade): ?Rank
+    public function get(string $name): ?Rank
     {
-        return self::$ranks[$grade] ?? null;
+        return $this->ranks[$name] ?? null;
     }
 
-    public static function getDefaultRank(): ?Rank
+    public function getDefaultRank(): ?Rank
     {
-        return reset(self::$ranks) ?? null;
+        return reset($this->ranks) ?? null;
     }
 
     #[ArrayShape(["{player}" => "string", "{prestige}" => "int", "{niveau}" => "int"])]

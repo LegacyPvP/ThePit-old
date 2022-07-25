@@ -4,7 +4,7 @@ namespace Legacy\ThePit\Providers;
 
 use pocketmine\utils\Config;
 
-class YAMLProvider extends BaseProvider
+final class YAMLProvider extends BaseProvider // On ne va pas extends ça ?
 {
     private string $name;
     private array $data;
@@ -36,21 +36,20 @@ class YAMLProvider extends BaseProvider
         return $this->name;
     }
 
-    public function get(mixed $k): mixed
+    public function get(mixed $k, mixed $default = null): mixed
     {
-        return $this->data[$k];
+        return $this->data[$k] ?? $default;
     }
 
     public function set(mixed $k, mixed $v): void
     {
-        $this->getConfig()->set($k, $v);
         $this->data[$k] = $v;
     }
 
-    public function getNested(mixed $k): mixed
+    public function getNested(mixed $k, mixed $default = null): mixed
     {
         if(isset($this->data[$k])){
-            return $this->data[$k];
+            return $this->data[$k] ?? $default;
         }
 
         $vars = explode(".", $k);
@@ -58,7 +57,7 @@ class YAMLProvider extends BaseProvider
         if(isset($this->data[$base])){
             $base = $this->data[$base];
         }else{
-            return null; //''?
+            return $default; //''?
         }
 
         while(count($vars) > 0){
@@ -66,7 +65,7 @@ class YAMLProvider extends BaseProvider
             if(is_array($base) && isset($base[$basek])){
                 $base = $base[$basek];
             }else{
-                return null; //''?
+                return $default; //''?
             }
         }
 
@@ -103,5 +102,9 @@ class YAMLProvider extends BaseProvider
     public function getPath(): string
     {
         return $this->path;
+    }
+
+    public function dump(): array {
+        return $this->data;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Legacy\ThePit\Items\List;
 
-use Legacy\ThePit\Core;
+use Legacy\ThePit\Managers\Managers;
 use pocketmine\item\Item;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\item\ItemUseResult;
@@ -19,9 +19,9 @@ final class Flap extends Item
     public function onClickAir(Player $player, Vector3 $directionVector): ItemUseResult
     {
         $motion = $player->getMotion();
-        $motion->x += $directionVector->x * (float)Core::getInstance()->getConfig()->getNested("items.flap.horizontal", 1.0);
-        $motion->y += $directionVector->y * (float)Core::getInstance()->getConfig()->getNested("items.flap.vertical", 1.0); // TODO: ($directionVector->y > 0.85 ? 1 : 0.15) * (float)Core::getInstance()->getConfig()->getNested("items.flap.vertical", 1.0)
-        $motion->z += $directionVector->z * (float)Core::getInstance()->getConfig()->getNested("items.flap.horizontal", 1.0);
+        $motion->x += $directionVector->x * (float)Managers::DATA()->get("config")->getNested("items.flap.horizontal", 1.0);
+        $motion->y += $directionVector->y * (float)Managers::DATA()->get("config")->getNested("items.flap.vertical", 1.0); // TODO: ($directionVector->y > 0.85 ? 1 : 0.15) * (float)Managers::DATA()->get("config")->getNested("items.flap.vertical", 1.0)
+        $motion->z += $directionVector->z * (float)Managers::DATA()->get("config")->getNested("items.flap.horizontal", 1.0);
         $player->setMotion($motion);
         return parent::onClickAir($player, $directionVector);
     }

@@ -2,23 +2,21 @@
 
 namespace Legacy\ThePit\Managers;
 
-use Legacy\ThePit\Core;
-
-abstract class KnockBackManager
+final class KnockBackManager extends Managers
 {
-    public static function getHorizontal(): float
+    public function getHorizontal(): float
     {
-        return Core::getInstance()->getConfig()->getNested("knockback.horizontal", 0.40);
+        return Managers::DATA()->get("config")->getNested("knockback.horizontal", 0.40);
     }
 
-    public static function getVertical(): float
+    public function getVertical(): float
     {
-        return Core::getInstance()->getConfig()->getNested("knockback.vertical", 0.40);
+        return Managers::DATA()->get("config")->getNested("knockback.vertical", 0.40);
     }
 
-    public static function getAttackCooldown(): int
+    public function getAttackCooldown(): int
     {
-        return Core::getInstance()->getConfig()->getNested("knockback.attack_cooldown", 10);
+        return Managers::DATA()->get("config")->getNested("knockback.attack_cooldown", 10);
     }
 
 }

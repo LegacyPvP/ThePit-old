@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Legacy\ThePit\Forms;
 
 
+use JetBrains\PhpStorm\ArrayShape;
 use pocketmine\form\Form as PmForm;
 
 abstract class Form implements PmForm
@@ -43,7 +44,7 @@ abstract class Form implements PmForm
 
     abstract protected function serializeBody(): array;
 
-    public function jsonSerialize(): array
+    #[ArrayShape(["buttons" => "\array|\string[][]", "content" => "string", "type" => "string", "title" => "string"])] public function jsonSerialize(): array
     {
         $body = $this->serializeBody();
         $body["title"] = $this->title;

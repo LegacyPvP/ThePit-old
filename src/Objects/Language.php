@@ -4,7 +4,7 @@ namespace Legacy\ThePit\Objects;
 
 use JetBrains\PhpStorm\Pure;
 use Legacy\ThePit\Databases\LanguageDatabase;
-use Legacy\ThePit\Managers\LanguageManager;
+use Legacy\ThePit\Managers\Managers;
 
 final class Language extends \pocketmine\lang\Language
 {
@@ -46,7 +46,7 @@ final class Language extends \pocketmine\lang\Language
 
     public function getMessage(string $key, array $params = [], int $prefix = 1): Message
     {
-        $message = ($prefix ? LanguageManager::getPrefix($prefix) : "") . $this->getDatabase()->getNested($key, $key);
+        $message = ($prefix ? Managers::LANGUAGES()->getPrefix($prefix) : "") . $this->getDatabase()->getNested($key, $key);
         foreach ($params as $key => $value) {
             $message = str_replace($key, $value, $message);
         }
@@ -55,6 +55,6 @@ final class Language extends \pocketmine\lang\Language
 
     public static function make(): Language
     {
-        return new Language(array_key_first(LanguageManager::$languages) ?? "FR", new LanguageDatabase(array_key_first(LanguageManager::$languages)) ?? "FR");
+        return new Language(array_key_first(Managers::LANGUAGES()->languages) ?? "FR", new LanguageDatabase(array_key_first(Managers::LANGUAGES()->languages)) ?? "FR");
     }
 }

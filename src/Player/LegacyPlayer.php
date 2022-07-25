@@ -3,12 +3,13 @@
 namespace Legacy\ThePit\Player;
 
 use Legacy\ThePit\Entities\List\FishingHook;
+use Legacy\ThePit\Managers\Managers;
+use Legacy\ThePit\Objects\Message;
 use Legacy\ThePit\Providers\CurrencyProvider;
-use Legacy\ThePit\Managers\KnockBackManager;
-use Legacy\ThePit\Managers\RanksManager;
-use Legacy\ThePit\Managers\LanguageManager;
 use Legacy\ThePit\Objects\Rank;
 use Legacy\ThePit\Objects\Language;
+use Legacy\ThePit\Utils\EquipmentUtils;
+use Legacy\ThePit\Traits\CacheTrait;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\EffectManager;
 use pocketmine\entity\effect\VanillaEffects;
@@ -18,8 +19,6 @@ use pocketmine\event\entity\EntityDamageByChildEntityEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\item\enchantment\VanillaEnchantments;
-use pocketmine\item\ItemFactory;
-use pocketmine\item\ItemIds;
 use pocketmine\lang\Translatable;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\network\mcpe\protocol\TextPacket;
@@ -29,10 +28,11 @@ use pocketmine\utils\TextFormat;
 
 final class LegacyPlayer extends Player
 {
+    use CacheTrait;
+
     private PlayerProperties $properties;
     private CurrencyProvider $currencyProvider;
     private CompoundTag $tag;
-    private bool $teleportation = false;
     public string $targetName = "";
     private ?FishingHook $isFishing = null;
 
@@ -78,7 +78,7 @@ final class LegacyPlayer extends Player
 
     public function getLanguage(): Language
     {
-        return LanguageManager::parseLanguage(parent::getLocale());
+        return Managers::LANGUAGES()->get(parent::getLocale());
     }
 
     public function syncNBT(): void
@@ -189,14 +189,14 @@ final class LegacyPlayer extends Player
             $e = $source->getChild();
             if ($e !== null) {
                 $motion = $e->getMotion();
-                $this->knockBack($motion->x, $motion->z, KnockBackManager::getHorizontal(), KnockBackManager::getVertical());
+                $this->knockBack($motion->x, $motion->z, Managers::KNOCKBACK()->getHorizontal(), Managers::KNOCKBACK()->getVertical());
             }
         } elseif ($source instanceof EntityDamageByEntityEvent) {
             $e = $source->getDamager();
             if ($e !== null) {
                 $deltaX = $this->location->x - $e->location->x;
                 $deltaZ = $this->location->z - $e->location->z;
-                $this->knockBack($deltaX, $deltaZ, KnockBackManager::getHorizontal(), KnockBackManager::getVertical());
+                $this->knockBack($deltaX, $deltaZ, Managers::KNOCKBACK()->getHorizontal(), Managers::KNOCKBACK()->getVertical());
             }
         }
 
@@ -206,36 +206,9 @@ final class LegacyPlayer extends Player
         }
     }
 
-    public function isInTeleportation(): bool
-    {
-        return $this->teleportation;
-    }
-
-    public function setTeleportation(bool $teleportation): void
-    {
-        $this->teleportation = $teleportation;
-    }
-
     public function getRank(): Rank
     {
-        return RanksManager::parseRank($this->getPlayerProperties()->getNestedProperties('infos.rank'));
-    }
-
-    public function isInCombat()
-    {
-        return $this->getPlayerProperties()->getNestedProperties('status.combat');
-    }
-
-    public function setInCombat(bool $combat, LegacyPlayer $target): void
-    {
-        if ($combat == true) {
-            $this->targetName = $target->getName();
-            $this->getPlayerProperties()->setNestedProperties('status.combat_players', [$this->getName(), $target->getName()]);
-            $this->getPlayerProperties()->setNestedProperties('status.combat', true);
-        } else {
-            $this->getPlayerProperties()->setNestedProperties('status.combat_players', []);
-            $this->getPlayerProperties()->setNestedProperties('status.combat', false);
-        }
+        return Managers::RANKS()->get($this->getPlayerProperties()->getNestedProperties('infos.rank'));
     }
 
     public function dropInventory()
@@ -271,5 +244,48 @@ final class LegacyPlayer extends Player
     public function setFishing(?FishingHook $fishing): void
     {
         $this->isFishing = $fishing;
+    }
+
+    public function getArmorLevel(int $index)
+    {
+        return match ($index) {
+            EquipmentUtils::HELMET => $this->getPlayerProperties()->getNestedProperties("inventory.helmet"),
+            EquipmentUtils::CHESTPLATE => $this->getPlayerProperties()->getNestedProperties("inventory.chestplate"),
+            EquipmentUtils::LEGGINGS => $this->getPlayerProperties()->getNestedProperties("inventory.leggings"),
+            EquipmentUtils::BOOTS => $this->getPlayerProperties()->getNestedProperties("inventory.boots"),
+            default => null,
+        };
+    }
+
+    public function getArmor(int $index): ? Message
+    {
+        $level = $this->getArmorLevel($index);
+        return match ($level) {
+            EquipmentUtils::HELMET => $this->getLanguage()->getMessage("equipment.helmet"),
+            EquipmentUtils::CHESTPLATE => $this->getLanguage()->getMessage("equipment.chestplate"),
+            EquipmentUtils::LEGGINGS => $this->getLanguage()->getMessage("equipment.leggings"),
+            EquipmentUtils::BOOTS => $this->getLanguage()->getMessage("equipment.boots"),
+            default => null,
+        };
+    }
+
+    public function getWeaponsLevel(int $index)
+    {
+        return match ($index) {
+            EquipmentUtils::SWORD => $this->getPlayerProperties()->getNestedProperties("inventory.sword"),
+            EquipmentUtils::BOW => $this->getPlayerProperties()->getNestedProperties("inventory.bow"),
+            EquipmentUtils::ARROW => $this->getPlayerProperties()->getNestedProperties("inventory.arrow"),
+            default => null,
+        };
+    }
+
+    public function getWeapons(int $index): ? Message {
+        $level = $this->getArmorLevel($index);
+        return match ($index) {
+            EquipmentUtils::SWORD => $this->getLanguage()->getMessage("equipment.sword"),
+            EquipmentUtils::BOW => $this->getLanguage()->getMessage("equipment.bow"),
+            EquipmentUtils::ARROW => $this->getLanguage()->getMessage("equipment.arrow"),
+            default => null,
+        };
     }
 }

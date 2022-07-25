@@ -21,7 +21,7 @@ abstract class PlayerUtils
         };
     }
 
-    public static function tagtoArray(CompoundTag|ListTag $nbt, $name = null): array
+    public static function tagToArray(CompoundTag|ListTag $nbt, $name = null): array
     {
         foreach ($nbt->getValue() as $key => $value) {
             if ($value instanceof CompoundTag || $value instanceof ListTag) {
@@ -34,7 +34,7 @@ abstract class PlayerUtils
         return self::$properties;
     }
 
-    public static function arraytoTag(array $array): CompoundTag
+    public static function arrayToTag(array $array): CompoundTag
     {
         $nbt = new CompoundTag();
         foreach ($array as $property => $value) {
