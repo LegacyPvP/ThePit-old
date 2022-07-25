@@ -19,7 +19,7 @@ final class LanguageManager extends Managers
         foreach ($this->getDataLanguages() as $language) {
             Core::$cache["data"][$language] = new LanguageDatabase("lang_".$language);
             Core::$cache["languages"][$language] = new Language($language);
-            // TODO: Managers::DATA()->add(new LanguageDatabase("lang_".$language)); DOESN'T    WORK
+            // TODO: Managers::DATA()->add(new LanguageDatabase("lang_".$language)); DOESN'T WORK
         }
     }
 

@@ -294,6 +294,8 @@ items:
     drops-interval:
     - 100
     - 600
+    lost-drops-inverval: [20, 30]
+    drops-interval: [100, 600]
     drops:
       Trésor:
         id: 1
