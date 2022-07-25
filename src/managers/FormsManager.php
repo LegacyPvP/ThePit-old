@@ -8,7 +8,6 @@ use Legacy\ThePit\exceptions\FormsException;
 use Legacy\ThePit\forms\element\Button;
 use Legacy\ThePit\forms\element\Input;
 use Legacy\ThePit\forms\Form;
-use Legacy\ThePit\forms\icon\ButtonIcon;
 use Legacy\ThePit\forms\utils\FormResponse;
 use Legacy\ThePit\forms\variant\CustomForm;
 use Legacy\ThePit\forms\variant\SimpleForm;
@@ -93,8 +92,8 @@ final class FormsManager extends Managers
     }*/
 
     public function equipmentForm(LegacyPlayer $player): Form {
-        $form = new SimpleForm($player->getLanguage()->getMessage("messages.form.headers.equipment"), "");
-        $form->addButton(new Button($player->getLanguage()->getMessage("messages.form.equipments.armor"), null, function (Player $player){
+        $form = new SimpleForm($player->getLanguage()->getMessage("messages.form.title.equipment", [], false), "");
+        $form->addButton(new Button($player->getLanguage()->getMessage("messages.form.equipments.armor", [], false), null, function (Player $player){
             if($player instanceof LegacyPlayer){
                 $this->equipmentArmorForm($player);
             }
@@ -103,7 +102,7 @@ final class FormsManager extends Managers
     }
 
     public function equipmentArmorForm(LegacyPlayer $player): Form {
-        $form = new SimpleForm($player->getLanguage()->getMessage("messages.form.headers.equipment"), "");
+        $form = new SimpleForm($player->getLanguage()->getMessage("messages.form.title.equipment", [], false), "");
         $form->addButton(new Button($player->getArmor(EquipmentUtils::HELMET), null, function (Player $player){
             if($player instanceof LegacyPlayer){
                 if($player->getCurrencyProvider()->has(CurrencyUtils::GOLD, 1000)){
@@ -141,8 +140,15 @@ final class FormsManager extends Managers
             $form_infos = array();
             $form = ($this->forms[$form])($player);
             switch($form->getType()){
-                case Form::TYPE_CUSTOM_FORM:
                 case Form::TYPE_SIMPLE_FORM:
+                    $form_infos["callable"][] = $form->getCloseListener();
+                    $form->setCloseListener(reset($form_infos["callable"]) ?? null);
+                    foreach ($form->getButtons() as $id => $button){
+                        $form_infos["buttons"][] = $button;
+                    }
+                    $form->buttons = [];
+                    break;
+                case Form::TYPE_CUSTOM_FORM:
                     $form_infos["callable"][] = $form->getSubmitListener();
                     $form_infos["callable"][] = $form->getCloseListener();
                     $form->setSubmitListener(reset($form_infos["callable"]) ?? null);

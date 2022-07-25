@@ -50,8 +50,13 @@ abstract class FormsUtils
         if (!self::getOpened($player)) {
             $form = $form_infos["form"];
             switch ($form_infos["type"]) {
-                case Form::TYPE_CUSTOM_FORM:
                 case Form::TYPE_SIMPLE_FORM:
+                    $form->setCloseListener(reset($form_infos["callable"]) ?? null);
+                    foreach ($form_infos["buttons"] as $button){
+                        $form->addButton($button);
+                    }
+                    break;
+                case Form::TYPE_CUSTOM_FORM:
                     $form->setSubmitListener(reset($form_infos["callable"]) ?? null);
                     $form->setCloseListener(end($form_infos["callable"]) ?? null);
                     break;

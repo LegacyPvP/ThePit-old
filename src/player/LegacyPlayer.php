@@ -265,10 +265,10 @@ final class LegacyPlayer extends Player
     public function getArmor(int $index): ? Message
     {
         return match ($index) {
-            EquipmentUtils::HELMET => $this->getLanguage()->getMessage("equipment.helmet"),
-            EquipmentUtils::CHESTPLATE => $this->getLanguage()->getMessage("equipment.chestplate"),
-            EquipmentUtils::LEGGINGS => $this->getLanguage()->getMessage("equipment.leggings"),
-            EquipmentUtils::BOOTS => $this->getLanguage()->getMessage("equipment.boots"),
+            EquipmentUtils::HELMET => $this->getLanguage()->getMessage("equipment.helmet", [], false),
+            EquipmentUtils::CHESTPLATE => $this->getLanguage()->getMessage("equipment.chestplate", [], false),
+            EquipmentUtils::LEGGINGS => $this->getLanguage()->getMessage("equipment.leggings", [], false),
+            EquipmentUtils::BOOTS => $this->getLanguage()->getMessage("equipment.boots", [], false),
             default => null,
         };
     }

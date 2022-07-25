@@ -24,7 +24,7 @@ final class SimpleForm extends Form
     use Closable;
 
     /** @var Button[] */
-    private array $buttons = [];
+    public array $buttons = [];
 
     private ?string $headerText;
 
