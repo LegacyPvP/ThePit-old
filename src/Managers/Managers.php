@@ -27,7 +27,7 @@ use pocketmine\utils\EnumTrait;
  * @method static ScoreBoardsManager SCOREBOARDS()
  * @method static DataManager DATA()
  */
-abstract class Managers implements Manager
+abstract class Managers implements IManager
 {
     use EnumTrait {
         __construct as Enum___construct;

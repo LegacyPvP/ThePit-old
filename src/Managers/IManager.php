@@ -2,7 +2,7 @@
 
 namespace Legacy\ThePit\Managers;
 
-interface Manager
+interface IManager
 {
     public function load(): void;
 
