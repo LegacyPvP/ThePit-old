@@ -1,8 +1,8 @@
 <?php
 
-namespace Legacy\ThePit\Currencies;
+namespace Legacy\ThePit\currencies;
 
-use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\player\LegacyPlayer;
 
 abstract class Currency
 {

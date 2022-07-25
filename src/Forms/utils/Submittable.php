@@ -9,7 +9,7 @@
 declare(strict_types=1);
 
 
-namespace Legacy\ThePit\Forms\utils;
+namespace Legacy\ThePit\forms\utils;
 
 
 use pocketmine\player\Player;

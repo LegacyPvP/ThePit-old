@@ -2,9 +2,8 @@
 
 namespace Legacy\ThePit;
 
-use JsonException;
-use Legacy\ThePit\Managers\Managers;
-use Legacy\ThePit\Tasks\GoldSpawnTask;
+use Legacy\ThePit\managers\Managers;
+use Legacy\ThePit\tasks\GoldSpawnTask;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
 
@@ -36,9 +35,6 @@ class Core extends PluginBase
         Managers::initManagers();
     }
 
-    /**
-     * @throws JsonException
-     */
     protected function onDisable(): void
     {
         Managers::DATA()->saveAll();

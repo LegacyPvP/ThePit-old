@@ -1,6 +1,6 @@
 <?php
 
-namespace Legacy\ThePit\Test;
+namespace Legacy\ThePit\test;
 
 use pocketmine\entity\Entity;
 use pocketmine\entity\Location;

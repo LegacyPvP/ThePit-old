@@ -1,11 +1,11 @@
 <?php
 
-namespace Legacy\ThePit\Utils;
+namespace Legacy\ThePit\utils;
 
 use JetBrains\PhpStorm\Pure;
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Forms\Form;
-use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\forms\Form;
+use Legacy\ThePit\player\LegacyPlayer;
 use pocketmine\scheduler\ClosureTask;
 
 abstract class FormsUtils

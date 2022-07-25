@@ -1,13 +1,13 @@
 <?php
 
-namespace Legacy\ThePit\Commands;
+namespace Legacy\ThePit\commands;
 
 use JsonException;
-use Legacy\ThePit\Exceptions\FormsException;
-use Legacy\ThePit\Exceptions\LanguageException;
-use Legacy\ThePit\Managers\Managers;
-use Legacy\ThePit\Player\LegacyPlayer;
-use Legacy\ThePit\Utils\ServerUtils;
+use Legacy\ThePit\exceptions\FormsException;
+use Legacy\ThePit\exceptions\LanguageException;
+use Legacy\ThePit\managers\Managers;
+use Legacy\ThePit\player\LegacyPlayer;
+use Legacy\ThePit\utils\ServerUtils;
 use pocketmine\command\CommandSender;
 
 final class KnockBackCommand extends Commands

@@ -1,14 +1,14 @@
 <?php /** @noinspection PhpVoidFunctionResultUsedInspection */
 
-namespace Legacy\ThePit\Player;
+namespace Legacy\ThePit\player;
 
-use Legacy\ThePit\Entities\List\FishingHook;
-use Legacy\ThePit\Managers\Managers;
-use Legacy\ThePit\Objects\Message;
-use Legacy\ThePit\Providers\CurrencyProvider;
-use Legacy\ThePit\Objects\Rank;
-use Legacy\ThePit\Objects\Language;
-use Legacy\ThePit\Utils\EquipmentUtils;
+use Legacy\ThePit\entities\list\FishingHook;
+use Legacy\ThePit\managers\Managers;
+use Legacy\ThePit\objects\Message;
+use Legacy\ThePit\providers\CurrencyProvider;
+use Legacy\ThePit\objects\Rank;
+use Legacy\ThePit\objects\Language;
+use Legacy\ThePit\utils\EquipmentUtils;
 use Legacy\ThePit\Traits\CacheTrait;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\EffectManager;
@@ -223,8 +223,6 @@ final class LegacyPlayer extends Player
         $helmet = $this->getPlayerProperties()->getNestedProperties("inventory.helmet");
         $chestplate = $this->getPlayerProperties()->getNestedProperties("inventory.chestplate");
         $leggings = $this->getPlayerProperties()->getNestedProperties("inventory.leggings");
-        var_dump($boots = $this->getPlayerProperties()->getNestedProperties("inventory.boots"));
-
         $this->getArmorInventory()->setHelmet($helmet);
         $this->getArmorInventory()->setChestplate($chestplate);
         $this->getArmorInventory()->setLeggings($leggings);

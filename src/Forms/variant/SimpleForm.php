@@ -9,13 +9,13 @@
 declare(strict_types=1);
 
 
-namespace Legacy\ThePit\Forms\variant;
+namespace Legacy\ThePit\forms\variant;
 
 
 use JetBrains\PhpStorm\ArrayShape;
-use Legacy\ThePit\Forms\element\Button;
-use Legacy\ThePit\Forms\Form;
-use Legacy\ThePit\Forms\utils\Closable;
+use Legacy\ThePit\forms\element\Button;
+use Legacy\ThePit\forms\Form;
+use Legacy\ThePit\forms\utils\Closable;
 use pocketmine\form\FormValidationException;
 use pocketmine\player\Player;
 

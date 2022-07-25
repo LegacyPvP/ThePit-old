@@ -1,6 +1,6 @@
 <?php
 
-namespace Legacy\ThePit\Commands;
+namespace Legacy\ThePit\commands;
 
 use pocketmine\command\CommandSender;
 

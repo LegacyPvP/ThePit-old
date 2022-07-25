@@ -1,17 +1,17 @@
 <?php
 
-namespace Legacy\ThePit\Managers;
+namespace Legacy\ThePit\managers;
 
 use Legacy\ThePit\Core;
-use Legacy\ThePit\ScoreBoard\module\types\ScoreBoardLine;
-use Legacy\ThePit\Player\LegacyPlayer;
-use Legacy\ThePit\Tasks\ScoreBoardTask;
-use Legacy\ThePit\Utils\CurrencyUtils;
+use Legacy\ThePit\scoreboard\module\types\ScoreBoardLine;
+use Legacy\ThePit\player\LegacyPlayer;
+use Legacy\ThePit\tasks\ScoreBoardTask;
+use Legacy\ThePit\utils\CurrencyUtils;
 use pocketmine\player\Player;
 use pocketmine\scheduler\ClosureTask;
 use pocketmine\Server;
-use Legacy\ThePit\ScoreBoard\ScoreBoardApi;
-use Legacy\ThePit\ScoreBoard\module\ScoreBoard;
+use Legacy\ThePit\scoreboard\ScoreBoardApi;
+use Legacy\ThePit\scoreboard\module\ScoreBoard;
 
 final class ScoreBoardsManager extends Managers
 {
@@ -31,12 +31,12 @@ final class ScoreBoardsManager extends Managers
                 )
             ];
             if (!isset($this->scoreboards[$type])) {
-                Core::getInstance()->getLogger()->emergency("[SCOREBOARDS] Failed to load ScoreBoard: $type ... Retrying in 5 seconds");
+                Core::getInstance()->getLogger()->emergency("[SCOREBOARDS] Failed to load scoreboard: $type ... Retrying in 5 seconds");
                 Core::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(function () use ($type): void {
-                    Core::getInstance()->getLogger()->notice("[SCOREBOARDS] Retrying to load ScoreBoard: $type");
+                    Core::getInstance()->getLogger()->notice("[SCOREBOARDS] Retrying to load scoreboard: $type");
                     $this->init();
                 }), 5 * 20);
-            } else Core::getInstance()->getLogger()->notice("[SCOREBOARDS] ScoreBoard: $type Loaded");
+            } else Core::getInstance()->getLogger()->notice("[SCOREBOARDS] scoreboard: $type Loaded");
         }
 
         Core::getInstance()->getScheduler()->scheduleRepeatingTask(new ScoreBoardTask(), Managers::DATA()->get("config")->getNested("scoreboards.refresh-time", 20));

@@ -1,9 +1,9 @@
 <?php
 
-namespace Legacy\ThePit\Objects;
+namespace Legacy\ThePit\objects;
 
-use Legacy\ThePit\Managers\Managers;
-use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\managers\Managers;
+use Legacy\ThePit\player\LegacyPlayer;
 
 final class Rank
 {

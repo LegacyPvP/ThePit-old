@@ -1,10 +1,9 @@
 <?php
 
-namespace Legacy\ThePit\Items\List;
+namespace Legacy\ThePit\items\list;
 
-use Legacy\ThePit\Entities\List\FishingHook;
-use Legacy\ThePit\Player\LegacyPlayer;
-use pocketmine\entity\animation\ArmSwingAnimation;
+use Legacy\ThePit\entities\list\FishingHook;
+use Legacy\ThePit\player\LegacyPlayer;
 use pocketmine\entity\Entity;
 use pocketmine\item\ItemUseResult;
 use pocketmine\item\Tool;
@@ -28,7 +27,6 @@ class FishingRod extends Tool
     public function onClickAir(Player $player, Vector3 $directionVector): ItemUseResult
     {
         if(!$player instanceof LegacyPlayer) return ItemUseResult::NONE();
-        $player->broadcastAnimation(new ArmSwingAnimation($player));
         if($player->getFishingHook() != null){
             $player->getFishingHook()->delete();
             return ItemUseResult::SUCCESS();

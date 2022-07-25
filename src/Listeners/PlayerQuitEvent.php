@@ -1,9 +1,9 @@
 <?php
 
-namespace Legacy\ThePit\Listeners;
+namespace Legacy\ThePit\listeners;
 
-use Legacy\ThePit\Player\LegacyPlayer;
-use Legacy\ThePit\Utils\ServerUtils;
+use Legacy\ThePit\player\LegacyPlayer;
+use Legacy\ThePit\utils\ServerUtils;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerQuitEvent as ClassEvent;
 

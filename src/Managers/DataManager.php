@@ -1,11 +1,11 @@
 <?php
 
-namespace Legacy\ThePit\Managers;
+namespace Legacy\ThePit\managers;
 
 use JsonException;
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Databases\Database;
 use Legacy\ThePit\Databases\BaseDatabase;
+use Legacy\ThePit\Databases\Database;
 use Legacy\ThePit\Databases\IDatabase;
 
 final class DataManager extends Managers

@@ -1,8 +1,8 @@
 <?php
 
-namespace Legacy\ThePit\Tasks;
+namespace Legacy\ThePit\tasks;
 
-use Legacy\ThePit\Managers\Managers;
+use Legacy\ThePit\managers\Managers;
 use pocketmine\scheduler\Task;
 
 final class ScoreBoardTask extends Task

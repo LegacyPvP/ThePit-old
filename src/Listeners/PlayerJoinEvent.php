@@ -1,10 +1,10 @@
 <?php
 
-namespace Legacy\ThePit\Listeners;
+namespace Legacy\ThePit\listeners;
 
-use Legacy\ThePit\Managers\Managers;
-use Legacy\ThePit\Player\LegacyPlayer;
-use Legacy\ThePit\Utils\ServerUtils;
+use Legacy\ThePit\managers\Managers;
+use Legacy\ThePit\player\LegacyPlayer;
+use Legacy\ThePit\utils\ServerUtils;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent as ClassEvent;
 
@@ -20,7 +20,7 @@ final class PlayerJoinEvent implements Listener
             }
             $packet = Managers::CUSTOMITEMS()->getPacket();
             if (!is_null($packet)) $player->getNetworkSession()->sendDataPacket($packet);
-            $player->setStuff();
+            //$player->setStuff();
         }
 
         foreach($player->getServer()->getOnlinePlayers() as $_player) {

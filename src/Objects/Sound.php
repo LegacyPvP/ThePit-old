@@ -1,8 +1,8 @@
 <?php
 
-namespace Legacy\ThePit\Objects;
+namespace Legacy\ThePit\objects;
 
-use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\player\LegacyPlayer;
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 
 final class Sound

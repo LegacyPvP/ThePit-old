@@ -7,7 +7,7 @@ trait DatabaseTrait
     protected mixed $data;
 
     protected function init(): void {
-        $this->data = yaml_parse_file($this->path); // yaml_parse(file_get_contents($this->path));
+        $this->data = yaml_parse_file($this->path);
     }
 
     public function get(mixed $k, mixed $default = null): mixed

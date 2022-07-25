@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Legacy\ThePit\Items;
+namespace Legacy\ThePit\items;
 
 use pocketmine\entity\Living;
 use pocketmine\item\Food;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Legacy\ThePit\Commands;
+namespace Legacy\ThePit\commands;
 
-use Legacy\ThePit\Managers\Managers;
-use Legacy\ThePit\Utils\ServerUtils;
+use Legacy\ThePit\managers\Managers;
+use Legacy\ThePit\utils\ServerUtils;
 use pocketmine\command\CommandSender;
 
 final class SayCommand extends Commands

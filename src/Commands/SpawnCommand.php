@@ -1,10 +1,10 @@
 <?php
 
-namespace Legacy\ThePit\Commands;
+namespace Legacy\ThePit\commands;
 
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Exceptions\LanguageException;
-use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\exceptions\LanguageException;
+use Legacy\ThePit\player\LegacyPlayer;
 use pocketmine\command\CommandSender;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;

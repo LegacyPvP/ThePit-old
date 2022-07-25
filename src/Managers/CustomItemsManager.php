@@ -1,6 +1,6 @@
 <?php
 
-namespace Legacy\ThePit\Managers;
+namespace Legacy\ThePit\managers;
 
 use Exception;
 use Legacy\ThePit\Core;

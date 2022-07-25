@@ -1,8 +1,8 @@
 <?php
 
-namespace Legacy\ThePit\Commands;
+namespace Legacy\ThePit\commands;
 
-use Legacy\ThePit\Managers\Managers;
+use Legacy\ThePit\managers\Managers;
 use pocketmine\command\CommandSender;
 
 final class ListRankCommand extends Commands

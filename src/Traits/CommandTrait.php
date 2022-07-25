@@ -2,7 +2,7 @@
 
 namespace Legacy\ThePit\Traits;
 
-use Legacy\ThePit\Managers\Managers;
+use Legacy\ThePit\managers\Managers;
 use pocketmine\command\Command;
 use pocketmine\permission\DefaultPermissions;
 use pocketmine\permission\Permission;

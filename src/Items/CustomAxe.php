@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Legacy\ThePit\Items;
+namespace Legacy\ThePit\items;
 
 use pocketmine\item\Axe;
 use pocketmine\item\ItemIdentifier;

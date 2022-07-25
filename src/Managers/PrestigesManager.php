@@ -1,11 +1,11 @@
 <?php
 
-namespace Legacy\ThePit\Managers;
+namespace Legacy\ThePit\managers;
 
 use JetBrains\PhpStorm\Pure;
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Objects\Prestige;
-use Legacy\ThePit\Utils\PrestigesUtils;
+use Legacy\ThePit\objects\Prestige;
+use Legacy\ThePit\utils\PrestigesUtils;
 
 final class PrestigesManager extends Managers
 {

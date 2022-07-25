@@ -1,13 +1,13 @@
 <?php
 
-namespace Legacy\ThePit\ScoreBoard\module;
+namespace Legacy\ThePit\scoreboard\module;
 
 use JetBrains\PhpStorm\Pure;
 use pocketmine\network\mcpe\protocol\RemoveObjectivePacket;
 use pocketmine\network\mcpe\protocol\SetDisplayObjectivePacket;
 use pocketmine\network\mcpe\protocol\SetScorePacket;
 use pocketmine\network\mcpe\protocol\types\ScorePacketEntry;
-use Legacy\ThePit\ScoreBoard\module\types\ScoreBoardLine;
+use Legacy\ThePit\scoreboard\module\types\ScoreBoardLine;
 use pocketmine\player\Player;
 
 final class ScoreBoard

@@ -1,16 +1,16 @@
 <?php
 
-namespace Legacy\ThePit\Managers;
+namespace Legacy\ThePit\managers;
 
-use Legacy\ThePit\Commands\BanCommand;
-use Legacy\ThePit\Commands\BanListCommand;
-use Legacy\ThePit\Commands\Currency\{
+use Legacy\ThePit\commands\BanCommand;
+use Legacy\ThePit\commands\BanListCommand;
+use Legacy\ThePit\commands\currency\{
     AddCommand,
     PayCommand,
     RemoveCommand,
     SetCommand
 };
-use Legacy\ThePit\Commands\{
+use Legacy\ThePit\commands\{
     GameModeCommand,
     GlobalMuteCommand,
     KickCommand,

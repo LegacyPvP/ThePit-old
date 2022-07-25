@@ -1,6 +1,6 @@
 <?php
 
-namespace Legacy\ThePit\Utils;
+namespace Legacy\ThePit\utils;
 
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\nbt\tag\ListTag;

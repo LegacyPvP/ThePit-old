@@ -1,20 +1,19 @@
 <?php
 
-namespace Legacy\ThePit\Managers;
+namespace Legacy\ThePit\managers;
 
 use JetBrains\PhpStorm\Pure;
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Listeners\DataPacketReceiveEvent;
-use Legacy\ThePit\Listeners\DataPacketSendEvent;
-use Legacy\ThePit\Listeners\EntityDamageByEntityEvent;
-use Legacy\ThePit\Listeners\EntityDamageEvent;
-use Legacy\ThePit\Listeners\EntityPickupItemEvent;
-use Legacy\ThePit\Listeners\EntityShootBowEvent;
-use Legacy\ThePit\Listeners\PlayerChatEvent;
-use Legacy\ThePit\Listeners\PlayerCreationEvent;
-use Legacy\ThePit\Listeners\PlayerDropItemEvent;
-use Legacy\ThePit\Listeners\PlayerItemUseEvent;
-use Legacy\ThePit\Listeners\PlayerJoinEvent;
+use Legacy\ThePit\listeners\DataPacketReceiveEvent;
+use Legacy\ThePit\listeners\DataPacketSendEvent;
+use Legacy\ThePit\listeners\EntityDamageByEntityEvent;
+use Legacy\ThePit\listeners\EntityDamageEvent;
+use Legacy\ThePit\listeners\EntityPickupItemEvent;
+use Legacy\ThePit\listeners\PlayerChatEvent;
+use Legacy\ThePit\listeners\PlayerCreationEvent;
+use Legacy\ThePit\listeners\PlayerDropItemEvent;
+use Legacy\ThePit\listeners\PlayerItemUseEvent;
+use Legacy\ThePit\listeners\PlayerJoinEvent;
 use pocketmine\Server;
 
 final class ListenersManager extends Managers
@@ -31,7 +30,6 @@ final class ListenersManager extends Managers
             new PlayerItemUseEvent(),
             new EntityDamageEvent(),
             new PlayerDropItemEvent(),
-            new EntityShootBowEvent(),
             new EntityPickupItemEvent(),
         ];
     }

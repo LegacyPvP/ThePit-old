@@ -9,7 +9,7 @@
 declare(strict_types=1);
 
 
-namespace Legacy\ThePit\Forms\element;
+namespace Legacy\ThePit\forms\element;
 
 
 use JsonSerializable;

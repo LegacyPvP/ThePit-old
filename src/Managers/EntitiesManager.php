@@ -1,9 +1,9 @@
 <?php
 
-namespace Legacy\ThePit\Managers;
+namespace Legacy\ThePit\managers;
 
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Entities\List\FishingHook;
+use Legacy\ThePit\entities\list\FishingHook;
 use pocketmine\data\bedrock\EntityLegacyIds;
 use pocketmine\entity\EntityDataHelper;
 use pocketmine\entity\EntityFactory;

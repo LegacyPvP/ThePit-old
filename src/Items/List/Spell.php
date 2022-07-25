@@ -1,8 +1,8 @@
 <?php
 
-namespace Legacy\ThePit\Items\List;
+namespace Legacy\ThePit\items\list;
 
-use Legacy\ThePit\Utils\SpellUtils;
+use Legacy\ThePit\utils\SpellUtils;
 use pocketmine\item\Item;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\player\Player;

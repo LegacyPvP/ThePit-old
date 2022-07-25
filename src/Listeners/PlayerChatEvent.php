@@ -1,10 +1,10 @@
 <?php /** @noinspection PhpMissingBreakStatementInspection */
 
-namespace Legacy\ThePit\Listeners;
+namespace Legacy\ThePit\listeners;
 
-use Legacy\ThePit\Managers\Managers;
-use Legacy\ThePit\Player\LegacyPlayer;
-use Legacy\ThePit\Utils\ServerUtils;
+use Legacy\ThePit\managers\Managers;
+use Legacy\ThePit\player\LegacyPlayer;
+use Legacy\ThePit\utils\ServerUtils;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerChatEvent as ClassEvent;
 

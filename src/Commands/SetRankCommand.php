@@ -1,9 +1,9 @@
 <?php
 
-namespace Legacy\ThePit\Commands;
+namespace Legacy\ThePit\commands;
 
-use Legacy\ThePit\Managers\Managers;
-use Legacy\ThePit\Player\LegacyPlayer;
+use Legacy\ThePit\managers\Managers;
+use Legacy\ThePit\player\LegacyPlayer;
 use pocketmine\command\CommandSender;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\nbt\tag\StringTag;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Legacy\ThePit\Listeners;
+namespace Legacy\ThePit\listeners;
 
-use Legacy\ThePit\Managers\Managers;
+use Legacy\ThePit\managers\Managers;
 use pocketmine\event\server\DataPacketSendEvent as ClassEvent;
 use pocketmine\event\Listener;
 use pocketmine\network\mcpe\protocol\ResourcePackStackPacket;
