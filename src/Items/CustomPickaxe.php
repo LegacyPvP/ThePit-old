@@ -8,7 +8,7 @@ use pocketmine\item\ItemIdentifier;
 use pocketmine\item\Pickaxe;
 use pocketmine\item\ToolTier;
 use pocketmine\nbt\tag\CompoundTag;
-use Legacy\ThePit\Traits\CustomItemTrait;
+use Legacy\ThePit\traits\CustomItemTrait;
 
 class CustomPickaxe extends Pickaxe
 {

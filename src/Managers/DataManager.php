@@ -4,9 +4,9 @@ namespace Legacy\ThePit\managers;
 
 use JsonException;
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Databases\BaseDatabase;
-use Legacy\ThePit\Databases\Database;
-use Legacy\ThePit\Databases\IDatabase;
+use Legacy\ThePit\databases\BaseDatabase;
+use Legacy\ThePit\databases\Database;
+use Legacy\ThePit\databases\IDatabase;
 
 final class DataManager extends Managers
 {

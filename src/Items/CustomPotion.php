@@ -10,7 +10,7 @@ use pocketmine\item\ItemIdentifier;
 use pocketmine\item\VanillaItems;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\player\Player;
-use Legacy\ThePit\Traits\CustomItemTrait;
+use Legacy\ThePit\traits\CustomItemTrait;
 
 class CustomPotion extends Food
 {

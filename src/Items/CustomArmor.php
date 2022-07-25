@@ -12,7 +12,7 @@ use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\player\Player;
 use pocketmine\Server;
-use Legacy\ThePit\Traits\CustomItemTrait;
+use Legacy\ThePit\traits\CustomItemTrait;
 
 class CustomArmor extends Armor
 {

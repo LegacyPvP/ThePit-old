@@ -8,7 +8,7 @@ use pocketmine\item\ItemIdentifier;
 use pocketmine\item\Shovel;
 use pocketmine\item\ToolTier;
 use pocketmine\nbt\tag\CompoundTag;
-use Legacy\ThePit\Traits\CustomItemTrait;
+use Legacy\ThePit\traits\CustomItemTrait;
 
 class CustomShovel extends Shovel
 {

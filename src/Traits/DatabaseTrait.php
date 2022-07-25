@@ -1,6 +1,6 @@
 <?php
 
-namespace Legacy\ThePit\Traits;
+namespace Legacy\ThePit\traits;
 
 trait DatabaseTrait
 {

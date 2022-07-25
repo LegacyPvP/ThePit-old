@@ -3,7 +3,7 @@
 namespace Legacy\ThePit\player;
 
 use Legacy\ThePit\managers\Managers;
-use Legacy\ThePit\Traits\PropertiesTrait;
+use Legacy\ThePit\traits\PropertiesTrait;
 use Legacy\ThePit\utils\CurrencyUtils;
 use Legacy\ThePit\utils\PlayerUtils;
 use Legacy\ThePit\utils\PrestigesUtils;

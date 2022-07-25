@@ -9,7 +9,7 @@ use Legacy\ThePit\providers\CurrencyProvider;
 use Legacy\ThePit\objects\Rank;
 use Legacy\ThePit\objects\Language;
 use Legacy\ThePit\utils\EquipmentUtils;
-use Legacy\ThePit\Traits\CacheTrait;
+use Legacy\ThePit\traits\CacheTrait;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\EffectManager;
 use pocketmine\entity\effect\VanillaEffects;

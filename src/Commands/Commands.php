@@ -6,7 +6,7 @@ use Legacy\ThePit\Core;
 use Legacy\ThePit\managers\Managers;
 use Legacy\ThePit\objects\Language;
 use Legacy\ThePit\player\LegacyPlayer;
-use Legacy\ThePit\Traits\CommandTrait;
+use Legacy\ThePit\traits\CommandTrait;
 use Legacy\ThePit\utils\ServerUtils;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;

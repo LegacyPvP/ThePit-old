@@ -2,7 +2,7 @@
 
 namespace Legacy\ThePit\objects;
 
-use Legacy\ThePit\Databases\IDatabase;
+use Legacy\ThePit\databases\IDatabase;
 use Legacy\ThePit\managers\Managers;
 
 final class Language extends \pocketmine\lang\Language

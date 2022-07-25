@@ -1,9 +1,9 @@
 <?php
 
-namespace Legacy\ThePit\Databases;
+namespace Legacy\ThePit\databases;
 
 use JetBrains\PhpStorm\Pure;
-use Legacy\ThePit\Traits\DatabaseTrait;
+use Legacy\ThePit\traits\DatabaseTrait;
 use LogicException;
 use RuntimeException;
 use SplFileInfo;

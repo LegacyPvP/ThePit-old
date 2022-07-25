@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Legacy\ThePit\Traits;
+namespace Legacy\ThePit\traits;
 
 trait CustomItemTrait
 {

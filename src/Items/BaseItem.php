@@ -7,7 +7,7 @@ namespace Legacy\ThePit\items;
 use pocketmine\item\Item;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\nbt\tag\CompoundTag;
-use Legacy\ThePit\Traits\CustomItemTrait;
+use Legacy\ThePit\traits\CustomItemTrait;
 
 class BaseItem extends Item
 {

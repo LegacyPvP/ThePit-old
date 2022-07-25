@@ -1,6 +1,6 @@
 <?php
 
-namespace Legacy\ThePit\Traits;
+namespace Legacy\ThePit\traits;
 
 use Legacy\ThePit\managers\Managers;
 use pocketmine\command\Command;
