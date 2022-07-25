@@ -219,6 +219,7 @@ final class LegacyPlayer extends Player
     }
 
     public function setStuff(): void {
+        /*
         $helmet = $this->getPlayerProperties()->getNestedProperties("inventory.helmet");
         $chestplate = $this->getPlayerProperties()->getNestedProperties("inventory.chestplate");
         $leggings = $this->getPlayerProperties()->getNestedProperties("inventory.leggings");
@@ -236,6 +237,7 @@ final class LegacyPlayer extends Player
         $this->getInventory()->setItem(0, $sword);
         $this->getInventory()->setItem(1, $bow);
         $this->getInventory()->setItem(8, $arrow);
+        */
     }
 
     public function getFishingHook(): ?FishingHook

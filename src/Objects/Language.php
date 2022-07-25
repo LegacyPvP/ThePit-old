@@ -2,30 +2,20 @@
 
 namespace Legacy\ThePit\Objects;
 
-use JetBrains\PhpStorm\Pure;
-use Legacy\ThePit\Databases\LanguageDatabase;
+use Legacy\ThePit\Databases\IDatabase;
 use Legacy\ThePit\Managers\Managers;
 
 final class Language extends \pocketmine\lang\Language
 {
     /** @noinspection PhpMissingParentConstructorInspection */
-    public function __construct(private string $name, private LanguageDatabase $database)
+    public function __construct(private string $name)
     {
 
     }
-
-    /**
-     * @return string
-     */
-    #[Pure] public function getLangName(): string
-    {
-        return $this->getName();
-    }
-
 
     protected static function loadLang(string $path, string $languageCode): array
     {
-        return (new self($languageCode, new LanguageDatabase($languageCode)))->database->getAll();
+        return (new self($languageCode))->getDatabase()->dump();
     }
 
     /**
@@ -37,11 +27,11 @@ final class Language extends \pocketmine\lang\Language
     }
 
     /**
-     * @return LanguageDatabase
+     * @return ?IDatabase
      */
-    public function getDatabase(): LanguageDatabase
+    public function getDatabase(): ?IDatabase
     {
-        return $this->database;
+        return Managers::DATA()->get("lang_".$this->name);
     }
 
     public function getMessage(string $key, array $params = [], int $prefix = 1): Message
@@ -55,6 +45,6 @@ final class Language extends \pocketmine\lang\Language
 
     public static function make(): Language
     {
-        return new Language(array_key_first(Managers::LANGUAGES()->languages) ?? "FR", new LanguageDatabase(array_key_first(Managers::LANGUAGES()->languages)) ?? "FR");
+        return new Language(array_key_first(Managers::LANGUAGES()->languages) ?? "fr_FR");
     }
 }

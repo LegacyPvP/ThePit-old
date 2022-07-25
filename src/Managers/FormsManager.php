@@ -9,6 +9,7 @@ use Legacy\ThePit\Forms\element\Input;
 use Legacy\ThePit\Forms\Form;
 use Legacy\ThePit\Forms\utils\FormResponse;
 use Legacy\ThePit\Forms\variant\CustomForm;
+use Legacy\ThePit\Forms\variant\SimpleForm;
 use Legacy\ThePit\Player\LegacyPlayer;
 use Legacy\ThePit\Utils\FormsUtils;
 use Legacy\ThePit\Utils\ServerUtils;
@@ -88,7 +89,7 @@ final class FormsManager extends Managers
     }*/
 
     public function equipmentForm(LegacyPlayer $player): Form {
-
+        return new SimpleForm("Equipment", "");
     }
 
     #[ArrayShape(["knockback" => "\Closure"])] public function getAll(): array {

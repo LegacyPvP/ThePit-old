@@ -1,35 +1,13 @@
 <?php
 
-namespace Legacy\ThePit\Providers;
+namespace Legacy\ThePit\Traits;
 
-use pocketmine\utils\Config;
-
-final class JSONProvider extends BaseProvider // On ne va pas extends ça ?
+trait DatabaseTrait
 {
-    private string $name;
-    private array $data;
-    private string $path;
+    protected mixed $data;
 
-    public function __construct(string $name, string $path)
-    {
-        $this->name = $name;
-        $this->path = $path;
-        $file = new \SplFileInfo($path);
-        if($file->getExtension() !== "json" && $file->getExtension() !== "js")
-        {
-            throw new \LogicException('Invalid extension "'.$file->getExtension().'", must be json or js in ' . $this);
-        }
-        $this->data = json_decode(file_get_contents($path));
-    }
-
-    public function getConfig(): Config
-    {
-        return new Config($this->path, Config::JSON);
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
+    protected function init(): void {
+        $this->data = yaml_parse_file($this->path);
     }
 
     public function get(mixed $k, mixed $default = null): mixed
@@ -50,8 +28,8 @@ final class JSONProvider extends BaseProvider // On ne va pas extends ça ?
 
         $vars = explode(".", $k);
         $base = array_shift($vars);
-        if(isset($this->config[$base])){
-            $base = $this->config[$base];
+        if(isset($this->data[$base])){
+            $base = $this->data[$base];
         }else{
             return $default; //''?
         }

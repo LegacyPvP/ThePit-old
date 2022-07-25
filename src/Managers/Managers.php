@@ -42,7 +42,7 @@ abstract class Managers implements IManager
 
     public static function initManagers(): void
     {
-        self::setup();
+        self::checkInit();
     }
 
     /**
@@ -52,6 +52,7 @@ abstract class Managers implements IManager
     {
         return [
             new DataManager('data'),
+            new LanguageManager('languages'),
             new CooldownManager('cooldowns'),
             new CurrenciesManager('currencies'),
             new CustomItemsManager('customitems'),
@@ -60,14 +61,12 @@ abstract class Managers implements IManager
             new FormsManager('forms'),
             new ItemsManager('items'),
             new KnockBackManager('knockback'),
-            new LanguageManager('languages'),
             new ListenersManager('listeners'),
             new MutesManager('mutes'),
             new PrestigesManager('prestiges'),
             new RanksManager('ranks'),
             new ScoreBoardsManager('scoreboards'),
             new CommandsManager('commands'),
-
         ];
     }
 

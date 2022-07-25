@@ -4,50 +4,51 @@ namespace Legacy\ThePit\Managers;
 
 use JsonException;
 use Legacy\ThePit\Core;
-use Legacy\ThePit\Providers\BaseProvider;
-use Legacy\ThePit\Providers\YAMLProvider;
+use Legacy\ThePit\Databases\Database;
+use Legacy\ThePit\Databases\BaseDatabase;
+use Legacy\ThePit\Databases\IDatabase;
 
 final class DataManager extends Managers
 {
     /**
-     * @param BaseProvider[] $providers
+     * @param Database[] $databases
      */
-    private array $providers = [];
+    private array $databases = [];
 
     public function load(): void
     {
         $this->add(
-            new YAMLProvider("config", Core::getFilePath() . "resources/" . "config.yml"),
+            new BaseDatabase("config", Core::getFilePath() . "resources/config.yml"),
         );
     }
 
     public function init(): void
     {
-        $this->providers = Core::$cache["data"];
+        $this->databases = Core::$cache["data"];
         unset(Core::$cache["data"]);
-        foreach ($this->getAll() as $provider) {
-            Core::getInstance()->getLogger()->notice("[DATA] Provider: " . $provider->getName() . " Loaded");
+        foreach ($this->getAll() as $database) {
+            Core::getInstance()->getLogger()->notice("[DATA] Provider: " . $database->getName() . " Loaded");
         }
     }
 
-    public function add(BaseProvider ...$providers)
+    public function add(Database ...$databases)
     {
-        foreach ($providers as $provider) {
-            Core::$cache["data"][$provider->getName()] = $provider;
+        foreach ($databases as $database) {
+            Core::$cache["data"][$database->getName()] = $database;
         }
     }
 
-    public function get(string $name): ?BaseProvider
+    public function get(string $name): ?IDatabase
     {
-        return $this->providers[$name] ?? reset($this->providers) ?: null;
+        return $this->providers[$name] ?? reset($this->databases) ?: null;
     }
 
     /**
-     * @return BaseProvider[] $providers
+     * @return Database[]
      */
     public function getAll(): array
     {
-        return $this->providers;
+        return $this->databases;
     }
 
     /**

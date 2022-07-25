@@ -13,14 +13,24 @@ final class LanguageManager extends Managers
      */
     public array $languages = [];
 
-    public function init(): void
+    public function load(): void
     {
         @mkdir(Core::getInstance()->getDataFolder() . "languages");
-        $this->saveDefaultConfig();
-        foreach ($this->getConfigLanguages() as $language) {
-            $this->languages[$language] = new Language($language, new LanguageDatabase($language));
-            Core::getInstance()->getLogger()->notice("[LANGUAGES] Lang: $language Loaded");
+        foreach ($this->getDataLanguages() as $language) {
+            Core::$cache["data"][$language] = new LanguageDatabase("lang_".$language);
+            Core::$cache["languages"][$language] = new Language($language);
+            // TODO: Managers::DATA()->add(new LanguageDatabase("lang_".$language)); DOESN'T    WORK
         }
+    }
+
+    public function init(): void
+    {
+        $this->languages = Core::$cache["languages"];
+        unset(Core::$cache["languages"]);
+        foreach ($this->getAll() as $language){
+            Core::getInstance()->getLogger()->notice("[LANGUAGES] Lang: {$language->getName()} Loaded");
+        }
+        $this->saveDefaultLanguages();
     }
 
     /**
@@ -31,7 +41,7 @@ final class LanguageManager extends Managers
         return $this->languages;
     }
 
-    public static function getConfigLanguages(): array
+    public static function getDataLanguages(): array
     {
         $languages = [];
         foreach (scandir(Core::getInstance()->getDataFolder() . "languages") as $file) {
@@ -62,7 +72,7 @@ final class LanguageManager extends Managers
         return reset($this->languages);
     }
 
-    private static function saveDefaultConfig(): void
+    private static function saveDefaultLanguages(): void
     {
         $languages = Managers::DATA()->get("config")->get("languages", []);
         foreach ($languages as $language) {

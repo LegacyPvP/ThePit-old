@@ -2,9 +2,9 @@
 
 namespace Legacy\ThePit;
 
+use JsonException;
 use Legacy\ThePit\Managers\Managers;
 use Legacy\ThePit\Tasks\GoldSpawnTask;
-use pocketmine\permission\DefaultPermissions;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
 
@@ -17,6 +17,7 @@ class Core extends PluginBase
 
     protected function onLoad(): void
     {
+        $this::setInstance($this);
         $this->saveDefaultConfig();
         self::$filePath = $this->getFile();
         Managers::loadManagers();
@@ -26,21 +27,21 @@ class Core extends PluginBase
     {
         date_default_timezone_set('Europe/Paris');
 
-        $this::setInstance($this);
-
-        Managers::initManagers();
-
         $default = yaml_parse(file_get_contents($this->getFile() . "resources/" . "config.yml"));
         if (is_array($default)) $this->getConfig()->setDefaults($default);
 
         $this->getScheduler()->scheduleDelayedRepeatingTask(new GoldSpawnTask(), 20 * 60, 20);
         $this->saveResource("config.yml", $this->isInDevMode());
+
+        Managers::initManagers();
     }
 
+    /**
+     * @throws JsonException
+     */
     protected function onDisable(): void
     {
         Managers::DATA()->saveAll();
-
     }
 
     public function isInDevMode(): bool
@@ -49,8 +50,8 @@ class Core extends PluginBase
     }
 
     /**
-     * @internal
      * @return string
+     * @internal
      */
     public static function getFilePath(): string
     {
