@@ -10,7 +10,7 @@ use Legacy\ThePit\commands\currency\{
     RemoveCommand,
     SetCommand
 };
-use Legacy\ThePit\commands\{
+use Legacy\ThePit\commands\{EquipmentCommand,
     GameModeCommand,
     GlobalMuteCommand,
     KickCommand,
@@ -30,8 +30,7 @@ use Legacy\ThePit\commands\{
     TprCommand,
     TPSCommand,
     UnbanCommand,
-    UnmuteCommand,
-};
+    UnmuteCommand};
 use Legacy\ThePit\Core;
 
 final class CommandsManager extends Managers
@@ -65,6 +64,7 @@ final class CommandsManager extends Managers
             new RemoveCommand("remove"),
             new AddCommand("add"),
             new StatisticsCommand("statistics"),
+            new EquipmentCommand("equipment"),
         ];
     }
 

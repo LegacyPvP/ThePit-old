@@ -19,6 +19,7 @@ use pocketmine\event\entity\EntityDamageByChildEntityEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\item\enchantment\VanillaEnchantments;
+use pocketmine\item\ItemFactory;
 use pocketmine\lang\Translatable;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\network\mcpe\protocol\TextPacket;
@@ -219,23 +220,25 @@ final class LegacyPlayer extends Player
     }
 
     public function setStuff(): void {
-        /*
-        $helmet = $this->getPlayerProperties()->getNestedProperties("inventory.helmet");
-        $chestplate = $this->getPlayerProperties()->getNestedProperties("inventory.chestplate");
-        $leggings = $this->getPlayerProperties()->getNestedProperties("inventory.leggings");
+        $factory = ItemFactory::getInstance();
+
+        $helmet = $factory->get(EquipmentUtils::getArmorId(EquipmentUtils::HELMET, $this->getArmorLevel(EquipmentUtils::HELMET)));
+        $chestplate = $factory->get(EquipmentUtils::getArmorId(EquipmentUtils::CHESTPLATE, $this->getArmorLevel(EquipmentUtils::CHESTPLATE)));
+        $leggings = $factory->get(EquipmentUtils::getArmorId(EquipmentUtils::LEGGINGS, $this->getArmorLevel(EquipmentUtils::LEGGINGS)));
+        $boots = $factory->get(EquipmentUtils::getArmorId(EquipmentUtils::BOOTS, $this->getArmorLevel(EquipmentUtils::BOOTS)));
+
         $this->getArmorInventory()->setHelmet($helmet);
         $this->getArmorInventory()->setChestplate($chestplate);
         $this->getArmorInventory()->setLeggings($leggings);
         $this->getArmorInventory()->setBoots($boots);
 
-        $sword = $this->getPlayerProperties()->getNestedProperties("inventory.sword");
+        /*$sword = $this->getPlayerProperties()->getNestedProperties("inventory.sword");
         $bow = $this->getPlayerProperties()->getNestedProperties("inventory.bow");
         $arrow = $this->getPlayerProperties()->getNestedProperties("inventory.arrow");
 
         $this->getInventory()->setItem(0, $sword);
         $this->getInventory()->setItem(1, $bow);
-        $this->getInventory()->setItem(8, $arrow);
-        */
+        $this->getInventory()->setItem(8, $arrow);*/
     }
 
     public function getFishingHook(): ?FishingHook
@@ -261,8 +264,7 @@ final class LegacyPlayer extends Player
 
     public function getArmor(int $index): ? Message
     {
-        $level = $this->getArmorLevel($index);
-        return match ($level) {
+        return match ($index) {
             EquipmentUtils::HELMET => $this->getLanguage()->getMessage("equipment.helmet"),
             EquipmentUtils::CHESTPLATE => $this->getLanguage()->getMessage("equipment.chestplate"),
             EquipmentUtils::LEGGINGS => $this->getLanguage()->getMessage("equipment.leggings"),
@@ -271,23 +273,12 @@ final class LegacyPlayer extends Player
         };
     }
 
-    public function getWeaponsLevel(int $index)
-    {
+    public function upgradeArmor(int $index){
         return match ($index) {
-            EquipmentUtils::SWORD => $this->getPlayerProperties()->getNestedProperties("inventory.sword"),
-            EquipmentUtils::BOW => $this->getPlayerProperties()->getNestedProperties("inventory.bow"),
-            EquipmentUtils::ARROW => $this->getPlayerProperties()->getNestedProperties("inventory.arrow"),
-            default => null,
-        };
-    }
-
-    public function getWeapons(int $index): ? Message {
-        $level = $this->getArmorLevel($index);
-        return match ($index) {
-            EquipmentUtils::SWORD => $this->getLanguage()->getMessage("equipment.sword"),
-            EquipmentUtils::BOW => $this->getLanguage()->getMessage("equipment.bow"),
-            EquipmentUtils::ARROW => $this->getLanguage()->getMessage("equipment.arrow"),
-            default => null,
+            EquipmentUtils::HELMET => $this->getPlayerProperties()->setNestedProperties("inventory.helmet", $this->getArmorLevel(EquipmentUtils::HELMET) + 1),
+            EquipmentUtils::CHESTPLATE => $this->getPlayerProperties()->setNestedProperties("inventory.chesplate", $this->getArmorLevel(EquipmentUtils::CHESTPLATE) + 1),
+            EquipmentUtils::LEGGINGS => $this->getPlayerProperties()->setNestedProperties("inventory.leggings", $this->getArmorLevel(EquipmentUtils::LEGGINGS) + 1),
+            EquipmentUtils::BOOTS => $this->getPlayerProperties()->setNestedProperties("inventory.boots", $this->getArmorLevel(EquipmentUtils::BOOTS) + 1),
         };
     }
 }

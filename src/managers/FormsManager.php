@@ -5,12 +5,16 @@ namespace Legacy\ThePit\managers;
 use JetBrains\PhpStorm\ArrayShape;
 use Legacy\ThePit\Core;
 use Legacy\ThePit\exceptions\FormsException;
+use Legacy\ThePit\forms\element\Button;
 use Legacy\ThePit\forms\element\Input;
 use Legacy\ThePit\forms\Form;
+use Legacy\ThePit\forms\icon\ButtonIcon;
 use Legacy\ThePit\forms\utils\FormResponse;
 use Legacy\ThePit\forms\variant\CustomForm;
 use Legacy\ThePit\forms\variant\SimpleForm;
 use Legacy\ThePit\player\LegacyPlayer;
+use Legacy\ThePit\utils\CurrencyUtils;
+use Legacy\ThePit\utils\EquipmentUtils;
 use Legacy\ThePit\utils\FormsUtils;
 use Legacy\ThePit\utils\ServerUtils;
 use pocketmine\player\Player;
@@ -89,12 +93,32 @@ final class FormsManager extends Managers
     }*/
 
     public function equipmentForm(LegacyPlayer $player): Form {
-        return new SimpleForm("Equipment", "");
+        $form = new SimpleForm($player->getLanguage()->getMessage("messages.form.headers.equipment"), "");
+        $form->addButton(new Button($player->getLanguage()->getMessage("messages.form.equipments.armor"), null, function (Player $player){
+            if($player instanceof LegacyPlayer){
+                $this->equipmentArmorForm($player);
+            }
+        }));
+        return $form;
     }
 
-    #[ArrayShape(["knockback" => "\Closure"])] public function getAll(): array {
+    public function equipmentArmorForm(LegacyPlayer $player): Form {
+        $form = new SimpleForm($player->getLanguage()->getMessage("messages.form.headers.equipment"), "");
+        $form->addButton(new Button($player->getArmor(EquipmentUtils::HELMET), null, function (Player $player){
+            if($player instanceof LegacyPlayer){
+                if($player->getCurrencyProvider()->has(CurrencyUtils::GOLD, 1000)){
+                    $player->upgradeArmor(EquipmentUtils::HELMET);
+                }
+            }
+        }));
+        return $form;
+    }
+
+    #[ArrayShape(["knockback" => "\Closure", "equipment" => "\Closure", "equipment-armor" => "\Closure"])] public function getAll(): array {
         return [
             "knockback" => fn(LegacyPlayer $player) => $this->knockBackForm($player),
+            "equipment" => fn(LegacyPlayer $player) => $this->equipmentForm($player),
+            "equipment-armor" => fn(LegacyPlayer $player) => $this->equipmentArmorForm($player),
         ];
     }
 

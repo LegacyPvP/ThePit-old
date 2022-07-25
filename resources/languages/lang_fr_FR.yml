@@ -1,124 +1,149 @@
+---
 messages:
   form:
-    not-found: "Formulaire non trouvé"
+    headers:
+      equipment: Equipement
+    not-found: Formulaire non trouvé
     shop:
-      votecoins-convert: "Conversion de votecoins en crédits"
+      votecoins-convert: Conversion de votecoins en crédits
+    equipment:
+      armor: Améliorer son armure
   mute:
-    muted: "Vous êtes toujours mute par {player} jusqu'au {date} pour: {reason}" # {player} {date} {reason}
+    muted: 'Vous êtes toujours mute par {player} jusqu''au {date} pour: {reason}'
   interactions:
-    cooldown: "Vous devez attendre {time} secondes avant de pouvoir faire cela"
+    cooldown: Vous devez attendre {time} secondes avant de pouvoir faire cela
     spells:
       health:
-        full: "Vous avez déjà tout vos points de vie"
-        success: "Vous avez utilisé votre sort de soin"
-        cooldown: "Vous devez attendre {time} secondes avant de pouvoir utiliser votre sort de soin"
+        full: Vous avez déjà tout vos points de vie
+        success: Vous avez utilisé votre sort de soin
+        cooldown: Vous devez attendre {time} secondes avant de pouvoir utiliser votre
+          sort de soin
       speed:
-        success: "Vous avez utilisé votre sort de vitesse"
-        cooldown: "Vous devez attendre {time} secondes avant de pouvoir utiliser votre sort de vitesse"
-  player-join: "§a+ {player} +"
-  player-quit: "§c- {player} -"
+        success: Vous avez utilisé votre sort de vitesse
+        cooldown: Vous devez attendre {time} secondes avant de pouvoir utiliser votre
+          sort de vitesse
+  player-join: §a+ {player} +
+  player-quit: §c- {player} -
   commands:
-    not-permission: "§cYou do not have permission to use this command"
-    target-not-player: "Le joueur mentionné n'existe pas"
-    target-not-found: "Le joueur mentionné n'est pas connecté"
-    sender-not-player: "Vous devez être un joueur pour effectuer cette commande"
+    not-permission: §cYou do not have permission to use this command
+    target-not-player: Le joueur mentionné n'existe pas
+    target-not-found: Le joueur mentionné n'est pas connecté
+    sender-not-player: Vous devez être un joueur pour effectuer cette commande
     ban:
-      success: "Vous avez banni {player} jusqu'au {date} pour {reason}" # {player}, {date}, {reason}
-      banned: "Vous avez été banni par {player} jusqu'au {date} pour {reason}" # {player} is the player who banned you, {date} is the date of the ban, {reason} is the reason of the ban
+      success: Vous avez banni {player} jusqu'au {date} pour {reason}
+      banned: Vous avez été banni par {player} jusqu'au {date} pour {reason}
     unban:
-      success: "Vous avez débanni {player}" # {player} is the player who unbanned you
+      success: Vous avez débanni {player}
     unmute:
-      success: "Vous avez unmute {player}" # {player} is the player who you unmuted
+      success: Vous avez unmute {player}
     kick:
-      success: "Vous avez kick {player} pour {reason}" # {player} is the player who kicked you
-      kicked: "Vous avez été kick par {player} pour {reason}" # {player} is the player who kicked you, {reason} is the reason of the kick
+      success: Vous avez kick {player} pour {reason}
+      kicked: Vous avez été kick par {player} pour {reason}
     mute:
-      success: "Vous avez mute {player} jusqu'au {date} pour {reason}" # {player}, {date}, {reason}
-      muted: "Vous avez été mute par {player} jusqu'au {date} pour {reason}" # {player}, {date}, {reason}
+      success: Vous avez mute {player} jusqu'au {date} pour {reason}
+      muted: Vous avez été mute par {player} jusqu'au {date} pour {reason}
     setrank:
-      invalid-rank: "Rank {rank} invalide"
-      success: "Vous avez changé le rank de {player} à {rank}" # {player} is the player who set his rank, {rank} is the rank he set
+      invalid-rank: Rank {rank} invalide
+      success: Vous avez changé le rank de {player} à {rank}
     listrank:
-      header: "Voici la liste des Ranks:\n"
-      format: "{name}, "
+      header: |
+        Voici la liste des Ranks:
+      format: '{name}, '
     banlist:
-      header: "Voici la liste des Bans:\n"
-      format: "- {name} [{date}] -> {reason}\n"
+      header: |
+        Voici la liste des Bans:
+      format: |
+        - {name} [{date}] -> {reason}
     say:
-      success: "Le message a été envoyé"
-      no-message-valid: "Vous devez entrer un message valide , plus de 1 caractère"
+      success: Le message a été envoyé
+      no-message-valid: Vous devez entrer un message valide , plus de 1 caractère
     globalmute:
-      muted: "Vous avez mute le serveur entier"
-      unmuted: "Vous avez unmute le serveur entier"
-      success-false: "Le général est désactivé"
-      success-true: "Le général est activé"
-      error: "Vous devez entrer soit <true> ou <false>"
+      muted: Vous avez mute le serveur entier
+      unmuted: Vous avez unmute le serveur entier
+      success-false: Le général est désactivé
+      success-true: Le général est activé
+      error: Vous devez entrer soit <true> ou <false>
     freeze:
-      freeze-success: "§aVous avez gelé {player}"
-      target-freeze: "Vous êtes gelé"
-      unfreeze-success: "§aVous avez dégelé {player}"
-      target-unfreeze: "Vous êtes dégelé"
+      freeze-success: §aVous avez gelé {player}
+      target-freeze: Vous êtes gelé
+      unfreeze-success: §aVous avez dégelé {player}
+      target-unfreeze: Vous êtes dégelé
     knockback:
-      success: "§aVous avez mis à jour le knockback ({horizontal}, {vertical}, {attack_cooldown})"
-      invalid-arguments: "Vous devez entrer des valeurs valides"
+      success: §aVous avez mis à jour le knockback ({horizontal}, {vertical}, {attack_cooldown})
+      invalid-arguments: Vous devez entrer des valeurs valides
     nightvision:
-      success-on: "§aVous avez activé la vision nocturne"
-      success-off: "§aVous avez désactivé la vision nocturne"
+      success-on: §aVous avez activé la vision nocturne
+      success-off: §aVous avez désactivé la vision nocturne
     ping:
-      sender-success: "Votre ping est de {ping} ms"
-      target-success: "Le ping de §d{target}§f est de {ping} ms"
+      sender-success: Votre ping est de {ping} ms
+      target-success: Le ping de §d{target}§f est de {ping} ms
     tpr:
-      success: "Vous vous êtes téléporté sur {player}" # {player}
-      failed: "Vous êtes le seul joueur du serveur."
+      success: Vous vous êtes téléporté sur {player}
+      failed: Vous êtes le seul joueur du serveur.
     tp:
-      success: "Vous vous êtes téléporté sur {player}" # {player}
-      success-others: "Vous avez téléporté {player1} à {player2}" # {player1} is the player who teleported, {player2} is the player who was teleported
+      success: Vous vous êtes téléporté sur {player}
+      success-others: Vous avez téléporté {player1} à {player2}
     spawn:
-      success: "Vous avez été téléporter au spawn"
-      already-in-teleportation: "Une téléportation est déjà en cours"
-      teleportation-in-progress: "Téléportation dans {time} secondes"
-      teleportation-cancelled: "Téléportation annulée"
+      success: Vous avez été téléporter au spawn
+      already-in-teleportation: Une téléportation est déjà en cours
+      teleportation-in-progress: Téléportation dans {time} secondes
+      teleportation-cancelled: Téléportation annulée
     lobby:
-      success: "Vous avez été téléporter au lobby"
-      already-in-teleportation: "Une téléportation est déjà en cours"
-      teleportation-in-progress: "Téléportation dans {time} secondes"
-      teleportation-cancelled: "Téléportation annulée"
+      success: Vous avez été téléporter au lobby
+      already-in-teleportation: Une téléportation est déjà en cours
+      teleportation-in-progress: Téléportation dans {time} secondes
+      teleportation-cancelled: Téléportation annulée
     gamemode:
-      invalid-gamemode: "Gamemode {gamemode} invalide"
-      change: "Votre gamemode a été changé à {gamemode}"
-      success-other: "Vous avez changé le gamemode de {player} à {gamemode}" # {player} is the player who set his gamemode, {gamemode} is the gamemode he set
-      success-self: "Vous avez changé votre gamemode à {gamemode}" # {player} is the player who set his gamemode, {gamemode} is the gamemode he set
+      invalid-gamemode: Gamemode {gamemode} invalide
+      change: Votre gamemode a été changé à {gamemode}
+      success-other: Vous avez changé le gamemode de {player} à {gamemode}
+      success-self: Vous avez changé votre gamemode à {gamemode}
     tps:
-      success: "§l§d» §r§fPerformances du serveurs §l§d«\n\n§l§d» §r§fActuel TPS: {ticks} {ticks_per_seconds}/({ticks_usage}%)\n§l§d» §r§fMoyenne TPS: {ticks} {ticks_per_seconds_average}  ({ticks_usage_average}%)"
+      success: |-
+        §l§d» §r§fPerformances du serveurs §l§d«
+
+        §l§d» §r§fActuel TPS: {ticks} {ticks_per_seconds}/({ticks_usage}%)
+        §l§d» §r§fMoyenne TPS: {ticks} {ticks_per_seconds_average}  ({ticks_usage_average}%)
     message:
-      sender-blocked: "Vous ne pouvez pas envoyer de message à {player} car le joueur vous à bloqué"
-      sender-message: "Vous avez bien envoyé un message à {player}: {message}"
-      target-message: "Vous avez reçu un message de {player}: {message}"
-      target-not-found: "Le joueur mentionné n'est pas connecté on n'existe pas"
+      sender-blocked: Vous ne pouvez pas envoyer de message à {player} car le joueur
+        vous à bloqué
+      sender-message: 'Vous avez bien envoyé un message à {player}: {message}'
+      target-message: 'Vous avez reçu un message de {player}: {message}'
+      target-not-found: Le joueur mentionné n'est pas connecté on n'existe pas
     pay:
-      invalid-amount: "Montant §5'{amount}' §finvalide"
-      not-enough-gold: "Vous n'avez pas assez d'or"
-      received: "Vous avez reçu {amount} or de la part de {player}"
-      success: "Vous avez payé {amount} or à {target}"
+      invalid-amount: Montant §5'{amount}' §finvalide
+      not-enough-gold: Vous n'avez pas assez d'or
+      received: Vous avez reçu {amount} or de la part de {player}
+      success: Vous avez payé {amount} or à {target}
     list:
-      header: "§l§d- §r§fListe des joueurs connectés§l§d-\n"
-      staff-header: "§l§d- §r§fListe des staff connectés§l§d-\n"
+      header: |
+        §l§d- §r§fListe des joueurs connectés§l§d-
+      staff-header: |
+        §l§d- §r§fListe des staff connectés§l§d-
     set:
-      success: "Vous avez changé le solde de {target} à {amount} ({currency})"
-      invalid-amount: "Montant §5'{amount}' §finvalide"
-      invalid-currency: "Monnaie {currency} invalide" # {currency} is the currency name
+      success: Vous avez changé le solde de {target} à {amount} ({currency})
+      invalid-amount: Montant §5'{amount}' §finvalide
+      invalid-currency: Monnaie {currency} invalide
     add:
-      success: "Vous avez ajouté {amount} à {target} ({currency})"
-      invalid-amount: "Montant §5'{amount}' §finvalide"
-      invalid-currency: "Monnaie {currency} invalide" # {currency} is the currency name
+      success: Vous avez ajouté {amount} à {target} ({currency})
+      invalid-amount: Montant §5'{amount}' §finvalide
+      invalid-currency: Monnaie {currency} invalide
     remove:
-      success: "Vous avez retiré {amount} à {target} ({currency})"
-      invalid-amount: "Montant §5'{amount}' §finvalide"
-      invalid-currency: "Monnaie {currency} invalide" # {currency} is the currency name
+      success: Vous avez retiré {amount} à {target} ({currency})
+      invalid-amount: Montant §5'{amount}' §finvalide
+      invalid-currency: Monnaie {currency} invalide
     statistics:
-      success: "§5- §fStatistiques de §d{player} §5-§f\n§fOr: §6{gold}§f\n§fÉtoiles: §e{stars}§f\n§fVoteCoins: §9{votecoins}§f\n§fCrédits: §2{credits}§f"
+      success: |-
+        §5- §fStatistiques de §d{player} §5-§f
+        §fOr: §6{gold}§f
+        §fÉtoiles: §e{stars}§f
+        §fVoteCoins: §9{votecoins}§f
+        §fCrédits: §2{credits}§f
   death:
-    killed: "Vous avez été tué par {player}" # {player} is the player who killed you
-  kill: "Vous avez tué {player}" # {player} is the player that you killed
-
-
+    killed: Vous avez été tué par {player}
+  kill: Vous avez tué {player}
+messages.commands.not-permission: §cYou do not have permission to use this command
+messages.player-join: §a+ {player} +
+messages.commands.nightvision.success-on: §aVous avez activé la vision nocturne
+messages.form.headers.equipment: Equipement
+...
