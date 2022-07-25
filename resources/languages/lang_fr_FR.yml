@@ -1,7 +1,12 @@
 ---
+equipment:
+  helmet: Casque §e§lRANG {rank}
+  chestplate: Plastron §e§lRANG {rank}
+  leggings: Pantalon §e§lRANG {rank}
+  boots: Bottes §e§lRANG {rank}
 messages:
   form:
-    headers:
+    titles:
       equipment: Equipement
     not-found: Formulaire non trouvé
     shop:
@@ -146,4 +151,10 @@ messages.commands.not-permission: §cYou do not have permission to use this comm
 messages.player-join: §a+ {player} +
 messages.commands.nightvision.success-on: §aVous avez activé la vision nocturne
 messages.form.headers.equipment: Equipement
+messages.form.titles.equipment: Equipement
+messages.form.equipment.armor: Améliorer son armure
+equipment.helmet: Casque §e§lRANG {rank}
+equipment.chestplate: Plastron §e§lRANG {rank}
+equipment.leggings: Pantalon §e§lRANG {rank}
+equipment.boots: Bottes §e§lRANG {rank}
 ...

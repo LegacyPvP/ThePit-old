@@ -11,6 +11,7 @@ use Legacy\ThePit\forms\Form;
 use Legacy\ThePit\forms\utils\FormResponse;
 use Legacy\ThePit\forms\variant\CustomForm;
 use Legacy\ThePit\forms\variant\SimpleForm;
+use Legacy\ThePit\objects\Sound;
 use Legacy\ThePit\player\LegacyPlayer;
 use Legacy\ThePit\utils\CurrencyUtils;
 use Legacy\ThePit\utils\EquipmentUtils;
@@ -92,21 +93,54 @@ final class FormsManager extends Managers
     }*/
 
     public function equipmentForm(LegacyPlayer $player): Form {
-        $form = new SimpleForm($player->getLanguage()->getMessage("messages.form.title.equipment", [], false), "");
-        $form->addButton(new Button($player->getLanguage()->getMessage("messages.form.equipments.armor", [], false), null, function (Player $player){
+        $form = new SimpleForm($player->getLanguage()->getMessage("messages.form.titles.equipment", [], false), "");
+        $form->addButton(new Button($player->getLanguage()->getMessage("messages.form.equipment.armor", [], false), null, function (Player $player){
             if($player instanceof LegacyPlayer){
-                $this->equipmentArmorForm($player);
+                Managers::FORMS()->sendForm($player, "equipment-armor");
             }
         }));
         return $form;
     }
 
     public function equipmentArmorForm(LegacyPlayer $player): Form {
-        $form = new SimpleForm($player->getLanguage()->getMessage("messages.form.title.equipment", [], false), "");
-        $form->addButton(new Button($player->getArmor(EquipmentUtils::HELMET), null, function (Player $player){
+        $form = new SimpleForm($player->getLanguage()->getMessage("messages.form.titles.equipment", [], false), "");
+        $form->addButton(new Button(str_replace("{rank}", $player->getArmorLevel(EquipmentUtils::HELMET), $player->getArmor(EquipmentUtils::HELMET)), null, function (Player $player){
+            if($player instanceof LegacyPlayer){
+                if($player->getCurrencyProvider()->has(CurrencyUtils::GOLD, 600)){
+                    $player->upgradeArmor(EquipmentUtils::HELMET);
+                    $player->setStuff();
+                    $sound = new Sound("random.pop", 1);
+                    $sound->play($player);
+                }
+            }
+        }));
+        $form->addButton(new Button(str_replace("{rank}", $player->getArmorLevel(EquipmentUtils::CHESTPLATE), $player->getArmor(EquipmentUtils::CHESTPLATE)), null, function (Player $player){
             if($player instanceof LegacyPlayer){
                 if($player->getCurrencyProvider()->has(CurrencyUtils::GOLD, 1000)){
-                    $player->upgradeArmor(EquipmentUtils::HELMET);
+                    $player->upgradeArmor(EquipmentUtils::CHESTPLATE);
+                    $player->setStuff();
+                    $sound = new Sound("random.pop", 1);
+                    $sound->play($player);
+                }
+            }
+        }));
+        $form->addButton(new Button(str_replace("{rank}", $player->getArmorLevel(EquipmentUtils::LEGGINGS), $player->getArmor(EquipmentUtils::LEGGINGS)), null, function (Player $player){
+            if($player instanceof LegacyPlayer){
+                if($player->getCurrencyProvider()->has(CurrencyUtils::GOLD, 800)){
+                    $player->upgradeArmor(EquipmentUtils::LEGGINGS);
+                    $player->setStuff();
+                    $sound = new Sound("random.pop", 1);
+                    $sound->play($player);
+                }
+            }
+        }));
+        $form->addButton(new Button(str_replace("{rank}", $player->getArmorLevel(EquipmentUtils::BOOTS), $player->getArmor(EquipmentUtils::BOOTS)), null, function (Player $player){
+            if($player instanceof LegacyPlayer){
+                if($player->getCurrencyProvider()->has(CurrencyUtils::GOLD, 1000)){
+                    $player->upgradeArmor(EquipmentUtils::BOOTS);
+                    $player->setStuff();
+                    $sound = new Sound("random.pop", 1);
+                    $sound->play($player);
                 }
             }
         }));

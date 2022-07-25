@@ -220,6 +220,8 @@ final class LegacyPlayer extends Player
     }
 
     public function setStuff(): void {
+        $this->getInventory()->clearAll();
+        $this->getArmorInventory()->clearAll();
         $factory = ItemFactory::getInstance();
 
         $helmet = $factory->get(EquipmentUtils::getArmorId(EquipmentUtils::HELMET, $this->getArmorLevel(EquipmentUtils::HELMET)));
@@ -275,10 +277,11 @@ final class LegacyPlayer extends Player
 
     public function upgradeArmor(int $index){
         return match ($index) {
-            EquipmentUtils::HELMET => $this->getPlayerProperties()->setNestedProperties("inventory.helmet", $this->getArmorLevel(EquipmentUtils::HELMET) + 1),
-            EquipmentUtils::CHESTPLATE => $this->getPlayerProperties()->setNestedProperties("inventory.chesplate", $this->getArmorLevel(EquipmentUtils::CHESTPLATE) + 1),
-            EquipmentUtils::LEGGINGS => $this->getPlayerProperties()->setNestedProperties("inventory.leggings", $this->getArmorLevel(EquipmentUtils::LEGGINGS) + 1),
-            EquipmentUtils::BOOTS => $this->getPlayerProperties()->setNestedProperties("inventory.boots", $this->getArmorLevel(EquipmentUtils::BOOTS) + 1),
+            EquipmentUtils::HELMET => $this->getPlayerProperties()->setNestedProperties("inventory.helmet", $this->getPlayerProperties()->getNestedProperties("inventory.helmet") + 1),
+            EquipmentUtils::CHESTPLATE => $this->getPlayerProperties()->setNestedProperties("inventory.chestplate", $this->getPlayerProperties()->getNestedProperties("inventory.chestplate") + 1),
+            EquipmentUtils::LEGGINGS => $this->getPlayerProperties()->setNestedProperties("inventory.leggings", $this->getPlayerProperties()->getNestedProperties("inventory.leggings") + 1),
+            EquipmentUtils::BOOTS => $this->getPlayerProperties()->setNestedProperties("inventory.boots", $this->getPlayerProperties()->getNestedProperties("inventory.boots") + 1),
+            default => null,
         };
     }
 }
