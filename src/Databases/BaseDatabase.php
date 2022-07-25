@@ -14,7 +14,6 @@ final class BaseDatabase extends Database
 
     public function getConfig(): Config
     {
-        $default = yaml_parse(file_get_contents(Core::getFilePath() . "resources/$this->name.yml")) ?: [];
-        return new Config($this->path, Config::YAML, $default);
+        return new Config($this->path, Config::DETECT);
     }
 }

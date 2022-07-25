@@ -40,7 +40,7 @@ final class DataManager extends Managers
 
     public function get(string $name): ?IDatabase
     {
-        return $this->providers[$name] ?? reset($this->databases) ?: null;
+        return $this->databases[$name] ?? reset($this->databases) ?: null;
     }
 
     /**
@@ -56,10 +56,11 @@ final class DataManager extends Managers
      */
     public function saveAll(): void
     {
-        foreach ($this->getAll() as $provider) {
-            $data = $provider->dump();
-            $provider->getConfig()->setAll($data);
-            $provider->getConfig()->save();
+        foreach ($this->getAll() as $database) {
+            $data = $database->dump();
+            $config = $database->getConfig();
+            $config->setAll($data);
+            $config->save();
         }
     }
 }

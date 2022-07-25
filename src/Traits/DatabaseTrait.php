@@ -7,7 +7,7 @@ trait DatabaseTrait
     protected mixed $data;
 
     protected function init(): void {
-        $this->data = yaml_parse_file($this->path);
+        $this->data = yaml_parse_file($this->path); // yaml_parse(file_get_contents($this->path));
     }
 
     public function get(mixed $k, mixed $default = null): mixed
@@ -23,7 +23,7 @@ trait DatabaseTrait
     public function getNested(mixed $k, mixed $default = null): mixed
     {
         if(isset($this->data[$k])){
-            return $this->data[$k] ?? $default;
+            return $this->data[$k];
         }
 
         $vars = explode(".", $k);

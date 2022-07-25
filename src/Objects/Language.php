@@ -31,7 +31,7 @@ final class Language extends \pocketmine\lang\Language
      */
     public function getDatabase(): ?IDatabase
     {
-        return Managers::DATA()->get("lang_".$this->name);
+        return Managers::DATA()->get($this->name);
     }
 
     public function getMessage(string $key, array $params = [], int $prefix = 1): Message
