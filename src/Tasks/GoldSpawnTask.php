@@ -38,7 +38,7 @@ final class GoldSpawnTask extends Task
      */
     public function onRun(): void
     {
-        if (!empty($this->getWorld()?->getEntities())) {
+        if ($this->getWorld()?->getEntities() == null or empty($this->getWorld()->getEntities())) {
             throw new CancelTaskException();
         }
         if (!$this->cleared) {

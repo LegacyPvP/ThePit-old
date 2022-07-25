@@ -28,7 +28,6 @@ class FishingRod extends Tool
     public function onClickAir(Player $player, Vector3 $directionVector): ItemUseResult
     {
         if(!$player instanceof LegacyPlayer) return ItemUseResult::NONE();
-        $player->broadcastAnimation(new ArmSwingAnimation($player));
         if($player->getFishingHook() != null){
             $player->getFishingHook()->delete();
             return ItemUseResult::SUCCESS();

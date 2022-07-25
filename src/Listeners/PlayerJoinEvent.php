@@ -21,7 +21,7 @@ final class PlayerJoinEvent implements Listener
             }
             $packet = CustomItemManager::getPacket();
             if (!is_null($packet)) $player->getNetworkSession()->sendDataPacket($packet);
-            $player->setStuff();
+            //$player->setStuff();
         }
 
         foreach($player->getServer()->getOnlinePlayers() as $_player) {

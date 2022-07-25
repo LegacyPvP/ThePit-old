@@ -249,8 +249,6 @@ final class LegacyPlayer extends Player
         $helmet = $this->getPlayerProperties()->getNestedProperties("inventory.helmet");
         $chestplate = $this->getPlayerProperties()->getNestedProperties("inventory.chestplate");
         $leggings = $this->getPlayerProperties()->getNestedProperties("inventory.leggings");
-        var_dump($boots = $this->getPlayerProperties()->getNestedProperties("inventory.boots"));
-
         $this->getArmorInventory()->setHelmet($helmet);
         $this->getArmorInventory()->setChestplate($chestplate);
         $this->getArmorInventory()->setLeggings($leggings);
