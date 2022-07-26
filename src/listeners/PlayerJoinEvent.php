@@ -12,8 +12,9 @@ final class PlayerJoinEvent implements Listener
 {
     public function onEvent(ClassEvent $event): void
     {
+        $player = $event->getPlayer();
         $event->setJoinMessage("");
-        if (($player = $event->getPlayer()) instanceof LegacyPlayer) {
+        if ($player instanceof LegacyPlayer) {
             $grade = Managers::RANKS()->get($player->getPlayerProperties()->getNestedProperties("infos.rank"));
             foreach (($grade?->getPermissions() ?? []) as $permission) {
                 $player->setBasePermission($permission, true);
