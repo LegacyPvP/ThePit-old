@@ -3,6 +3,7 @@
 namespace Legacy\ThePit;
 
 use Legacy\ThePit\managers\Managers;
+use Legacy\ThePit\player\LegacyPlayer;
 use Legacy\ThePit\tasks\GoldSpawnTask;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
@@ -38,6 +39,12 @@ class Core extends PluginBase
     protected function onDisable(): void
     {
         Managers::DATA()->saveAll();
+
+        foreach(self::getServer()->getOnlinePlayers() as $player) {
+            if ($player instanceof LegacyPlayer) {
+                $player->save();
+            }
+        }
     }
 
     public function isInDevMode(): bool

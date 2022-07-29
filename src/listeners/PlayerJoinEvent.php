@@ -10,10 +10,14 @@ use pocketmine\event\player\PlayerJoinEvent as ClassEvent;
 
 final class PlayerJoinEvent implements Listener
 {
+    public static array $cachedData = ["lastAttackedActorTime" => 0];
+
     public function onEvent(ClassEvent $event): void
     {
         $event->setJoinMessage("");
         if (($player = $event->getPlayer()) instanceof LegacyPlayer) {
+            self::$cachedData[$event->getPlayer()->getName()] = ["initialKnockbackMotion" => false, "shouldCancelKBMotion" => false, "lastAttackedActorTime" => 0];
+            $player->teleport($player->getWorld()->getSpawnLocation());
             $grade = Managers::RANKS()->get($player->getPlayerProperties()->getNestedProperties("infos.rank"));
             foreach (($grade?->getPermissions() ?? []) as $permission) {
                 $player->setBasePermission($permission, true);

@@ -20,29 +20,29 @@ final class StatisticsCommand extends Commands
                 if ($sender instanceof LegacyPlayer) {
                     if (!isset($args[0])) throw new LanguageException("messages.commands.statistics.success", [
                         "{player}" => $sender->getName(),
-                        "{stars}" => $sender->getCurrencyProvider()->get(CurrencyUtils::STARS),
-                        "{gold}" => $sender->getCurrencyProvider()->get(CurrencyUtils::GOLD),
-                        "{votecoins}" => $sender->getCurrencyProvider()->get(CurrencyUtils::VOTECOINS),
-                        "{credits}" => $sender->getCurrencyProvider()->get(CurrencyUtils::CREDITS),
+                        "{stars}" => CurrencyUtils::getText($sender->getCurrencyProvider()->get(CurrencyUtils::STARS)),
+                        "{gold}" => CurrencyUtils::getText($sender->getCurrencyProvider()->get(CurrencyUtils::GOLD)),
+                        "{votecoins}" => CurrencyUtils::getText($sender->getCurrencyProvider()->get(CurrencyUtils::VOTECOINS)),
+                        "{credits}" => CurrencyUtils::getText($sender->getCurrencyProvider()->get(CurrencyUtils::CREDITS)),
                     ], ServerUtils::PREFIX_4);
                     else {
                         $target = $sender->getServer()->getPlayerByPrefix($args[0]) ?? $sender->getServer()->getOfflinePlayer($args[0]);
                         if ($target instanceof LegacyPlayer) throw new LanguageException("messages.commands.statistics.success", [
                             "{player}" => $target->getName(),
-                            "{stars}" => $target->getCurrencyProvider()->get(CurrencyUtils::STARS),
-                            "{gold}" => $target->getCurrencyProvider()->get(CurrencyUtils::GOLD),
-                            "{votecoins}" => $target->getCurrencyProvider()->get(CurrencyUtils::VOTECOINS),
-                            "{credits}" => $target->getCurrencyProvider()->get(CurrencyUtils::CREDITS),
+                            "{stars}" => CurrencyUtils::getText($sender->getCurrencyProvider()->get(CurrencyUtils::STARS)),
+                            "{gold}" => CurrencyUtils::getText($sender->getCurrencyProvider()->get(CurrencyUtils::GOLD)),
+                            "{votecoins}" => CurrencyUtils::getText($sender->getCurrencyProvider()->get(CurrencyUtils::VOTECOINS)),
+                            "{credits}" => CurrencyUtils::getText($sender->getCurrencyProvider()->get(CurrencyUtils::CREDITS)),
                         ], ServerUtils::PREFIX_4);
                         elseif ($target instanceof OfflinePlayer and
                             ($data = Server::getInstance()->getOfflinePlayerData($target->getName())) and
                             ($properties = $data->getCompoundTag('properties')->getCompoundTag('money')))
                             throw new LanguageException("messages.commands.statistics.success", [
                                 "{player}" => $target->getName(),
-                                "{stars}" => $properties->getTag(CurrencyUtils::STARS)->getValue() ?? 0,
-                                "{gold}" => $properties->getTag(CurrencyUtils::GOLD)->getValue() ?? 0,
-                                "{votecoins}" => $properties->getTag(CurrencyUtils::VOTECOINS)->getValue() ?? 0,
-                                "{credits}" => $properties->getTag(CurrencyUtils::CREDITS)->getValue() ?? 0,
+                                "{stars}" => CurrencyUtils::getText($properties->getTag(CurrencyUtils::STARS)->getValue() ?? 0),
+                                "{gold}" => CurrencyUtils::getText($properties->getTag(CurrencyUtils::GOLD)->getValue() ?? 0),
+                                "{votecoins}" => CurrencyUtils::getText($properties->getTag(CurrencyUtils::VOTECOINS)->getValue() ?? 0),
+                                "{credits}" => CurrencyUtils::getText($properties->getTag(CurrencyUtils::CREDITS)->getValue() ?? 0),
                             ], ServerUtils::PREFIX_4);
                         else throw new LanguageException("messages.commands.target-not-player", [], ServerUtils::PREFIX_2);
                     }

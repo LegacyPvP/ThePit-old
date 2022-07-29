@@ -64,7 +64,7 @@ final class CommandsManager extends Managers
             new RemoveCommand("remove"),
             new AddCommand("add"),
             new StatisticsCommand("statistics"),
-            new EquipmentCommand("equipment"),
+            new EquipmentCommand("equipement"),
         ];
     }
 

@@ -4,7 +4,15 @@ equipment:
   chestplate: Plastron §e§lRANG {rank}
   leggings: Pantalon §e§lRANG {rank}
   boots: Bottes §e§lRANG {rank}
+  sword: Epée §e§lRANG {rank}
+  bow: Arc §e§lRANG {rank}
+  arrow: Flèches §e§lRANG {rank}
 messages:
+  killstreak:
+    broadcast: §a{player} a réussi à faire {killstreak} kills consécutifs et une prime
+      de {prime} et donc ajouté sur sa tête !
+    player: §avous êtes à {killstreak} kills consécutifs et une prime de {prime} et
+      ajouté sur votre tête attention !
   form:
     titles:
       equipment: Equipement
@@ -13,6 +21,9 @@ messages:
       votecoins-convert: Conversion de votecoins en crédits
     equipment:
       armor: Améliorer son armure
+      weapons: Améliorer ses armes
+      max: Vous avez atteint le niveau maximum de votre pièce d'armure
+      not-enough: Vous n'avez pas assez de d'or pour améliorer votre armure
   mute:
     muted: 'Vous êtes toujours mute par {player} jusqu''au {date} pour: {reason}'
   interactions:
@@ -153,6 +164,13 @@ messages.commands.nightvision.success-on: §aVous avez activé la vision nocturn
 messages.form.headers.equipment: Equipement
 messages.form.titles.equipment: Equipement
 messages.form.equipment.armor: Améliorer son armure
+messages.form.equipment.weapons: Améliorer ses armes
+equipment.sword: Epée §e§lRANG {rank}
+equipment.bow: Arc §e§lRANG {rank}
+equipment.arrow: Flèches §e§lRANG {rank}
+messages.form.equipment.not-enough: Vous n'avez pas assez de d'or pour améliorer votre
+  armure
+messages.commands.set.success: Vous avez changé le solde de {target} à {amount} ({currency})
 equipment.helmet: Casque §e§lRANG {rank}
 equipment.chestplate: Plastron §e§lRANG {rank}
 equipment.leggings: Pantalon §e§lRANG {rank}

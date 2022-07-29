@@ -13,11 +13,11 @@ use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\event\entity\EntityDamageByEntityEvent as ClassEvent;
 use pocketmine\event\Listener;
+use pocketmine\player\Player;
+use pocketmine\Server;
 
 final class EntityDamageByEntityEvent implements Listener
 {
-    /** @var array<string, array<string, bool|int>> $cachedData */
-    public static array $cachedData = [];
 
     public function onEvent(ClassEvent $event): void
     {
@@ -28,6 +28,32 @@ final class EntityDamageByEntityEvent implements Listener
             $target instanceof LegacyPlayer &&
             $event->getModifier(\pocketmine\event\entity\EntityDamageEvent::MODIFIER_PREVIOUS_DAMAGE_COOLDOWN) >= 0.0 &&
             $damager instanceof LegacyPlayer) {
+
+            PlayerJoinEvent::$cachedData[$damager->getName()]["lastAttackedActorTime"] = Server::getInstance()->getTick();
+
+            if($event->getFinalDamage() >= $target->getHealth()){
+                $damager->getLanguage()->getMessage("messages.kill", ["{player}" => $target->getName()])->send($damager);
+                $target->getLanguage()->getMessage("messages.death.killed", ["{player}" => $damager->getName()])->send($target);
+                $killstreak = ($damager->getPlayerProperties()->getNestedProperties("stats.killstreak") ?? 0) + 1;
+                $damager->getPlayerProperties()->setNestedProperties("stats.killstreak", $killstreak);
+                $damager->getPlayerProperties()->setNestedProperties("stats.prime", $damager->getPlayerProperties()->getNestedProperties("stats.prime") + $target->getPlayerProperties()->getNestedProperties("stats.prime"));
+                $target->getPlayerProperties()->setNestedProperties("stats.killstreak", 0);
+                $target->getPlayerProperties()->setNestedProperties("stats.prime", 0);
+                $target->setStuff();
+                $damager->setStuff();
+
+                if ($killstreak % 10 === 0) {
+                    $array = [50, 75, 100];
+                    $prime = ($damager->getPlayerProperties()->getNestedProperties("stats.prime") ?? 0) + $array[array_rand($array)];
+                    $add = $array[array_rand($array)];
+                    $damager->getPlayerProperties()->setNestedProperties("stats.prime", $prime);
+                    $damager->getLanguage()->getMessage("messages.killstreak.player", ["{killstreak}" => $killstreak, "{prime}" => $add])->send($damager);
+                    foreach($damager->getServer()->getOnlinePlayers() as $player){
+                        $player->getLanguage()->getMessage("messages.killstreak.broadcast", ["{player}" => $damager->getName(), "{killstreak}" => $killstreak, "{prime}" => $add])->send($player);
+                    }
+                }
+            }
+
 
             $vector = $damager->getDirectionVector();
             $item = $event->getDamager()->getInventory()->getItemInHand();

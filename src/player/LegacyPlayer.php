@@ -89,7 +89,12 @@ final class LegacyPlayer extends Player
 
     public function onUpdate(int $currentTick): bool
     {
-        $this->setNameTag($this->getRank()->getNametag($this) . TextFormat::GOLD . "\n" . str_replace("{level}", $this->getPlayerProperties()->getNestedProperties("stats.level"), $this->getPlayerProperties()->getNestedProperties("stats.prestige")));
+        if($this->getPlayerProperties()->getNestedProperties("stats.prime") >= 0){
+            $this->setNameTag($this->getRank()->getNametag($this) . TextFormat::GOLD . "\n" . str_replace("{level}", $this->getPlayerProperties()->getNestedProperties("stats.level"), $this->getPlayerProperties()->getNestedProperties("stats.prestige")));
+        }else{
+            $prime = $this->getPlayerProperties()->getNestedProperties("stats.prime");
+            $this->setNameTag("§l§e$prime GOLD" . "\n" . $this->getRank()->getNametag($this) . TextFormat::GOLD . "\n" . str_replace("{level}", $this->getPlayerProperties()->getNestedProperties("stats.level"), $this->getPlayerProperties()->getNestedProperties("stats.prestige")));
+        }
         $this->setScoreTag($this->getRank()->getScoretag($this));
         $currentTick % 20 !== 0 ?: $this->syncNBT();
 
@@ -234,13 +239,15 @@ final class LegacyPlayer extends Player
         $this->getArmorInventory()->setLeggings($leggings);
         $this->getArmorInventory()->setBoots($boots);
 
-        /*$sword = $this->getPlayerProperties()->getNestedProperties("inventory.sword");
-        $bow = $this->getPlayerProperties()->getNestedProperties("inventory.bow");
-        $arrow = $this->getPlayerProperties()->getNestedProperties("inventory.arrow");
+        $arrow_count = EquipmentUtils::getWeaponId(EquipmentUtils::ARROW, $this->getWeaponLevel(EquipmentUtils::ARROW));
+
+        $sword = $factory->get(EquipmentUtils::getWeaponId(EquipmentUtils::SWORD, $this->getWeaponLevel(EquipmentUtils::SWORD)));
+        $bow = $factory->get(EquipmentUtils::getWeaponId(EquipmentUtils::BOW, $this->getWeaponLevel(EquipmentUtils::BOW)));
+        $arrow = $factory->get($arrow_count[0], $arrow_count[1], $arrow_count[2]);
 
         $this->getInventory()->setItem(0, $sword);
         $this->getInventory()->setItem(1, $bow);
-        $this->getInventory()->setItem(8, $arrow);*/
+        $this->getInventory()->setItem(8, $arrow);
     }
 
     public function getFishingHook(): ?FishingHook
@@ -281,6 +288,34 @@ final class LegacyPlayer extends Player
             EquipmentUtils::CHESTPLATE => $this->getPlayerProperties()->setNestedProperties("inventory.chestplate", $this->getPlayerProperties()->getNestedProperties("inventory.chestplate") + 1),
             EquipmentUtils::LEGGINGS => $this->getPlayerProperties()->setNestedProperties("inventory.leggings", $this->getPlayerProperties()->getNestedProperties("inventory.leggings") + 1),
             EquipmentUtils::BOOTS => $this->getPlayerProperties()->setNestedProperties("inventory.boots", $this->getPlayerProperties()->getNestedProperties("inventory.boots") + 1),
+            default => null,
+        };
+    }
+
+    public function getWeaponLevel(int $index)
+    {
+        return match ($index) {
+            EquipmentUtils::SWORD => $this->getPlayerProperties()->getNestedProperties("inventory.sword"),
+            EquipmentUtils::BOW => $this->getPlayerProperties()->getNestedProperties("inventory.bow"),
+            EquipmentUtils::ARROW => $this->getPlayerProperties()->getNestedProperties("inventory.arrow"),
+            default => null,
+        };
+    }
+
+    public function getWeapon(int $index): ? Message{
+        return match ($index) {
+            EquipmentUtils::SWORD => $this->getLanguage()->getMessage("equipment.sword", [], false),
+            EquipmentUtils::BOW => $this->getLanguage()->getMessage("equipment.bow", [], false),
+            EquipmentUtils::ARROW => $this->getLanguage()->getMessage("equipment.arrow", [], false),
+            default => null,
+        };
+    }
+
+    public function upgradeWeapon(int $index){
+        return match ($index) {
+            EquipmentUtils::SWORD => $this->getPlayerProperties()->setNestedProperties("inventory.sword", $this->getPlayerProperties()->getNestedProperties("inventory.sword") + 1),
+            EquipmentUtils::BOW => $this->getPlayerProperties()->setNestedProperties("inventory.bow", $this->getPlayerProperties()->getNestedProperties("inventory.bow") + 1),
+            EquipmentUtils::ARROW => $this->getPlayerProperties()->setNestedProperties("inventory.arrow", $this->getPlayerProperties()->getNestedProperties("inventory.arrow") + 1),
             default => null,
         };
     }
