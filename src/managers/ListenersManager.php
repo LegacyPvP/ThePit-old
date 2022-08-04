@@ -8,7 +8,7 @@ use Legacy\ThePit\listeners\DataPacketReceiveEvent;
 use Legacy\ThePit\listeners\DataPacketSendEvent;
 use Legacy\ThePit\listeners\EntityDamageByEntityEvent;
 use Legacy\ThePit\listeners\EntityDamageEvent;
-use Legacy\ThePit\listeners\EntityPickupItemEvent;
+use Legacy\ThePit\listeners\EntityItemPickupEvent;
 use Legacy\ThePit\listeners\PlayerChatEvent;
 use Legacy\ThePit\listeners\PlayerCreationEvent;
 use Legacy\ThePit\listeners\PlayerDropItemEvent;
@@ -30,7 +30,7 @@ final class ListenersManager extends Managers
             new PlayerItemUseEvent(),
             new EntityDamageEvent(),
             new PlayerDropItemEvent(),
-            new EntityPickupItemEvent(),
+            new EntityItemPickupEvent(),
         ];
     }
 

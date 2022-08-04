@@ -8,6 +8,7 @@ use Legacy\ThePit\objects\Message;
 use Legacy\ThePit\providers\CurrencyProvider;
 use Legacy\ThePit\objects\Rank;
 use Legacy\ThePit\objects\Language;
+use Legacy\ThePit\providers\PerksProvider;
 use Legacy\ThePit\utils\EquipmentUtils;
 use Legacy\ThePit\traits\CacheTrait;
 use pocketmine\entity\effect\EffectInstance;
@@ -33,6 +34,7 @@ final class LegacyPlayer extends Player
 
     private PlayerProperties $properties;
     private CurrencyProvider $currencyProvider;
+    private PerksProvider $perksProvider;
     private CompoundTag $tag;
     public string $targetName = "";
     private ?FishingHook $isFishing = null;
@@ -43,6 +45,7 @@ final class LegacyPlayer extends Player
         $this->tag = $nbt;
         $this->properties = new PlayerProperties($this);
         $this->currencyProvider = new CurrencyProvider($this);
+        $this->perksProvider = new PerksProvider($this);
     }
 
     public function getNBT(): CompoundTag
@@ -63,6 +66,11 @@ final class LegacyPlayer extends Player
     public function getCurrencyProvider(): CurrencyProvider
     {
         return $this->currencyProvider;
+    }
+
+    public function getPerksProvider(): PerksProvider
+    {
+        return $this->perksProvider;
     }
 
     //TODO: The problem with a player NBT should not crash the server.
@@ -193,6 +201,7 @@ final class LegacyPlayer extends Player
                 $this->knockBack($motion->x, $motion->z, Managers::KNOCKBACK()->getHorizontal(), Managers::KNOCKBACK()->getVertical());
             }
         } elseif ($source instanceof EntityDamageByEntityEvent) {
+            $this->getPerksProvider()->onEvent($source::class);
             $e = $source->getDamager();
             if ($e !== null) {
                 $deltaX = $this->location->x - $e->location->x;

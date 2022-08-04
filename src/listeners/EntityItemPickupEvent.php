@@ -10,17 +10,19 @@ use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityItemPickupEvent as ClassEvent;
 use pocketmine\item\ItemIds;
 
-final class EntityPickupItemEvent implements Listener {
+final class EntityItemPickupEvent implements Listener {
 
     public function onEvent(ClassEvent $event): void {
         $item = $event->getItem();
         $entity = $event->getEntity();
         $item_entity = $event->getOrigin();
         if($item->getId() == ItemIds::GOLD_INGOT and $entity instanceof LegacyPlayer){
-            $count = mt_rand(1, 3);
+            $count = rand(1, 4);
             $entity->getCurrencyProvider()->add(CurrencyUtils::GOLD, $count);
+            $entity->getPerksProvider()->onEvent($event::class);
             $sound = new Sound("random.orb", 1);
             $sound->play($entity);
+            $entity->sendPopup("§6- §e+$count §6-");
             if($item_entity instanceof ItemEntity){
                 $item_entity->flagForDespawn();
                 $event->cancel();
