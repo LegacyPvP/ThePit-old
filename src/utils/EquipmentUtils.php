@@ -12,6 +12,8 @@ abstract class EquipmentUtils {
 
     const ARMOR_CHAIN = 1, ARMOR_IRON = 2, ARMOR_DIAMOND = 3;
     const SWORD_STONE = 1, SWORD_IRON = 2, SWORD_DIAMOND = 3;
+    const BOW_UNENCHANTED = 1, BOW_ENCHANTED = 2;
+    const ARROW_16 = 1, ARROW_32 = 2, ARROW_64 = 3;
 
 
     public static function getArmorId(int $index, int $level): int
@@ -41,13 +43,24 @@ abstract class EquipmentUtils {
         };
     }
 
-    public static function getWeaponId(int $index, int $level): int
+    public static function getWeaponId(int $index, int $level): int|array
     {
         if ($index == self::SWORD)
             return match ($level) {
-                self::SWORD_STONE => ItemIds::CHAIN_HELMET,
-                self::SWORD_IRON => ItemIds::IRON_HELMET,
-                self::SWORD_DIAMOND => ItemIds::DIAMOND_HELMET,
+                self::SWORD_STONE => ItemIds::STONE_SWORD,
+                self::SWORD_IRON => ItemIds::IRON_SWORD,
+                self::SWORD_DIAMOND => ItemIds::DIAMOND_SWORD,
+            };
+        elseif($index == self::BOW)
+            return match ($level) {
+                self::BOW_UNENCHANTED => ItemIds::BOW,
+                self::BOW_ENCHANTED => ItemIds::BOW,
+            };
+        elseif($index == self::ARROW)
+            return match ($level) {
+                self::ARROW_16 => [ItemIds::ARROW, 0, 16],
+                self::ARROW_32 => [ItemIds::ARROW, 0, 32],
+                self::ARROW_64 => [ItemIds::ARROW, 0, 64],
             };
         return ItemIds::AIR;
     }

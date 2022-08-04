@@ -11,6 +11,7 @@ use Legacy\ThePit\listeners\EntityDamageEvent;
 use Legacy\ThePit\listeners\EntityItemPickupEvent;
 use Legacy\ThePit\listeners\PlayerChatEvent;
 use Legacy\ThePit\listeners\PlayerCreationEvent;
+use Legacy\ThePit\listeners\PlayerDeathEvent;
 use Legacy\ThePit\listeners\PlayerDropItemEvent;
 use Legacy\ThePit\listeners\PlayerItemUseEvent;
 use Legacy\ThePit\listeners\PlayerJoinEvent;
@@ -31,6 +32,7 @@ final class ListenersManager extends Managers
             new EntityDamageEvent(),
             new PlayerDropItemEvent(),
             new EntityItemPickupEvent(),
+            new PlayerDeathEvent(),
         ];
     }
 

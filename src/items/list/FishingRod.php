@@ -20,17 +20,9 @@ final class FishingRod extends Tool
 
     protected function createHook(LegacyPlayer $player): void
     {
-        $location = clone $player->getLocation();
-        $hook = new FishingHook(Location::fromObject(
-            $player->getEyePos(),
-            $player->getWorld(),
-            ($location->yaw > 180 ? 360 : 0) - $location->yaw,
-            -$location->pitch
-        ), $player);
-        $hook->setMotion($player->getDirectionVector());
+        $hook = new FishingHook($player->getLocation(), $player);
         $player->setFishing($hook);
         $hook->spawnToAll();
-
     }
 
     public function onClickAir(Player $player, Vector3 $directionVector): ItemUseResult
