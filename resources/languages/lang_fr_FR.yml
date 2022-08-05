@@ -7,6 +7,12 @@ equipment:
   sword: Epée §e§lRANG {rank}
   bow: Arc §e§lRANG {rank}
   arrow: Flèches §e§lRANG {rank}
+  hook: Canne à pêche §e§lRANG {rank}
+  bucket_lava: Seau de lave §e§lRANG {rank}
+  snowball: Boules de neiges §e§lRANG {rank}
+  block: Blocs §e§lRANG {rank}
+  flap: Saut §e§lRANG {rank}
+  nemo: Répulseur §e§lRANG {rank}
 messages:
   killstreak:
     broadcast: §a{player} a réussi à faire {killstreak} kills consécutifs et une prime
@@ -22,6 +28,7 @@ messages:
     equipment:
       armor: Améliorer son armure
       weapons: Améliorer ses armes
+      support: Améliorer ses soutiens
       max: Vous avez atteint le niveau maximum de votre pièce d'armure
       not-enough: Vous n'avez pas assez de d'or pour améliorer votre armure
   mute:

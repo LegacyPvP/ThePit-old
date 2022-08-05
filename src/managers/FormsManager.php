@@ -106,6 +106,11 @@ final class FormsManager extends Managers
                 Managers::FORMS()->sendForm($player, "equipment-weapons");
             }
         }));
+        $form->addButton(new Button($player->getLanguage()->getMessage("messages.form.equipment.support", [], false), null, function (Player $player){
+            if($player instanceof LegacyPlayer){
+                Managers::FORMS()->sendForm($player, "equipment-support");
+            }
+        }));
         return $form;
     }
 
@@ -205,7 +210,7 @@ final class FormsManager extends Managers
             if($player instanceof LegacyPlayer){
                 if($player->getCurrencyProvider()->has(CurrencyUtils::GOLD, 1500)){
                     if($player->getWeaponLevel(EquipmentUtils::BOW) < 2){
-                        $player->getCurrencyProvider()->remove(CurrencyUtils::GOLD, 1000);
+                        $player->getCurrencyProvider()->remove(CurrencyUtils::GOLD, 1500);
                         $player->upgradeWeapon(EquipmentUtils::BOW);
                         $player->setStuff();
                         $sound = new Sound("random.pop", 1);
@@ -224,6 +229,113 @@ final class FormsManager extends Managers
                     if($player->getWeaponLevel(EquipmentUtils::ARROW) < 3){
                         $player->getCurrencyProvider()->remove(CurrencyUtils::GOLD, 1000);
                         $player->upgradeWeapon(EquipmentUtils::ARROW);
+                        $player->setStuff();
+                        $sound = new Sound("random.pop", 1);
+                        $sound->play($player);
+                    } else {
+                        $player->sendMessage($player->getLanguage()->getMessage("messages.form.equipment.max", [], ServerUtils::PREFIX_3));
+                    }
+                }else{
+                    $player->sendMessage($player->getLanguage()->getMessage("messages.form.equipment.not-enough", [], ServerUtils::PREFIX_3));
+                }
+            }
+        }));
+        return $form;
+    }
+
+    public function equipmentSupportsForm(LegacyPlayer $player): Form {
+        $form = new SimpleForm($player->getLanguage()->getMessage("messages.form.titles.equipment", [], false), "");
+        $form->addButton(new Button(str_replace("{rank}", $player->getSupportLevel(EquipmentUtils::HOOK), $player->getSupport(EquipmentUtils::HOOK)), null, function (Player $player){
+            if($player instanceof LegacyPlayer){
+                if($player->getCurrencyProvider()->has(CurrencyUtils::GOLD, 1500)){
+                    if($player->getSupportLevel(EquipmentUtils::HOOK) < 1){
+                        $player->getCurrencyProvider()->remove(CurrencyUtils::GOLD, 1500);
+                        $player->upgradeSupport(EquipmentUtils::HOOK);
+                        $player->setStuff();
+                        $sound = new Sound("random.pop", 1);
+                        $sound->play($player);
+                    } else {
+                        $player->sendMessage($player->getLanguage()->getMessage("messages.form.equipment.max", [], ServerUtils::PREFIX_3));
+                    }
+                }else{
+                    $player->sendMessage($player->getLanguage()->getMessage("messages.form.equipment.not-enough", [], ServerUtils::PREFIX_3));
+                }
+            }
+        }));
+        $form->addButton(new Button(str_replace("{rank}", $player->getSupportLevel(EquipmentUtils::BUCKET_LAVA), $player->getSupport(EquipmentUtils::BUCKET_LAVA)), null, function (Player $player){
+            if($player instanceof LegacyPlayer){
+                if($player->getCurrencyProvider()->has(CurrencyUtils::GOLD, 1500)){
+                    if($player->getSupportLevel(EquipmentUtils::BUCKET_LAVA) < 1){
+                        $player->getCurrencyProvider()->remove(CurrencyUtils::GOLD, 1500);
+                        $player->upgradeSupport(EquipmentUtils::BUCKET_LAVA);
+                        $player->setStuff();
+                        $sound = new Sound("random.pop", 1);
+                        $sound->play($player);
+                    } else {
+                        $player->sendMessage($player->getLanguage()->getMessage("messages.form.equipment.max", [], ServerUtils::PREFIX_3));
+                    }
+                }else{
+                    $player->sendMessage($player->getLanguage()->getMessage("messages.form.equipment.not-enough", [], ServerUtils::PREFIX_3));
+                }
+            }
+        }));
+        $form->addButton(new Button(str_replace("{rank}", $player->getSupportLevel(EquipmentUtils::SNOWBALL), $player->getSupport(EquipmentUtils::SNOWBALL)), null, function (Player $player){
+            if($player instanceof LegacyPlayer){
+                if($player->getCurrencyProvider()->has(CurrencyUtils::GOLD, 1000)){
+                    if($player->getSupportLevel(EquipmentUtils::SNOWBALL) < 3){
+                        $player->getCurrencyProvider()->remove(CurrencyUtils::GOLD, 1000);
+                        $player->upgradeSupport(EquipmentUtils::SNOWBALL);
+                        $player->setStuff();
+                        $sound = new Sound("random.pop", 1);
+                        $sound->play($player);
+                    } else {
+                        $player->sendMessage($player->getLanguage()->getMessage("messages.form.equipment.max", [], ServerUtils::PREFIX_3));
+                    }
+                }else{
+                    $player->sendMessage($player->getLanguage()->getMessage("messages.form.equipment.not-enough", [], ServerUtils::PREFIX_3));
+                }
+            }
+        }));
+        $form->addButton(new Button(str_replace("{rank}", $player->getSupportLevel(EquipmentUtils::BLOCKS), $player->getSupport(EquipmentUtils::BLOCKS)), null, function (Player $player){
+            if($player instanceof LegacyPlayer){
+                if($player->getCurrencyProvider()->has(CurrencyUtils::GOLD, 1000)){
+                    if($player->getSupportLevel(EquipmentUtils::BLOCKS) < 3){
+                        $player->getCurrencyProvider()->remove(CurrencyUtils::GOLD, 1000);
+                        $player->upgradeSupport(EquipmentUtils::BLOCKS);
+                        $player->setStuff();
+                        $sound = new Sound("random.pop", 1);
+                        $sound->play($player);
+                    } else {
+                        $player->sendMessage($player->getLanguage()->getMessage("messages.form.equipment.max", [], ServerUtils::PREFIX_3));
+                    }
+                }else{
+                    $player->sendMessage($player->getLanguage()->getMessage("messages.form.equipment.not-enough", [], ServerUtils::PREFIX_3));
+                }
+            }
+        }));
+        $form->addButton(new Button(str_replace("{rank}", $player->getSupportLevel(EquipmentUtils::FLAP), $player->getSupport(EquipmentUtils::FLAP)), null, function (Player $player){
+            if($player instanceof LegacyPlayer){
+                if($player->getCurrencyProvider()->has(CurrencyUtils::GOLD, 1000)){
+                    if($player->getSupportLevel(EquipmentUtils::FLAP) < 3){
+                        $player->getCurrencyProvider()->remove(CurrencyUtils::GOLD, 1000);
+                        $player->upgradeSupport(EquipmentUtils::FLAP);
+                        $player->setStuff();
+                        $sound = new Sound("random.pop", 1);
+                        $sound->play($player);
+                    } else {
+                        $player->sendMessage($player->getLanguage()->getMessage("messages.form.equipment.max", [], ServerUtils::PREFIX_3));
+                    }
+                }else{
+                    $player->sendMessage($player->getLanguage()->getMessage("messages.form.equipment.not-enough", [], ServerUtils::PREFIX_3));
+                }
+            }
+        }));
+        $form->addButton(new Button(str_replace("{rank}", $player->getSupportLevel(EquipmentUtils::NEMO), $player->getSupport(EquipmentUtils::NEMO)), null, function (Player $player){
+            if($player instanceof LegacyPlayer){
+                if($player->getCurrencyProvider()->has(CurrencyUtils::GOLD, 1000)){
+                    if($player->getSupportLevel(EquipmentUtils::NEMO) < 3){
+                        $player->getCurrencyProvider()->remove(CurrencyUtils::GOLD, 1000);
+                        $player->upgradeSupport(EquipmentUtils::NEMO);
                         $player->setStuff();
                         $sound = new Sound("random.pop", 1);
                         $sound->play($player);
@@ -425,6 +537,7 @@ final class FormsManager extends Managers
             "equipment" => fn(LegacyPlayer $player) => $this->equipmentForm($player),
             "equipment-armor" => fn(LegacyPlayer $player) => $this->equipmentArmorForm($player),
             "equipment-weapons" => fn(LegacyPlayer $player) => $this->equipmentWeaponsForm($player),
+            "equipment-support" => fn(LegacyPlayer $player) => $this->equipmentSupportsForm($player),
             "shop-credits" => fn(LegacyPlayer $player) => $this->shopCredits($player),
             "shop-credits-ranks" => fn(LegacyPlayer $player) => $this->shopCreditsRanks($player),
             "shop-credits-boosters" => fn(LegacyPlayer $player) => $this->shopCreditsBoosters($player),
