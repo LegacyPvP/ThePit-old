@@ -237,7 +237,7 @@ final class LegacyPlayer extends Player
         $factory = ItemFactory::getInstance();
         $this->getInventory()->clearAll();
         $this->getArmorInventory()->clearAll();
-        /*
+
         $helmet = $factory->get(EquipmentUtils::getArmorId(EquipmentUtils::HELMET, $this->getArmorLevel(EquipmentUtils::HELMET)));
         $chestplate = $factory->get(EquipmentUtils::getArmorId(EquipmentUtils::CHESTPLATE, $this->getArmorLevel(EquipmentUtils::CHESTPLATE)));
         $leggings = $factory->get(EquipmentUtils::getArmorId(EquipmentUtils::LEGGINGS, $this->getArmorLevel(EquipmentUtils::LEGGINGS)));
@@ -257,13 +257,12 @@ final class LegacyPlayer extends Player
         $this->getInventory()->setItem(0, $sword);
         $this->getInventory()->setItem(1, $bow);
         $this->getInventory()->setItem(8, $arrow);
-        */
 
         $snowball_ = EquipmentUtils::getWeaponId(EquipmentUtils::SNOWBALL, $this->getSupportLevel(EquipmentUtils::SNOWBALL));
         $block_ = EquipmentUtils::getWeaponId(EquipmentUtils::BLOCKS, $this->getSupportLevel(EquipmentUtils::BLOCKS));
 
         $hook = $factory->get(EquipmentUtils::getSupportId(EquipmentUtils::HOOK, $this->getSupportLevel(EquipmentUtils::HOOK)));
-        $bucket_lava = $factory->get(EquipmentUtils::getSupportId(EquipmentUtils::BUCKET_LAVA, EquipmentUtils::getSupportId(EquipmentUtils::BUCKET_LAVA)));
+        $bucket_lava = $factory->get(EquipmentUtils::getSupportId(EquipmentUtils::BUCKET_LAVA, $this->getSupportLevel(EquipmentUtils::BUCKET_LAVA)));
         $flap = $factory->get(EquipmentUtils::getSupportId(EquipmentUtils::FLAP, $this->getSupportLevel(EquipmentUtils::FLAP)));
         $nemo = $factory->get(EquipmentUtils::getSupportId(EquipmentUtils::NEMO, $this->getSupportLevel(EquipmentUtils::NEMO)));
         $snowball = $factory->get($snowball_[0], $snowball_[1], $snowball_[2]);
