@@ -234,6 +234,7 @@ final class LegacyPlayer extends Player
     }
 
     public function setStuff(): void {
+        /*
         $this->getInventory()->clearAll();
         $this->getArmorInventory()->clearAll();
         $factory = ItemFactory::getInstance();
@@ -257,6 +258,7 @@ final class LegacyPlayer extends Player
         $this->getInventory()->setItem(0, $sword);
         $this->getInventory()->setItem(1, $bow);
         $this->getInventory()->setItem(8, $arrow);
+        */
     }
 
     public function getFishingHook(): ?FishingHook

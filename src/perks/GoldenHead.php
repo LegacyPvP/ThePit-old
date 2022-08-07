@@ -2,11 +2,11 @@
 
 namespace Legacy\ThePit\perks;
 
-use Legacy\ThePit\listeners\PlayerDeathEvent;
 use Legacy\ThePit\player\LegacyPlayer;
+use pocketmine\event\entity\EntityDamageByEntityEvent;
+use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\item\ItemIds;
-use pocketmine\player\Player;
 use Legacy\ThePit\items\list\GoldenHead as Item;
 
 final class GoldenHead extends Perk
@@ -15,14 +15,18 @@ final class GoldenHead extends Perk
         return PlayerDeathEvent::class;
     }
 
-    final public function start(Player $player): void
+    final public function start(PlayerDeathEvent $event): void
     {
-        $player->getInventory()->addItem(new Item(new ItemIdentifier(ItemIds::APPLE_ENCHANTED, 0), "Golden Head"));
+        if(!($cause = $event->getPlayer()->getLastDamageCause()) instanceof EntityDamageByEntityEvent) return;
+        if(!($killer = $cause->getDamager()) instanceof LegacyPlayer) return;
+        $killer->getInventory()->addItem(new Item(new ItemIdentifier(ItemIds::APPLE_ENCHANTED, 0), "Golden Head"));
     }
 
-    final public function canStart(LegacyPlayer $player): bool
+    final public function canStart(PlayerDeathEvent $event): bool
     {
-        foreach($player->getInventory()->getContents() as $item){
+        if(!($cause = $event->getPlayer()->getLastDamageCause()) instanceof EntityDamageByEntityEvent) return false;
+        if(!($killer = $cause->getDamager()) instanceof LegacyPlayer) return false;
+        foreach($killer->getInventory()->getContents() as $item){
             if($item::class === Item::class){
                 return true;
             }

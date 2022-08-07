@@ -2,15 +2,13 @@
 
 namespace Legacy\ThePit\databases;
 
-use pocketmine\utils\Config;
-
 interface IDatabase
 {
     public function get(mixed $k, mixed $default = null);
 
     public function set(mixed $k, mixed $v);
 
-    public function getConfig(): Config;
+    public function getConfig(): object;
 
     public function getNested(mixed $k, mixed $default = null);
 

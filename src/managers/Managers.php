@@ -26,6 +26,7 @@ use pocketmine\utils\EnumTrait;
  * @method static RanksManager RANKS()
  * @method static ScoreBoardsManager SCOREBOARDS()
  * @method static DataManager DATA()
+ * @method static CratesManager CRATES()
  */
 abstract class Managers implements IManager
 {

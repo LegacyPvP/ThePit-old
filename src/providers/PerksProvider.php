@@ -1,9 +1,11 @@
-<?php
+<?php /** @noinspection PhpParamsInspection */
 
 namespace Legacy\ThePit\providers;
 
 use Legacy\ThePit\perks\Perk;
 use Legacy\ThePit\player\LegacyPlayer;
+use pocketmine\event\Event;
+use pocketmine\Server;
 
 final class PerksProvider
 {
@@ -14,6 +16,7 @@ final class PerksProvider
 
     public function __construct(private LegacyPlayer $player)
     {
+        $this->add(Perk::BOUNTYHUNTER(), Perk::NABBIT(), Perk::GOLDENHEAD(), Perk::FLASH(), Perk::SERIALKILLER());
     }
 
     public function getAll(): array
@@ -21,21 +24,25 @@ final class PerksProvider
         return $this->perks;
     }
 
-    public function add(Perk $perk): void
+    public function add(Perk ...$perks): void
     {
-        $this->perks[$perk->getName()] = $perk;
+        foreach ($perks as $perk){
+            $this->perks[$perk->getName()] = $perk;
+        }
     }
 
-    public function remove(Perk $perk): void
+    public function remove(Perk ...$perks): void
     {
-        unset($this->perks[$perk->getName()]);
+        foreach ($perks as $perk){
+            unset($this->perks[$perk->getName()]);
+        }
     }
 
-    public function onEvent(string $class)
+    public function onEvent(Event $event)
     {
         foreach ($this->getAll() as $perk) {
-            if ($perk->onEvent() === $class and $perk->canStart($this->player)) {
-                $perk->start($this->player);
+            if ($perk->onEvent() === $event::class and $perk->canStart($event)) {
+                $perk->start($event);
             }
         }
     }

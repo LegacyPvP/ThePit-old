@@ -3,6 +3,7 @@
 namespace Legacy\ThePit;
 
 use Legacy\ThePit\managers\Managers;
+use Legacy\ThePit\perks\Perk;
 use Legacy\ThePit\player\LegacyPlayer;
 use Legacy\ThePit\tasks\GoldSpawnTask;
 use pocketmine\plugin\PluginBase;
@@ -34,6 +35,8 @@ class Core extends PluginBase
         $this->saveResource("config.yml", $this->isInDevMode());
 
         Managers::initManagers();
+
+        Perk::setup();
     }
 
     protected function onDisable(): void

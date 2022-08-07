@@ -14,7 +14,7 @@ final class ProjectileHitEntityEvent implements Listener
         $player = $event->getEntity()->getOwningEntity();
         $projectile = $event->getEntity();
         if($player instanceof LegacyPlayer and $projectile instanceof Arrow){
-            $player->getPerksProvider()->onEvent($event::class);
+            $player->getPerksProvider()->onEvent($event);
         }
     }
 

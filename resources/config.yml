@@ -1,5 +1,11 @@
 ---
 dev_mode: true
+
+database:
+  path: "/root/legacy.db"
+  username: "root"
+  password: "toor"
+
 prefixes:
   1: §5[§dLegacy§r§5] §r
   2: §5[§d§l!!!§r§5] §r
@@ -10,7 +16,7 @@ server:
     ip: play.nyrok.fr
     port: 19133
 languages:
-- fr_FR
+  - fr_FR
 knockback:
   horizontal: 0.4
   vertical: 0.4
@@ -20,283 +26,283 @@ scoreboards:
   basic:
     title: §l§dLEGACY
     lines:
-    - ' '
-    - '§fNiveau§7: {level}'
-    - '§fEXP restant§7: §b{xp}'
-    - '  '
-    - '§fOr§7: §6{or}'
-    - '§fCrédits§7: §a{credits}'
-    - '§fÉtoiles§7: §e{etoiles}'
-    - '§fVoteCoins§7: §9{votecoins}'
-    - '   '
-    - '§fServeur§7: §c{online}'
-    - '    '
-    - legacymc.eu
+      - ' '
+      - '§fNiveau§7: {level}'
+      - '§fEXP restant§7: §b{xp}'
+      - '  '
+      - '§fOr§7: §6{or}'
+      - '§fCrédits§7: §a{credits}'
+      - '§fÉtoiles§7: §e{etoiles}'
+      - '§fVoteCoins§7: §9{votecoins}'
+      - '   '
+      - '§fServeur§7: §c{online}'
+      - '    '
+      - legacymc.eu
   prestige:
     title: §l§dLEGACY
     lines:
-    - ' '
-    - '§fPrestige§7: §e{prestige}'
-    - '§fNiveau§7: {level}'
-    - '§fEXP restant§7: §b{xp}'
-    - '  '
-    - '§fOr§7: §6{or}'
-    - '§fCrédits§7: §a{credits}'
-    - '§fÉtoiles§7: §e{etoiles}'
-    - '§fVoteCoins§7: §9{votecoins}'
-    - '   '
-    - '§fServeur§7: §c{online}'
-    - '     '
-    - legacymc.eu
+      - ' '
+      - '§fPrestige§7: §e{prestige}'
+      - '§fNiveau§7: {level}'
+      - '§fEXP restant§7: §b{xp}'
+      - '  '
+      - '§fOr§7: §6{or}'
+      - '§fCrédits§7: §a{credits}'
+      - '§fÉtoiles§7: §e{etoiles}'
+      - '§fVoteCoins§7: §9{votecoins}'
+      - '   '
+      - '§fServeur§7: §c{online}'
+      - '     '
+      - legacymc.eu
   deathmatch:
     title: ""
     lines:
-    - ""
-    - ""
+      - ""
+      - ""
   raffle:
     title: ""
     lines:
-    - ""
-    - ""
+      - ""
+      - ""
   spire:
     title: ""
     lines:
-    - ""
-    - ""
+      - ""
+      - ""
 ranks:
   Joueur:
     chat: '{prestige} §7{player} §l§7» §r§7{chat}'
     nametag: §7{player}
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   Plus:
     chat: '{prestige} §8[§a+§8] §a{player} §l§8» §r§f{chat}'
     nametag: §a{player}
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   Star:
     chat: '{prestige} §8[§9Star§8] §9{player} §l§8» §r§f{chat}'
     nametag: §9{player}
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   Booster:
     chat: '{prestige} §8[§dBooster§8] §d{player} §l§8» §r§f{chat}'
     nametag: §d{player}
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   YouTube:
     chat: '{prestige} §8[§bYouTube§8] §b{player} §l§8» §r§f{chat}'
     nametag: §b{player}
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   Famous:
     chat: '{prestige} §8[§5Famous§8] §5{player} §l§8» §r§f{chat}'
     nametag: §5{player}
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   Guide:
     chat: '{prestige} §8[§2§lGuide§r§8] §2{player} §l§8» §r§2{chat}'
     nametag: §2§l{player}
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   Modo:
     chat: '{prestige} §8[§e§lModo§r§8] §e{player} §l§8» §r§e{chat}'
     nametag: §e§l{player}
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   SuperModo:
     chat: '{prestige} §8[§6§lSuperModo§r§8] §6{player} §l§8» §r§6{chat}'
     nametag: §6§l{player}
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   Développeur:
     chat: '{prestige} §8[§c§lDéveloppeur§r§8] §c{player} §l§8» §r§c{chat}'
     nametag: §c§l{player}
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   Responsable:
     chat: '{prestige} §8[§c§lResponsable§r§8] §c{player} §l§8» §r§c{chat}'
     nametag: §c§l{player}
     scoretag: ""
-    permissions: []
+    permissions: [ ]
   Admin:
     chat: '{prestige} §8[§4§lAdmin§r§8] §4{player} §l§8» §r§4{chat}'
     nametag: §l§4{player}
     scoretag: ""
-    permissions: []
+    permissions: [ ]
 commands:
   ban:
     permission: legacy.commands.ban
     usage: '§fVous devez faire §d/ban <nom du joueur> <temps> [ip: [oui/non]] [raison]
       §fpour bannir un joueur.'
     description: Bannir un joueur
-    aliases: []
+    aliases: [ ]
   unban:
     permission: legacy.commands.unban
     usage: §fVous devez faire §d/unban <nom du joueur> §fpour débannir un joueur.
     description: Débannir un joueur
-    aliases: []
+    aliases: [ ]
   kick:
     permission: legacy.commands.kick
     usage: §fVous devez faire §d/kick <nom du joueur> §fpour expulser un joueur.
     description: Expulser un joueur
-    aliases: []
+    aliases: [ ]
   setrank:
     permission: legacy.commands.setrank
     usage: §fVous devez faire §d/setrank <nom du joueur> <grade> §fpour mettre un
       grade à un joueur.
     description: Mettre un grade à un joueur
-    aliases: []
+    aliases: [ ]
   listrank:
     permission: legacy.commands.listrank
     usage: §fVous devez faire §d/listrank §fpour voir la liste des grades.
     description: Voir la liste des ranks
-    aliases: []
+    aliases: [ ]
   banlist:
     permission: legacy.commands.banlist
     usage: §fVous devez faire §d/banlist §fpour voir la liste des joueurs bannis.
     description: Voir la liste des joueurs bannis
-    aliases: []
+    aliases: [ ]
   gamemode:
     permission: legacy.commands.gamemode
     usage: §fVous devez faire §d/gamemode <mode> [nom du joueur] §fpour changer le
       mode de jeu d'un joueur.
     description: Définir le gamemode d'un joueur
     aliases:
-    - gm
+      - gm
   say:
     permission: legacy.commands.say
     usage: §fVous devez faire §d/say <message> §fpour faire une annonce.
     description: Écrire une annonce
     aliases:
-    - s
-    - sayall
+      - s
+      - sayall
   globalmute:
     permission: legacy.commands.globalmute
     usage: '§fVous devez faire §d/globalmute [mode: [on/off]] §fpour mute tous les
       joueurs.'
     description: Mute tous les joueurs
     aliases:
-    - muteall
+      - muteall
   tpr:
     permission: legacy.commands.tpr
     usage: §fVous devez faire §d/tpr §fpour vous téléporter aléatoirement à un joueur
       du serveur.
     description: Se téléporter aléatoirement à un joueur du serveur
     aliases:
-    - randomtp
+      - randomtp
   tp:
     permission: legacy.commands.tp
     usage: §fVous devez faire §d/tp <player1> [player2]
     description: Se téléporter à un joueur spécifique
     aliases:
-    - teleport
+      - teleport
   knockback:
     permission: legacy.commands.knockback
     usage: §fVous devez faire §d/knockback <horizontal> <vertical> [attack_cooldown]
     description: Changer le knockback du serveur
     aliases:
-    - kb
+      - kb
   nightvision:
     permission: legacy.commands.nightvision
     usage: §fVous devez faire §d/nightvision §fpour activer ou désactiver la vision
       nocturne.
     description: Activer la vision nocturne
     aliases:
-    - nv
+      - nv
   ping:
     permission: legacy.commands.ping
     usage: §fVous devez faire §d/ping §fpour voir votre ping.
     description: Voir votre ping ou d'un joueur
-    aliases: []
+    aliases: [ ]
   spawn:
     permission: legacy.commands.spawn
     usage: §fVous devez faire §d/spawn §fpour vous téléporter au spawn.
     description: Se téléporter au spawn
     aliases:
-    - spawnpoint
+      - spawnpoint
   lobby:
     permission: legacy.commands.lobby
     usage: §fVous devez faire §d/lobby §fpour vous téléporter au lobby.
     description: Se téléporter au lobby
     aliases:
-    - hub
+      - hub
   mute:
     permission: legacy.commands.mute
     usage: §fVous devez faire §d/mute <nom du joueur> <temps> [raison] §fpour mute
       un joueur.
     description: Mute un joueur
-    aliases: []
+    aliases: [ ]
   unmute:
     permission: legacy.commands.unmute
     usage: §fVous devez faire §d/unmute <nom du joueur> §fpour unmute un joueur.
     description: Unmute un joueur
-    aliases: []
+    aliases: [ ]
   tps:
     permission: legacy.commands.tps
     usage: §fVous devez faire §d/tps §fpour voir le tps du serveur.
     description: Voir le tps du serveur
-    aliases: []
+    aliases: [ ]
   message:
     permission: legacy.commands.message
     usage: §fVous devez faire §d/message <nom du joueur> <message> §fpour envoyer
       un message à un joueur.
     description: Envoyer un message à un joueur
     aliases:
-    - w
-    - tell
-    - mp
+      - w
+      - tell
+      - mp
   pay:
     permission: legacy.commands.pay
     usage: §fVous devez faire §d/pay <nom du joueur> <montant> §fpour payer un joueur
       avec de l'or.
     description: Payer un joueur avec de l'or
-    aliases: []
+    aliases: [ ]
   list:
     permission: legacy.commands.list
     usage: §fVous devez faire §d/list §fpour voir la liste des joueurs.
     description: Voir la liste des joueurs
-    aliases: []
+    aliases: [ ]
   statistics:
     permission: legacy.commands.statistics
     usage: §fVous devez faire §d/statistics §fpour voir les statistiques du serveur.
     description: Voir les statistiques du serveur
     aliases:
-    - stats
+      - stats
   set:
     permission: legacy.commands.set
     usage: §fVous devez faire §d/set <nom du joueur> <valeur> <monnaie> §fpour changer
       la valeur d'un joueur.
     description: Changer la valeur d'un joueur
-    aliases: []
+    aliases: [ ]
   add:
     permission: legacy.commands.add
     usage: §fVous devez faire §d/add <nom du joueur> <valeur> <monnaie> §fpour ajouter
       une valeur à un joueur.
     description: Ajouter une valeur à un joueur
-    aliases: []
+    aliases: [ ]
   remove:
     permission: legacy.commands.remove
     usage: §fVous devez faire §d/remove <nom du joueur> <valeur> <monnaie> §fpour
       enlever une valeur à un joueur.
     description: Enlever une valeur à un joueur
-    aliases: []
+    aliases: [ ]
   equipment:
     permission: legacy.commands.equipment
     usage: §fVous devez faire §d/equipment pour améliorer votre équipement.
     description: Améliorer son équipement
-    aliases: []
+    aliases: [ ]
 items:
   fishingRod:
     lose-drops-inverval:
-    - 20
-    - 30
+      - 20
+      - 30
     drops-interval:
-    - 100
-    - 600
+      - 100
+      - 600
     lost-drops-inverval:
-    - 20
-    - 30
+      - 20
+      - 30
     drops:
       Trésor:
         id: 1
@@ -327,25 +333,25 @@ cooldowns:
 areas:
   spawn:
     x:
-    - 100
-    - 100
+      - 100
+      - 100
     "y":
-    - 0
-    - 100
+      - 0
+      - 100
     z:
-    - 100
-    - 100
+      - 100
+      - 100
     world: Sky
 goldspawn:
   x:
-  - -288
-  - -17
+    - -288
+    - -17
   "y":
-  - 46
-  - 54
+    - 46
+    - 54
   z:
-  - 127
-  - -368
+    - 127
+    - -368
   world: Sky
 scoreboards.refresh-time: 15
 commands.ban:
@@ -353,180 +359,180 @@ commands.ban:
   usage: '§fVous devez faire §d/ban <nom du joueur> <temps> [ip: [oui/non]] [raison]
     §fpour bannir un joueur.'
   description: Bannir un joueur
-  aliases: []
+  aliases: [ ]
 commands.unban:
   permission: legacy.commands.unban
   usage: §fVous devez faire §d/unban <nom du joueur> §fpour débannir un joueur.
   description: Débannir un joueur
-  aliases: []
+  aliases: [ ]
 commands.kick:
   permission: legacy.commands.kick
   usage: §fVous devez faire §d/kick <nom du joueur> §fpour expulser un joueur.
   description: Expulser un joueur
-  aliases: []
+  aliases: [ ]
 commands.setrank:
   permission: legacy.commands.setrank
   usage: §fVous devez faire §d/setrank <nom du joueur> <grade> §fpour mettre un grade
     à un joueur.
   description: Mettre un grade à un joueur
-  aliases: []
+  aliases: [ ]
 commands.listrank:
   permission: legacy.commands.listrank
   usage: §fVous devez faire §d/listrank §fpour voir la liste des grades.
   description: Voir la liste des ranks
-  aliases: []
+  aliases: [ ]
 commands.banlist:
   permission: legacy.commands.banlist
   usage: §fVous devez faire §d/banlist §fpour voir la liste des joueurs bannis.
   description: Voir la liste des joueurs bannis
-  aliases: []
+  aliases: [ ]
 commands.gamemode:
   permission: legacy.commands.gamemode
   usage: §fVous devez faire §d/gamemode <mode> [nom du joueur] §fpour changer le mode
     de jeu d'un joueur.
   description: Définir le gamemode d'un joueur
   aliases:
-  - gm
+    - gm
 commands.say:
   permission: legacy.commands.say
   usage: §fVous devez faire §d/say <message> §fpour faire une annonce.
   description: Écrire une annonce
   aliases:
-  - s
-  - sayall
+    - s
+    - sayall
 commands.globalmute:
   permission: legacy.commands.globalmute
   usage: '§fVous devez faire §d/globalmute [mode: [on/off]] §fpour mute tous les joueurs.'
   description: Mute tous les joueurs
   aliases:
-  - muteall
+    - muteall
 commands.tpr:
   permission: legacy.commands.tpr
   usage: §fVous devez faire §d/tpr §fpour vous téléporter aléatoirement à un joueur
     du serveur.
   description: Se téléporter aléatoirement à un joueur du serveur
   aliases:
-  - randomtp
+    - randomtp
 commands.tp:
   permission: legacy.commands.tp
   usage: §fVous devez faire §d/tp <player1> [player2]
   description: Se téléporter à un joueur spécifique
   aliases:
-  - teleport
+    - teleport
 commands.knockback:
   permission: legacy.commands.knockback
   usage: §fVous devez faire §d/knockback <horizontal> <vertical> [attack_cooldown]
   description: Changer le knockback du serveur
   aliases:
-  - kb
+    - kb
 commands.ping:
   permission: legacy.commands.ping
   usage: §fVous devez faire §d/ping §fpour voir votre ping.
   description: Voir votre ping ou d'un joueur
-  aliases: []
+  aliases: [ ]
 commands.nightvision:
   permission: legacy.commands.nightvision
   usage: §fVous devez faire §d/nightvision §fpour activer ou désactiver la vision
     nocturne.
   description: Activer la vision nocturne
   aliases:
-  - nv
+    - nv
 commands.spawn:
   permission: legacy.commands.spawn
   usage: §fVous devez faire §d/spawn §fpour vous téléporter au spawn.
   description: Se téléporter au spawn
   aliases:
-  - spawnpoint
+    - spawnpoint
 commands.lobby:
   permission: legacy.commands.lobby
   usage: §fVous devez faire §d/lobby §fpour vous téléporter au lobby.
   description: Se téléporter au lobby
   aliases:
-  - hub
+    - hub
 commands.mute:
   permission: legacy.commands.mute
   usage: §fVous devez faire §d/mute <nom du joueur> <temps> [raison] §fpour mute un
     joueur.
   description: Mute un joueur
-  aliases: []
+  aliases: [ ]
 commands.unmute:
   permission: legacy.commands.unmute
   usage: §fVous devez faire §d/unmute <nom du joueur> §fpour unmute un joueur.
   description: Unmute un joueur
-  aliases: []
+  aliases: [ ]
 commands.tps:
   permission: legacy.commands.tps
   usage: §fVous devez faire §d/tps §fpour voir le tps du serveur.
   description: Voir le tps du serveur
-  aliases: []
+  aliases: [ ]
 commands.pay:
   permission: legacy.commands.pay
   usage: §fVous devez faire §d/pay <nom du joueur> <montant> §fpour payer un joueur
     avec de l'or.
   description: Payer un joueur avec de l'or
-  aliases: []
+  aliases: [ ]
 commands.list:
   permission: legacy.commands.list
   usage: §fVous devez faire §d/list §fpour voir la liste des joueurs.
   description: Voir la liste des joueurs
-  aliases: []
+  aliases: [ ]
 commands.set:
   permission: legacy.commands.set
   usage: §fVous devez faire §d/set <nom du joueur> <valeur> <monnaie> §fpour changer
     la valeur d'un joueur.
   description: Changer la valeur d'un joueur
-  aliases: []
+  aliases: [ ]
 commands.remove:
   permission: legacy.commands.remove
   usage: §fVous devez faire §d/remove <nom du joueur> <valeur> <monnaie> §fpour enlever
     une valeur à un joueur.
   description: Enlever une valeur à un joueur
-  aliases: []
+  aliases: [ ]
 commands.add:
   permission: legacy.commands.add
   usage: §fVous devez faire §d/add <nom du joueur> <valeur> <monnaie> §fpour ajouter
     une valeur à un joueur.
   description: Ajouter une valeur à un joueur
-  aliases: []
+  aliases: [ ]
 commands.statistics:
   permission: legacy.commands.statistics
   usage: §fVous devez faire §d/statistics §fpour voir les statistiques du serveur.
   description: Voir les statistiques du serveur
   aliases:
-  - stats
+    - stats
 commands.equipment:
   permission: legacy.commands.equipment
   usage: §fVous devez faire §d/equipment pour améliorer votre équipement.
   description: Améliorer son équipement
-  aliases: []
+  aliases: [ ]
 goldspawn.x:
-- -288
-- -17
+  - -288
+  - -17
 goldspawn.y:
-- 46
-- 54
+  - 46
+  - 54
 goldspawn.z:
-- 127
-- -368
+  - 127
+  - -368
 goldspawn.world: Sky
 scoreboards.prestige.lines:
-- ' '
-- '§fPrestige§7: §e{prestige}'
-- '§fNiveau§7: {level}'
-- '§fEXP restant§7: §b{xp}'
-- '  '
-- '§fOr§7: §6{or}'
-- '§fCrédits§7: §a{credits}'
-- '§fÉtoiles§7: §e{etoiles}'
-- '§fVoteCoins§7: §9{votecoins}'
-- '   '
-- '§fServeur§7: §c{online}'
-- '     '
-- legacymc.eu
+  - ' '
+  - '§fPrestige§7: §e{prestige}'
+  - '§fNiveau§7: {level}'
+  - '§fEXP restant§7: §b{xp}'
+  - '  '
+  - '§fOr§7: §6{or}'
+  - '§fCrédits§7: §a{credits}'
+  - '§fÉtoiles§7: §e{etoiles}'
+  - '§fVoteCoins§7: §9{votecoins}'
+  - '   '
+  - '§fServeur§7: §c{online}'
+  - '     '
+  - legacymc.eu
 scoreboards.basic.title: §l§dLEGACY
 items.fishingRod.drops-interval:
-- 100
-- 600
+  - 100
+  - 600
 items.fishingRod.drops:
   Trésor:
     id: 1

@@ -2,6 +2,7 @@
 
 namespace Legacy\ThePit\listeners;
 
+use Legacy\ThePit\events\PlayerCollectGoldEvent;
 use Legacy\ThePit\objects\Sound;
 use Legacy\ThePit\player\LegacyPlayer;
 use Legacy\ThePit\utils\CurrencyUtils;
@@ -18,8 +19,11 @@ final class EntityItemPickupEvent implements Listener {
         $item_entity = $event->getOrigin();
         if($item->getId() == ItemIds::GOLD_INGOT and $entity instanceof LegacyPlayer){
             $count = rand(1, 4);
+            $ev = new PlayerCollectGoldEvent($entity, $count);
+            $ev->call();
+            if($ev->isCancelled()) return;
+            $entity->getPerksProvider()->onEvent($ev);
             $entity->getCurrencyProvider()->add(CurrencyUtils::GOLD, $count);
-            $entity->getPerksProvider()->onEvent($event::class);
             $sound = new Sound("random.orb", 1);
             $sound->play($entity);
             $entity->sendPopup("§6- §e+$count §6-");
