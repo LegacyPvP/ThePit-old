@@ -206,7 +206,7 @@ final class LegacyPlayer extends Player
                 $this->knockBack($motion->x, $motion->z, Managers::KNOCKBACK()->getHorizontal(), Managers::KNOCKBACK()->getVertical());
             }
         } elseif ($source instanceof EntityDamageByEntityEvent) {
-            $this->getPerksProvider()->onEvent($source::class);
+            $this->getPerksProvider()->onEvent($source);
             $e = $source->getDamager();
             if ($e !== null) {
                 $deltaX = $this->location->x - $e->location->x;
@@ -234,11 +234,10 @@ final class LegacyPlayer extends Player
     }
 
     public function setStuff(): void {
-        /*
+        $factory = ItemFactory::getInstance();
         $this->getInventory()->clearAll();
         $this->getArmorInventory()->clearAll();
-        $factory = ItemFactory::getInstance();
-
+        /*
         $helmet = $factory->get(EquipmentUtils::getArmorId(EquipmentUtils::HELMET, $this->getArmorLevel(EquipmentUtils::HELMET)));
         $chestplate = $factory->get(EquipmentUtils::getArmorId(EquipmentUtils::CHESTPLATE, $this->getArmorLevel(EquipmentUtils::CHESTPLATE)));
         $leggings = $factory->get(EquipmentUtils::getArmorId(EquipmentUtils::LEGGINGS, $this->getArmorLevel(EquipmentUtils::LEGGINGS)));
@@ -249,16 +248,36 @@ final class LegacyPlayer extends Player
         $this->getArmorInventory()->setLeggings($leggings);
         $this->getArmorInventory()->setBoots($boots);
 
-        $arrow_count = EquipmentUtils::getWeaponId(EquipmentUtils::ARROW, $this->getWeaponLevel(EquipmentUtils::ARROW));
+        $arrow_ = EquipmentUtils::getWeaponId(EquipmentUtils::ARROW, $this->getWeaponLevel(EquipmentUtils::ARROW));
 
         $sword = $factory->get(EquipmentUtils::getWeaponId(EquipmentUtils::SWORD, $this->getWeaponLevel(EquipmentUtils::SWORD)));
         $bow = $factory->get(EquipmentUtils::getWeaponId(EquipmentUtils::BOW, $this->getWeaponLevel(EquipmentUtils::BOW)));
-        $arrow = $factory->get($arrow_count[0], $arrow_count[1], $arrow_count[2]);
+        $arrow = $factory->get($arrow_[0], $arrow_[1], $arrow_[2]);
 
         $this->getInventory()->setItem(0, $sword);
         $this->getInventory()->setItem(1, $bow);
         $this->getInventory()->setItem(8, $arrow);
         */
+
+        $snowball_ = EquipmentUtils::getWeaponId(EquipmentUtils::SNOWBALL, $this->getSupportLevel(EquipmentUtils::SNOWBALL));
+        $block_ = EquipmentUtils::getWeaponId(EquipmentUtils::BLOCKS, $this->getSupportLevel(EquipmentUtils::BLOCKS));
+
+        $hook = $factory->get(EquipmentUtils::getSupportId(EquipmentUtils::HOOK, $this->getSupportLevel(EquipmentUtils::HOOK)));
+        $bucket_lava = $factory->get(EquipmentUtils::getSupportId(EquipmentUtils::BUCKET_LAVA, EquipmentUtils::getSupportId(EquipmentUtils::BUCKET_LAVA)));
+        $flap = $factory->get(EquipmentUtils::getSupportId(EquipmentUtils::FLAP, $this->getSupportLevel(EquipmentUtils::FLAP)));
+        $nemo = $factory->get(EquipmentUtils::getSupportId(EquipmentUtils::NEMO, $this->getSupportLevel(EquipmentUtils::NEMO)));
+        $snowball = $factory->get($snowball_[0], $snowball_[1], $snowball_[2]);
+        $block = $factory->get($block_[0], $block_[1], $block_[2]);
+
+
+
+        if ($this->getSupportLevel(EquipmentUtils::HOOK) != 0 and $this->getInventory()->canAddItem($hook)) {
+            $this->getInventory()->addItem($hook);
+        }
+
+        if ($this->getSupportLevel(EquipmentUtils::BUCKET_LAVA) != 0 and $this->getInventory()->canAddItem($bucket_lava)) {
+            $this->getInventory()->addItem($bucket_lava);
+        }
     }
 
     public function getFishingHook(): ?FishingHook
@@ -327,6 +346,43 @@ final class LegacyPlayer extends Player
             EquipmentUtils::SWORD => $this->getPlayerProperties()->setNestedProperties("inventory.sword", $this->getPlayerProperties()->getNestedProperties("inventory.sword") + 1),
             EquipmentUtils::BOW => $this->getPlayerProperties()->setNestedProperties("inventory.bow", $this->getPlayerProperties()->getNestedProperties("inventory.bow") + 1),
             EquipmentUtils::ARROW => $this->getPlayerProperties()->setNestedProperties("inventory.arrow", $this->getPlayerProperties()->getNestedProperties("inventory.arrow") + 1),
+            default => null,
+        };
+    }
+
+    public function getSupportLevel(int $index)
+    {
+        return match ($index) {
+            EquipmentUtils::HOOK => $this->getPlayerProperties()->getNestedProperties("inventory.hook"),
+            EquipmentUtils::BUCKET_LAVA => $this->getPlayerProperties()->getNestedProperties("inventory.bucket_lava"),
+            EquipmentUtils::SNOWBALL => $this->getPlayerProperties()->getNestedProperties("inventory.snowball"),
+            EquipmentUtils::BLOCKS => $this->getPlayerProperties()->getNestedProperties("inventory.block"),
+            EquipmentUtils::FLAP => $this->getPlayerProperties()->getNestedProperties("inventory.flap"),
+            EquipmentUtils::NEMO => $this->getPlayerProperties()->getNestedProperties("inventory.nemo"),
+            default => null,
+        };
+    }
+
+    public function getSupport(int $index): ? Message{
+        return match ($index) {
+            EquipmentUtils::HOOK => $this->getLanguage()->getMessage("equipment.hook", [], false),
+            EquipmentUtils::BUCKET_LAVA => $this->getLanguage()->getMessage("equipment.bucket_lava", [], false),
+            EquipmentUtils::SNOWBALL => $this->getLanguage()->getMessage("equipment.snowball", [], false),
+            EquipmentUtils::BLOCKS => $this->getLanguage()->getMessage("equipment.block", [], false),
+            EquipmentUtils::FLAP => $this->getLanguage()->getMessage("equipment.flap", [], false),
+            EquipmentUtils::NEMO => $this->getLanguage()->getMessage("equipment.nemo", [], false),
+            default => null,
+        };
+    }
+
+    public function upgradeSupport(int $index){
+        return match ($index) {
+            EquipmentUtils::HOOK => $this->getPlayerProperties()->setNestedProperties("inventory.hook", $this->getPlayerProperties()->getNestedProperties("inventory.hook") + 1),
+            EquipmentUtils::BUCKET_LAVA => $this->getPlayerProperties()->setNestedProperties("inventory.bucket_lava", $this->getPlayerProperties()->getNestedProperties("inventory.bucket_lava") + 1),
+            EquipmentUtils::SNOWBALL => $this->getPlayerProperties()->setNestedProperties("inventory.snowball", $this->getPlayerProperties()->getNestedProperties("inventory.snowball") + 1),
+            EquipmentUtils::BLOCKS => $this->getPlayerProperties()->setNestedProperties("inventory.block", $this->getPlayerProperties()->getNestedProperties("inventory.block") + 1),
+            EquipmentUtils::FLAP => $this->getPlayerProperties()->setNestedProperties("inventory.flap", $this->getPlayerProperties()->getNestedProperties("inventory.flap") + 1),
+            EquipmentUtils::NEMO => $this->getPlayerProperties()->setNestedProperties("inventory.nemo", $this->getPlayerProperties()->getNestedProperties("inventory.nemo") + 1),
             default => null,
         };
     }

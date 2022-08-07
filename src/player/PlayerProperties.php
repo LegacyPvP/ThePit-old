@@ -73,10 +73,10 @@ final class PlayerProperties
                     "bow" => 1,
                     "arrow" => 1,
 
-                    "rod" => 0, //1k gold
-                    "bucket" => 0, //500 gold
+                    "hook" => 0, //1k gold
+                    "bucket_lava" => 0, //1500 gold
                     "snowball" => 0, //500 gold
-                    "blocks" => 0, //1k gold
+                    "block" => 0, //1k gold
                     "flap" => 0, //1,5k gold
                     "nemo" => 0, //1,5k gold
                 ],
