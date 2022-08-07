@@ -2,9 +2,7 @@
 
 namespace Legacy\ThePit\utils;
 
-use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
-use pocketmine\block\BlockLegacyIds;
 
 abstract class EquipmentUtils {
 
@@ -18,8 +16,8 @@ abstract class EquipmentUtils {
     const ARROW_16 = 1, ARROW_32 = 2, ARROW_64 = 3;
     const HOOK_NORMAL = 1;
     const BUCKET_LAVA_NORMAL = 1;
-    const SNOWBALL_4 = 1, SNOWBALL_8;
-    const BLOCKS_16 = 1, BLOCKS_32;
+    const SNOWBALL_4 = 1, SNOWBALL_8 = 2; // TODO: J'ai juste fix le crash au démarrage, tu mettras la valeur que tu voulais pour BLOCKS_32 et SNOWBALL_8
+    const BLOCKS_16 = 1, BLOCKS_32 = 2;
     const FLAP_NORMAL = 1;
     const NEMO_NORMAL = 1;
 
@@ -61,8 +59,7 @@ abstract class EquipmentUtils {
             };
         elseif($index == self::BOW)
             return match ($level) {
-                self::BOW_UNENCHANTED => ItemIds::BOW,
-                self::BOW_ENCHANTED => ItemIds::BOW,
+                self::BOW_UNENCHANTED, self::BOW_ENCHANTED => ItemIds::BOW,
             };
         elseif($index == self::ARROW)
             return match ($level) {
@@ -77,7 +74,8 @@ abstract class EquipmentUtils {
     {
         return match($index){
             self::HOOK => match($level){
-                self::HOOK_SUPPORT => ItemIds::FISHING_ROD,
+                // TODO: HOOK_SUPPORT n'existait pas j'ai mis HOOK_NORMAL, tu modifieras aussi
+                self::HOOK_NORMAL => ItemIds::FISHING_ROD,
             },
             self::BUCKET_LAVA => match($level){
                 self::BUCKET_LAVA_NORMAL => [ItemIds::BUCKET, 2],
@@ -97,6 +95,6 @@ abstract class EquipmentUtils {
                 self::NEMO_NORMAL => ItemIds::CLOWNFISH,
             },
             default => ItemIds::AIR,
-        }
+        };
     }
 }
