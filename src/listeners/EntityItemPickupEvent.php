@@ -18,7 +18,7 @@ final class EntityItemPickupEvent implements Listener {
         $entity = $event->getEntity();
         $item_entity = $event->getOrigin();
         if($item->getId() == ItemIds::GOLD_INGOT and $entity instanceof LegacyPlayer){
-            $count = rand(1, 4);
+            $count = rand(1, 3);
             $ev = new PlayerCollectGoldEvent($entity, $count);
             $ev->call();
             if($ev->isCancelled()) return;
