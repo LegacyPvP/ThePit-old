@@ -234,6 +234,8 @@ final class LegacyPlayer extends Player
     }
 
     public function setStuff(): void {
+        // TODO: CRASH FIX
+        /*
         $factory = ItemFactory::getInstance();
         $this->getInventory()->clearAll();
         $this->getArmorInventory()->clearAll();
@@ -277,6 +279,7 @@ final class LegacyPlayer extends Player
         if ($this->getSupportLevel(EquipmentUtils::BUCKET_LAVA) != 0 and $this->getInventory()->canAddItem($bucket_lava)) {
             $this->getInventory()->addItem($bucket_lava);
         }
+        */
     }
 
     public function getFishingHook(): ?FishingHook
