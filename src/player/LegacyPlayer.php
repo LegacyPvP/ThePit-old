@@ -234,8 +234,6 @@ final class LegacyPlayer extends Player
     }
 
     public function setStuff(): void {
-        // TODO: CRASH FIX
-        /*
         $factory = ItemFactory::getInstance();
         $this->getInventory()->clearAll();
         $this->getArmorInventory()->clearAll();
@@ -270,8 +268,6 @@ final class LegacyPlayer extends Player
         $snowball = $factory->get($snowball_[0], $snowball_[1], $snowball_[2]);
         $block = $factory->get($block_[0], $block_[1], $block_[2]);
 
-
-
         if ($this->getSupportLevel(EquipmentUtils::HOOK) != 0 and $this->getInventory()->canAddItem($hook)) {
             $this->getInventory()->addItem($hook);
         }
@@ -279,7 +275,22 @@ final class LegacyPlayer extends Player
         if ($this->getSupportLevel(EquipmentUtils::BUCKET_LAVA) != 0 and $this->getInventory()->canAddItem($bucket_lava)) {
             $this->getInventory()->addItem($bucket_lava);
         }
-        */
+        
+        if ($this->getSupportLevel(EquipmentUtils::SNOWBALL) != 0 and $this->getInventory()->canAddItem($snowball)) {
+          $this->getInventory()->addItem($snowball);
+        }
+        
+        if ($this->getSupportLevel(EquipmentUtils::BLOCKS) != 0 and $this->getInventory()->canAddItem($block)){
+          $this->addItem($block);
+        }
+        
+        if ($this->getSupportLevel(EquipmentUtils::FLAP) != 0 and $this->getInventory()->canAddItem($flap)){
+          $this->addItem($flap);
+        }
+        
+        if ($this->getSupportLevel(EquipmentUtils::NEMO) != 0 and $this->getInventory()->canAddItem($nemo)){
+          $this->addItem($nemo);
+        }
     }
 
     public function getFishingHook(): ?FishingHook
