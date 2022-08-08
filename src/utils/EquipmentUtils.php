@@ -74,7 +74,7 @@ abstract class EquipmentUtils {
     {
         return match($index){
             self::HOOK => match($level){
-                // TODO: HOOK_SUPPORT n'existait pas j'ai mis HOOK_NORMAL, tu modifieras aussi
+                // j'étais sur ipad j'ai pas d'erreur pas fais gaffe lol
                 self::HOOK_NORMAL => ItemIds::FISHING_ROD,
             },
             self::BUCKET_LAVA => match($level){
