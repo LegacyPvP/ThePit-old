@@ -17,7 +17,12 @@ final class EntitiesManager extends Managers
         return [
             [FishingHook::class, function (World $world, CompoundTag $nbt): FishingHook {
                 return new FishingHook(EntityDataHelper::parseLocation($nbt, $world), null);
+            }, ["FishingRod", "minecraft:fishingrod"], EntityLegacyIds::FISHING_HOOK],
+            /*
+            [DragonEgg::class, function (World $world, CompoundTag $nbt): DragonEgg {
+                return new DragonEgg(EntityDataHelper::parseLocation($nbt, $world), null, new BlockBreakInfo());
             }, ["FishingRod", "minecraft:fishingrod"], EntityLegacyIds::FISHING_HOOK]
+            */
         ];
     }
 
