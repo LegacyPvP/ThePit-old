@@ -2,6 +2,7 @@
 
 namespace Legacy\ThePit\tasks;
 
+use Legacy\ThePit\events\Event;
 use Legacy\ThePit\managers\Managers;
 use pocketmine\scheduler\Task;
 
@@ -10,11 +11,10 @@ final class ScoreBoardTask extends Task
     public function onRun(): void
     {
         match (Managers::EVENTS()->getCurrentEvent()->getName()){
-            Managers::EVENTS()::TYPE_DEATHMATCH => Managers::SCOREBOARDS()->updateScoreboard(Managers::SCOREBOARDS()->get("deathmatch"), Managers::EVENTS()::TYPE_DEATHMATCH),
-            Managers::EVENTS()::TYPE_RAFFLE => Managers::SCOREBOARDS()->updateScoreboard(Managers::SCOREBOARDS()->get("raffle"), Managers::EVENTS()::TYPE_RAFFLE),
-            Managers::EVENTS()::TYPE_SPIRE => Managers::SCOREBOARDS()->updateScoreboard(Managers::SCOREBOARDS()->get("spire"), Managers::EVENTS()::TYPE_SPIRE),
-            default => Managers::SCOREBOARDS()->updateScoreboard(null, Managers::EVENTS()::TYPE_NONE),
+            Event::DEATHMATCH()->getName() => Managers::SCOREBOARDS()->updateScoreboard(Managers::SCOREBOARDS()->get("deathmatch"), Event::DEATHMATCH()->getName()),
+            Event::RAFFLE()->getName() => Managers::SCOREBOARDS()->updateScoreboard(Managers::SCOREBOARDS()->get("raffle"), Event::RAFFLE()->getName()),
+            Event::SPIRE()->getName() => Managers::SCOREBOARDS()->updateScoreboard(Managers::SCOREBOARDS()->get("spire"), Event::SPIRE()->getName()),
+            default => Managers::SCOREBOARDS()->updateScoreboard(null, Event::NONE()->getName()),
         };
-        Managers::SCOREBOARDS()->updateScoreboard(Managers::SCOREBOARDS()->get(Managers::EVENTS()->getCurrentEvent()->getName()), Managers::EVENTS()->getCurrentEvent()->getName());
     }
 }

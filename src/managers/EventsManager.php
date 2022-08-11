@@ -8,7 +8,7 @@ final class EventsManager extends Managers
 {
     private ?Event $event = null;
 
-    public function init(): void
+    public function load(): void
     {
         Event::setup();
     }

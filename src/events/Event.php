@@ -50,6 +50,7 @@ abstract class Event
 
     private function __construct(protected string $name, protected string $description, protected int $duration)
     {
+        $this->enumName = $name;
     }
 
     final public function getName(): string

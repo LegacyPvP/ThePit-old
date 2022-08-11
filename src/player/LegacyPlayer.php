@@ -289,15 +289,15 @@ final class LegacyPlayer extends Player
         }
         
         if ($this->getSupportLevel(EquipmentUtils::BLOCKS) != 0 and $this->getInventory()->canAddItem($block)){
-          $this->addItem($block);
+          $this->getInventory()->addItem($block);
         }
         
         if ($this->getSupportLevel(EquipmentUtils::FLAP) != 0 and $this->getInventory()->canAddItem($flap)){
-          $this->addItem($flap);
+          $this->getInventory()->addItem($flap);
         }
         
         if ($this->getSupportLevel(EquipmentUtils::NEMO) != 0 and $this->getInventory()->canAddItem($nemo)){
-          $this->addItem($nemo);
+          $this->getInventory()->addItem($nemo);
         }
     }
 
