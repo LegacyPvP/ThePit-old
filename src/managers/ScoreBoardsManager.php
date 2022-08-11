@@ -3,6 +3,7 @@
 namespace Legacy\ThePit\managers;
 
 use Legacy\ThePit\Core;
+use Legacy\ThePit\events\Event;
 use Legacy\ThePit\scoreboard\module\types\ScoreBoardLine;
 use Legacy\ThePit\player\LegacyPlayer;
 use Legacy\ThePit\tasks\ScoreBoardTask;
@@ -57,7 +58,7 @@ final class ScoreBoardsManager extends Managers
 
     public function getTitle(string $type): string
     {
-        $type = $type === Managers::EVENTS()::TYPE_NONE ? "basic" : $type;
+        $type = $type === Event::NONE()->getName() ? "basic" : $type;
         return Managers::DATA()->get("config")->getNested("scoreboards.$type.title", "Legacy");
     }
 
@@ -72,14 +73,14 @@ final class ScoreBoardsManager extends Managers
             foreach ($this->getAll() as $scoreboard) {
                 $scoreboard["scoreboard"]->removePlayer($player);
             }
-            $scoreboard = match ($type) {
-                Managers::EVENTS()::TYPE_NONE => match ($player->getPlayerProperties()->getNestedProperties("stats.prestige") ?? 0) {
+            $scoreboard = match (Managers::EVENTS()->getCurrentEvent()->getName()) {
+                default => match ($player->getPlayerProperties()->getNestedProperties("stats.prestige") ?? 0) {
                     0 => $this->scoreboards["basic"]["scoreboard"],
                     default => $this->scoreboards["prestige"]["scoreboard"],
                 },
-                Managers::EVENTS()::TYPE_DEATHMATCH => $this->scoreboards[Managers::EVENTS()::TYPE_DEATHMATCH]["scoreboard"],
-                Managers::EVENTS()::TYPE_RAFFLE => $this->scoreboards[Managers::EVENTS()::TYPE_RAFFLE]["scoreboard"],
-                Managers::EVENTS()::TYPE_SPIRE => $this->scoreboards[Managers::EVENTS()::TYPE_SPIRE]["scoreboard"],
+                Event::DEATHMATCH()->getName() => $this->scoreboards[Event::DEATHMATCH()->getName()]["scoreboard"],
+                Event::RAFFLE()->getName() => $this->scoreboards[Event::RAFFLE()->getName()]["scoreboard"],
+                Event::SPIRE()->getName() => $this->scoreboards[Event::SPIRE()->getName()]["scoreboard"],
             };
             if ($player->getPlayerProperties()->getNestedProperties("parameters.scoreboard") ?? true) {
                 $scoreboard?->addPlayer($player);
@@ -92,7 +93,7 @@ final class ScoreBoardsManager extends Managers
 
     public function updateLines(ScoreBoard $scoreboard, string $type, Player|LegacyPlayer|null $player = null): ScoreBoard
     {
-        if ($type === Managers::EVENTS()::TYPE_NONE) $type = ($player?->getPlayerProperties()?->getNestedProperties("stats.prestige") ?? 0) >= 1 ? "prestige" : "basic";
+        if ($type === Event::NONE()->getName()) $type = ($player?->getPlayerProperties()?->getNestedProperties("stats.prestige") ?? 0) >= 1 ? "prestige" : "basic";
         foreach (array_slice($this->getLines($type), 0, 15) as $i => $line) {
             foreach ($this->getParameters($type, $player) as $parameter => $value) {
                 $line = str_replace($parameter, $value, $line);
@@ -125,7 +126,7 @@ final class ScoreBoardsManager extends Managers
                 "{online}" => count(Server::getInstance()->getOnlinePlayers())
             ],
             "deathmatch" => [
-                "{timeleft}" => 0, // Pour l'instant je met tout 0 puisque l'event n'existe pas (cause de crash)
+                "{timeleft}" => 0,
                 "{kills}" => 0,
                 "{position}" => 0,
                 "{kills_blue}" => 0,

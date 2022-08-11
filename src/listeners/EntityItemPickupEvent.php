@@ -2,7 +2,7 @@
 
 namespace Legacy\ThePit\listeners;
 
-use Legacy\ThePit\events\PlayerCollectGoldEvent;
+use Legacy\ThePit\listeners\events\PlayerCollectGoldEvent;
 use Legacy\ThePit\objects\Sound;
 use Legacy\ThePit\player\LegacyPlayer;
 use Legacy\ThePit\utils\CurrencyUtils;
@@ -13,7 +13,7 @@ use pocketmine\item\ItemIds;
 
 final class EntityItemPickupEvent implements Listener {
 
-    public function onEvent(ClassEvent $event): void {
+    final public function onEvent(ClassEvent $event): void {
         $item = $event->getItem();
         $entity = $event->getEntity();
         $item_entity = $event->getOrigin();

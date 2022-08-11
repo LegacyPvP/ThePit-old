@@ -11,7 +11,7 @@ use pocketmine\event\entity\EntityShootBowEvent as ClassEvent;
 
 final class EntityShootBowEvent implements Listener {
 
-    #[Pure] public function onEvent(ClassEvent $event): void {
+    #[Pure] final public function onEvent(ClassEvent $event): void {
         $player = $event->getEntity();
         if($player instanceof LegacyPlayer){
             $location = $player->getLocation();

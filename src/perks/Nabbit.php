@@ -2,7 +2,7 @@
 
 namespace Legacy\ThePit\perks;
 
-use Legacy\ThePit\events\PlayerCollectGoldEvent;
+use Legacy\ThePit\listeners\events\PlayerCollectGoldEvent;
 use Legacy\ThePit\utils\CurrencyUtils;
 use pocketmine\event\player\PlayerDeathEvent;
 

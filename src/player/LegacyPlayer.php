@@ -9,6 +9,7 @@ use Legacy\ThePit\providers\CurrencyProvider;
 use Legacy\ThePit\objects\Rank;
 use Legacy\ThePit\objects\Language;
 use Legacy\ThePit\providers\PerksProvider;
+use Legacy\ThePit\providers\StatsProvider;
 use Legacy\ThePit\utils\EquipmentUtils;
 use Legacy\ThePit\traits\CacheTrait;
 use pocketmine\entity\effect\EffectInstance;
@@ -35,6 +36,7 @@ final class LegacyPlayer extends Player
     private PlayerProperties $properties;
     private CurrencyProvider $currencyProvider;
     private PerksProvider $perksProvider;
+    private StatsProvider $statsProvider;
     private CompoundTag $tag;
     public string $targetName = "";
     private ?FishingHook $isFishing = null;
@@ -46,6 +48,7 @@ final class LegacyPlayer extends Player
         $this->properties = new PlayerProperties($this);
         $this->currencyProvider = new CurrencyProvider($this);
         $this->perksProvider = new PerksProvider($this);
+        $this->statsProvider = new StatsProvider($this);
     }
 
     public function getNBT(): CompoundTag
@@ -66,6 +69,11 @@ final class LegacyPlayer extends Player
     public function getCurrencyProvider(): CurrencyProvider
     {
         return $this->currencyProvider;
+    }
+
+    public function getStatsProvider(): StatsProvider
+    {
+        return $this->statsProvider;
     }
 
     public function getPerksProvider(): PerksProvider

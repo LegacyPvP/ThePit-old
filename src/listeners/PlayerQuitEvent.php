@@ -9,7 +9,7 @@ use pocketmine\event\player\PlayerQuitEvent as ClassEvent;
 
 final class PlayerQuitEvent implements Listener
 {
-    public function onEvent(ClassEvent $event): void
+    final public function onEvent(ClassEvent $event): void
     {
         $event->setQuitMessage("");
         $player = $event->getPlayer();

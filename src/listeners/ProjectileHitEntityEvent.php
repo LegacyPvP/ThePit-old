@@ -9,7 +9,7 @@ use pocketmine\event\entity\ProjectileHitEntityEvent as ClassEvent;
 
 final class ProjectileHitEntityEvent implements Listener
 {
-    public function onEvent(ClassEvent $event): void
+    final public function onEvent(ClassEvent $event): void
     {
         $player = $event->getEntity()->getOwningEntity();
         $projectile = $event->getEntity();

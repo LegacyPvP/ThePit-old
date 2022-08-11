@@ -11,10 +11,12 @@ use Legacy\ThePit\listeners\EntityDamageEvent;
 use Legacy\ThePit\listeners\EntityItemPickupEvent;
 use Legacy\ThePit\listeners\PlayerChatEvent;
 use Legacy\ThePit\listeners\PlayerCreationEvent;
+use Legacy\ThePit\listeners\PlayerCurrencyChangeEvent;
 use Legacy\ThePit\listeners\PlayerDeathEvent;
 use Legacy\ThePit\listeners\PlayerDropItemEvent;
 use Legacy\ThePit\listeners\PlayerItemUseEvent;
 use Legacy\ThePit\listeners\PlayerJoinEvent;
+use Legacy\ThePit\listeners\PlayerStatsChangeEvent;
 use pocketmine\Server;
 
 final class ListenersManager extends Managers
@@ -33,6 +35,8 @@ final class ListenersManager extends Managers
             new PlayerDropItemEvent(),
             new EntityItemPickupEvent(),
             new PlayerDeathEvent(),
+            new PlayerCurrencyChangeEvent(),
+            new PlayerStatsChangeEvent(),
         ];
     }
 

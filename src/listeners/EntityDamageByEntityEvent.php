@@ -18,8 +18,7 @@ use pocketmine\Server;
 
 final class EntityDamageByEntityEvent implements Listener
 {
-
-    public function onEvent(ClassEvent $event): void
+    final public function onEvent(ClassEvent $event): void
     {
         $event->setKnockBack(0);
         $damager = $event->getDamager();

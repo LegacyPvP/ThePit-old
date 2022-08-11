@@ -2,16 +2,20 @@
 
 namespace Legacy\ThePit\managers;
 
+use Legacy\ThePit\events\Event;
+
 final class EventsManager extends Managers
 {
-    public const TYPE_NONE = "none";
-    public const TYPE_DEATHMATCH = "deathmatch";
-    public const TYPE_RAFFLE = "raffle";
-    public const TYPE_SPIRE = "spire";
+    private ?Event $event = null;
 
-    public static function getCurrentEvent(): string
+    public function init(): void
     {
-        return self::TYPE_NONE;
+        Event::setup();
+    }
+
+    public function getCurrentEvent(): ?Event
+    {
+        return $this->event ?? Event::NONE();
     }
 
 }

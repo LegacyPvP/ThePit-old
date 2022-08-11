@@ -8,7 +8,7 @@ use pocketmine\event\player\PlayerDropItemEvent as ClassEvent;
 final class PlayerDropItemEvent implements Listener
 {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
-    public function onEvent(ClassEvent $event): void
+    final public function onEvent(ClassEvent $event): void
     {
         match ($event->getItem()->getId()) {
             298, 299, 300, 301 => match ($event->getItem()->getCustomColor()) {

@@ -8,7 +8,7 @@ use pocketmine\event\player\PlayerDeathEvent as ClassEvent;
 
 final class PlayerDeathEvent implements Listener
 {
-    public function onEvent(ClassEvent $event): void
+    final public function onEvent(ClassEvent $event): void
     {
         $event->setDeathMessage("");
     }

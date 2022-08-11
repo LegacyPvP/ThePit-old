@@ -14,7 +14,7 @@ final class PlayerChatEvent implements Listener
      * @param ClassEvent $event
      * @priority LOWEST
      */
-    public function onEvent(ClassEvent $event)
+    final public function onEvent(ClassEvent $event)
     {
         $player = $event->getPlayer();
         if ($player instanceof LegacyPlayer) {

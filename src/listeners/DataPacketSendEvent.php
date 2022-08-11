@@ -11,7 +11,7 @@ use pocketmine\network\mcpe\protocol\types\Experiments;
 
 final class DataPacketSendEvent implements Listener
 {
-    public function onEvent(ClassEvent $event): void
+    final public function onEvent(ClassEvent $event): void
     {
         $packets = $event->getPackets();
         $experimentsOverridden = [

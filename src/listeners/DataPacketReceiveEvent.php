@@ -29,7 +29,7 @@ use pocketmine\world\Position;
 
 final class DataPacketReceiveEvent implements Listener
 {
-    public function onEvent(ClassEvent $event): void
+    final public function onEvent(ClassEvent $event): void
     {
         $player = $event->getOrigin()->getPlayer();
         $packet = $event->getPacket();

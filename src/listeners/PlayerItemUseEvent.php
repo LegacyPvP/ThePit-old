@@ -12,7 +12,7 @@ use pocketmine\item\Book;
 
 final class PlayerItemUseEvent implements Listener
 {
-    public function onEvent(ClassEvent $event): void
+    final public function onEvent(ClassEvent $event): void
     {
         if ($event->getItem() instanceof Book) {
             Spell::openSpell($event->getPlayer());

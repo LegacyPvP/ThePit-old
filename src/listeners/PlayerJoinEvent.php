@@ -12,7 +12,7 @@ final class PlayerJoinEvent implements Listener
 {
     public static array $cachedData = ["lastAttackedActorTime" => 0];
 
-    public function onEvent(ClassEvent $event): void
+    final public function onEvent(ClassEvent $event): void
     {
         $event->setJoinMessage("");
         if (($player = $event->getPlayer()) instanceof LegacyPlayer) {

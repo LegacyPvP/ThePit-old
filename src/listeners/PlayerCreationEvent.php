@@ -8,7 +8,7 @@ use pocketmine\event\player\PlayerCreationEvent as ClassEvent;
 
 final class PlayerCreationEvent implements Listener
 {
-    public function onEvent(ClassEvent $event): void
+    final public function onEvent(ClassEvent $event): void
     {
         $event->setPlayerClass(LegacyPlayer::class);
     }
