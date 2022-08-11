@@ -242,6 +242,8 @@ final class LegacyPlayer extends Player
     }
 
     public function setStuff(): void {
+        /*
+        TODO: TypeError: "Legacy\ThePit\utils\EquipmentUtils::getArmorId(): Argument #2 ($level) must be of type int, null given
         $factory = ItemFactory::getInstance();
         $this->getInventory()->clearAll();
         $this->getArmorInventory()->clearAll();
@@ -299,6 +301,7 @@ final class LegacyPlayer extends Player
         if ($this->getSupportLevel(EquipmentUtils::NEMO) != 0 and $this->getInventory()->canAddItem($nemo)){
           $this->getInventory()->addItem($nemo);
         }
+        */
     }
 
     public function getFishingHook(): ?FishingHook
