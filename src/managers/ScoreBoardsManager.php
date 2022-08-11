@@ -8,6 +8,7 @@ use Legacy\ThePit\scoreboard\module\types\ScoreBoardLine;
 use Legacy\ThePit\player\LegacyPlayer;
 use Legacy\ThePit\tasks\ScoreBoardTask;
 use Legacy\ThePit\utils\CurrencyUtils;
+use Legacy\ThePit\utils\StatsUtils;
 use pocketmine\player\Player;
 use pocketmine\scheduler\ClosureTask;
 use pocketmine\Server;
@@ -74,7 +75,7 @@ final class ScoreBoardsManager extends Managers
                 $scoreboard["scoreboard"]->removePlayer($player);
             }
             $scoreboard = match (Managers::EVENTS()->getCurrentEvent()->getName()) {
-                default => match ($player->getPlayerProperties()->getNestedProperties("stats.prestige") ?? 0) {
+                default => match ($player->getStatsProvider()->get(StatsUtils::PRESTIGE)) {
                     0 => $this->scoreboards["basic"]["scoreboard"],
                     default => $this->scoreboards["prestige"]["scoreboard"],
                 },
@@ -93,7 +94,7 @@ final class ScoreBoardsManager extends Managers
 
     public function updateLines(ScoreBoard $scoreboard, string $type, Player|LegacyPlayer|null $player = null): ScoreBoard
     {
-        if ($type === Event::NONE()->getName()) $type = ($player?->getPlayerProperties()?->getNestedProperties("stats.prestige") ?? 0) >= 1 ? "prestige" : "basic";
+        if ($type === Event::NONE()->getName()) $type = ($player?->getStatsProvider()->get(StatsUtils::PRESTIGE)) >= 1 ? "prestige" : "basic";
         foreach (array_slice($this->getLines($type), 0, 15) as $i => $line) {
             foreach ($this->getParameters($type, $player) as $parameter => $value) {
                 $line = str_replace($parameter, $value, $line);
@@ -107,8 +108,8 @@ final class ScoreBoardsManager extends Managers
     {
         return match ($type) {
             "basic" => [
-                "{level}" => $player?->getPlayerProperties()->getNestedProperties("stats.level") ?? 1,
-                "{xp}" => $player?->getPlayerProperties()->getNestedProperties("stats.xp") ?? 0,
+                "{level}" => $player?->getStatsProvider()->get(StatsUtils::LEVEL) ?: 1,
+                "{xp}" => $player?->getStatsProvider()->get(StatsUtils::XP),
                 "{or}" => $player?->getCurrencyProvider()?->get(CurrencyUtils::GOLD),
                 "{credits}" => $player?->getCurrencyProvider()?->get(CurrencyUtils::CREDITS),
                 "{etoiles}" => $player?->getCurrencyProvider()?->get(CurrencyUtils::STARS),
@@ -116,9 +117,9 @@ final class ScoreBoardsManager extends Managers
                 "{online}" => count(Server::getInstance()->getOnlinePlayers())
             ],
             "prestige" => [
-                "{prestige}" => $player?->getPlayerProperties()->getNestedProperties("stats.prestige") ?? 0,
-                "{level}" => $player?->getPlayerProperties()->getNestedProperties("stats.level") ?? 1,
-                "{xp}" => $player?->getPlayerProperties()->getNestedProperties("stats.xp") ?? 0,
+                "{prestige}" => $player?->getStatsProvider()->get(StatsUtils::PRESTIGE),
+                "{level}" => $player?->getStatsProvider()->get(StatsUtils::LEVEL) ?: 1,
+                "{xp}" => $player?->getStatsProvider()->get(StatsUtils::XP) ?? 0,
                 "{or}" => $player?->getCurrencyProvider()?->get(CurrencyUtils::GOLD),
                 "{credits}" => $player?->getCurrencyProvider()?->get(CurrencyUtils::CREDITS),
                 "{etoiles}" => $player?->getCurrencyProvider()?->get(CurrencyUtils::STARS),
@@ -131,9 +132,9 @@ final class ScoreBoardsManager extends Managers
                 "{position}" => 0,
                 "{kills_blue}" => 0,
                 "{kills_red}" => 0,
-                "{prestige}" => $player?->getPlayerProperties()->getNestedProperties("stats.prestige") ?? 0,
-                "{level}" => $player?->getPlayerProperties()->getNestedProperties("stats.level") ?? 1,
-                "{xp}" => $player?->getPlayerProperties()->getNestedProperties("stats.xp") ?? 0,
+                "{prestige}" => $player?->getStatsProvider()->get(StatsUtils::PRESTIGE),
+                "{level}" => $player?->getStatsProvider()->get(StatsUtils::LEVEL) ?: 1,
+                "{xp}" => $player?->getStatsProvider()->get(StatsUtils::XP) ?? 0,
                 "{online}" => count(Server::getInstance()->getOnlinePlayers())
             ],
             "raffle" => [
@@ -141,18 +142,18 @@ final class ScoreBoardsManager extends Managers
                 "{tickets}" => 0,
                 "{position}" => 0,
                 "{cagnotte}" => 0,
-                "{prestige}" => $player?->getPlayerProperties()->getNestedProperties("stats.prestige") ?? 0,
-                "{level}" => $player?->getPlayerProperties()->getNestedProperties("stats.level") ?? 1,
-                "{xp}" => $player?->getPlayerProperties()->getNestedProperties("stats.xp") ?? 0,
+                "{prestige}" => $player?->getStatsProvider()->get(StatsUtils::PRESTIGE),
+                "{level}" => $player?->getStatsProvider()->get(StatsUtils::LEVEL) ?: 1,
+                "{xp}" => $player?->getStatsProvider()->get(StatsUtils::XP) ?? 0,
                 "{online}" => count(Server::getInstance()->getOnlinePlayers())
             ],
             "spire" => [
                 "{timeleft}" => 0,
                 "{stage}" => 0,
                 "{kills}" => 0,
-                "{prestige}" => $player?->getPlayerProperties()->getNestedProperties("stats.prestige") ?? 0,
-                "{level}" => $player?->getPlayerProperties()->getNestedProperties("stats.level") ?? 1,
-                "{xp}" => $player?->getPlayerProperties()->getNestedProperties("stats.xp") ?? 0,
+                "{prestige}" => $player?->getStatsProvider()->get(StatsUtils::PRESTIGE),
+                "{level}" => $player?->getStatsProvider()->get(StatsUtils::LEVEL) ?: 1,
+                "{xp}" => $player?->getStatsProvider()->get(StatsUtils::XP) ?? 0,
                 "{online}" => count(Server::getInstance()->getOnlinePlayers())
             ],
             default => []
