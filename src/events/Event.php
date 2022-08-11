@@ -17,6 +17,7 @@ use pocketmine\utils\EnumTrait;
  * TODO: MINOR
  *
  * @method static DoubleReward DOUBLEREWARD()
+ * @method static Bounty BOUNTY()
  *
  * TODO: MAJOR
  *
@@ -40,6 +41,7 @@ abstract class Event
 
             // MINOR
             new DoubleReward("doublereward", "", 300),
+            new Bounty("bounty", "", 300),
 
             // MAJOR
             new DeathMatch("deathmatch", "", 300),

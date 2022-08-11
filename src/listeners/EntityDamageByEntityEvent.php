@@ -28,7 +28,7 @@ final class EntityDamageByEntityEvent implements Listener
             $event->getModifier(\pocketmine\event\entity\EntityDamageEvent::MODIFIER_PREVIOUS_DAMAGE_COOLDOWN) >= 0.0 &&
             $damager instanceof LegacyPlayer) {
 
-            PlayerJoinEvent::$cachedData[$damager->getName()]["lastAttackedActorTime"] = Server::getInstance()->getTick();
+            $damager->setInCache("lastAttackedActorTime", Server::getInstance()->getTick());
 
             $vector = $damager->getDirectionVector();
             $item = $event->getDamager()->getInventory()->getItemInHand();
