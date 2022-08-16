@@ -2,6 +2,8 @@
 
 namespace Legacy\ThePit;
 
+use Legacy\ThePit\databases\SQLDatabase;
+use Legacy\ThePit\librairies\libasynql\AwaitGenerator\Await;
 use Legacy\ThePit\managers\Managers;
 use Legacy\ThePit\perks\Perk;
 use Legacy\ThePit\player\LegacyPlayer;
@@ -42,8 +44,7 @@ class Core extends PluginBase
     protected function onDisable(): void
     {
         Managers::DATA()->saveAll();
-
-        foreach(self::getServer()->getOnlinePlayers() as $player) {
+        foreach($this->getServer()->getOnlinePlayers() as $player) {
             if ($player instanceof LegacyPlayer) {
                 $player->save();
             }

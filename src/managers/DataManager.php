@@ -7,6 +7,7 @@ use Legacy\ThePit\Core;
 use Legacy\ThePit\databases\BaseDatabase;
 use Legacy\ThePit\databases\Database;
 use Legacy\ThePit\databases\IDatabase;
+use Legacy\ThePit\databases\SQLDatabase;
 
 final class DataManager extends Managers
 {
@@ -19,6 +20,7 @@ final class DataManager extends Managers
     {
         $this->add(
             new BaseDatabase("config", Core::getFilePath() . "resources/config.yml"),
+            new SQLDatabase("sql", Core::getInstance()->getDataFolder() . "data.sql")
         );
     }
 
@@ -38,6 +40,10 @@ final class DataManager extends Managers
         }
     }
 
+    /**
+     * @param string $name
+     * @return IDatabase|null
+     */
     public function get(string $name): ?IDatabase
     {
         return $this->databases[$name] ?? reset($this->databases) ?: null;

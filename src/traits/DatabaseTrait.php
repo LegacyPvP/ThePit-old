@@ -7,6 +7,7 @@ trait DatabaseTrait
     protected mixed $data;
 
     protected function init(): void {
+        if((new \SplFileInfo($this->path))->getExtension() === "sql") return;
         $this->data = yaml_parse_file($this->path);
     }
 

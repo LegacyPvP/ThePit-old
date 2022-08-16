@@ -15,9 +15,10 @@ final class PlayerJoinEvent implements Listener
         $event->setJoinMessage("");
         $player = $event->getPlayer();
         if ($player instanceof LegacyPlayer) {
-            $player->setInCache("initialKnockbackMotion", false);
-            $player->setInCache("shouldCancelKBMotion", false);
-            $player->setInCache("lastAttackedActorTime", 0);
+            $player->init();
+            $player::setInCache("initialKnockbackMotion", false);
+            $player::setInCache("shouldCancelKBMotion", false);
+            $player::setInCache("lastAttackedActorTime", 0);
             $player->teleport($player->getWorld()->getSpawnLocation());
             $grade = Managers::RANKS()->get($player->getPlayerProperties()->getNestedProperties("infos.rank"));
             foreach (($grade?->getPermissions() ?? []) as $permission) {

@@ -20,7 +20,7 @@ abstract class Database implements IDatabase
         }
         $file = new SplFileInfo($path);
         if(match ($file->getExtension()){
-            "yml", "yaml", "json" => false,
+            "yml", "yaml", "json", "sql" => false,
             default => true,
         })
         {

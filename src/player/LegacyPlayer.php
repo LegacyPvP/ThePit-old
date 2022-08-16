@@ -2,7 +2,9 @@
 
 namespace Legacy\ThePit\player;
 
+use Legacy\ThePit\databases\SQLDatabase;
 use Legacy\ThePit\entities\list\FishingHook;
+use Legacy\ThePit\librairies\libasynql\AwaitGenerator\Await;
 use Legacy\ThePit\managers\Managers;
 use Legacy\ThePit\objects\Message;
 use Legacy\ThePit\providers\CurrencyProvider;
@@ -93,9 +95,20 @@ final class LegacyPlayer extends Player
         return $nbt;
     }
 
+    public function init(): void
+    {
+        $db = SQLDatabase::getDatabase();
+        Await::g2c($db->asyncSelect("user.getall", ["uuid" => $this->getUniqueId()->toString()]),
+        function (array $data) use ($db) : void {
+            if (empty($data)) {
+                $db->asyncInsert("user.init", ["uuid" => $this->getUniqueId()->toString()]);
+            }
+        });
+    }
+
     public function getLanguage(): Language
     {
-        return Managers::LANGUAGES()->get(parent::getLocale());
+        return Managers::LANGUAGES()->get($this->getLocale());
     }
 
     public function syncNBT(): void
