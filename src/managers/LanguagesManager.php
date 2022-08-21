@@ -6,7 +6,7 @@ use Legacy\ThePit\Core;
 use Legacy\ThePit\databases\LanguageDatabase;
 use Legacy\ThePit\objects\Language;
 
-final class LanguageManager extends Managers
+final class LanguagesManager extends Managers
 {
     /**
      * @var Language[]

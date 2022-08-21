@@ -11,7 +11,7 @@ use pocketmine\utils\EnumTrait;
  * @generate-registry-docblock
  *
  * @method static CommandsManager COMMANDS()
- * @method static CooldownManager COOLDOWNS()
+ * @method static CooldownsManager COOLDOWNS()
  * @method static CurrenciesManager CURRENCIES()
  * @method static CustomItemsManager CUSTOMITEMS()
  * @method static EntitiesManager ENTITIES()
@@ -19,13 +19,13 @@ use pocketmine\utils\EnumTrait;
  * @method static FormsManager FORMS()
  * @method static ItemsManager ITEMS()
  * @method static KnockBackManager KNOCKBACK()
- * @method static LanguageManager LANGUAGES()
+ * @method static LanguagesManager LANGUAGES()
  * @method static ListenersManager LISTENERS()
  * @method static MutesManager MUTES()
  * @method static PrestigesManager PRESTIGES()
  * @method static RanksManager RANKS()
  * @method static ScoreBoardsManager SCOREBOARDS()
- * @method static DataManager DATA()
+ * @method static DatasManager DATA()
  * @method static CratesManager CRATES()
  */
 abstract class Managers implements IManager
@@ -52,9 +52,9 @@ abstract class Managers implements IManager
     protected static function getManagers(): array
     {
         return [
-            new DataManager('data'),
-            new LanguageManager('languages'),
-            new CooldownManager('cooldowns'),
+            new DatasManager('data'),
+            new LanguagesManager('languages'),
+            new CooldownsManager('cooldowns'),
             new CurrenciesManager('currencies'),
             new CustomItemsManager('customitems'),
             new EntitiesManager('entities'),
