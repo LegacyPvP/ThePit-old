@@ -12,7 +12,7 @@ use pocketmine\utils\EnumTrait;
  * @see build/generate-registry-annotations.php
  * @generate-registry-docblock
  *
- * @method static Event NONE()
+ * @method static Events NONE()
  *
  * TODO: MINOR
  *
@@ -25,7 +25,7 @@ use pocketmine\utils\EnumTrait;
  * @method static Raffle RAFFLE()
  * @method static Spire SPIRE()
  */
-abstract class Event
+abstract class Events
 {
     use EnumTrait {
         __construct as Enum___construct;

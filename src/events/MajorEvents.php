@@ -4,7 +4,7 @@ namespace Legacy\ThePit\events;
 
 use pocketmine\Server;
 
-abstract class MajorEvent extends Event
+abstract class MajorEvents extends Events
 {
     final public function canStart(): bool {
         return count(Server::getInstance()->getOnlinePlayers()) >= 50;

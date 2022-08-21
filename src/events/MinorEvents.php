@@ -4,7 +4,7 @@ namespace Legacy\ThePit\events;
 
 use pocketmine\Server;
 
-abstract class MinorEvent extends Event
+abstract class MinorEvents extends Events
 {
     final public function canStart(){
         return true;

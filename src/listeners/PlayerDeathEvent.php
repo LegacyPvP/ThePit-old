@@ -2,7 +2,7 @@
 
 namespace Legacy\ThePit\listeners;
 
-use Legacy\ThePit\events\Event;
+use Legacy\ThePit\events\Events;
 use Legacy\ThePit\managers\Managers;
 use Legacy\ThePit\player\LegacyPlayer;
 use Legacy\ThePit\utils\CurrencyUtils;
@@ -22,7 +22,7 @@ final class PlayerDeathEvent implements Listener
             $killer->getLanguage()->getMessage("messages.kill", ["{player}" => $player->getName()])->send($killer);
             $player->getLanguage()->getMessage("messages.death.killed", ["{player}" => $killer->getName()])->send($player);
             $killer->getStatsProvider()->add(StatsUtils::KILLSTREAK, 1);
-            Managers::EVENTS()->getCurrentEvent()::class === Event::BOUNTY()::class
+            Managers::EVENTS()->getCurrentEvent()::class === Events::BOUNTY()::class
                 ? $killer->getStatsProvider()->add(StatsUtils::PRIME, $player->getStatsProvider()->get(StatsUtils::PRIME))
                 : $killer->getCurrencyProvider()->add(CurrencyUtils::GOLD, $player->getStatsProvider()->get(StatsUtils::PRIME));
             $player->getStatsProvider()->set(StatsUtils::KILLSTREAK, 0);

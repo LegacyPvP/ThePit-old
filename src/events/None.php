@@ -2,7 +2,7 @@
 
 namespace Legacy\ThePit\events;
 
-final class None extends Event
+final class None extends Events
 {
     public function stop(): void {}
 }

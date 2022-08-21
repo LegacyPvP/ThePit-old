@@ -2,20 +2,20 @@
 
 namespace Legacy\ThePit\managers;
 
-use Legacy\ThePit\events\Event;
+use Legacy\ThePit\events\Events;
 
 final class EventsManager extends Managers
 {
-    private ?Event $event = null;
+    private ?Events $event = null;
 
     public function load(): void
     {
-        Event::setup();
+        Events::setup();
     }
 
-    public function getCurrentEvent(): ?Event
+    public function getCurrentEvent(): ?Events
     {
-        return $this->event ?? Event::NONE();
+        return $this->event ?? Events::NONE();
     }
 
 }

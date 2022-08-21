@@ -5,7 +5,7 @@ namespace Legacy\ThePit\events;
 use Legacy\ThePit\utils\StatsUtils;
 use pocketmine\Server;
 
-final class Bounty extends MinorEvent
+final class Bounty extends MinorEvents
 {
     public function start(): void
     {
