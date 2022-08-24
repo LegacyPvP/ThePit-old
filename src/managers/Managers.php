@@ -54,7 +54,7 @@ abstract class Managers implements IManager
     {
         return [
             new DataManager('data'),
-           // new LanguageManager('languages'),
+            new LanguageManager('languages'),
             new CooldownManager('cooldowns'),
             new CurrenciesManager('currencies'),
             new CustomItemsManager('customitems'),
