@@ -53,6 +53,9 @@ final class PlayerProperties
                 "show-join-message" => true,
                 "show-leave-message" => true,
             ],
+            "keys" => [
+
+            ],
             "mute" => [
                 "reason" => "",
                 "time" => time(),

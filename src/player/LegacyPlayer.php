@@ -423,4 +423,9 @@ final class LegacyPlayer extends Player
             default => null,
         };
     }
+
+    public function __ToString(): string
+    {
+        return $this->getName();
+    }
 }

@@ -26,7 +26,8 @@ use pocketmine\utils\EnumTrait;
  * @method static RanksManager RANKS()
  * @method static ScoreBoardsManager SCOREBOARDS()
  * @method static DataManager DATA()
- * @method static CratesManager CRATES()
+ * @method static TilesManager TILES()
+ * @method static CrateManager CRATES()
  */
 abstract class Managers implements IManager
 {
@@ -53,7 +54,7 @@ abstract class Managers implements IManager
     {
         return [
             new DataManager('data'),
-            new LanguageManager('languages'),
+           // new LanguageManager('languages'),
             new CooldownManager('cooldowns'),
             new CurrenciesManager('currencies'),
             new CustomItemsManager('customitems'),
@@ -68,6 +69,8 @@ abstract class Managers implements IManager
             new RanksManager('ranks'),
             new ScoreBoardsManager('scoreboards'),
             new CommandsManager('commands'),
+            new TilesManager('tiles'),
+            new CrateManager('crates'),
         ];
     }
 

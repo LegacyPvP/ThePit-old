@@ -14,6 +14,7 @@ use Legacy\ThePit\listeners\PlayerCreationEvent;
 use Legacy\ThePit\listeners\PlayerCurrencyChangeEvent;
 use Legacy\ThePit\listeners\PlayerDeathEvent;
 use Legacy\ThePit\listeners\PlayerDropItemEvent;
+use Legacy\ThePit\listeners\PlayerInteractEvent;
 use Legacy\ThePit\listeners\PlayerItemUseEvent;
 use Legacy\ThePit\listeners\PlayerJoinEvent;
 use Legacy\ThePit\listeners\PlayerStatsChangeEvent;
@@ -37,6 +38,7 @@ final class ListenersManager extends Managers
             new PlayerDeathEvent(),
             new PlayerCurrencyChangeEvent(),
             new PlayerStatsChangeEvent(),
+            new PlayerInteractEvent(),
         ];
     }
 

@@ -13,6 +13,7 @@ use Legacy\ThePit\commands\currency\{
 use Legacy\ThePit\commands\{EquipmentCommand,
     GameModeCommand,
     GlobalMuteCommand,
+    KeyCrateCommand,
     KickCommand,
     KnockBackCommand,
     ListCommand,
@@ -65,6 +66,7 @@ final class CommandsManager extends Managers
             new AddCommand("add"),
             new StatisticsCommand("statistics"),
             new EquipmentCommand("equipement"),
+            new KeyCrateCommand("key"),
         ];
     }
 

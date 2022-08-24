@@ -548,4 +548,28 @@ items.fishingRod.drops:
     meta: 0
     amount: 1
     chance: 10
+boxs:
+  Common:
+    name: §cCommon Box
+    rewards:
+      xps:
+        88: 50
+        1: 10000
+      items:
+        rabbit_foot:
+          chance: 50
+          amount:
+            88: 2
+            1: 128
+      money:
+        votecoin:
+          chance: 20
+          amount:
+            56: 1
+            50: 5
+        gold:
+          chance: 20
+          amount:
+            39: 67
+            40: 3
 ...
