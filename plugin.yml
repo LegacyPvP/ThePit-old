@@ -6,5 +6,6 @@ authors:
   - Nyrok
   - Litoz
   - Zumma
+  - Yanoox
 api: [ 4.0.0 ]
 src-namespace-prefix: Legacy\ThePit
