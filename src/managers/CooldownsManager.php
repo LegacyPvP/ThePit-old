@@ -5,7 +5,7 @@ namespace Legacy\ThePit\managers;
 use pocketmine\item\Item;
 use pocketmine\nbt\tag\IntTag;
 
-final class CooldownManager extends Managers
+final class CooldownsManager extends Managers
 {
 
     public static function getCooldownConfig(int $item): bool

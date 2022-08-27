@@ -9,7 +9,7 @@ use Legacy\ThePit\databases\Database;
 use Legacy\ThePit\databases\IDatabase;
 use Legacy\ThePit\databases\SQLDatabase;
 
-final class DataManager extends Managers
+final class DatasManager extends Managers
 {
     /**
      * @param Database[] $databases

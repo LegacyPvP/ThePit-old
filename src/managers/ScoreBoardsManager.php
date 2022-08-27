@@ -3,7 +3,7 @@
 namespace Legacy\ThePit\managers;
 
 use Legacy\ThePit\Core;
-use Legacy\ThePit\events\Event;
+use Legacy\ThePit\events\Events;
 use Legacy\ThePit\scoreboard\module\types\ScoreBoardLine;
 use Legacy\ThePit\player\LegacyPlayer;
 use Legacy\ThePit\tasks\ScoreBoardTask;
@@ -59,7 +59,7 @@ final class ScoreBoardsManager extends Managers
 
     public function getTitle(string $type): string
     {
-        $type = $type === Event::NONE()->getName() ? "basic" : $type;
+        $type = $type === Events::NONE()->getName() ? "basic" : $type;
         return Managers::DATA()->get("config")->getNested("scoreboards.$type.title", "Legacy");
     }
 
@@ -79,9 +79,9 @@ final class ScoreBoardsManager extends Managers
                     0 => $this->scoreboards["basic"]["scoreboard"],
                     default => $this->scoreboards["prestige"]["scoreboard"],
                 },
-                Event::DEATHMATCH()->getName() => $this->scoreboards[Event::DEATHMATCH()->getName()]["scoreboard"],
-                Event::RAFFLE()->getName() => $this->scoreboards[Event::RAFFLE()->getName()]["scoreboard"],
-                Event::SPIRE()->getName() => $this->scoreboards[Event::SPIRE()->getName()]["scoreboard"],
+                Events::DEATHMATCH()->getName() => $this->scoreboards[Events::DEATHMATCH()->getName()]["scoreboard"],
+                Events::RAFFLE()->getName() => $this->scoreboards[Events::RAFFLE()->getName()]["scoreboard"],
+                Events::SPIRE()->getName() => $this->scoreboards[Events::SPIRE()->getName()]["scoreboard"],
             };
             if ($player->getPlayerProperties()->getNestedProperties("parameters.scoreboard") ?? true) {
                 $scoreboard?->addPlayer($player);
@@ -94,7 +94,7 @@ final class ScoreBoardsManager extends Managers
 
     public function updateLines(ScoreBoard $scoreboard, string $type, Player|LegacyPlayer|null $player = null): ScoreBoard
     {
-        if ($type === Event::NONE()->getName()) $type = ($player?->getStatsProvider()->get(StatsUtils::PRESTIGE)) >= 1 ? "prestige" : "basic";
+        if ($type === Events::NONE()->getName()) $type = ($player?->getStatsProvider()->get(StatsUtils::PRESTIGE)) >= 1 ? "prestige" : "basic";
         foreach (array_slice($this->getLines($type), 0, 15) as $i => $line) {
             foreach ($this->getParameters($type, $player) as $parameter => $value) {
                 $line = str_replace($parameter, $value, $line);

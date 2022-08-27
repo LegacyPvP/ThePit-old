@@ -2,7 +2,7 @@
 
 namespace Legacy\ThePit\events;
 
-final class DragonEgg extends MinorEvent
+final class DragonEgg extends MinorEvents
 {
     public function start(): void
     {

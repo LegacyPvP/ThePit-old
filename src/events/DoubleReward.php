@@ -7,7 +7,7 @@ use Legacy\ThePit\listeners\events\PlayerStatsChangeEvent;
 use Legacy\ThePit\utils\CurrencyUtils;
 use pocketmine\event\Event;
 
-final class DoubleReward extends MinorEvent
+final class DoubleReward extends MinorEvents
 {
     public function handle(Event $event): void {
         if($event instanceof PlayerCurrencyChangeEvent){
