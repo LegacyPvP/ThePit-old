@@ -3,15 +3,16 @@
 namespace Legacy\ThePit\crate;
 
 use Legacy\ThePit\tiles\list\CrateTile;
+use Legacy\ThePit\utils\RewardUtils;
 use pocketmine\block\Chest;
 
 final class Crate
 {
-    private Reward $reward;
+    private RewardUtils $reward;
 
     public function __construct(protected string $name, protected array $data)
     {
-        $this->reward = Reward::create($this->data["rewards"]["xps"], $this->data["rewards"]["items"], $this->data["rewards"]["money"]);
+        $this->reward = RewardUtils::create($this->data["rewards"]["xps"], $this->data["rewards"]["items"], $this->data["rewards"]["money"]);
     }
 
     public static function create(string $name, array $data): self
@@ -29,7 +30,7 @@ final class Crate
         return $this->data;
     }
 
-    public function getReward(): Reward{
+    public function getReward(): RewardUtils{
         return $this->reward;
     }
 

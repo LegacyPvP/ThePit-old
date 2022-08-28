@@ -7,7 +7,11 @@ use Legacy\ThePit\librairies\libasynql\AwaitGenerator\Await;
 use Legacy\ThePit\managers\Managers;
 use Legacy\ThePit\perks\Perk;
 use Legacy\ThePit\player\LegacyPlayer;
+use Legacy\ThePit\quest\Quest;
+use Legacy\ThePit\quest\Step;
 use Legacy\ThePit\tasks\GoldSpawnTask;
+use Legacy\ThePit\utils\ListenerUtils;
+use Legacy\ThePit\utils\RewardUtils;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
 
@@ -33,7 +37,7 @@ class Core extends PluginBase
         $default = yaml_parse(file_get_contents($this->getFile() . "resources/" . "config.yml"));
         if (is_array($default)) $this->getConfig()->setDefaults($default);
 
-        $this->getScheduler()->scheduleDelayedRepeatingTask(new GoldSpawnTask(), 20 * 60, 20);
+        //$this->getScheduler()->scheduleDelayedRepeatingTask(new GoldSpawnTask(), 20 * 60, 20);
         $this->saveResource("config.yml", $this->isInDevMode());
 
         Managers::initManagers();

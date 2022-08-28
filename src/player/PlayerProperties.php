@@ -83,6 +83,7 @@ final class PlayerProperties
                 "flap" => 0, //1,5k gold
                 "nemo" => 0, //1,5k gold
             ],
+            "quests" => [],
         ];
         if (!($nbt = $this->player->getNBT())->getCompoundTag('properties') || empty($nbt->getCompoundTag("properties")?->getValue())) {
             $this->setBaseProperties($prop);
@@ -93,7 +94,6 @@ final class PlayerProperties
 
     public function save(CompoundTag $tag)
     {
-        var_dump($this->getCleanedProperties($this->getPropertiesList()));
         SQLDatabase::getDatabase()->asyncInsert("user.update", $this->getCleanedProperties($this->getPropertiesList()));
         $tag->setTag("properties", PlayerUtils::arraytoTag($this->getPropertiesList()));
     }

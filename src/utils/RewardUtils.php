@@ -1,20 +1,31 @@
 <?php
 
-namespace Legacy\ThePit\crate;
+namespace Legacy\ThePit\utils;
 
 use Legacy\ThePit\managers\Managers;
 use Legacy\ThePit\player\LegacyPlayer;
 use pocketmine\item\Item;
 use pocketmine\item\StringToItemParser;
 
-final class Reward
+final class RewardUtils
 {
 
-    public function __construct(protected array $xp, protected array $items, protected array $money)
+    /**
+     * @param array|null $xp
+     * @param array|null $items identifier name of items ('cause of serialization issue)
+     * @param array|null $money
+     */
+    public function __construct(protected ?array $xp, protected ?array $items, protected ?array $money)
     {
     }
 
-    public static function create(array $xp, array $items, array $money): self
+    /**
+     * @param array|null $xp
+     * @param array|null $items identifier name of items ('cause of serialization issue)
+     * @param array|null $money
+     * @return static
+     */
+    public static function create(?array $xp, ?array $items, ?array $money): self
     {
         return new self($xp, $items, $money);
     }
@@ -40,7 +51,7 @@ final class Reward
     public function getMoney(): ?array
     {
         $moneys = [];
-        if (empty($this->money)) return null;
+        if (!$this->money) return null;
         foreach ($this->money as $type => $data) {
             while (true) {
                 if (mt_rand(0, 99) <= (int)$data["chance"]) {
@@ -62,7 +73,7 @@ final class Reward
 
     public function getXp(): ?int
     {
-        if ($this->xp == 0) return null;
+        if (!$this->xp) return null;
         while (true) {
             foreach ($this->xp as $chance => $xp) {
                 if (mt_rand(0, 99) <= $chance) return $xp;
@@ -72,7 +83,7 @@ final class Reward
 
     public function getItem(): ?Item
     {
-        if (empty($this->items)) return null;
+        if (!$this->items) return null;
         while (true) {
             foreach ($this->items as $item => $data) {
                 if (mt_rand(0, 99) <= $data["chance"]) {

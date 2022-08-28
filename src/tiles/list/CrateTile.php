@@ -3,9 +3,8 @@
 namespace Legacy\ThePit\tiles\list;
 
 use Legacy\ThePit\Core;
-use Legacy\ThePit\crate\Key;
-use Legacy\ThePit\crate\Reward;
 use Legacy\ThePit\player\LegacyPlayer;
+use Legacy\ThePit\utils\RewardUtils;
 use pocketmine\block\tile\Chest;
 use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\CompoundTag;
@@ -19,7 +18,7 @@ class CrateTile extends Chest
     private int $time = 5;
     public bool $inUse;
 
-    public function __construct(World $world, Vector3 $pos, protected Reward $reward)
+    public function __construct(World $world, Vector3 $pos, protected RewardUtils $reward)
     {
         parent::__construct($world, $pos);
     }

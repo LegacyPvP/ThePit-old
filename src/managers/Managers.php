@@ -2,6 +2,10 @@
 
 namespace Legacy\ThePit\managers;
 
+use Legacy\ThePit\quest\Quest;
+use Legacy\ThePit\quest\Step;
+use Legacy\ThePit\utils\ListenerUtils;
+use Legacy\ThePit\utils\RewardUtils;
 use pocketmine\utils\EnumTrait;
 
 /**

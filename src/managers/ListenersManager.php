@@ -18,6 +18,7 @@ use Legacy\ThePit\listeners\PlayerInteractEvent;
 use Legacy\ThePit\listeners\PlayerItemUseEvent;
 use Legacy\ThePit\listeners\PlayerJoinEvent;
 use Legacy\ThePit\listeners\PlayerStatsChangeEvent;
+use Legacy\ThePit\quest\QuestListener;
 use pocketmine\Server;
 
 final class ListenersManager extends Managers
@@ -39,6 +40,7 @@ final class ListenersManager extends Managers
             new PlayerCurrencyChangeEvent(),
             new PlayerStatsChangeEvent(),
             new PlayerInteractEvent(),
+            //new QuestListener(), //TODO: SOUCIS NON-MAJEUR DETECTE, voir commentaire class
         ];
     }
 

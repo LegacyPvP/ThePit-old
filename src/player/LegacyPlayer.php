@@ -11,6 +11,7 @@ use Legacy\ThePit\providers\CurrencyProvider;
 use Legacy\ThePit\objects\Rank;
 use Legacy\ThePit\objects\Language;
 use Legacy\ThePit\providers\PerksProvider;
+use Legacy\ThePit\providers\QuestProvider;
 use Legacy\ThePit\providers\StatsProvider;
 use Legacy\ThePit\utils\EquipmentUtils;
 use Legacy\ThePit\traits\CacheTrait;
@@ -39,6 +40,7 @@ final class LegacyPlayer extends Player
     private CurrencyProvider $currencyProvider;
     private PerksProvider $perksProvider;
     private StatsProvider $statsProvider;
+    private QuestProvider $questProvider;
     private CompoundTag $tag;
     public string $targetName = "";
     private ?FishingHook $isFishing = null;
@@ -51,6 +53,7 @@ final class LegacyPlayer extends Player
         $this->currencyProvider = new CurrencyProvider($this);
         $this->perksProvider = new PerksProvider($this);
         $this->statsProvider = new StatsProvider($this);
+        $this->questProvider = new QuestProvider($this);
     }
 
     public function getNBT(): CompoundTag
@@ -81,6 +84,11 @@ final class LegacyPlayer extends Player
     public function getPerksProvider(): PerksProvider
     {
         return $this->perksProvider;
+    }
+
+    public function getQuestProvider(): QuestProvider
+    {
+        return $this->questProvider;
     }
 
     //TODO: The problem with a player NBT should not crash the server.
